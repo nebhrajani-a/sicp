@@ -1,1 +1,28 @@
 * Structure and Interpretation of Computer Programs
+
+** Notes
+   My notes are based on the 1986 presentation of 6.001 (SICP),
+   produced by Hewlett-Packard. The notes are generated using Emacs'
+   Org mode, are written in literate programming style, and use
+   Racket's =#lang sicp=. In some (very few) cases, this causes the
+   code in these notes to differ from the equivalent code in
+   MIT-Scheme. These instances are pointed out in the notes.
+
+   The notes are compiled together into a single PDF file, which is
+   good enough for me. However, if you're interested in having it
+   organised as HTML with each lecture being a node, open a pull
+   request and I'll find somewhere to host it.
+
+** Videos
+   The videos the notes are based on are located in directory
+   =videos=, and are licensed by MIT under [[https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en][CC-BY-NC-SA 4.0]]. Full
+   citation:
+
+   #+begin_quote
+   Eric Grimson, Peter Szolovits, and Trevor Darrell. /6.001 Structure
+   and Interpretation of Computer Programs/. Spring 2005. Massachusetts
+   Institute of Technology: MIT OpenCourseWare, https://ocw.mit.edu.
+   License: Creative Commons BY-NC-SA.
+   #+end_quote
+
+** License

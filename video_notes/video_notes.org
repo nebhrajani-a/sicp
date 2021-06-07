@@ -2,7 +2,7 @@
 #+latex_class: org-report
 #+latex_header: \usepackage{tikz-cd}
 #+latex_header: \usepackage{parskip}
-#+latex_header: \usepackage[type={CC}, modifier={by-nc}, version={3.0},]{doclicense}
+#+latex_header: \usepackage[type={CC}, modifier={by-nc-sa}, version={4.0},]{doclicense}
 #+latex_header: \usepackage{forest}
 #+latex_class_options: [9pt]
 #+latex_header:\usepackage{sectsty}
