@@ -15,9 +15,9 @@
 
 ** Videos
    The videos the notes are based on are located in directory
-   =videos=, and are licensed by MIT under [[https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en][CC-BY-NC-SA 4.0]]. Full
-   citation:
+   =videos=, and are licensed by MIT under [[http://creativecommons.org/licenses/by-sa/3.0][CC-BY-SA 3.0]].
 
+   The citation of the course on MIT OCW is:
    #+begin_quote
    Eric Grimson, Peter Szolovits, and Trevor Darrell. /6.001 Structure
    and Interpretation of Computer Programs/. Spring 2005. Massachusetts
