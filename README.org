@@ -1,13 +1,31 @@
-* Structure and Interpretation of Computer Programs
+* Structure and Interpretation of Computer Programs Notes
 
   /Structure and Interpretation of Computer Programs/, also called the
-  Wizard Book, was an introductory computer science course taught at
-  MIT from 1981 to 2007.
+  Wizard Book, is a book based on introductory computer science course
+  taught at MIT from 1981 to 2007. It teaches the Scheme dialect of
+  Lisp, and is worth reading if you're a serious programmer of any
+  sort, if only because it teaches Lisp.
+  Eric Raymond on Lisp:
+
+  #+begin_quote
+  Lisp is worth learning for the profound enlightenment experience you
+  will have when you finally get it; that experience will make you a
+  better programmer for the rest of your days, even if you never
+  actually use Lisp itself a lot.
+  #+end_quote
+
+  Moreover, SICP has gems of computer programming wisdom sprinkled
+  throughout its pages:
+
+  #+begin_quote
+ "Programs must be written for people to read, and only incidentally for machines to execute."
+  #+end_quote
+  – Abelson & Sussman, SICP, preface to the first edition
 
 
 ** Notes
-   My notes are based on the 1986 presentation of 6.001 (SICP),
-   produced by Hewlett-Packard. The notes are generated using Emacs'
+   My notes are based on the [[https://groups.csail.mit.edu/mac/classes/6.001/abelson-sussman-lectures/][1986 presentation of 6.001 (SICP),
+   produced by Hewlett-Packard]]. The notes are generated using Emacs'
    Org mode, are written in literate programming style, and use
    Racket's =#lang sicp=. In some (very few) cases, this causes the
    code in these notes to differ from the equivalent code in
