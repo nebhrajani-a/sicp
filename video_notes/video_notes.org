@@ -35,8 +35,7 @@
 ** About
    These are my notes of the twenty SICP lectures of June 1986,
    produced by Hewlett-Packard Television. These videos are available
-   under a Creative Commons license. These videos should be included in
-   the directory =../videos=.
+   under a Creative Commons license.
 
    These notes aim to be concise and as example-heavy as possible. The
    language used and referred to as "Lisp" is MIT-Scheme. These notes,
