@@ -622,7 +622,7 @@
    \end{cases}$$
 
    The series itself is:
-   $$0,1,1,2,3,5,8,13,21,34,55\hdots$$
+   $$0,1,1,2,3,5,8,13,21,34,55\dots$$
 
    Let's write a Lisp function to calculate the $n\mathrm{th}$ Fibonacci
    number, assuming 0 is the 0th.
@@ -641,7 +641,7 @@
 
    It works, that's true. But how /well/ does it work. Let's see. When
    we call (say) =(fib 4)=, we also call =(fib 3)= and =(fib 2)=, both
-   of which also call $\hdots$ let's draw it:
+   of which also call $\dots$ let's draw it:
 
    #+LATEX: \begin{center}
    #+LATEX: \begin{forest}
@@ -1042,7 +1042,7 @@
     $$f(2) = \frac{2}{2} = 1$$
     $$f(1) = \frac{2}{1} = 2$$
     $$f(2) = \frac{2}{2} = 1$$
-    $$~\hdots$$
+    $$~\dots$$
 
     It seems that instead of converging, this function is
     /oscillating/ between two values. We know that it's easy to fix
