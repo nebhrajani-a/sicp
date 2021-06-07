@@ -1,4 +1,4 @@
-% Created 2021-06-08 Tue 01:09
+% Created 2021-06-08 Tue 04:12
 % Intended LaTeX compiler: xelatex
 \documentclass[9pt]{report}
 \usepackage{graphicx}
@@ -60,10 +60,10 @@
 
 
 \chapter{Introduction}
-\label{sec:org3faea84}
+\label{sec:org4dbeacd}
 
 \section{About}
-\label{sec:org207faa2}
+\label{sec:org6f8d912}
 These are my notes of the twenty SICP lectures of June 1986,
 produced by Hewlett-Packard Television. These videos are available
 under a Creative Commons license.
@@ -78,11 +78,11 @@ exception of having to prefix some numbers with \texttt{\#i} to ensure
 Racket treats them as imprecise.
 
 \section{License}
-\label{sec:org20dc72a}
+\label{sec:org417e2a3}
 \doclicenseThis
 
 \chapter{Lecture 1A: Overview and Introduction to Lisp}
-\label{sec:orgffd4234}
+\label{sec:orge264cf3}
 
 Computer science isn't really a science, and it isn't really about
 computers. Computer science is the study of how-to or imperative
@@ -110,7 +110,7 @@ Computer science focuses on this kind of imperative knowledge, and,
 specifically, how to communicate that knowledge to a computer.
 
 \section{Managing Complexity: Key Ideas of 6.001}
-\label{sec:orgc1c2024}
+\label{sec:orged153eb}
 Computer science is also about managing complexity, in that large
 programs that you can't hold in your head should still be manageable
 and easy to work with. We explore this theme in 6.001 by learning
@@ -124,7 +124,7 @@ three key ideas:
 
 
 \section{Let's Learn Lisp}
-\label{sec:orga00477b}
+\label{sec:org0f6b9ea}
 When learning a new language, always ask about its:
 \begin{itemize}
 \item Primitive elements,
@@ -133,7 +133,7 @@ When learning a new language, always ask about its:
 \end{itemize}
 
 \subsection{Primitive Elements}
-\label{sec:org3c17f10}
+\label{sec:orgb91a329}
 These are numbers like 3, 17.4, or 5. Other primitives are
 discussed later in the course.
 
@@ -150,7 +150,7 @@ discussed later in the course.
 \end{verbatim}
 
 \subsection{Means of Combination}
-\label{sec:orgf5f8892}
+\label{sec:org4dc1990}
 Lisp's numerical primitives can be combined with ``operations'' such
 as addition, written in prefix notation.
 
@@ -188,7 +188,7 @@ In Lisp, () is the application of an operation or function in
 prefix notation.
 
 \subsection{Means of Abstraction}
-\label{sec:org26fcc2c}
+\label{sec:org054f035}
 
 Abstraction can simply be done by naming things. Giving
 complicated things a name prevents us from having to understand
@@ -278,7 +278,7 @@ Note the indentation: since Lisp is parenthesis heavy, we use
 indentation. Good editors like Emacs should do this automatically.
 
 \section{Case Analysis in Lisp}
-\label{sec:orgfb2d644}
+\label{sec:org29b1b23}
 
 To represent functions like:
 $$abs(x) = \begin{cases}
@@ -339,7 +339,7 @@ We now know most of Lisp. Lisp doesn't have \texttt{do...while} or \texttt{for},
 since anything a loop can do can be done via recursion.
 
 \section{Finding Square Roots}
-\label{sec:org24f99bd}
+\label{sec:org1a644bb}
 
 Remember our square root finding algorithm?
 
@@ -355,13 +355,13 @@ Or, in Lisp,
 
 \begin{minted}[]{racket}
 (define (try g x)
-  (if (good-enough-p g x)
+  (if (good-enough? g x)
       g
       (try (improve g x) x)))
 \end{minted}
 
 This is a form of programming called ``wishful thinking'': we assume
-\texttt{good-enough-p} (good enough predicate) and \texttt{improve} are already
+\texttt{good-enough?} (good enough predicate) and \texttt{improve} are already
 implemented. Now that we can try a guess and improve it till it's
 good enough, we can write a simple square root function:
 
@@ -379,7 +379,7 @@ now write the functions we don't have:
 \end{minted}
 
 \begin{minted}[]{racket}
-(define (good-enough-p g x)
+(define (good-enough? g x)
   (< (abs (- (square g) x))
      0.00001))
 \end{minted}
@@ -420,7 +420,7 @@ square root function to hide them from the outer scope, thus:
 
 \begin{minted}[]{racket}
 (define (sqrt x)
-  (define (good-enough-p g)
+  (define (good-enough? g)
     (define (square g)
       (* g g))
     (define (abs y)
@@ -434,7 +434,7 @@ square root function to hide them from the outer scope, thus:
       (/ (+ y z) 2))
     (average g (/ x g)))
   (define (try g)
-    (if (good-enough-p g)
+    (if (good-enough? g)
         g
         (try (improve g))))
   (try 1))
@@ -456,7 +456,7 @@ within it are hidden.
 \begin{forest}
 [\texttt{sqrt}
 [\texttt{try}
-[\texttt{good-enough-p}
+[\texttt{good-enough?}
 [\texttt{abs}] [\texttt{square}]]
 [\texttt{improve}
 [\texttt{average}]]
@@ -468,7 +468,7 @@ This discipline of writing procedures is called lexical scoping.
 
 
 \section{Inbuilt/Primitive Procedures Aren't Special}
-\label{sec:orgc07765f}
+\label{sec:org0d1474e}
 
 \begin{minted}[]{racket}
 
@@ -482,10 +482,10 @@ square
 \end{verbatim}
 
 \chapter{Lecture 1B: Procedures and Processes, Substitution Model}
-\label{sec:orge542867}
+\label{sec:org76ab3a7}
 
 \section{Substitution Rule/Model}
-\label{sec:orgf6c381e}
+\label{sec:orgfc442d9}
 The substitution rule states that,
 
 \begin{quote}
@@ -507,7 +507,7 @@ Lisp application, but the substitution rule is a ``good enough''
 model for our purposes.
 
 \subsection{Kinds of Expressions in Lisp}
-\label{sec:org40b07b7}
+\label{sec:org8292386}
 \begin{itemize}
 \item Numbers (evaluate to ``themselves'')
 \item Symbols (represent some procedure)
@@ -522,7 +522,7 @@ The last three are called ``special forms'', and we'll worry about
 them later.
 
 \subsection{Example}
-\label{sec:org343ee28}
+\label{sec:orgbc8582f}
 
 Consider:
 
@@ -552,10 +552,10 @@ Let's try to apply the substitution rule to our application,
 \end{minted}
 
 \section{Peano Arithmetic}
-\label{sec:org429c350}
+\label{sec:orgf444c1a}
 
 \subsection{Simple Peano Addition}
-\label{sec:orgb0dff5d}
+\label{sec:org487f6d9}
 Peano arithmetic defines addition as:
 
 \begin{minted}[]{racket}
@@ -605,7 +605,7 @@ Written with steps skipped:
 \end{minted}
 
 \subsection{Another Peano Adder}
-\label{sec:org077110b}
+\label{sec:orgf5d9ec3}
 Consider:
 \begin{minted}[]{racket}
 (define (pb+ x y)
@@ -681,7 +681,7 @@ with the implementation/definition of the \emph{procedure}, which is
 recursive. Iteration refers to the constant space requirement.
 
 \section{Differentiating Between Iterative and Recursive Processes}
-\label{sec:org04cf81b}
+\label{sec:org2679601}
 
 One of the primary ways to differentiate between an iterative and
 recursive process is to imagine what'd happen if you turned the
@@ -697,7 +697,7 @@ In an iterative process, we can pick up right where we left off,
 since \emph{all} state information is contained by the process.
 
 \section{Fibonacci Numbers}
-\label{sec:orgb388616}
+\label{sec:org4726a19}
 
 Fibonacci numbers are defined as:
 
@@ -753,7 +753,7 @@ It is useful to try and write an iterative Fibonacci with better
 performance as an exercise.
 
 \section{Towers of Hanoi}
-\label{sec:org16c63b4}
+\label{sec:org519ac67}
 
 From Wikipedia:
 
@@ -830,7 +830,7 @@ you compute every move in \(O(1)\) (which we do, since it's just a
 print), the complexity will be \(O(2^n)\).
 
 \section{Iterative Fibonacci}
-\label{sec:orgf44e101}
+\label{sec:orgf76146d}
 
 \begin{minted}[]{racket}
 (define (iter-fib n a b)
@@ -849,10 +849,10 @@ print), the complexity will be \(O(2^n)\).
 \end{verbatim}
 
 \chapter{Lecture 2A: Higher-Order Procedures}
-\label{sec:orgcf7fe03}
+\label{sec:org0d2cdd5}
 
 \section{Abstracting Procedural Ideas}
-\label{sec:org521cfa6}
+\label{sec:org3b4c620}
 
 Consider the functions and their respective (recursive) procedures:
 
@@ -1038,14 +1038,14 @@ constant.
 \end{verbatim}
 
 \section{More on Square Roots}
-\label{sec:org0f2c50c}
+\label{sec:org8128fc8}
 
 Recall our square root procedure. When seen in Lisp code, it's not
 very clear what it's doing, or how it's working.
 
 \begin{minted}[]{racket}
 (define (sqrt x)
-  (define (good-enough-p g)
+  (define (good-enough? g)
     (define (square g)
       (* g g))
     (define (abs y)
@@ -1059,7 +1059,7 @@ very clear what it's doing, or how it's working.
       (/ (+ y z) 2))
     (average g (/ x g)))
   (define (try g)
-    (if (good-enough-p g)
+    (if (good-enough? g)
         g
         (try (improve g))))
   (try 1))
@@ -1078,7 +1078,7 @@ very clear what it's doing, or how it's working.
 Let's use higher-order procedure abstraction to make it clearer.
 
 \subsection{Fixed Points}
-\label{sec:org89aacba}
+\label{sec:orgfb9cee8}
 
 Recall that the algorithm itself relies on writing a function
 
@@ -1138,7 +1138,7 @@ Let's try it out!
 \end{verbatim}
 
 \subsection{Damping Oscillations}
-\label{sec:org3810bee}
+\label{sec:orga6898ec}
 
 A fair question when seeing the function
 $$f_1\colon y\mapsto \frac{y+\frac{x}{y}}{2}$$
@@ -1199,7 +1199,7 @@ Using the \texttt{sqrt} function,
 \end{verbatim}
 
 \section{Newton's Method}
-\label{sec:orge1ee5ff}
+\label{sec:org1e68d88}
 
 Newton's method is used to find the zeros of a function (\(y \ni
    f(y)=0\)). To use it, start with some guess \(y_0\). Then,
@@ -1291,7 +1291,7 @@ Testing out our \texttt{sqrt} function:
 \end{verbatim}
 
 \section{Procedures are First-Class Citizens}
-\label{sec:orgcdc7b16}
+\label{sec:org6672a94}
 
 This means that procedures can be:
 \begin{itemize}
@@ -1302,17 +1302,17 @@ This means that procedures can be:
 \end{itemize}
 
 \chapter{Lecture 2B: Compound Data}
-\label{sec:orgcdc7ab7}
+\label{sec:org847218d}
 
-Consider our \texttt{sqrt} function that uses \texttt{good-enough-p}. What we did
-while writing \texttt{sqrt} is assume the existence of \texttt{good-enough-p}.
+Consider our \texttt{sqrt} function that uses \texttt{good-enough?}. What we did
+while writing \texttt{sqrt} is assume the existence of \texttt{good-enough?}.
 That is, we divorced the task of building \texttt{sqrt} from the task of
 implementing its parts.
 
 Let's do this for data.
 
 \section{Rational Number Arithmetic}
-\label{sec:org0abc453}
+\label{sec:org1ebe2c9}
 
 Let's design a system which can add fractions:
 $$\frac{1}{2}+\frac{1}{4}=\frac{3}{4}$$
@@ -1326,7 +1326,7 @@ and
 $$\frac{n_1}{d_1} \times \frac{n_2}{d_2} = \frac{n_1n_2}{d_1d_2}$$
 
 \subsection{Abstraction}
-\label{sec:orgcb33eb1}
+\label{sec:org00d5edf}
 We don't know, however, how to represent this data in a Lisp
 procedure. Let's use our powerful ``wishful thinking'' strategy.
 Assume that we have the following procedures available to us:
@@ -1381,7 +1381,7 @@ Worse than confusing the program, such a design philosophy would
 confuse us, the programmers.
 
 \subsection{Data Object Creation}
-\label{sec:org53d5571}
+\label{sec:org5f90def}
 
 The glue we use to stick two numbers together is provided by three
 Lisp primitives:
@@ -1513,7 +1513,7 @@ the lower layers and not their implementation or underlying
 representation.
 
 \section{Representing Points on a Plane}
-\label{sec:org6810adc}
+\label{sec:orgdd9d57b}
 
 This is now an easy problem --- the code should be
 self-explanatory.
@@ -1630,7 +1630,7 @@ pair of numbers. Or, in Lisp:
 \end{verbatim}
 
 \section{Pairs}
-\label{sec:org4a45716}
+\label{sec:orgc66445b}
 
 Let's go back to when we assumed that \texttt{make-rat}, \texttt{numer}, and
 \texttt{denom}, were already implemented. The procedures we then wrote
@@ -1743,7 +1743,7 @@ for.
 \end{center}
 
 \chapter{Lecture 3A: Henderson Escher Example}
-\label{sec:orgd476235}
+\label{sec:org72883f4}
 
 Recall our vector procedures:
 
@@ -1777,7 +1777,7 @@ vectors, or pair of pairs. That is, we can use the property of
 closure that pairs have to store any amount of data.
 
 \section{Lists}
-\label{sec:org953aac9}
+\label{sec:orgd9d25f4}
 Often, we want to store a sequence of data. Using pairs, there are
 many ways to do this, for instance:
 
@@ -1851,7 +1851,7 @@ a list, but it's a bit painful. Thus, when we want to process
 lists, we write procedures.
 
 \subsection{Procedures on Lists}
-\label{sec:orge4d7dce}
+\label{sec:orgc4d4163}
 
 Say we wanted to write a procedure \texttt{scale-list} which multiplies
 every element in the list by a certain value. That is, when scale
@@ -1932,7 +1932,7 @@ applies to procedure to each element of the list.
 \end{minted}
 
 \section{Henderson's Picture Language}
-\label{sec:org504f690}
+\label{sec:orgce42cee}
 
 Let's define a language. As usual, we'll concern ourselves with its
 primitives, means of combination, and means of abstraction,
@@ -1940,13 +1940,13 @@ implementing some of this language in Lisp along the way.
 
 
 \subsection{Primitives}
-\label{sec:org06ccf07}
+\label{sec:orgfa0c9f2}
 This language has only one primitive: ``picture'', which is a figure
 scaled to fit a rectangle.
 
 
 \subsection{Means of Combination and Operations}
-\label{sec:org98ccff0}
+\label{sec:orga715628}
 
 \begin{itemize}
 \item Rotate, which rotates a picture and returns it.
@@ -1963,11 +1963,11 @@ combination to build complex pictures with ease.
 Let's now implement this part of the language.
 
 \subsection{An Implementation}
-\label{sec:orgf806795}
+\label{sec:orgee89187}
 
 \begin{enumerate}
 \item Rectangles
-\label{sec:orgf785dc8}
+\label{sec:orged57f38}
 
 Three vectors are needed to uniquely identify a rectangle on the
 plane. By convention, we take these to be the bottom left corner
@@ -2003,7 +2003,7 @@ a pair of points \((x,y)\) on the unit square to a given rectangle:
 correctly to \texttt{rect}.
 
 \item Pictures
-\label{sec:orgcafde31}
+\label{sec:orga5d68a2}
 
 We can now easily define a procedure which makes a picture:
 \begin{minted}[]{racket}
@@ -2053,7 +2053,7 @@ procedure from a \texttt{seglist}. Or, in use:
 \end{minted}
 
 \item Beside
-\label{sec:orgbf8c750}
+\label{sec:org48c89d6}
 
 \texttt{beside} needs to draw two pictures on the screen, after scaling
 them correctly (by \texttt{a}) and placing them side by side. Thus,
@@ -2079,7 +2079,7 @@ side and scales them correctly within \texttt{rect}. Or, in Lisp,
 \end{minted}
 
 \item Rotate-90
-\label{sec:org8a8e0a2}
+\label{sec:org07f5e40}
 
 To rotate a picture by 90 degrees counter-clockwise, all we have
 to do is make the \texttt{origin} shift to where \texttt{horiz} is, then draw
@@ -2099,7 +2099,7 @@ the procedure in Lisp is:
 
 
 \subsection{Means of Abstraction}
-\label{sec:org313cf6d}
+\label{sec:orge565b22}
 See that the picture language is now embedded in Lisp. We can
 write recursive procedures to modify a picture:
 
@@ -2147,7 +2147,7 @@ more than one node is a nightmare.
 \end{itemize}
 
 \chapter{Lecture 3B: Symbolic Differentiation; Quotation}
-\label{sec:orge96b372}
+\label{sec:orgab245c4}
 
 We saw that robust system design involves insensitivity to small
 changes, and that embedding a language within Lisp allows this. Let
@@ -2161,7 +2161,7 @@ Before figuring out how to implement such a thing, let's talk about
 the operation of differentiation itself.
 
 \section{Differentiation v/s Integration}
-\label{sec:orgc92a8f6}
+\label{sec:orgb8f34c2}
 
 Why is it so much easier to differentiate than to integrate?
 Let us look at the basic rules of differentiation:
@@ -2192,7 +2192,7 @@ With these simple recursive rules in mind, let's implement a
 symbolic differentiation system.
 
 \section{Some Wishful Thinking}
-\label{sec:org37b12bd}
+\label{sec:orgeaee59d}
 
 \begin{minted}[]{racket}
 (define (deriv expr var)
@@ -2224,10 +2224,10 @@ abstraction below \texttt{deriv}, and involve the actual representation of
 algebraic expressions. Let's figure out how to do this.
 
 \section{Representing Algebraic Expressions}
-\label{sec:org426bc44}
+\label{sec:org8d616fd}
 
 \subsection{Using Lisp Syntax}
-\label{sec:org1fac7f1}
+\label{sec:org95fb414}
 
 One very simple way to represent expressions is to use Lisp's way:
 expressions that form trees. Consider:
@@ -2241,7 +2241,7 @@ the list, and the operands are the \texttt{cdr}. This effectively
 eliminates our need for parsing algebraic expressions.
 
 \subsection{Representation Implementation}
-\label{sec:org3ea0f43}
+\label{sec:org84642c4}
 
 Let's start defining our procedures.
 
@@ -2357,7 +2357,7 @@ some other variable. This is because the recursion only ends when
 an expression is decomposed to either \texttt{same-var?} or \texttt{constant?}.
 
 \subsection{Simplification}
-\label{sec:orgf1a2ede}
+\label{sec:org7bc98d5}
 
 However, these results are ugly, and we know why --- there's no
 simplification. Technically, it's correct:
@@ -2436,7 +2436,7 @@ simplest form varies with application. However, this is good
 enough.
 
 \section{On Abstract Syntax}
-\label{sec:orgbf80a16}
+\label{sec:org05a986e}
 
 Note that the syntax we used was abstract in the sense that it had
 its own rules and grammar. However, since it followed Lisp's syntax
@@ -2448,7 +2448,7 @@ also use Lisp to interpret any syntax. We'll see more of this in
 the future.
 
 \chapter{Lecture 4A: Pattern Matching and Rule-Based Substitution}
-\label{sec:org67b098c}
+\label{sec:org2dc6b09}
 
 It's a funny technique we used last time, converting the rules of
 differentiation to Lisp. In fact, if we wanted to explain (say) the
@@ -2482,7 +2482,7 @@ Let us now build a simple language to express these rules, which can
 then be pattern matched, skeletons created, then instantiated.
 
 \section{Rule Language}
-\label{sec:org2eb9569}
+\label{sec:org73b1a09}
 
 Here's a sample bit of what we want the rule language to look like:
 
@@ -2492,6 +2492,8 @@ Here's a sample bit of what we want the rule language to look like:
     ((dd (?c c) (? v)) 0)
     ((dd (?v v) (? v)) 1)
     ((dd (?v u) (? v)) 0)
+
+    ((dd (* (?c c) (? x)) (? v)) (* (: c) (dd (: x) (: v))))
 
     ((dd (+ (? x1) (? x2)) (? v))
      (+ (dd (: x1) (: v))
@@ -2512,7 +2514,7 @@ pattern to match (rule LHS), and the \texttt{cdr} is the skeleton
 substitution expression (rule RHS).
 
 \subsection{Pattern Matching}
-\label{sec:orgf4eb87f}
+\label{sec:orgd58a096}
 
 The idea of the LHS language is to provide a framework where
 certain constructs can be matched and possibly named. These names
@@ -2536,7 +2538,7 @@ Syntax & Meaning\\
 
 
 \subsection{Skeleton and Instantiation}
-\label{sec:orgf0886fe}
+\label{sec:org1b18e60}
 The RHS language provides a skeleton wherein values provided by
 the LHS language can be substituted.
 
@@ -2552,8 +2554,8 @@ Syntax & Meaning\\
 \end{tabular}
 \end{center}
 
-\section{Sample Usage}
-\label{sec:orgfedf139}
+\section{Desired Behaviour}
+\label{sec:orga1efba7}
 
 We expect to use this program by calling a procedure called
 \texttt{simplifier}, to which we provide the list of rules. The procedure
@@ -2572,7 +2574,7 @@ to a given input expression. Or, in Lisp:
 \end{verbatim}
 
 \section{Implementation}
-\label{sec:org82be2ad}
+\label{sec:org1094fec}
 
 We implement a procedure \texttt{match}, which takes a pattern, an
 expression, and a dictionary as arguments. If that pattern matches
@@ -2587,7 +2589,7 @@ expression cannot be further simplified (no more change after a
 round of match-instantiate).
 
 \subsection{Matcher}
-\label{sec:org30b8fb1}
+\label{sec:org4341667}
 
 Abstractly, the job of the matcher is to do a tree traversal and
 comparison. Consider the rule LHS: \texttt{(+ (* (? x) (? y)) (? y))},
@@ -2602,4 +2604,375 @@ are:
 [+ [* [\texttt{3}] [\texttt{x}]] [\texttt{x}]]
 \end{forest}
 \end{center}
+
+Clearly, these expressions should be matched in the tree
+traversal. Don't confuse the \texttt{(? x)} in the rule LHS with the
+symbol \texttt{x} in the expression: for the rule, it's just a matching
+variable, but the \texttt{x} in the expression goes into the dictionary.
+
+Let's now write our first implementation of \texttt{match}:
+
+\begin{minted}[]{racket}
+(define (match pat expr dict)
+  (cond ((eq? dict 'failed) 'failed)
+        ; ... some other cases
+        ((atom? expr) 'failed)
+        (else
+         (match (cdr pat)
+                 (cdr expr)
+                 (match (car pat)
+                         (car expr)
+                         dict)))))
+\end{minted}
+
+Before we write the entire procedure, let's observe how the
+general case (\texttt{else}) works, because that's the bit which does the
+tree traversal. It calls \texttt{match} on the \texttt{car} of the pattern and
+expression. If they match, we return a dictionary, which is then
+used to match the \texttt{cdr} of the original expression. Why does this
+do tree traversal? Well, it's basically a depth first search on a
+tree. Consider what happens when \texttt{match} is called on the \texttt{car}.
+After being called for the \texttt{caar} and \texttt{caaar}\ldots{}it'll eventually
+be called for the \texttt{cadr} and the \texttt{caddr} and so on. That's
+precisely what a depth first search is. It'll keep going deeper
+and deeper until it fails, which is when it takes one step back
+and goes deeper into another branch.
+
+Now, it is important to define the non-general cases, especially
+the ones that terminate \texttt{match}. The most important of these is
+when the expression passed is atomic, since that means we're at
+the leaf of the expression tree. Another possible failure is the
+insertion into the dictionary failing. How is this possible?
+Consider:
+
+\begin{center}
+\begin{forest}
+[+ [* [\texttt{(? x)}] [\texttt{(? y)}]] [\boxed{\texttt{(?~y)}}]]
+\end{forest}
+\begin{forest}
+[+ [* [\texttt{3}] [\texttt{x}]] [\boxed{\texttt{q}}]]
+\end{forest}
+\end{center}
+
+Just before \texttt{match} reaches the last leaf (boxed), our dictionary will look
+something like the following:
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+rule-vars & expr-vals\\
+\midrule
+x & 3\\
+y & x\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+However, when it tries to insert \texttt{y: q}, the dictionary will
+\texttt{failed} to do so, because \texttt{y} already has value \texttt{x}, and thus the
+rule does not match.
+
+Finally, we implement as more cases in the \texttt{cond} other things we
+may need to match, according to the rule language (\ref{sec:org73b1a09}).
+
+\begin{minted}[]{racket}
+(define (match pattern expression dict)
+  (cond ((eq? dict 'failed) 'failed)
+
+        ((atom? pattern)
+         (if (atom? expression)
+             (if (eq? pattern expression)
+                 dict
+                 'failed)
+             'failed))
+
+        ((arbitrary-constant? pattern)
+         (if (constant? expression)
+             (extend-dict pattern expression dict)
+             'failed))
+
+        ((arbitrary-variable? pattern)
+         (if (variable? expression)
+             (extend-dict pattern expression dict)
+             'failed))
+
+        ((arbitrary-expression? pattern)
+         (extend-dict pattern expression dict))
+
+        ((atom? expression) 'failed)
+
+        (else
+         (match (cdr pattern)
+                 (cdr expression)
+                 (match (car pattern)
+                         (car expression)
+                         dict)))))
+\end{minted}
+
+We add one case wherein both the pattern to be matched and the
+expression are atomic and the same, (the case \texttt{foo} in \ref{sec:org73b1a09}), in which we simply return the dictionary, since the
+pattern matches. The other new cases are self-explanatory: they are
+merely matching \texttt{(?c)}, \texttt{(?v)}, and \texttt{(?)}.
+
+
+\subsection{Instantiator}
+\label{sec:orgd4f5ae0}
+
+Recall that instantiate must take accept the input of a skeleton
+and a dictionary, traverse the skeleton tree, and replace rule
+variables for expression values according to the dictionary. That
+is, given the tree:
+
+\begin{center}
+\begin{forest}
+[* [\texttt{(: x)}] [\texttt{(: y)}]]
+\end{forest}
+\end{center}
+
+And the dictionary \texttt{(x: 3, y: 4)}, it should produce the tree:
+
+\begin{center}
+\begin{forest}
+[* [\texttt{3}] [\texttt{4}]]
+\end{forest}
+\end{center}
+
+This is a fairly simple procedure to write:
+
+\begin{minted}[]{racket}
+(define (instantiate skeleton dict)
+  (cond ((atom? skeleton) skeleton)
+        ((skeleton-evaluation? skeleton)
+         (evaluate (evaluation-expression skeleton)
+                   dict))
+        (else (cons (instantiate (car skeleton) dict)
+                    (instantiate (cdr skeleton) dict)))))
+\end{minted}
+
+The general case is our usual tree recursion: it first
+instantiates the \texttt{car}, then \texttt{cons}' that with the instantiated
+\texttt{cdr}. The depth-first search ends if the leaf is atomic, as
+usual.
+
+The interesting bit is what we do when we want to evaluate a
+skeleton of the \texttt{(:)} form (predicate \texttt{skeleton-evaluation?}). In
+this case, we call a procedure \texttt{evaluate}, to which we pass the
+expression to be evaluated (the \texttt{cadr}, really, since we don't
+need the \texttt{:}).
+
+Now, \texttt{evaluate} works in a special way we'll see later, so take on
+faith that the following \texttt{evaluate} function does its job of
+instantiation the way we want it to:
+
+\begin{minted}[]{racket}
+(define (evaluation-expression evaluation) (cadr evaluation))
+
+(define (evaluate form dict)
+  (if (atom? form)
+      (lookup form dict)
+      (apply (eval (lookup (car form) dict)
+                   user-initial-environment)
+             (map (lambda (v) (lookup v dict))
+                  (cdr form)))))
+\end{minted}
+
+\subsection{GIGO Simplifier}
+\label{sec:org9650bbf}
+
+The GIGO (garbage in, garbage out)\footnote{``Garbage in, garbage out'' means that the simplifier will
+produce garbage output if the rules supplied to it are garbage. That
+is, it makes no attempt to fix flaws in logic on the part of the user,
+much like a computer. This underlying principle of computing was noted
+by the father of computers, Charles Babbage: ``On two occasions I have
+been asked, `Pray, Mr. Babbage, if you put into the machine wrong
+figures, will the right answers come out?' I am not able rightly
+to apprehend the kind of confusion of ideas that could provoke such a
+question.''} simplifier is implemented
+by stringing together the matcher, the instantiator, and the list
+of rules we are given as an input. We write it in lexically scoped
+style, because the procedures within it are merely helpers.
+
+\begin{minted}[]{racket}
+(define (simplifier the-rules)
+  (define (simplify-expression expression)
+    (try-rules
+     (if (compound? expression)
+         (map simplify-expression expression)
+         expression)))
+  (define (try-rules expression)
+    (define (scan rules)
+      (if (null? rules)
+          expression
+          (let ((dict (match (pattern (car rules))
+                        expression
+                        (make-empty-dict))))
+            (if (eq? dict 'failed)
+                (scan (cdr rules))
+                (simplify-expression (instantiate
+                                         (skeleton (car rules))
+                                         dict))))))
+  (scan the-rules))
+  simplify-expression)
+\end{minted}
+
+Okay, there's a fair amount to break down here.
+\begin{itemize}
+\item \texttt{simplify-expression} tries \emph{all} the rules on every node in the
+given expression tree. It does this using our (by now) standard
+depth first tree recursion. In this case, the leaf is an atomic
+expression. The general case is when the expression is compound,
+in which case we try to simplify the \texttt{car}. If this doesn't
+work, we try the \texttt{cdr}, recursively. This fulfils our objective
+of trying all rules on all nodes. Note that instead of doing the
+recursion explicitly, we use \texttt{map}. This doesn't make a
+difference, it is merely somewhat easier to write.
+\item \texttt{try-rules} accepts an expression as an input, and scans the
+input list of rules, applying each in turn using \texttt{scan}.
+\item \texttt{scan} takes the pattern of the first rule in the list and tries
+to match it to the expression. If it succeeds, we instantiate
+the skeleton of this rule with the values from the dictionary.
+On the other hand, if the \texttt{match} failed, we simply try the rest
+of the rules (\texttt{cdr}).
+\item Finally, \texttt{simplifier} returns the \texttt{simplify-expression}
+procedure, which can apply \texttt{the-rules} to any input expression.
+Note that this is what the desired behaviour is (\ref{sec:orga1efba7}).
+\end{itemize}
+
+\subsection{Dictionary Implementation}
+\label{sec:org9706ae3}
+The actual dictionary implementation isn't of much interest to us,
+since it has much more to do with Lisp primitives we'll study
+later than our program.
+
+\begin{minted}[]{racket}
+(define (make-empty-dict) '())
+
+(define (extend-dict pat dat dictionary)
+  (let ((vname (variable-name pat)))
+    (let ((v (assq vname dictionary)))
+      (cond ((not v)
+             (cons (list vname dat) dictionary))
+            ((eq? (cadr v) dat) dictionary)
+            (else 'failed)))))
+
+(define (lookup var dictionary)
+  (let ((v (assq var dictionary)))
+    (if (null? v)
+        var
+        (cadr v))))
+\end{minted}
+
+\subsection{Predicates}
+\label{sec:orge20e934}
+Finally, we must implement the predicates we've used throughout.
+These are simple to implement and self-explanatory:
+
+\begin{minted}[]{racket}
+(define (compound? exp) (pair? exp))
+(define (constant? exp) (number? exp))
+(define (variable? exp) (atom? exp))
+(define (pattern rule) (car rule))
+(define (skeleton rule) (cadr rule))
+
+(define (arbitrary-constant? pat)
+  (if (pair? pat) (eq? (car pat) '?c) false))
+
+(define (arbitrary-expression? pat)
+  (if (pair? pat) (eq? (car pat) '?) false))
+
+(define (arbitrary-variable? pat)
+  (if (pair? pat) (eq? (car pat) '?v) false))
+
+(define (variable-name pat) (cadr pat))
+
+(define (skeleton-evaluation? pat)
+  (if (pair? pat) (eq? (car pat) ':) false))
+\end{minted}
+
+\section{Usage}
+\label{sec:org3b8ff01}
+
+\begin{minted}[]{racket}
+
+
+
+
+
+
+
+
+(define dsimp
+  (simplifier deriv-rules))
+
+(dsimp '(dd (* x x) x))
+\end{minted}
+
+\begin{verbatim}
+(+ (* x 1) (* x 1))
+\end{verbatim}
+
+
+Excellent --- it works. Note that there is no algebraic
+simplification. Witness now the power of abstraction --- all we
+really have to do is define some rules for algebraic
+simplification, and pass the result of \texttt{dsimp} to \texttt{algsimp} to get
+a clean expression.
+
+\subsection{Algebraic Simplification}
+\label{sec:org4caccf6}
+Consider the rule set:
+
+\begin{minted}[]{racket}
+(define algebra-rules
+  '(
+    ( ((? op) (?c e1) (?c e2))         (: (op e1 e2))               )
+    ( ((? op) (? e1) (?c e2))          ((: op) (: e2) (: e1))       )
+    ( (+ 0 (? e))                      (: e)                        )
+    ( (* 1 (? e))                      (: e)                        )
+    ( (* 0 (? e))                      0                            )
+    ( (* (?c e1) (* (?c e2) (? e3)))   (* (: (* e1 e2)) (: e3))     )
+    ( (* (? e1) (* (?c e2) (? e3)))    (* (: e2) (* (: e1) (: e3))) )
+    ( (* (* (? e1) (? e2)) (? e3))     (* (: e1) (* (: e2) (: e3))) )
+    ( (+ (?c e1) (+ (?c e2) (? e3)))   (+ (: (+ e1 e2)) (: e3))     )
+    ( (+ (? e1) (+ (?c e2) (? e3)))    (+ (: e2) (+ (: e1) (: e3))) )
+    ( (+ (+ (? e1) (? e2)) (? e3))     (+ (: e1) (+ (: e2) (: e3))) )
+    ( (+ (* (?c c) (? a)) (* (?c d) (? a)))
+      (* (: (+ c d)) (: a))        )
+    ( (* (? c) (+ (? d) (? e)))        (+ (* (: c) (: d))
+                                          (* (: c) (: e)))          )
+    ))
+\end{minted}
+
+\begin{minted}[]{racket}
+
+
+
+
+
+
+
+
+
+(define dsimp
+  (simplifier deriv-rules))
+
+(define algsimp
+  (simplifier algebra-rules))
+
+(define (derivative x)
+  (algsimp (dsimp x)))
+
+(derivative '(dd (* x x) x))
+(derivative '(dd (+ (+ x (* x 5)) (* x x)) x))
+\end{minted}
+
+\begin{verbatim}
+(+ x x)
+(+ 6 (+ x x))
+\end{verbatim}
+
+
+Excellent. We now have a complete pattern matching and replacement
+language at our disposal, and we've tested it out on the rules of
+differentiation and algebraic simplification.
 \end{document}

@@ -294,13 +294,13 @@
    #+NAME: try
    #+BEGIN_SRC racket :lang sicp :eval no-export :exports both
      (define (try g x)
-       (if (good-enough-p g x)
+       (if (good-enough? g x)
            g
            (try (improve g x) x)))
    #+END_SRC
 
    This is a form of programming called "wishful thinking": we assume
-   =good-enough-p= (good enough predicate) and =improve= are already
+   =good-enough?= (good enough predicate) and =improve= are already
    implemented. Now that we can try a guess and improve it till it's
    good enough, we can write a simple square root function:
 
@@ -319,9 +319,9 @@
        (average g (/ x g)))
    #+END_SRC
 
-   #+NAME: good-enough-p
+   #+NAME: good-enough?
    #+BEGIN_SRC racket :lang sicp :eval no-export :exports both
-     (define (good-enough-p g x)
+     (define (good-enough? g x)
        (< (abs (- (square g) x))
           0.00001))
    #+END_SRC
@@ -334,7 +334,7 @@
      <<average>>
      <<abs>>
      <<improve>>
-     <<good-enough-p>>
+     <<good-enough?>>
      <<try>>
      <<sqrt>>
      (sqrt #i2)
@@ -360,7 +360,7 @@
 
    #+BEGIN_SRC racket :lang sicp :eval no-export :exports both
      (define (sqrt x)
-       (define (good-enough-p g)
+       (define (good-enough? g)
          (define (square g)
            (* g g))
          (define (abs y)
@@ -374,7 +374,7 @@
            (/ (+ y z) 2))
          (average g (/ x g)))
        (define (try g)
-         (if (good-enough-p g)
+         (if (good-enough? g)
              g
              (try (improve g))))
        (try 1))
@@ -394,7 +394,7 @@
    #+LATEX: \begin{forest}
    #+LATEX: [\texttt{sqrt}
    #+LATEX: [\texttt{try}
-   #+LATEX: [\texttt{good-enough-p}
+   #+LATEX: [\texttt{good-enough?}
    #+LATEX: [\texttt{abs}] [\texttt{square}]]
    #+LATEX: [\texttt{improve}
    #+LATEX: [\texttt{average}]]
@@ -937,7 +937,7 @@
    #+NAME: no-dep-sqrt
    #+BEGIN_SRC racket :lang sicp :eval no-export :exports both
      (define (sqrt x)
-       (define (good-enough-p g)
+       (define (good-enough? g)
          (define (square g)
            (* g g))
          (define (abs y)
@@ -951,7 +951,7 @@
            (/ (+ y z) 2))
          (average g (/ x g)))
        (define (try g)
-         (if (good-enough-p g)
+         (if (good-enough? g)
              g
              (try (improve g))))
        (try 1))
@@ -1189,8 +1189,8 @@
 
 * Lecture 2B: Compound Data
 
-  Consider our =sqrt= function that uses =good-enough-p=. What we did
-  while writing =sqrt= is assume the existence of =good-enough-p=.
+  Consider our =sqrt= function that uses =good-enough?=. What we did
+  while writing =sqrt= is assume the existence of =good-enough?=.
   That is, we divorced the task of building =sqrt= from the task of
   implementing its parts.
 
@@ -2302,12 +2302,15 @@
 
    Here's a sample bit of what we want the rule language to look like:
 
+   #+NAME: rule-deriv-rules
    #+BEGIN_SRC racket :lang sicp :eval no-export :exports both
      (define deriv-rules
        '(
          ((dd (?c c) (? v)) 0)
          ((dd (?v v) (? v)) 1)
          ((dd (?v u) (? v)) 0)
+
+         ((dd (* (?c c) (? x)) (? v)) (* (: c) (dd (: x) (: v))))
 
          ((dd (+ (? x1) (? x2)) (? v))
           (+ (dd (: x1) (: v))
@@ -2354,7 +2357,7 @@
     | =(f a b)= | Instantiates each element of the list and returns a list.     |
     | =(: x)=   | Instantiate the value of =x= provided by the pattern matcher. |
 
-** Sample Usage
+** Desired Behaviour
 
    We expect to use this program by calling a procedure called
    =simplifier=, to which we provide the list of rules. The procedure
@@ -2407,14 +2410,365 @@
     symbol =x= in the expression: for the rule, it's just a matching
     variable, but the =x= in the expression goes into the dictionary.
 
+    Let's now write our first implementation of =match=:
+
+    #+BEGIN_SRC racket :lang sicp :eval no-export :exports both
+      (define (match pat expr dict)
+        (cond ((eq? dict 'failed) 'failed)
+              ; ... some other cases
+              ((atom? expr) 'failed)
+              (else
+               (match (cdr pat)
+                       (cdr expr)
+                       (match (car pat)
+                               (car expr)
+                               dict)))))
+    #+END_SRC
+
+    Before we write the entire procedure, let's observe how the
+    general case (=else=) works, because that's the bit which does the
+    tree traversal. It calls =match= on the =car= of the pattern and
+    expression. If they match, we return a dictionary, which is then
+    used to match the =cdr= of the original expression. Why does this
+    do tree traversal? Well, it's basically a depth first search on a
+    tree. Consider what happens when =match= is called on the =car=.
+    After being called for the =caar= and =caaar=...it'll eventually
+    be called for the =cadr= and the =caddr= and so on. That's
+    precisely what a depth first search is. It'll keep going deeper
+    and deeper until it fails, which is when it takes one step back
+    and goes deeper into another branch.
+
+    Now, it is important to define the non-general cases, especially
+    the ones that terminate =match=. The most important of these is
+    when the expression passed is atomic, since that means we're at
+    the leaf of the expression tree. Another possible failure is the
+    insertion into the dictionary failing. How is this possible?
+    Consider:
+
+    #+LATEX: \begin{center}
+    #+LATEX: \begin{forest}
+    #+LATEX: [+ [* [\texttt{(? x)}] [\texttt{(? y)}]] [\boxed{\texttt{(?~y)}}]]
+    #+LATEX: \end{forest}
+    #+LATEX: \begin{forest}
+    #+LATEX: [+ [* [\texttt{3}] [\texttt{x}]] [\boxed{\texttt{q}}]]
+    #+LATEX: \end{forest}
+    #+LATEX: \end{center}
+
+    Just before =match= reaches the last leaf (boxed), our dictionary will look
+    something like the following:
+
+    #+ATTR_LATEX: :booktabs t
+    | rule-vars | expr-vals |
+    |-----------+-----------|
+    | x         | 3         |
+    | y         | x         |
+
+    However, when it tries to insert =y: q=, the dictionary will
+    =failed= to do so, because =y= already has value =x=, and thus the
+    rule does not match.
+
+    Finally, we implement as more cases in the =cond= other things we
+    may need to match, according to the rule language ([[Rule Language]]).
+
+    #+NAME: rule-match
+    #+BEGIN_SRC racket :lang sicp :eval no-export :exports both
+      (define (match pattern expression dict)
+        (cond ((eq? dict 'failed) 'failed)
+
+              ((atom? pattern)
+               (if (atom? expression)
+                   (if (eq? pattern expression)
+                       dict
+                       'failed)
+                   'failed))
+
+              ((arbitrary-constant? pattern)
+               (if (constant? expression)
+                   (extend-dict pattern expression dict)
+                   'failed))
+
+              ((arbitrary-variable? pattern)
+               (if (variable? expression)
+                   (extend-dict pattern expression dict)
+                   'failed))
+
+              ((arbitrary-expression? pattern)
+               (extend-dict pattern expression dict))
+
+              ((atom? expression) 'failed)
+
+              (else
+               (match (cdr pattern)
+                       (cdr expression)
+                       (match (car pattern)
+                               (car expression)
+                               dict)))))
+    #+END_SRC
+
+    We add one case wherein both the pattern to be matched and the
+    expression are atomic and the same, (the case =foo= in [[Rule
+    Language]]), in which we simply return the dictionary, since the
+    pattern matches. The other new cases are self-explanatory: they are
+    merely matching =(?c)=, =(?v)=, and =(?)=.
 
 
+*** Instantiator
+
+    Recall that instantiate must take accept the input of a skeleton
+    and a dictionary, traverse the skeleton tree, and replace rule
+    variables for expression values according to the dictionary. That
+    is, given the tree:
+
+    #+LATEX: \begin{center}
+    #+LATEX: \begin{forest}
+    #+LATEX: [* [\texttt{(: x)}] [\texttt{(: y)}]]
+    #+LATEX: \end{forest}
+    #+LATEX: \end{center}
+
+    And the dictionary =(x: 3, y: 4)=, it should produce the tree:
+
+    #+LATEX: \begin{center}
+    #+LATEX: \begin{forest}
+    #+LATEX: [* [\texttt{3}] [\texttt{4}]]
+    #+LATEX: \end{forest}
+    #+LATEX: \end{center}
+
+    This is a fairly simple procedure to write:
+
+    #+NAME: rule-instantiate
+    #+BEGIN_SRC racket :lang sicp :eval no-export :exports both
+      (define (instantiate skeleton dict)
+        (cond ((atom? skeleton) skeleton)
+              ((skeleton-evaluation? skeleton)
+               (evaluate (evaluation-expression skeleton)
+                         dict))
+              (else (cons (instantiate (car skeleton) dict)
+                          (instantiate (cdr skeleton) dict)))))
+    #+END_SRC
+
+    The general case is our usual tree recursion: it first
+    instantiates the =car=, then =cons=' that with the instantiated
+    =cdr=. The depth-first search ends if the leaf is atomic, as
+    usual.
+
+    The interesting bit is what we do when we want to evaluate a
+    skeleton of the =(:)= form (predicate =skeleton-evaluation?=). In
+    this case, we call a procedure =evaluate=, to which we pass the
+    expression to be evaluated (the =cadr=, really, since we don't
+    need the =:=).
+
+    Now, =evaluate= works in a special way we'll see later, so take on
+    faith that the following =evaluate= function does its job of
+    instantiation the way we want it to:
+
+    #+NAME: rule-evaluate
+    #+BEGIN_SRC racket :lang sicp :eval no-export :exports both
+      (define (evaluation-expression evaluation) (cadr evaluation))
+
+      (define (evaluate form dict)
+        (if (atom? form)
+            (lookup form dict)
+            (apply (eval (lookup (car form) dict)
+                         user-initial-environment)
+                   (map (lambda (v) (lookup v dict))
+                        (cdr form)))))
+    #+END_SRC
+
+*** GIGO Simplifier
+
+    The GIGO (garbage in, garbage out)[fn:7] simplifier is implemented
+    by stringing together the matcher, the instantiator, and the list
+    of rules we are given as an input. We write it in lexically scoped
+    style, because the procedures within it are merely helpers.
+
+    #+NAME: rule-simplifier
+    #+BEGIN_SRC racket :lang sicp :eval no-export :exports both
+      (define (simplifier the-rules)
+        (define (simplify-expression expression)
+          (try-rules
+           (if (compound? expression)
+               (map simplify-expression expression)
+               expression)))
+        (define (try-rules expression)
+          (define (scan rules)
+            (if (null? rules)
+                expression
+                (let ((dict (match (pattern (car rules))
+                              expression
+                              (make-empty-dict))))
+                  (if (eq? dict 'failed)
+                      (scan (cdr rules))
+                      (simplify-expression (instantiate
+                                               (skeleton (car rules))
+                                               dict))))))
+        (scan the-rules))
+        simplify-expression)
+    #+END_SRC
+
+    Okay, there's a fair amount to break down here.
+    - =simplify-expression= tries /all/ the rules on every node in the
+      given expression tree. It does this using our (by now) standard
+      depth first tree recursion. In this case, the leaf is an atomic
+      expression. The general case is when the expression is compound,
+      in which case we try to simplify the =car=. If this doesn't
+      work, we try the =cdr=, recursively. This fulfils our objective
+      of trying all rules on all nodes. Note that instead of doing the
+      recursion explicitly, we use =map=. This doesn't make a
+      difference, it is merely somewhat easier to write.
+    - =try-rules= accepts an expression as an input, and scans the
+      input list of rules, applying each in turn using =scan=.
+    - =scan= takes the pattern of the first rule in the list and tries
+      to match it to the expression. If it succeeds, we instantiate
+      the skeleton of this rule with the values from the dictionary.
+      On the other hand, if the =match= failed, we simply try the rest
+      of the rules (=cdr=).
+    - Finally, =simplifier= returns the =simplify-expression=
+      procedure, which can apply =the-rules= to any input expression.
+      Note that this is what the desired behaviour is ([[Desired
+      Behaviour]]).
+
+*** Dictionary Implementation
+    The actual dictionary implementation isn't of much interest to us,
+    since it has much more to do with Lisp primitives we'll study
+    later than our program.
+
+    #+NAME: rule-dict
+    #+BEGIN_SRC racket :lang sicp :eval no-export :exports both
+      (define (make-empty-dict) '())
+
+      (define (extend-dict pat dat dictionary)
+        (let ((vname (variable-name pat)))
+          (let ((v (assq vname dictionary)))
+            (cond ((not v)
+                   (cons (list vname dat) dictionary))
+                  ((eq? (cadr v) dat) dictionary)
+                  (else 'failed)))))
+
+      (define (lookup var dictionary)
+        (let ((v (assq var dictionary)))
+          (if (null? v)
+              var
+              (cadr v))))
+    #+END_SRC
+
+*** Predicates
+    Finally, we must implement the predicates we've used throughout.
+    These are simple to implement and self-explanatory:
+
+    #+NAME: rule-preds
+    #+BEGIN_SRC racket :lang sicp :eval no-export :exports both
+      (define (compound? exp) (pair? exp))
+      (define (constant? exp) (number? exp))
+      (define (variable? exp) (atom? exp))
+      (define (pattern rule) (car rule))
+      (define (skeleton rule) (cadr rule))
+
+      (define (arbitrary-constant? pat)
+        (if (pair? pat) (eq? (car pat) '?c) false))
+
+      (define (arbitrary-expression? pat)
+        (if (pair? pat) (eq? (car pat) '?) false))
+
+      (define (arbitrary-variable? pat)
+        (if (pair? pat) (eq? (car pat) '?v) false))
+
+      (define (variable-name pat) (cadr pat))
+
+      (define (skeleton-evaluation? pat)
+        (if (pair? pat) (eq? (car pat) ':) false))
+    #+END_SRC
+
+    #+NAME: rule-env-fix
+    #+BEGIN_SRC racket :lang sicp :eval no-export :exports none
+      (define user-initial-environment (scheme-report-environment 5))
+      (define (atom? x) (not (pair? x)))
+    #+END_SRC
 
 
+** Usage
 
+   #+BEGIN_SRC racket :lang sicp :eval no-export :exports both :noweb strip-export
+     <<rule-env-fix>>
+     <<rule-deriv-rules>>
+     <<rule-match>>
+     <<rule-evaluate>>
+     <<rule-instantiate>>
+     <<rule-simplifier>>
+     <<rule-dict>>
+     <<rule-preds>>
+     (define dsimp
+       (simplifier deriv-rules))
 
+     (dsimp '(dd (* x x) x))
+   #+END_SRC
 
+   #+RESULTS:
+   : (+ (* x 1) (* x 1))
 
+   Excellent --- it works. Note that there is no algebraic
+   simplification. Witness now the power of abstraction --- all we
+   really have to do is define some rules for algebraic
+   simplification, and pass the result of =dsimp= to =algsimp= to get
+   a clean expression.
+
+*** Algebraic Simplification
+    Consider the rule set:
+
+    # review
+    #+NAME: rule-alg-rules
+    #+BEGIN_SRC racket :lang sicp :eval no-export :exports both
+      (define algebra-rules
+        '(
+          ( ((? op) (?c e1) (?c e2))         (: (op e1 e2))               )
+          ( ((? op) (? e1) (?c e2))          ((: op) (: e2) (: e1))       )
+          ( (+ 0 (? e))                      (: e)                        )
+          ( (* 1 (? e))                      (: e)                        )
+          ( (* 0 (? e))                      0                            )
+          ( (* (?c e1) (* (?c e2) (? e3)))   (* (: (* e1 e2)) (: e3))     )
+          ( (* (? e1) (* (?c e2) (? e3)))    (* (: e2) (* (: e1) (: e3))) )
+          ( (* (* (? e1) (? e2)) (? e3))     (* (: e1) (* (: e2) (: e3))) )
+          ( (+ (?c e1) (+ (?c e2) (? e3)))   (+ (: (+ e1 e2)) (: e3))     )
+          ( (+ (? e1) (+ (?c e2) (? e3)))    (+ (: e2) (+ (: e1) (: e3))) )
+          ( (+ (+ (? e1) (? e2)) (? e3))     (+ (: e1) (+ (: e2) (: e3))) )
+          ( (+ (* (?c c) (? a)) (* (?c d) (? a)))
+            (* (: (+ c d)) (: a))        )
+          ( (* (? c) (+ (? d) (? e)))        (+ (* (: c) (: d))
+                                                (* (: c) (: e)))          )
+          ))
+    #+END_SRC
+
+   #+BEGIN_SRC racket :lang sicp :eval no-export :exports both :noweb strip-export
+     <<rule-env-fix>>
+     <<rule-deriv-rules>>
+     <<rule-alg-rules>>
+     <<rule-match>>
+     <<rule-evaluate>>
+     <<rule-instantiate>>
+     <<rule-simplifier>>
+     <<rule-dict>>
+     <<rule-preds>>
+     (define dsimp
+       (simplifier deriv-rules))
+
+     (define algsimp
+       (simplifier algebra-rules))
+
+     (define (derivative x)
+       (algsimp (dsimp x)))
+
+     (derivative '(dd (* x x) x))
+     (derivative '(dd (+ (+ x (* x 5)) (* x x)) x))
+   #+END_SRC
+
+   #+RESULTS:
+   : (+ x x)
+   : (+ 6 (+ x x))
+
+   Excellent. We now have a complete pattern matching and replacement
+   language at our disposal, and we've tested it out on the rules of
+   differentiation and algebraic simplification.
+
+   # add pre-sec on tree recursion
 
 
 
@@ -2517,3 +2871,13 @@ structures, since using procedures this way is less efficient.
 [fn:6] We use "initiate" and "substitute" interchangeably to mean
 swapping out expressions in the skeleton provided by the RHS of the
 rules.
+
+[fn:7] "Garbage in, garbage out" means that the simplifier will
+produce garbage output if the rules supplied to it are garbage. That
+is, it makes no attempt to fix flaws in logic on the part of the user,
+much like a computer. This underlying principle of computing was noted
+by the father of computers, Charles Babbage: "On two occasions I have
+been asked, 'Pray, Mr. Babbage, if you put into the machine wrong
+figures, will the right answers come out?' I am not able rightly
+to apprehend the kind of confusion of ideas that could provoke such a
+question."

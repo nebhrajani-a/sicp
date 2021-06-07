@@ -58,7 +58,7 @@
    exercises (second edition). Eventually, this repository may include
    solutions to assignments and exams on the OCW page as well. No
    promises though --- it takes a non-trivial amount of energy and time to
-   write fairly high-quality notes and solutions.
+   write reasonably high-quality notes and solutions.
 
 ** Reporting Errors
    Open an issue, or, if you think you can fix the error yourself,
