@@ -1,0 +1,2479 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-06-05 Sat 00:02 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MIT 6.001 1986 Video Notes</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Nebhrajani A.V." />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2020 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">MIT 6.001 1986 Video Notes</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org522c7ea">1. Introduction</a>
+<ul>
+<li><a href="#org23960ba">1.1. About</a></li>
+<li><a href="#orgbc04095">1.2. License</a></li>
+</ul>
+</li>
+<li><a href="#org01a909e">2. Lecture 1A: Overview and Introduction to Lisp</a>
+<ul>
+<li><a href="#org0bfe7f6">2.1. Managing Complexity: Key Ideas of 6.001</a></li>
+<li><a href="#orgf668997">2.2. Let&rsquo;s Learn Lisp</a>
+<ul>
+<li><a href="#org798949d">2.2.1. Primitive Elements</a></li>
+<li><a href="#orge43bee7">2.2.2. Means of Combination</a></li>
+<li><a href="#orge45c9b2">2.2.3. Means of Abstraction</a></li>
+</ul>
+</li>
+<li><a href="#org003871d">2.3. Case Analysis in Lisp</a></li>
+<li><a href="#orgdeca56e">2.4. Finding Square Roots</a></li>
+<li><a href="#org35b4de4">2.5. Inbuilt/Primitive Procedures Aren&rsquo;t Special</a></li>
+</ul>
+</li>
+<li><a href="#org6a91e07">3. Lecture 1B: Procedures and Processes, Substitution Model</a>
+<ul>
+<li><a href="#org03d1f1a">3.1. Substitution Rule/Model</a>
+<ul>
+<li><a href="#org637f1d0">3.1.1. Kinds of Expressions in Lisp</a></li>
+<li><a href="#org132752e">3.1.2. Example</a></li>
+</ul>
+</li>
+<li><a href="#org3841204">3.2. Peano Arithmetic</a>
+<ul>
+<li><a href="#org6b49627">3.2.1. Simple Peano Addition</a></li>
+<li><a href="#org5fa3295">3.2.2. Another Peano Adder</a></li>
+</ul>
+</li>
+<li><a href="#orgc5ee9d0">3.3. Differentiating Between Iterative and Recursive Processes</a></li>
+<li><a href="#org36b1792">3.4. Fibonacci Numbers</a></li>
+<li><a href="#orgd215c3b">3.5. Towers of Hanoi</a></li>
+<li><a href="#orgdaa944b">3.6. Iterative Fibonacci</a></li>
+</ul>
+</li>
+<li><a href="#orge6ef54b">4. Lecture 2A: Higher-Order Procedures</a>
+<ul>
+<li><a href="#orgd00be73">4.1. Abstracting Procedural Ideas</a></li>
+<li><a href="#org4760735">4.2. More on Square Roots</a>
+<ul>
+<li><a href="#org672ee7a">4.2.1. Fixed Points</a></li>
+<li><a href="#orga55cf7c">4.2.2. Damping Oscillations</a></li>
+</ul>
+</li>
+<li><a href="#orgf0ddfdd">4.3. Newton&rsquo;s Method</a></li>
+<li><a href="#orgda76410">4.4. Procedures are First-Class Citizens</a></li>
+</ul>
+</li>
+<li><a href="#org6f4c2a7">5. Lecture 2B: Compound Data</a>
+<ul>
+<li><a href="#org2a5a189">5.1. Rational Number Arithmetic</a>
+<ul>
+<li><a href="#org1566bfd">5.1.1. Abstraction</a></li>
+<li><a href="#org7653493">5.1.2. Data Object Creation</a></li>
+</ul>
+</li>
+<li><a href="#orgfdf3bdc">5.2. Representing Points on a Plane</a></li>
+<li><a href="#org5a8096e">5.3. Pairs</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org522c7ea" class="outline-2">
+<h2 id="org522c7ea"><span class="section-number-2">1</span> Introduction</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-org23960ba" class="outline-3">
+<h3 id="org23960ba"><span class="section-number-3">1.1</span> About</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+These are my notes of the twenty SICP lectures of June 1986,
+produced by Hewlett-Packard Television. These videos are available
+under a Creative Commons license. These videos should be included in
+a directory called <code>./videos</code>.
+</p>
+
+<p>
+These notes aim to be concise and as example-heavy as possible. The
+language used and referred to as &ldquo;Lisp&rdquo; is MIT-Scheme. These notes,
+however, use the SICP language provided by Racket, a modern Scheme
+dialect. This is because Racket&rsquo;s integration with Emacs and
+<code>org-mode</code> is orders of magnitude better than MIT-Scheme&rsquo;s. In
+general, all &ldquo;Lisp&rdquo; code looks exactly the same as in SICP, with the
+exception of having to prefix some numbers with <code>#i</code> to ensure
+Racket treats them as imprecise.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgbc04095" class="outline-3">
+<h3 id="orgbc04095"><span class="section-number-3">1.2</span> License</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+\doclicenseThis
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org01a909e" class="outline-2">
+<h2 id="org01a909e"><span class="section-number-2">2</span> Lecture 1A: Overview and Introduction to Lisp</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Computer science isn&rsquo;t really a science, and it isn&rsquo;t really about
+computers. Computer science is the study of how-to or imperative
+knowledge (as opposed to declarative knowledge). To illustrate the
+difference, consider:
+</p>
+
+<p>
+\[y = \sqrt{x} \mathrm{~such~that~} y^2=x, y \geq 0\]
+</p>
+
+<p>
+This is declarative, in that we could recognize if \(y\) is the square
+root of \(x\) given \(x\) and \(y\), but we&rsquo;re no closer to knowing how to
+<i>find</i> \(y\) if we are given \(x\). Imperative knowledge would look
+like:
+</p>
+
+<p>
+To find the square root \(y\) of \(x\):
+</p>
+<ul class="org-ul">
+<li>Make a guess \(g\).</li>
+<li>If \(g^2\) is close enough to \(x\), \(y=g\).</li>
+<li>Otherwise, make a new guess equal to the average of \(g\) and \(x/g\).</li>
+</ul>
+
+<p>
+This method will eventually come up with a \(g\) close enough to the
+actual square root \(y\) of \(x\).
+</p>
+
+<p>
+Computer science focuses on this kind of imperative knowledge, and,
+specifically, how to communicate that knowledge to a computer.
+</p>
+</div>
+
+<div id="outline-container-org0bfe7f6" class="outline-3">
+<h3 id="org0bfe7f6"><span class="section-number-3">2.1</span> Managing Complexity: Key Ideas of 6.001</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+Computer science is also about managing complexity, in that large
+programs that you can&rsquo;t hold in your head should still be manageable
+and easy to work with. We explore this theme in 6.001 by learning
+three key ideas:
+</p>
+
+<ul class="org-ul">
+<li>Black-box abstractions</li>
+<li>Conventional interfaces</li>
+<li>Metalinguistic abstraction.</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-orgf668997" class="outline-3">
+<h3 id="orgf668997"><span class="section-number-3">2.2</span> Let&rsquo;s Learn Lisp</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+When learning a new language, always ask about its:
+</p>
+<ul class="org-ul">
+<li>Primitive elements,</li>
+<li>Means of combination, and</li>
+<li>Means of abstraction.</li>
+</ul>
+</div>
+
+<div id="outline-container-org798949d" class="outline-4">
+<h4 id="org798949d"><span class="section-number-4">2.2.1</span> Primitive Elements</h4>
+<div class="outline-text-4" id="text-2-2-1">
+<p>
+These are numbers like 3, 17.4, or 5. Other primitives are
+discussed later in the course.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket"><span style="color: #2e8b57;">4</span>
+<span style="color: #2e8b57;">17.4</span>
+<span style="color: #2e8b57;">5</span>
+</pre>
+</div>
+
+<pre class="example">
+4
+17.4
+5
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orge43bee7" class="outline-4">
+<h4 id="orge43bee7"><span class="section-number-4">2.2.2</span> Means of Combination</h4>
+<div class="outline-text-4" id="text-2-2-2">
+<p>
+Lisp&rsquo;s numerical primitives can be combined with &ldquo;operations&rdquo; such
+as addition, written in prefix notation.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket"><span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">+</span> <span style="color: #2e8b57;">3</span> <span style="color: #2e8b57;">17.4</span> <span style="color: #2e8b57;">5</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+25.4
+</pre>
+
+
+<p>
+Other basic operations are provided by Lisp, such as
+multiplication and division. Of course, combinations can be
+combined recursively:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket"><span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">+</span> <span style="color: #2e8b57;">3</span> <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">*</span> <span style="color: #2e8b57;">5</span> <span style="color: #2e8b57;">6</span><span style="color: #E27E8D;">)</span> <span style="color: #2e8b57;">8</span> <span style="color: #2e8b57;">2</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+43
+</pre>
+
+
+<p>
+This should show you the tree structure inherent in all of Lisp:
+</p>
+<p>
+In Lisp, () is the application of an operation or function in
+prefix notation.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge45c9b2" class="outline-4">
+<h4 id="orge45c9b2"><span class="section-number-4">2.2.3</span> Means of Abstraction</h4>
+<div class="outline-text-4" id="text-2-2-3">
+<p>
+Abstraction can simply be done by naming things. Giving
+complicated things a name prevents us from having to understand
+how the thing the name refers to <i>works</i>, and instead lets us
+&ldquo;abstractly&rdquo; use the name for our purposes.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket"><span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #718CA1;">a</span> <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">*</span> <span style="color: #2e8b57;">5</span> <span style="color: #2e8b57;">5</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+a
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">*</span> a a<span style="color: #5EC4FF;">)</span>
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #718CA1;">b</span> <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">+</span> a <span style="color: #8BD49C;">(</span><span style="color: #5EC4FF;">*</span> <span style="color: #2e8b57;">5</span> a<span style="color: #8BD49C;">)</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+b
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">+</span> a <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">/</span> b <span style="color: #2e8b57;">5</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+25
+625
+150
+55
+</pre>
+
+
+<p>
+Now, it&rsquo;s often more useful to abstract away imperative how-to
+knowledge. Consider:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket" id="org52f2cdb"><span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #E27E8D;">(</span><span style="color: #33CED8;">square</span> x<span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">*</span> x x<span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-racket">
+<span style="color: #5EC4FF;">(</span>square <span style="color: #2e8b57;">10</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+100
+</pre>
+
+
+<p>
+This defines <code>square</code> as a function taking a single argument <code>x</code>,
+and returning <code>(* x x)</code>. Note that this way of writing a define is
+actually &ldquo;syntactic sugar&rdquo; for:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket"><span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #718CA1;">square</span>
+  <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">lambda</span> <span style="color: #8BD49C;">(</span>x<span style="color: #8BD49C;">)</span>
+    <span style="color: #8BD49C;">(</span><span style="color: #5EC4FF;">*</span> x x<span style="color: #8BD49C;">)</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+
+<span style="color: #5EC4FF;">(</span>square <span style="color: #2e8b57;">25</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+625
+</pre>
+
+
+<p>
+<code>lambda (x)</code> means &ldquo;make a procedure that takes argument <code>x</code>&rdquo;. The
+second argument to lambda is the actual procedure body. The
+<code>define</code> names this anonymous procedure <code>square</code>.
+</p>
+
+<p>
+Just like we can use combinations recursively, so we can
+abstractions. Consider:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket" id="orgb2cda38"><span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #E27E8D;">(</span><span style="color: #33CED8;">average</span> x y<span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">/</span> <span style="color: #8BD49C;">(</span><span style="color: #5EC4FF;">+</span> x y<span style="color: #8BD49C;">)</span> <span style="color: #2e8b57;">2</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-racket">
+
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #E27E8D;">(</span><span style="color: #33CED8;">mean-square</span> x y<span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span>average <span style="color: #8BD49C;">(</span>square x<span style="color: #8BD49C;">)</span>
+           <span style="color: #8BD49C;">(</span>square y<span style="color: #8BD49C;">)</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+
+<span style="color: #5EC4FF;">(</span>mean-square <span style="color: #2e8b57;">2</span> <span style="color: #2e8b57;">3</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+13/2
+</pre>
+
+
+<p>
+Note the indentation: since Lisp is parenthesis heavy, we use
+indentation. Good editors like Emacs should do this automatically.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org003871d" class="outline-3">
+<h3 id="org003871d"><span class="section-number-3">2.3</span> Case Analysis in Lisp</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+To represent functions like:
+\[abs(x) = \begin{cases}
+   -x & x<0\\
+   0 & x = 0\\
+   x & x > 0
+   \end{cases}\]
+Lisp needs some form of conditional execution. In Lisp, this
+function would look like:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket"><span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #E27E8D;">(</span><span style="color: #33CED8;">abs</span> x<span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">cond</span> <span style="color: #8BD49C;">(</span><span style="color: #D98E48;">(</span><span style="color: #5EC4FF;">&lt;</span> x <span style="color: #2e8b57;">0</span><span style="color: #D98E48;">)</span> <span style="color: #D98E48;">(</span><span style="color: #5EC4FF;">-</span> x<span style="color: #D98E48;">)</span><span style="color: #8BD49C;">)</span>
+        <span style="color: #8BD49C;">(</span><span style="color: #D98E48;">(</span><span style="color: #5EC4FF;">=</span> x <span style="color: #2e8b57;">0</span><span style="color: #D98E48;">)</span> <span style="color: #2e8b57;">0</span><span style="color: #8BD49C;">)</span>
+        <span style="color: #8BD49C;">(</span><span style="color: #D98E48;">(</span><span style="color: #5EC4FF;">&gt;</span> x <span style="color: #2e8b57;">0</span><span style="color: #D98E48;">)</span> x<span style="color: #8BD49C;">)</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">abs</span> <span style="color: #2e8b57;">-3</span><span style="color: #5EC4FF;">)</span>
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">abs</span> <span style="color: #2e8b57;">0</span><span style="color: #5EC4FF;">)</span>
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">abs</span> <span style="color: #2e8b57;">5</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+3
+0
+5
+</pre>
+
+
+<p>
+<code>cond</code> takes any number of arguments. Each argument must be
+structured as <code>(predicate) (consequent)</code>. If <code>predicate</code> is true,
+we do the <code>consequent</code>. Otherwise, we don&rsquo;t. Lisp also provides a
+way to write conditionals that only have two branches (an if-else):
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket" id="orgdc01c4e"><span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #E27E8D;">(</span><span style="color: #33CED8;">abs</span> x<span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">if</span> <span style="color: #8BD49C;">(</span><span style="color: #5EC4FF;">&lt;</span> x <span style="color: #2e8b57;">0</span><span style="color: #8BD49C;">)</span>
+      <span style="color: #8BD49C;">(</span><span style="color: #5EC4FF;">-</span> x<span style="color: #8BD49C;">)</span>
+      x<span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-racket">
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">abs</span> <span style="color: #2e8b57;">-11</span><span style="color: #5EC4FF;">)</span>
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">abs</span> <span style="color: #2e8b57;">0</span><span style="color: #5EC4FF;">)</span>
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">abs</span> <span style="color: #2e8b57;">33</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+11
+0
+33
+</pre>
+
+
+<p>
+<code>cond</code> and <code>if</code> are syntactical sugar for each other. The Lisp
+implementation picks any one and defines the other in terms of it.
+</p>
+
+<p>
+We now know most of Lisp. Lisp doesn&rsquo;t have <code>do...while</code> or <code>for</code>,
+since anything a loop can do can be done via recursion.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgdeca56e" class="outline-3">
+<h3 id="orgdeca56e"><span class="section-number-3">2.4</span> Finding Square Roots</h3>
+<div class="outline-text-3" id="text-2-4">
+<p>
+Remember our square root finding algorithm?
+</p>
+
+<p>
+To find the square root \(y\) of \(x\):
+</p>
+<ul class="org-ul">
+<li>Make a guess \(g\).</li>
+<li>If \(g^2\) is close enough to \(x\), \(y=g\).</li>
+<li>Otherwise, make a new guess equal to the average of \(g\) and
+\(x/g\).</li>
+</ul>
+
+<p>
+Or, in Lisp,
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket" id="orgcc848cc"><span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #E27E8D;">(</span><span style="color: #33CED8;">try</span> g x<span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">if</span> <span style="color: #8BD49C;">(</span>good-enough-p g x<span style="color: #8BD49C;">)</span>
+      g
+      <span style="color: #8BD49C;">(</span>try <span style="color: #D98E48;">(</span>improve g x<span style="color: #D98E48;">)</span> x<span style="color: #8BD49C;">)</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<p>
+This is a form of programming called &ldquo;wishful thinking&rdquo;: we assume
+<code>good-enough-p</code> (good enough predicate) and <code>improve</code> are already
+implemented. Now that we can try a guess and improve it till it&rsquo;s
+good enough, we can write a simple square root function:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket" id="org16d3a2a"><span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #E27E8D;">(</span><span style="color: #33CED8;">sqrt</span> x<span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span>try <span style="color: #2e8b57;">1</span> x<span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<p>
+This function simply starts the guess at 1, then improves it. Let&rsquo;s
+now write the functions we don&rsquo;t have:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket" id="org343b2a2"><span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #E27E8D;">(</span><span style="color: #33CED8;">improve</span> g x<span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span>average g <span style="color: #8BD49C;">(</span><span style="color: #5EC4FF;">/</span> x g<span style="color: #8BD49C;">)</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-racket" id="orge606d37"><span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #E27E8D;">(</span><span style="color: #33CED8;">good-enough-p</span> g x<span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">&lt;</span> <span style="color: #8BD49C;">(</span><span style="color: #5EC4FF;">abs</span> <span style="color: #D98E48;">(</span><span style="color: #5EC4FF;">-</span> <span style="color: #B62D65;">(</span>square g<span style="color: #B62D65;">)</span> x<span style="color: #D98E48;">)</span><span style="color: #8BD49C;">)</span>
+     <span style="color: #2e8b57;">0.00001</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<p>
+This tests if \(g^2\) is within 0.0001 of \(x\). Putting it all
+together, we can finally try to find square roots:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket">
+
+
+
+
+
+
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">sqrt</span> <span style="color: #2e8b57;">#i2</span><span style="color: #5EC4FF;">)</span>
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">sqrt</span> <span style="color: #2e8b57;">#i3</span><span style="color: #5EC4FF;">)</span>
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">sqrt</span> <span style="color: #2e8b57;">#i4</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+1.4142156862745097
+1.7320508100147274
+2.0000000929222947
+</pre>
+
+
+<blockquote>
+<p>
+<b>Note:</b> The <code>#i4</code> is Racket&rsquo;s syntax for using imprecise
+(decimals) instead of precise (fractions). Ignore it, and treat it
+as the number <code>4</code>.
+</p>
+</blockquote>
+
+<p>
+See that <code>try</code> actually runs a loop, but does so recursively,
+calling itself every time the <code>if</code> condition fails to improve the
+guess. Also note that these functions can all be nested inside the
+square root function to hide them from the outer scope, thus:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket"><span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #E27E8D;">(</span><span style="color: #33CED8;">sqrt</span> x<span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #8BD49C;">(</span><span style="color: #33CED8;">good-enough-p</span> g<span style="color: #8BD49C;">)</span>
+    <span style="color: #8BD49C;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #D98E48;">(</span><span style="color: #33CED8;">square</span> g<span style="color: #D98E48;">)</span>
+      <span style="color: #D98E48;">(</span><span style="color: #5EC4FF;">*</span> g g<span style="color: #D98E48;">)</span><span style="color: #8BD49C;">)</span>
+    <span style="color: #8BD49C;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #D98E48;">(</span><span style="color: #33CED8;">abs</span> y<span style="color: #D98E48;">)</span>
+      <span style="color: #D98E48;">(</span><span style="color: #5EC4FF;">if</span> <span style="color: #B62D65;">(</span><span style="color: #5EC4FF;">&lt;</span> y <span style="color: #2e8b57;">0</span><span style="color: #B62D65;">)</span>
+          <span style="color: #B62D65;">(</span><span style="color: #5EC4FF;">-</span> y<span style="color: #B62D65;">)</span>
+          y<span style="color: #D98E48;">)</span><span style="color: #8BD49C;">)</span>
+    <span style="color: #8BD49C;">(</span><span style="color: #5EC4FF;">&lt;</span> <span style="color: #D98E48;">(</span><span style="color: #5EC4FF;">abs</span> <span style="color: #B62D65;">(</span><span style="color: #5EC4FF;">-</span> <span style="color: #EBBF83;">(</span>square g<span style="color: #EBBF83;">)</span> x<span style="color: #B62D65;">)</span><span style="color: #D98E48;">)</span>
+       <span style="color: #2e8b57;">0.0001</span><span style="color: #8BD49C;">)</span><span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #8BD49C;">(</span><span style="color: #33CED8;">improve</span> g<span style="color: #8BD49C;">)</span>
+    <span style="color: #8BD49C;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #D98E48;">(</span><span style="color: #33CED8;">average</span> y z<span style="color: #D98E48;">)</span>
+      <span style="color: #D98E48;">(</span><span style="color: #5EC4FF;">/</span> <span style="color: #B62D65;">(</span><span style="color: #5EC4FF;">+</span> y z<span style="color: #B62D65;">)</span> <span style="color: #2e8b57;">2</span><span style="color: #D98E48;">)</span><span style="color: #8BD49C;">)</span>
+    <span style="color: #8BD49C;">(</span>average g <span style="color: #D98E48;">(</span><span style="color: #5EC4FF;">/</span> x g<span style="color: #D98E48;">)</span><span style="color: #8BD49C;">)</span><span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #8BD49C;">(</span><span style="color: #33CED8;">try</span> g<span style="color: #8BD49C;">)</span>
+    <span style="color: #8BD49C;">(</span><span style="color: #5EC4FF;">if</span> <span style="color: #D98E48;">(</span>good-enough-p g<span style="color: #D98E48;">)</span>
+        g
+        <span style="color: #D98E48;">(</span>try <span style="color: #B62D65;">(</span>improve g<span style="color: #B62D65;">)</span><span style="color: #D98E48;">)</span><span style="color: #8BD49C;">)</span><span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span>try <span style="color: #2e8b57;">1</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">sqrt</span> <span style="color: #2e8b57;">#i2</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+1.4142156862745097
+</pre>
+
+
+<p>
+This program should also show you a tree-like dependency of the
+functions, with each function containing the definitions of the
+functions it depends on. For someone using <code>sqrt</code>, all the functions
+within it are hidden.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org35b4de4" class="outline-3">
+<h3 id="org35b4de4"><span class="section-number-3">2.5</span> Inbuilt/Primitive Procedures Aren&rsquo;t Special</h3>
+<div class="outline-text-3" id="text-2-5">
+<div class="org-src-container">
+<pre class="src src-racket">
+square
+<span style="color: #5EC4FF;">+</span>
+</pre>
+</div>
+
+<pre class="example">
+#&lt;procedure:square&gt;
+#&lt;procedure:+&gt;
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6a91e07" class="outline-2">
+<h2 id="org6a91e07"><span class="section-number-2">3</span> Lecture 1B: Procedures and Processes, Substitution Model</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-org03d1f1a" class="outline-3">
+<h3 id="org03d1f1a"><span class="section-number-3">3.1</span> Substitution Rule/Model</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+The substitution rule states that,
+</p>
+
+<blockquote>
+<p>
+To evaluate an application:
+</p>
+<ul class="org-ul">
+<li>Evaluate the operator to get procedure.</li>
+<li>Evaluate the operands to get arguments.</li>
+<li>Apply procedure to arguments.
+<ul class="org-ul">
+<li>Copy body of procedure.</li>
+<li>Replace formal parameters with actual arguments.</li>
+</ul></li>
+<li>Evaluate new body.</li>
+</ul>
+</blockquote>
+
+<p>
+Note that this isn&rsquo;t necessarily how the <i>interpreter</i> evaluates a
+Lisp application, but the substitution rule is a &ldquo;good enough&rdquo;
+model for our purposes.
+</p>
+</div>
+
+<div id="outline-container-org637f1d0" class="outline-4">
+<h4 id="org637f1d0"><span class="section-number-4">3.1.1</span> Kinds of Expressions in Lisp</h4>
+<div class="outline-text-4" id="text-3-1-1">
+<ul class="org-ul">
+<li>Numbers (evaluate to &ldquo;themselves&rdquo;)</li>
+<li>Symbols (represent some procedure)</li>
+<li>Combinations</li>
+<li>&lambda;-expressions (used to build procedures)</li>
+<li>Definitions (used to name symbols)</li>
+<li>Conditionals</li>
+</ul>
+
+<p>
+We will focus our use of the substitution rule on the first three.
+The last three are called &ldquo;special forms&rdquo;, and we&rsquo;ll worry about
+them later.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org132752e" class="outline-4">
+<h4 id="org132752e"><span class="section-number-4">3.1.2</span> Example</h4>
+<div class="outline-text-4" id="text-3-1-2">
+<p>
+Consider:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket">
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #E27E8D;">(</span><span style="color: #33CED8;">sum-of-squares</span> x y<span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">+</span> <span style="color: #8BD49C;">(</span>square x<span style="color: #8BD49C;">)</span> <span style="color: #8BD49C;">(</span>square y<span style="color: #8BD49C;">)</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+
+<span style="color: #5EC4FF;">(</span>sum-of-squares <span style="color: #2e8b57;">3</span> <span style="color: #2e8b57;">4</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+25
+</pre>
+
+
+<p>
+Let&rsquo;s try to apply the substitution rule to our application,
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket"><span style="color: #5EC4FF;">(</span>sum-of-squares <span style="color: #2e8b57;">3</span> <span style="color: #2e8b57;">4</span><span style="color: #5EC4FF;">)</span>
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">+</span> <span style="color: #E27E8D;">(</span>square <span style="color: #2e8b57;">3</span><span style="color: #E27E8D;">)</span> <span style="color: #E27E8D;">(</span>square <span style="color: #2e8b57;">4</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">+</span> <span style="color: #E27E8D;">(</span>square <span style="color: #2e8b57;">3</span><span style="color: #E27E8D;">)</span> <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">*</span> <span style="color: #2e8b57;">4</span> <span style="color: #2e8b57;">4</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">+</span> <span style="color: #E27E8D;">(</span>square <span style="color: #2e8b57;">3</span><span style="color: #E27E8D;">)</span> <span style="color: #2e8b57;">16</span><span style="color: #5EC4FF;">)</span>
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">+</span> <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">*</span> <span style="color: #2e8b57;">3</span> <span style="color: #2e8b57;">3</span><span style="color: #E27E8D;">)</span> <span style="color: #2e8b57;">16</span><span style="color: #5EC4FF;">)</span>
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">+</span> <span style="color: #2e8b57;">9</span> <span style="color: #2e8b57;">16</span><span style="color: #5EC4FF;">)</span>
+<span style="color: #2e8b57;">25</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org3841204" class="outline-3">
+<h3 id="org3841204"><span class="section-number-3">3.2</span> Peano Arithmetic</h3>
+<div class="outline-text-3" id="text-3-2">
+</div>
+<div id="outline-container-org6b49627" class="outline-4">
+<h4 id="org6b49627"><span class="section-number-4">3.2.1</span> Simple Peano Addition</h4>
+<div class="outline-text-4" id="text-3-2-1">
+<p>
+Peano arithmetic defines addition as:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket" id="orgf7df355"><span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #E27E8D;">(</span><span style="color: #33CED8;">pa+</span> x y<span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">if</span> <span style="color: #8BD49C;">(</span><span style="color: #5EC4FF;">=</span> x <span style="color: #2e8b57;">0</span><span style="color: #8BD49C;">)</span>
+      y
+      <span style="color: #8BD49C;">(</span>pa+ <span style="color: #D98E48;">(</span>dec x<span style="color: #D98E48;">)</span> <span style="color: #D98E48;">(</span>inc y<span style="color: #D98E48;">)</span><span style="color: #8BD49C;">)</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-racket">
+<span style="color: #5EC4FF;">(</span>pa+ <span style="color: #2e8b57;">3</span> <span style="color: #2e8b57;">4</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+7
+</pre>
+
+
+<p>
+Assume that <code>inc</code> and <code>dec</code> are primitives available that increment
+and decrement the argument respectively. How is the procedure <code>pa+</code>
+working? Let&rsquo;s apply the substitution rule.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket"><span style="color: #5EC4FF;">(</span>pa+ <span style="color: #2e8b57;">3</span> <span style="color: #2e8b57;">4</span><span style="color: #5EC4FF;">)</span>
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">if</span> <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">=</span> <span style="color: #2e8b57;">3</span> <span style="color: #2e8b57;">0</span><span style="color: #E27E8D;">)</span>
+    <span style="color: #2e8b57;">4</span>
+    <span style="color: #E27E8D;">(</span>pa+ <span style="color: #8BD49C;">(</span>dec <span style="color: #2e8b57;">3</span><span style="color: #8BD49C;">)</span> <span style="color: #8BD49C;">(</span>inc <span style="color: #2e8b57;">4</span><span style="color: #8BD49C;">)</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+<span style="color: #5EC4FF;">(</span>pa+ <span style="color: #2e8b57;">2</span> <span style="color: #2e8b57;">5</span><span style="color: #5EC4FF;">)</span>
+<span style="color: #5EC4FF;">...</span>
+<span style="color: #5EC4FF;">(</span>pa+ <span style="color: #2e8b57;">1</span> <span style="color: #2e8b57;">6</span><span style="color: #5EC4FF;">)</span>
+<span style="color: #5EC4FF;">...</span>
+<span style="color: #5EC4FF;">(</span>pa+ <span style="color: #2e8b57;">0</span> <span style="color: #2e8b57;">7</span><span style="color: #5EC4FF;">)</span>
+<span style="color: #2e8b57;">7</span>
+</pre>
+</div>
+
+<p>
+We&rsquo;re skipping some steps, but the idea is that <code>x</code> keeps giving
+one &ldquo;unit&rdquo; to <code>y</code> until it reaches zero. Then the sum is <code>y</code>.
+Written with steps skipped:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket"><span style="color: #5EC4FF;">(</span>pa+ <span style="color: #2e8b57;">3</span> <span style="color: #2e8b57;">4</span><span style="color: #5EC4FF;">)</span>
+<span style="color: #5EC4FF;">(</span>pa+ <span style="color: #2e8b57;">2</span> <span style="color: #2e8b57;">5</span><span style="color: #5EC4FF;">)</span>
+<span style="color: #5EC4FF;">(</span>pa+ <span style="color: #2e8b57;">1</span> <span style="color: #2e8b57;">6</span><span style="color: #5EC4FF;">)</span>
+<span style="color: #5EC4FF;">(</span>pa+ <span style="color: #2e8b57;">0</span> <span style="color: #2e8b57;">7</span><span style="color: #5EC4FF;">)</span>
+<span style="color: #2e8b57;">7</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org5fa3295" class="outline-4">
+<h4 id="org5fa3295"><span class="section-number-4">3.2.2</span> Another Peano Adder</h4>
+<div class="outline-text-4" id="text-3-2-2">
+<p>
+Consider:
+</p>
+<div class="org-src-container">
+<pre class="src src-racket" id="org6281379"><span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #E27E8D;">(</span><span style="color: #33CED8;">pb+</span> x y<span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">if</span> <span style="color: #8BD49C;">(</span><span style="color: #5EC4FF;">=</span> x <span style="color: #2e8b57;">0</span><span style="color: #8BD49C;">)</span>
+      y
+      <span style="color: #8BD49C;">(</span>inc <span style="color: #D98E48;">(</span>pb+ <span style="color: #B62D65;">(</span>dec x<span style="color: #B62D65;">)</span> y<span style="color: #D98E48;">)</span><span style="color: #8BD49C;">)</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+
+<p>
+This is also a Peano adder: but it&rsquo;s implemented <i>slightly</i>
+differently syntax-wise, a few characters here and there. Let&rsquo;s
+use the substitution rule to see how it works.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket"><span style="color: #5EC4FF;">(</span>pb+ <span style="color: #2e8b57;">3</span> <span style="color: #2e8b57;">4</span><span style="color: #5EC4FF;">)</span>
+<span style="color: #5EC4FF;">(</span>inc <span style="color: #E27E8D;">(</span>pb+ <span style="color: #2e8b57;">2</span> <span style="color: #2e8b57;">4</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+<span style="color: #5EC4FF;">(</span>inc <span style="color: #E27E8D;">(</span>inc <span style="color: #8BD49C;">(</span>pb+ <span style="color: #2e8b57;">1</span> <span style="color: #2e8b57;">4</span><span style="color: #8BD49C;">)</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+<span style="color: #5EC4FF;">(</span>inc <span style="color: #E27E8D;">(</span>inc <span style="color: #8BD49C;">(</span>inc <span style="color: #D98E48;">(</span>pb+ <span style="color: #2e8b57;">0</span> <span style="color: #2e8b57;">4</span><span style="color: #D98E48;">)</span><span style="color: #8BD49C;">)</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+<span style="color: #5EC4FF;">(</span>inc <span style="color: #E27E8D;">(</span>inc <span style="color: #8BD49C;">(</span><span style="color: #D98E48;">(</span>inc <span style="color: #2e8b57;">4</span><span style="color: #D98E48;">)</span><span style="color: #8BD49C;">)</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+<span style="color: #5EC4FF;">(</span>inc <span style="color: #E27E8D;">(</span>inc <span style="color: #2e8b57;">5</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+<span style="color: #5EC4FF;">(</span>inc <span style="color: #2e8b57;">6</span><span style="color: #5EC4FF;">)</span>
+<span style="color: #2e8b57;">7</span>
+</pre>
+</div>
+
+<p>
+See that it <i>does</i> work:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket">
+<span style="color: #5EC4FF;">(</span>pb+ <span style="color: #2e8b57;">3</span> <span style="color: #2e8b57;">4</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+7
+</pre>
+
+
+<p>
+Now, consider how these two, <code>pa+</code> and <code>pb+</code>, are different. While
+the <i>procedures</i> do the same thing, the processes are wildly
+different. Let&rsquo;s discuss their time and space complexity.
+It should be obvious to you that the time complexity is the
+vertical axis in the substitution rule application, since the
+interpreter &ldquo;executes&rdquo; these instructions line by line. More lines
+means more time.
+</p>
+
+<p>
+In the case of <code>pa+</code>, the number of lines increases by 1 if you
+increase input <code>x</code> by 1. Thus, the time complexity is \(O(x)\).
+Similarly, in the case of <code>pb+</code>, the number of lines increases by
+2 (once in the expansion, once in the contraction) when you
+increase <code>x</code> by 1. Thus, it is also \(O(x)\).
+</p>
+
+<p>
+Now, the horizontal axis shows us how much space is being used. In
+the case of <code>pa+</code>, the space used is a constant. Thus, \(O(1)\). On
+the other hand, see that <code>pb+</code> first <i>expands</i> then <i>contracts</i>.
+The length of the maximum expansion increases by 1 if we increase
+\(x\) by 1, since there&rsquo;s one more increment to do. Thus, \(O(x)\).
+</p>
+
+<p>
+Now, we call a process like <code>pa+</code> <i>linear iterative</i> and a process
+like <code>pb+</code> <i>linear recursive</i>.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Process</th>
+<th scope="col" class="org-left">Time Complexity</th>
+<th scope="col" class="org-left">Space Complexity</th>
+<th scope="col" class="org-left">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left"><code>pa+</code></td>
+<td class="org-left">\(O(x)\)</td>
+<td class="org-left">\(O(1)\)</td>
+<td class="org-left">Linear iterative</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>pb+</code></td>
+<td class="org-left">\(O(x)\)</td>
+<td class="org-left">\(O(x)\)</td>
+<td class="org-left">Linear recursive</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Note that the <i>process</i> <code>pa+</code> being iterative has nothing to do
+with the implementation/definition of the <i>procedure</i>, which is
+recursive. Iteration refers to the constant space requirement.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc5ee9d0" class="outline-3">
+<h3 id="orgc5ee9d0"><span class="section-number-3">3.3</span> Differentiating Between Iterative and Recursive Processes</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+One of the primary ways to differentiate between an iterative and
+recursive process is to imagine what&rsquo;d happen if you turned the
+computer off, then resumed the current computation.
+</p>
+
+<p>
+In a recursive process, we&rsquo;ve lost some important information: how
+deep into the recursion we are. In the <code>pb+</code> example, we wouldn&rsquo;t
+know how many <code>inc</code>&rsquo;s deep we are (information stored in the RAM by
+the interpreter, not by the process), meaning that we can&rsquo;t return
+the right value.
+</p>
+
+<p>
+In an iterative process, we can pick up right where we left off,
+since <i>all</i> state information is contained by the process.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org36b1792" class="outline-3">
+<h3 id="org36b1792"><span class="section-number-3">3.4</span> Fibonacci Numbers</h3>
+<div class="outline-text-3" id="text-3-4">
+<p>
+Fibonacci numbers are defined as:
+</p>
+
+<p>
+\[F(x) =
+   \begin{cases}
+   0, & x = 0\\
+   1, & x = 1\\
+   F(x-1) + F(x-2), & \mathrm{otherwise}
+   \end{cases}\]
+</p>
+
+<p>
+The series itself is:
+\[0,1,1,2,3,5,8,13,21,34,55\hdots\]
+</p>
+
+<p>
+Let&rsquo;s write a Lisp function to calculate the \(n\mathrm{th}\) Fibonacci
+number, assuming 0 is the 0th.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket"><span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #E27E8D;">(</span><span style="color: #33CED8;">fib</span> n<span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">if</span> <span style="color: #8BD49C;">(</span><span style="color: #5EC4FF;">&lt;</span> n <span style="color: #2e8b57;">2</span><span style="color: #8BD49C;">)</span>
+      n
+      <span style="color: #8BD49C;">(</span><span style="color: #5EC4FF;">+</span> <span style="color: #D98E48;">(</span>fib <span style="color: #B62D65;">(</span><span style="color: #5EC4FF;">-</span> n <span style="color: #2e8b57;">1</span><span style="color: #B62D65;">)</span><span style="color: #D98E48;">)</span>
+         <span style="color: #D98E48;">(</span>fib <span style="color: #B62D65;">(</span><span style="color: #5EC4FF;">-</span> n <span style="color: #2e8b57;">2</span><span style="color: #B62D65;">)</span><span style="color: #D98E48;">)</span><span style="color: #8BD49C;">)</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+<span style="color: #5EC4FF;">(</span>fib <span style="color: #2e8b57;">10</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+55
+</pre>
+
+
+<p>
+It works, that&rsquo;s true. But how <i>well</i> does it work. Let&rsquo;s see. When
+we call (say) <code>(fib 4)</code>, we also call <code>(fib 3)</code> and <code>(fib 2)</code>, both
+of which also call \(\hdots\) let&rsquo;s draw it:
+</p>
+
+<p>
+A tree! Clearly, this is an exponential-time process, since
+computing \(n+1\) takes exponentially more effort. Also note that
+it&rsquo;s a pretty bad process, since we constantly recompute many
+values. The space complexity is the maximum depth of the tree
+(depth of recursion), which is at most \(n\). Therefore, the time
+complexity is \(O(\mathrm{fib}(n))\) and space complexity is \(O(n)\).
+</p>
+
+<p>
+It is useful to try and write an iterative Fibonacci with better
+performance as an exercise.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd215c3b" class="outline-3">
+<h3 id="orgd215c3b"><span class="section-number-3">3.5</span> Towers of Hanoi</h3>
+<div class="outline-text-3" id="text-3-5">
+<p>
+From Wikipedia:
+</p>
+
+<blockquote>
+<p>
+The Tower of Hanoi is a mathematical game or puzzle. It consists of
+three rods and a number of disks of different diameters, which can
+slide onto any rod. The puzzle starts with the disks stacked on one
+rod in order of decreasing size, the smallest at the top, thus
+approximating a conical shape. The objective of the puzzle is to
+move the entire stack to the last rod, obeying the following simple
+rules:
+</p>
+
+<ul class="org-ul">
+<li>Only one disk may be moved at a time.</li>
+<li>Each move consists of taking the upper disk from one of the
+stacks and placing it on top of another stack or an empty rod.</li>
+<li>No disk may be placed on top of a disk that is smaller than it.</li>
+</ul>
+</blockquote>
+
+<p>
+Let&rsquo;s try to solve Hanoi for 4 disks, from rod A to rod C. Again
+&#x2014; &ldquo;wishful thinking&rdquo;. Let&rsquo;s assume that we know how to solve for
+3 disks. To solve, we&rsquo;d take the top 3 disks, put it on the spare
+rod B. Then, we&rsquo;d take the fourth and largest disk, and put it on
+destination rod C. Finally, we&rsquo;d move the three disk pile from B
+to C. Solved!
+</p>
+
+<p>
+But wait &#x2014; to solve the 3 disk case, let&rsquo;s assume we know how to
+solve the 2 disk case.
+</p>
+
+<p>
+To solve the 2 disk case, we should know how
+to solve the one disk case, which is just moving a disk from a rod
+to another.
+</p>
+
+<p>
+Or, in Lisp,
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket"><span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #E27E8D;">(</span><span style="color: #33CED8;">move</span> n from to spare<span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">cond</span> <span style="color: #8BD49C;">(</span><span style="color: #D98E48;">(</span><span style="color: #5EC4FF;">=</span> n <span style="color: #2e8b57;">1</span><span style="color: #D98E48;">)</span> <span style="color: #D98E48;">(</span><span style="color: #5EC4FF;">display</span> <span style="color: #539AFC;">"Move disk at rod "</span><span style="color: #D98E48;">)</span>
+                 <span style="color: #D98E48;">(</span><span style="color: #5EC4FF;">display</span> from<span style="color: #D98E48;">)</span>
+                 <span style="color: #D98E48;">(</span><span style="color: #5EC4FF;">display</span> <span style="color: #539AFC;">" to rod "</span><span style="color: #D98E48;">)</span>
+                 <span style="color: #D98E48;">(</span><span style="color: #5EC4FF;">display</span> to<span style="color: #D98E48;">)</span>
+                 <span style="color: #D98E48;">(</span><span style="color: #5EC4FF;">display</span> <span style="color: #539AFC;">".\n"</span><span style="color: #D98E48;">)</span><span style="color: #8BD49C;">)</span>
+        <span style="color: #8BD49C;">(</span><span style="color: #5EC4FF;">else</span>
+         <span style="color: #D98E48;">(</span>move <span style="color: #B62D65;">(</span><span style="color: #5EC4FF;">-</span> n <span style="color: #2e8b57;">1</span><span style="color: #B62D65;">)</span> from spare to<span style="color: #D98E48;">)</span>
+         <span style="color: #D98E48;">(</span>move <span style="color: #2e8b57;">1</span> from to spare<span style="color: #D98E48;">)</span>
+         <span style="color: #D98E48;">(</span>move <span style="color: #B62D65;">(</span><span style="color: #5EC4FF;">-</span> n <span style="color: #2e8b57;">1</span><span style="color: #B62D65;">)</span> spare to from<span style="color: #D98E48;">)</span><span style="color: #8BD49C;">)</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+
+<span style="color: #5EC4FF;">(</span>move <span style="color: #2e8b57;">4</span> <span style="color: #539AFC;">"A"</span> <span style="color: #539AFC;">"C"</span> <span style="color: #539AFC;">"B"</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+Move disk at rod A to rod B.
+Move disk at rod A to rod C.
+Move disk at rod B to rod C.
+Move disk at rod A to rod B.
+Move disk at rod C to rod A.
+Move disk at rod C to rod B.
+Move disk at rod A to rod B.
+Move disk at rod A to rod C.
+Move disk at rod B to rod C.
+Move disk at rod B to rod A.
+Move disk at rod C to rod A.
+Move disk at rod B to rod C.
+Move disk at rod A to rod B.
+Move disk at rod A to rod C.
+Move disk at rod B to rod C.
+</pre>
+
+<p>
+Note, of course, that this procedure too, is an exponential time
+procedure. However, any procedure for Hanoi will be exponential
+time, since for \(n\) disks, Hanoi requires \(2^{n-1}\) moves. Even if
+you compute every move in \(O(1)\) (which we do, since it&rsquo;s just a
+print), the complexity will be \(O(2^n)\).
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgdaa944b" class="outline-3">
+<h3 id="orgdaa944b"><span class="section-number-3">3.6</span> Iterative Fibonacci</h3>
+<div class="outline-text-3" id="text-3-6">
+<div class="org-src-container">
+<pre class="src src-racket"><span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #E27E8D;">(</span><span style="color: #33CED8;">iter-fib</span> n a b<span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">if</span> <span style="color: #8BD49C;">(</span><span style="color: #5EC4FF;">=</span> n <span style="color: #2e8b57;">1</span><span style="color: #8BD49C;">)</span>
+      b
+      <span style="color: #8BD49C;">(</span>iter-fib <span style="color: #D98E48;">(</span>dec n<span style="color: #D98E48;">)</span> b <span style="color: #D98E48;">(</span><span style="color: #5EC4FF;">+</span> a b<span style="color: #D98E48;">)</span><span style="color: #8BD49C;">)</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #E27E8D;">(</span><span style="color: #33CED8;">fib</span> n<span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span>iter-fib n <span style="color: #2e8b57;">0</span> <span style="color: #2e8b57;">1</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+
+<span style="color: #5EC4FF;">(</span>fib <span style="color: #2e8b57;">10</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+55
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge6ef54b" class="outline-2">
+<h2 id="orge6ef54b"><span class="section-number-2">4</span> Lecture 2A: Higher-Order Procedures</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-orgd00be73" class="outline-3">
+<h3 id="orgd00be73"><span class="section-number-3">4.1</span> Abstracting Procedural Ideas</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+Consider the functions and their respective (recursive) procedures:
+</p>
+
+<p>
+\[\sum_{i=a}^{b} i\]
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket"><span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #E27E8D;">(</span><span style="color: #33CED8;">sum-int</span> a b<span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">if</span> <span style="color: #8BD49C;">(</span><span style="color: #5EC4FF;">&gt;</span> a b<span style="color: #8BD49C;">)</span>
+      <span style="color: #2e8b57;">0</span>
+      <span style="color: #8BD49C;">(</span><span style="color: #5EC4FF;">+</span> a
+         <span style="color: #D98E48;">(</span>sum-int <span style="color: #B62D65;">(</span>inc a<span style="color: #B62D65;">)</span> b<span style="color: #D98E48;">)</span><span style="color: #8BD49C;">)</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+
+<span style="color: #5EC4FF;">(</span>sum-int <span style="color: #2e8b57;">0</span> <span style="color: #2e8b57;">10</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+55
+</pre>
+
+
+<p>
+\[\sum_{i=a}^{b} i^{2}\]
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket">
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #E27E8D;">(</span><span style="color: #33CED8;">sum-sq</span> a b<span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">if</span> <span style="color: #8BD49C;">(</span><span style="color: #5EC4FF;">&gt;</span> a b<span style="color: #8BD49C;">)</span>
+      <span style="color: #2e8b57;">0</span>
+      <span style="color: #8BD49C;">(</span><span style="color: #5EC4FF;">+</span> <span style="color: #D98E48;">(</span>square a<span style="color: #D98E48;">)</span>
+         <span style="color: #D98E48;">(</span>sum-sq <span style="color: #B62D65;">(</span>inc a<span style="color: #B62D65;">)</span> b<span style="color: #D98E48;">)</span><span style="color: #8BD49C;">)</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+
+<span style="color: #5EC4FF;">(</span>sum-sq <span style="color: #2e8b57;">0</span> <span style="color: #2e8b57;">4</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+30
+</pre>
+
+
+<p>
+\[\sum_{i=a_{\mathrm{~by~}4}}^{b} \frac{1}{i(i+2)}\]
+</p>
+
+<p>
+Note that this series estimates \(\pi /8\).
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket"><span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #E27E8D;">(</span><span style="color: #33CED8;">sum-pi</span> a b<span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">if</span> <span style="color: #8BD49C;">(</span><span style="color: #5EC4FF;">&gt;</span> a b<span style="color: #8BD49C;">)</span>
+      <span style="color: #2e8b57;">0</span>
+      <span style="color: #8BD49C;">(</span><span style="color: #5EC4FF;">+</span> <span style="color: #D98E48;">(</span><span style="color: #5EC4FF;">/</span> <span style="color: #2e8b57;">1</span>
+            <span style="color: #B62D65;">(</span><span style="color: #5EC4FF;">*</span> a <span style="color: #EBBF83;">(</span><span style="color: #5EC4FF;">+</span> a <span style="color: #2e8b57;">2</span><span style="color: #EBBF83;">)</span><span style="color: #B62D65;">)</span><span style="color: #D98E48;">)</span>
+         <span style="color: #D98E48;">(</span>sum-pi <span style="color: #B62D65;">(</span><span style="color: #5EC4FF;">+</span> a <span style="color: #2e8b57;">4</span><span style="color: #B62D65;">)</span> b<span style="color: #D98E48;">)</span><span style="color: #8BD49C;">)</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">*</span> <span style="color: #2e8b57;">8</span> <span style="color: #E27E8D;">(</span>sum-pi <span style="color: #2e8b57;">#i1</span> <span style="color: #2e8b57;">#i1000000</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+3.141590653589793
+</pre>
+
+
+
+<p>
+See that the commonality between these procedures comes from the
+fact that the notion of &ldquo;summation&rdquo; from <code>a</code> to <code>b</code> is the same,
+but the <i>function</i> being summed is different in each case. Or, in
+general form:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket"><span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #E27E8D;">(</span><span style="color: #33CED8;">&lt;name&gt;</span> a b<span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">if</span> <span style="color: #8BD49C;">(</span><span style="color: #5EC4FF;">&gt;</span> a b<span style="color: #8BD49C;">)</span>
+      <span style="color: #2e8b57;">0</span>
+      <span style="color: #8BD49C;">(</span><span style="color: #5EC4FF;">+</span> <span style="color: #D98E48;">(</span>&lt;term&gt; a<span style="color: #D98E48;">)</span>
+         <span style="color: #D98E48;">(</span>&lt;name&gt; <span style="color: #B62D65;">(</span>&lt;next&gt; a<span style="color: #B62D65;">)</span> b<span style="color: #D98E48;">)</span><span style="color: #8BD49C;">)</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<p>
+The way to solve this is by writing a procedure <code>sum</code>, which has
+available to it two procedures <code>term</code> and <code>next</code>. We supply these
+are arguments. Consider:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket" id="org561ce69"><span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #E27E8D;">(</span><span style="color: #33CED8;">sum</span> term a next b<span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">if</span> <span style="color: #8BD49C;">(</span><span style="color: #5EC4FF;">&gt;</span> a b<span style="color: #8BD49C;">)</span>
+      <span style="color: #2e8b57;">0</span>
+      <span style="color: #8BD49C;">(</span><span style="color: #5EC4FF;">+</span> <span style="color: #D98E48;">(</span>term a<span style="color: #D98E48;">)</span>
+         <span style="color: #D98E48;">(</span>sum term <span style="color: #B62D65;">(</span>next a<span style="color: #B62D65;">)</span> next b<span style="color: #D98E48;">)</span><span style="color: #8BD49C;">)</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<p>
+When we call <code>sum</code> recursively, see that we pass to it the <i>same
+procedures</i> <code>term</code> and <code>next</code>, along with <code>b</code> and the next value of
+<code>a</code>. Now, it is easy to define <code>sum-int</code>, <code>sum-sq</code>, and <code>sum-pi</code>
+using <code>sum</code>, thus:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket">
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #E27E8D;">(</span><span style="color: #33CED8;">sum-int</span> a b<span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #8BD49C;">(</span><span style="color: #33CED8;">identity</span> x<span style="color: #8BD49C;">)</span> x<span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span>sum <span style="color: #5EC4FF;">identity</span>
+       a
+       inc
+       b<span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+
+<span style="color: #5EC4FF;">(</span>sum-int <span style="color: #2e8b57;">0</span> <span style="color: #2e8b57;">10</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+55
+</pre>
+
+
+<p>
+<code>identity</code> is the function \(p(x) = x\).
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket">
+
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #E27E8D;">(</span><span style="color: #33CED8;">sum-sq</span> a b<span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span>sum square
+       a
+       inc
+       b<span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+
+<span style="color: #5EC4FF;">(</span>sum-sq <span style="color: #2e8b57;">0</span> <span style="color: #2e8b57;">4</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+30
+</pre>
+
+
+<div class="org-src-container">
+<pre class="src src-racket">
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #E27E8D;">(</span><span style="color: #33CED8;">sum-pi</span> a b<span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span>sum <span style="color: #8BD49C;">(</span><span style="color: #5EC4FF;">lambda</span> <span style="color: #D98E48;">(</span>x<span style="color: #D98E48;">)</span>
+         <span style="color: #D98E48;">(</span><span style="color: #5EC4FF;">/</span> <span style="color: #2e8b57;">1</span>
+            <span style="color: #B62D65;">(</span><span style="color: #5EC4FF;">*</span> x <span style="color: #EBBF83;">(</span><span style="color: #5EC4FF;">+</span> x <span style="color: #2e8b57;">2</span><span style="color: #EBBF83;">)</span><span style="color: #B62D65;">)</span><span style="color: #D98E48;">)</span><span style="color: #8BD49C;">)</span>
+       a
+       <span style="color: #8BD49C;">(</span><span style="color: #5EC4FF;">lambda</span> <span style="color: #D98E48;">(</span>x<span style="color: #D98E48;">)</span> <span style="color: #D98E48;">(</span><span style="color: #5EC4FF;">+</span> x <span style="color: #2e8b57;">4</span><span style="color: #D98E48;">)</span><span style="color: #8BD49C;">)</span>
+       b<span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">*</span> <span style="color: #2e8b57;">8</span> <span style="color: #E27E8D;">(</span>sum-pi <span style="color: #2e8b57;">#i1</span> <span style="color: #2e8b57;">#i1000000</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+3.141590653589793
+</pre>
+
+
+<p>
+Recall that <code>lambda</code> means &ldquo;make a procedure&rdquo; that is nameless. In
+<code>sum-pi</code>, we choose to give it anonymous functions as arguments
+instead of defining our own, because there&rsquo;s no reason to name a
+procedure we won&rsquo;t later use.
+</p>
+
+<p>
+The big advantage of abstracting away <code>sum</code> this way is that in
+case we want to implement it in a different way, we merely have to
+change the implementation of one function (<code>sum</code>) and not that of
+the three functions that use it. In fact, those functions can
+remain exactly the same.
+</p>
+
+<p>
+Here&rsquo;s another implementation of <code>sum</code>. See that <code>sum-pi</code> still
+works without changes, because it doesn&rsquo;t care about how <code>sum</code> is
+implemented as long as the argument number and order remains
+constant.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket"><span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #E27E8D;">(</span><span style="color: #33CED8;">sum</span> term a next b<span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #8BD49C;">(</span><span style="color: #33CED8;">iter</span> j ans<span style="color: #8BD49C;">)</span>
+    <span style="color: #8BD49C;">(</span><span style="color: #5EC4FF;">if</span> <span style="color: #D98E48;">(</span><span style="color: #5EC4FF;">&gt;</span> j b<span style="color: #D98E48;">)</span>
+        ans
+        <span style="color: #D98E48;">(</span>iter <span style="color: #B62D65;">(</span>next j<span style="color: #B62D65;">)</span>
+              <span style="color: #B62D65;">(</span><span style="color: #5EC4FF;">+</span> <span style="color: #EBBF83;">(</span>term j<span style="color: #EBBF83;">)</span>
+                 ans<span style="color: #B62D65;">)</span><span style="color: #D98E48;">)</span><span style="color: #8BD49C;">)</span><span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span>iter a <span style="color: #2e8b57;">0</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #E27E8D;">(</span><span style="color: #33CED8;">sum-pi</span> a b<span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span>sum <span style="color: #8BD49C;">(</span><span style="color: #5EC4FF;">lambda</span> <span style="color: #D98E48;">(</span>x<span style="color: #D98E48;">)</span>
+         <span style="color: #D98E48;">(</span><span style="color: #5EC4FF;">/</span> <span style="color: #2e8b57;">1</span>
+            <span style="color: #B62D65;">(</span><span style="color: #5EC4FF;">*</span> x <span style="color: #EBBF83;">(</span><span style="color: #5EC4FF;">+</span> x <span style="color: #2e8b57;">2</span><span style="color: #EBBF83;">)</span><span style="color: #B62D65;">)</span><span style="color: #D98E48;">)</span><span style="color: #8BD49C;">)</span>
+       a
+       <span style="color: #8BD49C;">(</span><span style="color: #5EC4FF;">lambda</span> <span style="color: #D98E48;">(</span>x<span style="color: #D98E48;">)</span> <span style="color: #D98E48;">(</span><span style="color: #5EC4FF;">+</span> x <span style="color: #2e8b57;">4</span><span style="color: #D98E48;">)</span><span style="color: #8BD49C;">)</span>
+       b<span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">*</span> <span style="color: #2e8b57;">8</span> <span style="color: #E27E8D;">(</span>sum-pi <span style="color: #2e8b57;">#i1</span> <span style="color: #2e8b57;">#i1000000</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+3.1415906535898936
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org4760735" class="outline-3">
+<h3 id="org4760735"><span class="section-number-3">4.2</span> More on Square Roots</h3>
+<div class="outline-text-3" id="text-4-2">
+<p>
+Recall our square root procedure. When seen in Lisp code, it&rsquo;s not
+very clear what it&rsquo;s doing, or how it&rsquo;s working.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket" id="org0b855be"><span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #E27E8D;">(</span><span style="color: #33CED8;">sqrt</span> x<span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #8BD49C;">(</span><span style="color: #33CED8;">good-enough-p</span> g<span style="color: #8BD49C;">)</span>
+    <span style="color: #8BD49C;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #D98E48;">(</span><span style="color: #33CED8;">square</span> g<span style="color: #D98E48;">)</span>
+      <span style="color: #D98E48;">(</span><span style="color: #5EC4FF;">*</span> g g<span style="color: #D98E48;">)</span><span style="color: #8BD49C;">)</span>
+    <span style="color: #8BD49C;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #D98E48;">(</span><span style="color: #33CED8;">abs</span> y<span style="color: #D98E48;">)</span>
+      <span style="color: #D98E48;">(</span><span style="color: #5EC4FF;">if</span> <span style="color: #B62D65;">(</span><span style="color: #5EC4FF;">&lt;</span> y <span style="color: #2e8b57;">0</span><span style="color: #B62D65;">)</span>
+          <span style="color: #B62D65;">(</span><span style="color: #5EC4FF;">-</span> y<span style="color: #B62D65;">)</span>
+          y<span style="color: #D98E48;">)</span><span style="color: #8BD49C;">)</span>
+    <span style="color: #8BD49C;">(</span><span style="color: #5EC4FF;">&lt;</span> <span style="color: #D98E48;">(</span><span style="color: #5EC4FF;">abs</span> <span style="color: #B62D65;">(</span><span style="color: #5EC4FF;">-</span> <span style="color: #EBBF83;">(</span>square g<span style="color: #EBBF83;">)</span> x<span style="color: #B62D65;">)</span><span style="color: #D98E48;">)</span>
+       <span style="color: #2e8b57;">0.0001</span><span style="color: #8BD49C;">)</span><span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #8BD49C;">(</span><span style="color: #33CED8;">improve</span> g<span style="color: #8BD49C;">)</span>
+    <span style="color: #8BD49C;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #D98E48;">(</span><span style="color: #33CED8;">average</span> y z<span style="color: #D98E48;">)</span>
+      <span style="color: #D98E48;">(</span><span style="color: #5EC4FF;">/</span> <span style="color: #B62D65;">(</span><span style="color: #5EC4FF;">+</span> y z<span style="color: #B62D65;">)</span> <span style="color: #2e8b57;">2</span><span style="color: #D98E48;">)</span><span style="color: #8BD49C;">)</span>
+    <span style="color: #8BD49C;">(</span>average g <span style="color: #D98E48;">(</span><span style="color: #5EC4FF;">/</span> x g<span style="color: #D98E48;">)</span><span style="color: #8BD49C;">)</span><span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #8BD49C;">(</span><span style="color: #33CED8;">try</span> g<span style="color: #8BD49C;">)</span>
+    <span style="color: #8BD49C;">(</span><span style="color: #5EC4FF;">if</span> <span style="color: #D98E48;">(</span>good-enough-p g<span style="color: #D98E48;">)</span>
+        g
+        <span style="color: #D98E48;">(</span>try <span style="color: #B62D65;">(</span>improve g<span style="color: #B62D65;">)</span><span style="color: #D98E48;">)</span><span style="color: #8BD49C;">)</span><span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span>try <span style="color: #2e8b57;">1</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-racket">
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">sqrt</span> <span style="color: #2e8b57;">#i2</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+1.4142156862745097
+</pre>
+
+
+<p>
+Let&rsquo;s use higher-order procedure abstraction to make it clearer.
+</p>
+</div>
+
+<div id="outline-container-org672ee7a" class="outline-4">
+<h4 id="org672ee7a"><span class="section-number-4">4.2.1</span> Fixed Points</h4>
+<div class="outline-text-4" id="text-4-2-1">
+<p>
+Recall that the algorithm itself relies on writing a function
+</p>
+
+<p>
+\[f\colon y\mapsto \frac{y+\frac{x}{y}}{2}\]
+</p>
+
+<p>
+Note that this works because \(f(\sqrt{x}) = \sqrt{x}\):
+</p>
+
+<p>
+\[f(\sqrt{x})=\frac{\sqrt{x}+\frac{x}{\sqrt{x}}}{2} = \frac{2\sqrt{x}}{2} = \sqrt{x}\]
+</p>
+
+<p>
+See that this is <i>actually</i> an algorithm for finding a fixed point
+of a function \(f\), which is defined as finding the point where
+\(f(z)=z\). This algorithm is merely an instance of a function \(f\)
+whose fixed point happens to be the square root.
+</p>
+
+<blockquote>
+<p>
+For some functions, the fixed point can be found by iterating it.
+</p>
+</blockquote>
+
+<p>
+This is the top-level abstraction we&rsquo;ll write a function for.
+First, let&rsquo;s see how we&rsquo;d write a square-root function by wishful
+thinking:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket" id="orgd9cce83">
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #E27E8D;">(</span><span style="color: #33CED8;">sqrt</span> x<span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span>fixed-point
+   <span style="color: #8BD49C;">(</span><span style="color: #5EC4FF;">lambda</span> <span style="color: #D98E48;">(</span>y<span style="color: #D98E48;">)</span> <span style="color: #D98E48;">(</span>average <span style="color: #B62D65;">(</span><span style="color: #5EC4FF;">/</span> x y<span style="color: #B62D65;">)</span>
+                        y<span style="color: #D98E48;">)</span><span style="color: #8BD49C;">)</span>
+   <span style="color: #2e8b57;">1</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<p>
+Now writing <code>fixed-point</code>:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket" id="org32b46d2">
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #E27E8D;">(</span><span style="color: #33CED8;">fixed-point</span> f start<span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #8BD49C;">(</span><span style="color: #33CED8;">close-enough-p</span> x y<span style="color: #8BD49C;">)</span>
+    <span style="color: #8BD49C;">(</span><span style="color: #5EC4FF;">&lt;</span> <span style="color: #D98E48;">(</span><span style="color: #5EC4FF;">abs</span> <span style="color: #B62D65;">(</span><span style="color: #5EC4FF;">-</span> x y<span style="color: #B62D65;">)</span><span style="color: #D98E48;">)</span>
+       <span style="color: #2e8b57;">0.00001</span><span style="color: #8BD49C;">)</span><span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #8BD49C;">(</span><span style="color: #33CED8;">iter</span> old <span style="color: #5EC4FF;">new</span><span style="color: #8BD49C;">)</span>
+    <span style="color: #8BD49C;">(</span><span style="color: #5EC4FF;">if</span> <span style="color: #D98E48;">(</span>close-enough-p old <span style="color: #5EC4FF;">new</span><span style="color: #D98E48;">)</span>
+        <span style="color: #5EC4FF;">new</span>
+        <span style="color: #D98E48;">(</span>iter <span style="color: #5EC4FF;">new</span> <span style="color: #B62D65;">(</span>f <span style="color: #5EC4FF;">new</span><span style="color: #B62D65;">)</span><span style="color: #D98E48;">)</span><span style="color: #8BD49C;">)</span><span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span>iter start <span style="color: #8BD49C;">(</span>f start<span style="color: #8BD49C;">)</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<p>
+Let&rsquo;s try it out!
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket">
+
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">sqrt</span> <span style="color: #2e8b57;">#i2</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+1.4142135623746899
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orga55cf7c" class="outline-4">
+<h4 id="orga55cf7c"><span class="section-number-4">4.2.2</span> Damping Oscillations</h4>
+<div class="outline-text-4" id="text-4-2-2">
+<p>
+A fair question when seeing the function
+\[f_1\colon y\mapsto \frac{y+\frac{x}{y}}{2}\]
+is why another function
+\[f\colon y\mapsto \frac{x}{y}\]
+wouldn&rsquo;t work in its place. It&rsquo;s a fair question, and is best
+answered by trying to find its fixed point by iteration. Let&rsquo;s try
+to find it for \(x=2\), starting at \(y=1\). Then,
+</p>
+
+<p>
+\[f(1) = \frac{2}{1} = 2\]
+\[f(2) = \frac{2}{2} = 1\]
+\[f(1) = \frac{2}{1} = 2\]
+\[f(2) = \frac{2}{2} = 1\]
+\[~\hdots\]
+</p>
+
+<p>
+It seems that instead of converging, this function is
+<i>oscillating</i> between two values. We know that it&rsquo;s easy to fix
+this: we have to damp these oscillations. The most natural way to
+do this is to take the average of successive values \(y\) and
+\(f(y)\). A <code>sqrt</code> function that uses average damping would be:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket" id="org78a518b">
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #E27E8D;">(</span><span style="color: #33CED8;">sqrt</span> x<span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span>fixed-point
+   <span style="color: #8BD49C;">(</span>avg-damp <span style="color: #D98E48;">(</span><span style="color: #5EC4FF;">lambda</span> <span style="color: #B62D65;">(</span>y<span style="color: #B62D65;">)</span> <span style="color: #B62D65;">(</span><span style="color: #5EC4FF;">/</span> x y<span style="color: #B62D65;">)</span><span style="color: #D98E48;">)</span><span style="color: #8BD49C;">)</span>
+   <span style="color: #2e8b57;">1</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<p>
+The <code>avg-damp</code> function takes in a procedure, creates an average damping
+procedure, and returns it. Or, in Lisp:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket" id="orgd35699a">
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #718CA1;">avg-damp</span>
+  <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">lambda</span> <span style="color: #8BD49C;">(</span>f<span style="color: #8BD49C;">)</span>
+    <span style="color: #8BD49C;">(</span><span style="color: #5EC4FF;">lambda</span> <span style="color: #D98E48;">(</span>x<span style="color: #D98E48;">)</span> <span style="color: #D98E48;">(</span>average <span style="color: #B62D65;">(</span>f x<span style="color: #B62D65;">)</span> x<span style="color: #D98E48;">)</span><span style="color: #8BD49C;">)</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<p>
+It is worth discussing how <code>avg-damp</code> works. It is defined as a
+procedure which takes the argument of a function <code>f</code>. It then
+returns an anonymous procedure which takes an argument <code>x</code>, and
+computes the average of \(f(x)\) and \(x\). This is finally the
+highest level of abstraction we can reach for the <code>sqrt</code>
+algorithm &#x2014; finding the fixed point of a damped oscillating
+function.
+</p>
+
+<p>
+Using the <code>sqrt</code> function,
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket">
+
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">sqrt</span> <span style="color: #2e8b57;">#i2</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+1.4142135623746899
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf0ddfdd" class="outline-3">
+<h3 id="orgf0ddfdd"><span class="section-number-3">4.3</span> Newton&rsquo;s Method</h3>
+<div class="outline-text-3" id="text-4-3">
+<p>
+Newton&rsquo;s method is used to find the zeros of a function (\(y \ni
+   f(y)=0\)). To use it, start with some guess \(y_0\). Then,
+</p>
+
+<p>
+\[y_{n+1} = y_n - \frac{f(y_n)}{f'(y_n)}\]
+</p>
+
+<p>
+where \[f'(y) = \frac{\mathrm{d}f(y)}{\mathrm{d}y}\]
+</p>
+
+<p>
+We can, of course, find the zero of the square root finding function
+\(f(y) =  x-y^2\) using Newton&rsquo;s method. Note that Newton&rsquo;s method
+<i>itself</i> is based on fixed points, since it aims to find a fixed
+point where \(y_{n+1}\approx y_n\).
+</p>
+
+<p>
+Defining <code>sqrt</code>:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket" id="org18fcd45">
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #E27E8D;">(</span><span style="color: #33CED8;">sqrt</span> x<span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span>newton <span style="color: #8BD49C;">(</span><span style="color: #5EC4FF;">lambda</span> <span style="color: #D98E48;">(</span>y<span style="color: #D98E48;">)</span> <span style="color: #D98E48;">(</span><span style="color: #5EC4FF;">-</span> x <span style="color: #B62D65;">(</span>square y<span style="color: #B62D65;">)</span><span style="color: #D98E48;">)</span><span style="color: #8BD49C;">)</span>
+          <span style="color: #2e8b57;">1</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<p>
+We pass to <code>newton</code> a function \(f(y)=x-y^2\), since its zero is \(x=y^2\).
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket" id="org983213f">
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #E27E8D;">(</span><span style="color: #33CED8;">newton</span> f guess<span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #718CA1;">df</span> <span style="color: #8BD49C;">(</span>deriv f<span style="color: #8BD49C;">)</span><span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span>fixed-point
+   <span style="color: #8BD49C;">(</span><span style="color: #5EC4FF;">lambda</span> <span style="color: #D98E48;">(</span>x<span style="color: #D98E48;">)</span> <span style="color: #D98E48;">(</span><span style="color: #5EC4FF;">-</span> x
+                  <span style="color: #B62D65;">(</span><span style="color: #5EC4FF;">/</span> <span style="color: #EBBF83;">(</span>f x<span style="color: #EBBF83;">)</span>
+                     <span style="color: #EBBF83;">(</span>df x<span style="color: #EBBF83;">)</span><span style="color: #B62D65;">)</span><span style="color: #D98E48;">)</span><span style="color: #8BD49C;">)</span>
+   guess<span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+
+<p>
+It is important to note that defining <code>df</code> to be <code>(deriv f)</code> once
+prevents wasteful recomputation of <code>df</code> every time <code>fixed-point</code>
+calls itself.
+</p>
+
+<p>
+Of course, we now have to define a derivative function. We can
+simply use the standard limit definition to find it numerically:
+</p>
+
+<p>
+\[f'(x) = \lim_{\Delta x\to 0} \frac{f(x+\Delta x) - f(x)}{\Delta
+   x}\]
+</p>
+
+<p>
+Or, in Lisp,
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket" id="orgdd4e9f9"><span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #718CA1;">dx</span> <span style="color: #2e8b57;">0.0000001</span><span style="color: #5EC4FF;">)</span>
+
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #718CA1;">deriv</span>
+  <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">lambda</span> <span style="color: #8BD49C;">(</span>f<span style="color: #8BD49C;">)</span>
+    <span style="color: #8BD49C;">(</span><span style="color: #5EC4FF;">lambda</span> <span style="color: #D98E48;">(</span>x<span style="color: #D98E48;">)</span>
+      <span style="color: #D98E48;">(</span><span style="color: #5EC4FF;">/</span> <span style="color: #B62D65;">(</span><span style="color: #5EC4FF;">-</span> <span style="color: #EBBF83;">(</span>f <span style="color: #33CED8;">(</span><span style="color: #5EC4FF;">+</span> x dx<span style="color: #33CED8;">)</span><span style="color: #EBBF83;">)</span>
+            <span style="color: #EBBF83;">(</span>f x<span style="color: #EBBF83;">)</span><span style="color: #B62D65;">)</span>
+         dx<span style="color: #D98E48;">)</span><span style="color: #8BD49C;">)</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+
+
+</pre>
+</div>
+
+<p>
+This function returns a function which is the derivative of <code>f</code>,
+and can be used as such. Consider:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket">
+<span style="color: #5EC4FF;">(</span><span style="color: #E27E8D;">(</span>deriv <span style="color: #8BD49C;">(</span><span style="color: #5EC4FF;">lambda</span> <span style="color: #D98E48;">(</span>x<span style="color: #D98E48;">)</span> <span style="color: #D98E48;">(</span><span style="color: #5EC4FF;">*</span> x x x<span style="color: #D98E48;">)</span><span style="color: #8BD49C;">)</span><span style="color: #E27E8D;">)</span> <span style="color: #2e8b57;">2</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+12.000000584322379
+</pre>
+
+
+<p>
+Which is the expected value of differentiating \(x^{3}\) w.r.t \(x\)
+(\(3x^2\)) and evaluating at 2.
+</p>
+
+<p>
+Testing out our <code>sqrt</code> function:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket">
+
+
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">sqrt</span> <span style="color: #2e8b57;">#i2</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+1.4142135623747674
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgda76410" class="outline-3">
+<h3 id="orgda76410"><span class="section-number-3">4.4</span> Procedures are First-Class Citizens</h3>
+<div class="outline-text-3" id="text-4-4">
+<p>
+This means that procedures can be:
+</p>
+<ul class="org-ul">
+<li>Named using variables.</li>
+<li>Passed as arguments to procedures.</li>
+<li>Returned as values from procedures.</li>
+<li>Included in data structures.</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6f4c2a7" class="outline-2">
+<h2 id="org6f4c2a7"><span class="section-number-2">5</span> Lecture 2B: Compound Data</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+Consider our <code>sqrt</code> function that uses <code>good-enough-p</code>. What we did
+while writing <code>sqrt</code> is assume the existence of <code>good-enough-p</code>.
+That is, we divorced the task of building <code>sqrt</code> from the task of
+implementing its parts.
+</p>
+
+<p>
+Let&rsquo;s do this for data.
+</p>
+</div>
+
+<div id="outline-container-org2a5a189" class="outline-3">
+<h3 id="org2a5a189"><span class="section-number-3">5.1</span> Rational Number Arithmetic</h3>
+<div class="outline-text-3" id="text-5-1">
+<p>
+Let&rsquo;s design a system which can add fractions:
+\[\frac{1}{2}+\frac{1}{4}=\frac{3}{4}\]
+and multiply them:
+\[\frac{3}{4}\times \frac{2}{3} = \frac{1}{2}\]
+</p>
+
+<p>
+The <i>procedures</i> for these two tasks are well known to most people:
+</p>
+
+<p>
+\[\frac{n_1}{d_1} + \frac{n_2}{d_2} = \frac{n_1d_2+n_2d_2}{d_1d_2}\]
+and
+\[\frac{n_1}{d_1} \times \frac{n_2}{d_2} = \frac{n_1n_2}{d_1d_2}\]
+</p>
+</div>
+
+<div id="outline-container-org1566bfd" class="outline-4">
+<h4 id="org1566bfd"><span class="section-number-4">5.1.1</span> Abstraction</h4>
+<div class="outline-text-4" id="text-5-1-1">
+<p>
+We don&rsquo;t know, however, how to represent this data in a Lisp
+procedure. Let&rsquo;s use our powerful &ldquo;wishful thinking&rdquo; strategy.
+Assume that we have the following procedures available to us:
+</p>
+
+<ul class="org-ul">
+<li>A constructor <code>(make-rat n d)</code> which makes a fraction with
+numerator <code>n</code> and denominator <code>d</code>.</li>
+<li>Two selectors:
+<ul class="org-ul">
+<li><code>(numer x)</code> which takes in a fraction <code>x</code> and returns its
+numerator.</li>
+<li><code>(denom x)</code> which takes in a fraction <code>x</code> and returns its
+denominator.</li>
+</ul></li>
+</ul>
+
+<p>
+Then, our procedures are easy to write:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket" id="orgdaf4e3a"><span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #E27E8D;">(</span><span style="color: #33CED8;">+rat</span> x y<span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span>make-rat
+   <span style="color: #8BD49C;">(</span><span style="color: #5EC4FF;">+</span> <span style="color: #D98E48;">(</span><span style="color: #5EC4FF;">*</span> <span style="color: #B62D65;">(</span>numer x<span style="color: #B62D65;">)</span> <span style="color: #B62D65;">(</span>denom y<span style="color: #B62D65;">)</span><span style="color: #D98E48;">)</span>
+      <span style="color: #D98E48;">(</span><span style="color: #5EC4FF;">*</span> <span style="color: #B62D65;">(</span>numer y<span style="color: #B62D65;">)</span> <span style="color: #B62D65;">(</span>denom x<span style="color: #B62D65;">)</span><span style="color: #D98E48;">)</span><span style="color: #8BD49C;">)</span>
+   <span style="color: #8BD49C;">(</span><span style="color: #5EC4FF;">*</span> <span style="color: #D98E48;">(</span>denom x<span style="color: #D98E48;">)</span> <span style="color: #D98E48;">(</span>denom y<span style="color: #D98E48;">)</span><span style="color: #8BD49C;">)</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #E27E8D;">(</span><span style="color: #33CED8;">*rat</span> x y<span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span>make-rat
+   <span style="color: #8BD49C;">(</span><span style="color: #5EC4FF;">*</span> <span style="color: #D98E48;">(</span>numer x<span style="color: #D98E48;">)</span> <span style="color: #D98E48;">(</span>numer y<span style="color: #D98E48;">)</span><span style="color: #8BD49C;">)</span>
+   <span style="color: #8BD49C;">(</span><span style="color: #5EC4FF;">*</span> <span style="color: #D98E48;">(</span>denom x<span style="color: #D98E48;">)</span> <span style="color: #D98E48;">(</span>denom y<span style="color: #D98E48;">)</span><span style="color: #8BD49C;">)</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<p>
+Why do we need this data object abstraction anyway? We could very
+well define <code>+rat</code> to take in four numbers, two numerators and two
+denominators. But to return, we can&rsquo;t return <i>both</i> numerator and
+denominator. We now have to define two summation functions, one for
+the numerator and one for the denominator, and somehow keep track
+of the fact that one of these number is the numerator and the other
+the denominator. Furthermore, when applying more complex operations
+like:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket"><span style="color: #5EC4FF;">(</span>*rat <span style="color: #E27E8D;">(</span>+rat x y<span style="color: #E27E8D;">)</span>
+      <span style="color: #E27E8D;">(</span>+rat s t<span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<p>
+The data abstraction helps. If it weren&rsquo;t there, we&rsquo;d have to
+maintain some temporary registers to store the numerator and
+denominator values of the <code>+rat</code> operations into, then pass them to
+<code>*rat</code>.
+</p>
+
+<p>
+Worse than confusing the program, such a design philosophy would
+confuse us, the programmers.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7653493" class="outline-4">
+<h4 id="org7653493"><span class="section-number-4">5.1.2</span> Data Object Creation</h4>
+<div class="outline-text-4" id="text-5-1-2">
+<p>
+The glue we use to stick two numbers together is provided by three
+Lisp primitives:
+</p>
+<ul class="org-ul">
+<li>A constructor <code>cons</code>, which generates an ordered pair.</li>
+<li>Two selectors:
+<ul class="org-ul">
+<li><code>car</code>, which selects the first element of the pair, and</li>
+<li><code>cdr</code>, which selects the second element of the pair.</li>
+</ul></li>
+</ul>
+
+<p>
+In use,
+</p>
+<div class="org-src-container">
+<pre class="src src-racket"><span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #718CA1;">x</span> <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">cons</span> <span style="color: #2e8b57;">1</span> <span style="color: #2e8b57;">2</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">car</span> x<span style="color: #5EC4FF;">)</span>
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">cdr</span> x<span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+1
+2
+</pre>
+
+
+<p>
+We can now write the procedures that we&rsquo;d deferred writing
+earlier:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket" id="orge55401b"><span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #E27E8D;">(</span><span style="color: #33CED8;">make-rat</span> x y<span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">cons</span> x y<span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #E27E8D;">(</span><span style="color: #33CED8;">numer</span> x<span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">car</span> x<span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #E27E8D;">(</span><span style="color: #33CED8;">denom</span> x<span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">cdr</span> x<span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-racket">
+
+
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #718CA1;">x</span> <span style="color: #E27E8D;">(</span>make-rat <span style="color: #2e8b57;">1</span> <span style="color: #2e8b57;">2</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #718CA1;">y</span> <span style="color: #E27E8D;">(</span>make-rat <span style="color: #2e8b57;">1</span> <span style="color: #2e8b57;">4</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #718CA1;">z</span> <span style="color: #E27E8D;">(</span>+rat x y<span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+<span style="color: #5EC4FF;">(</span>numer z<span style="color: #5EC4FF;">)</span>
+<span style="color: #5EC4FF;">(</span>denom z<span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+6
+8
+</pre>
+
+
+<p>
+Agh. We forgot to reduce results to the simplest form. We can
+easily include this in the <code>make-rat</code> procedure:<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket" id="orgef932f7"><span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #E27E8D;">(</span><span style="color: #33CED8;">make-rat</span> x y<span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">let</span> <span style="color: #8BD49C;">(</span><span style="color: #D98E48;">(</span><span style="color: #718CA1;">g</span> <span style="color: #B62D65;">(</span><span style="color: #5EC4FF;">gcd</span> x y<span style="color: #B62D65;">)</span><span style="color: #D98E48;">)</span><span style="color: #8BD49C;">)</span>
+    <span style="color: #8BD49C;">(</span><span style="color: #5EC4FF;">cons</span> <span style="color: #D98E48;">(</span><span style="color: #5EC4FF;">/</span> x g<span style="color: #D98E48;">)</span>
+          <span style="color: #D98E48;">(</span><span style="color: #5EC4FF;">/</span> y g<span style="color: #D98E48;">)</span><span style="color: #8BD49C;">)</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #E27E8D;">(</span><span style="color: #33CED8;">numer</span> x<span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">car</span> x<span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #E27E8D;">(</span><span style="color: #33CED8;">denom</span> x<span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">cdr</span> x<span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<p>
+Note that we could shift the <code>gcd</code> bit to functions <code>numer</code> and
+<code>denom</code>, which would display the simplest form at access time
+rather than creation time. Deciding between the two is a matter of
+system efficiency: a system which displays often should use
+creation time simplification, while a system which creates many
+fractions should use access time simplification.
+We now need a GCD function:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket" id="orgfcee757"><span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #E27E8D;">(</span><span style="color: #33CED8;">gcd</span> a b<span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">if</span> <span style="color: #8BD49C;">(</span><span style="color: #5EC4FF;">=</span> b <span style="color: #2e8b57;">0</span><span style="color: #8BD49C;">)</span>
+      a
+      <span style="color: #8BD49C;">(</span><span style="color: #5EC4FF;">gcd</span> b <span style="color: #D98E48;">(</span><span style="color: #5EC4FF;">remainder</span> a b<span style="color: #D98E48;">)</span><span style="color: #8BD49C;">)</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<p>
+We can now use <code>+rat</code> in <i>exactly</i> the same way, since the
+interface is the same. This is the advantage of abstraction.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket">
+
+
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #718CA1;">x</span> <span style="color: #E27E8D;">(</span>make-rat <span style="color: #2e8b57;">1</span> <span style="color: #2e8b57;">2</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #718CA1;">y</span> <span style="color: #E27E8D;">(</span>make-rat <span style="color: #2e8b57;">1</span> <span style="color: #2e8b57;">4</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #718CA1;">z</span> <span style="color: #E27E8D;">(</span>+rat x y<span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+<span style="color: #5EC4FF;">(</span>numer z<span style="color: #5EC4FF;">)</span>
+<span style="color: #5EC4FF;">(</span>denom z<span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+3
+4
+</pre>
+
+
+<p>
+Excellent: we now have a working system. The data abstraction
+model can be visualised as follows:
+</p>
+
+<div class="org-center">
+<p>
+\rule{6cm}{2pt}<br />
+<code>+rat</code>, <code>*rat</code> &#x2026;<br />
+\rule{6cm}{2pt}<br />
+<code>make-rat</code>, <code>numer</code>, <code>denom</code><br />
+\rule{6cm}{2pt}<br />
+<code>gcd</code><br />
+\rule{6cm}{2pt}<br />
+Pairs<br />
+\rule{6cm}{2pt}
+</p>
+</div>
+
+<p>
+At each layer of abstraction, we merely care about the usage of
+the lower layers and not their implementation or underlying
+representation.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgfdf3bdc" class="outline-3">
+<h3 id="orgfdf3bdc"><span class="section-number-3">5.2</span> Representing Points on a Plane</h3>
+<div class="outline-text-3" id="text-5-2">
+<p>
+This is now an easy problem &#x2014; the code should be
+self-explanatory.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket" id="org742890d"><span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #E27E8D;">(</span><span style="color: #33CED8;">make-vec</span> x y<span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">cons</span> x y<span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #E27E8D;">(</span><span style="color: #33CED8;">xcor</span> v<span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">car</span> v<span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #E27E8D;">(</span><span style="color: #33CED8;">ycor</span> v<span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">cdr</span> v<span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<p>
+We could now define a segment as a pair of vectors:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket" id="org59fb137"><span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #E27E8D;">(</span><span style="color: #33CED8;">make-seg</span> v w<span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">cons</span> v w<span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #E27E8D;">(</span><span style="color: #33CED8;">seg-start</span> s<span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">car</span> s<span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #E27E8D;">(</span><span style="color: #33CED8;">seg-end</span> s<span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">cdr</span> s<span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<p>
+Some sample operations:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket">
+
+
+
+
+
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #E27E8D;">(</span><span style="color: #33CED8;">midpoint</span> s<span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">let</span> <span style="color: #8BD49C;">(</span><span style="color: #D98E48;">(</span><span style="color: #718CA1;">a</span> <span style="color: #B62D65;">(</span>seg-start s<span style="color: #B62D65;">)</span><span style="color: #D98E48;">)</span>
+        <span style="color: #D98E48;">(</span><span style="color: #718CA1;">b</span> <span style="color: #B62D65;">(</span>seg-end s<span style="color: #B62D65;">)</span><span style="color: #D98E48;">)</span><span style="color: #8BD49C;">)</span>
+    <span style="color: #8BD49C;">(</span>make-vec
+     <span style="color: #D98E48;">(</span>average <span style="color: #B62D65;">(</span>xcor a<span style="color: #B62D65;">)</span> <span style="color: #B62D65;">(</span>xcor b<span style="color: #B62D65;">)</span><span style="color: #D98E48;">)</span>
+     <span style="color: #D98E48;">(</span>average <span style="color: #B62D65;">(</span>ycor a<span style="color: #B62D65;">)</span> <span style="color: #B62D65;">(</span>ycor b<span style="color: #B62D65;">)</span><span style="color: #D98E48;">)</span><span style="color: #8BD49C;">)</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #E27E8D;">(</span><span style="color: #33CED8;">length</span> s<span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">let</span> <span style="color: #8BD49C;">(</span><span style="color: #D98E48;">(</span><span style="color: #718CA1;">dx</span> <span style="color: #B62D65;">(</span><span style="color: #5EC4FF;">-</span> <span style="color: #EBBF83;">(</span>xcor <span style="color: #33CED8;">(</span>seg-end s<span style="color: #33CED8;">)</span><span style="color: #EBBF83;">)</span>
+               <span style="color: #EBBF83;">(</span>xcor <span style="color: #33CED8;">(</span>seg-start s<span style="color: #33CED8;">)</span><span style="color: #EBBF83;">)</span><span style="color: #B62D65;">)</span><span style="color: #D98E48;">)</span>
+        <span style="color: #D98E48;">(</span><span style="color: #718CA1;">dy</span> <span style="color: #B62D65;">(</span><span style="color: #5EC4FF;">-</span> <span style="color: #EBBF83;">(</span>ycor <span style="color: #33CED8;">(</span>seg-end s<span style="color: #33CED8;">)</span><span style="color: #EBBF83;">)</span>
+               <span style="color: #EBBF83;">(</span>ycor <span style="color: #33CED8;">(</span>seg-start s<span style="color: #33CED8;">)</span><span style="color: #EBBF83;">)</span><span style="color: #B62D65;">)</span><span style="color: #D98E48;">)</span><span style="color: #8BD49C;">)</span>
+    <span style="color: #8BD49C;">(</span><span style="color: #5EC4FF;">sqrt</span> <span style="color: #D98E48;">(</span><span style="color: #5EC4FF;">+</span> <span style="color: #B62D65;">(</span>square dx<span style="color: #B62D65;">)</span>
+             <span style="color: #B62D65;">(</span>square dy<span style="color: #B62D65;">)</span><span style="color: #D98E48;">)</span><span style="color: #8BD49C;">)</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #718CA1;">side-a</span> <span style="color: #E27E8D;">(</span>make-vec <span style="color: #2e8b57;">#i3</span> <span style="color: #2e8b57;">#i0</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #718CA1;">side-b</span> <span style="color: #E27E8D;">(</span>make-vec <span style="color: #2e8b57;">#i0</span> <span style="color: #2e8b57;">#i4</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #718CA1;">segment</span> <span style="color: #E27E8D;">(</span>make-seg side-a side-b<span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">length</span> segment<span style="color: #5EC4FF;">)</span>
+
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #718CA1;">mp</span> <span style="color: #E27E8D;">(</span>midpoint segment<span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+
+<span style="color: #5EC4FF;">(</span>xcor mp<span style="color: #5EC4FF;">)</span>
+<span style="color: #5EC4FF;">(</span>ycor mp<span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+5.000000000053722
+1.5
+2.0
+</pre>
+
+
+<p>
+The abstraction layer diagram of this code is:
+</p>
+<div class="org-center">
+<p>
+\rule{6cm}{2pt}<br />
+Segments<br />
+\rule{6cm}{2pt}<br />
+Vectors<br />
+\rule{6cm}{2pt}<br />
+Pairs<br />
+\rule{6cm}{2pt}
+</p>
+</div>
+
+<p>
+It is interesting to note that segments are pairs of vectors,
+which are pairs of numbers, so segments are actually pairs of
+pairs. Represented as a tree:
+</p>
+
+<p>
+This property is called <i>closure</i> (from abstract algebra<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>): that means
+of combination can be nested recursively. It&rsquo;s an important and
+powerful technique.
+</p>
+
+<p>
+For instance, a three-dimensional vector can be represented by a
+pair whose one element is a number and whose other element is a
+pair of numbers. Or, in Lisp:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket"><span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #718CA1;">three-d-vec</span> <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">cons</span> <span style="color: #2e8b57;">3</span> <span style="color: #8BD49C;">(</span><span style="color: #5EC4FF;">cons</span> <span style="color: #2e8b57;">4</span> <span style="color: #2e8b57;">5</span><span style="color: #8BD49C;">)</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">car</span> three-d-vec<span style="color: #5EC4FF;">)</span>
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">car</span> <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">cdr</span> three-d-vec<span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">cdr</span> <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">cdr</span> three-d-vec<span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+3
+4
+5
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org5a8096e" class="outline-3">
+<h3 id="org5a8096e"><span class="section-number-3">5.3</span> Pairs</h3>
+<div class="outline-text-3" id="text-5-3">
+<p>
+Let&rsquo;s go back to when we assumed that <code>make-rat</code>, <code>numer</code>, and
+<code>denom</code>, were already implemented. The procedures we then wrote
+were written using <i>abstract data</i>, with the only &ldquo;assured&rdquo;
+property being that:
+</p>
+
+<p class="verse">
+<code>if x = (make-rat n d):</code><br />
+<br />
+&#xa0;&#xa0;\(\displaystyle \frac{\mathtt{numer~x}}{\mathtt{denom~x}} = \frac{\mathtt{n}}{\mathtt{d}}\)<br />
+</p>
+
+<p>
+Beyond this basic &ldquo;spec&rdquo;, or the interface contract, we know
+nothing about its implementation.
+</p>
+
+<p>
+Now, it&rsquo;s easy not to appreciate how knowing <i>merely</i> the
+specification of the layer below is sufficient to use it, so let&rsquo;s
+discuss how pairs work. When we wanted to implement <code>make-rat</code>, we
+kind of &ldquo;cheated&rdquo; in that we said, &ldquo;Okay, Lisp has a primitive to
+do this so we don&rsquo;t have to implement a pair.&rdquo; Let&rsquo;s now take a
+look at a possible implementation of a pair that doesn&rsquo;t use data
+objects at all, and instead mimics them from thin air. Consider:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket" id="org2a84a81"><span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #E27E8D;">(</span><span style="color: #33CED8;">our-cons</span> a b<span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">lambda</span> <span style="color: #8BD49C;">(</span>pick<span style="color: #8BD49C;">)</span>
+    <span style="color: #8BD49C;">(</span><span style="color: #5EC4FF;">cond</span> <span style="color: #D98E48;">(</span><span style="color: #B62D65;">(</span><span style="color: #5EC4FF;">=</span> pick <span style="color: #2e8b57;">1</span><span style="color: #B62D65;">)</span> a<span style="color: #D98E48;">)</span>
+          <span style="color: #D98E48;">(</span><span style="color: #B62D65;">(</span><span style="color: #5EC4FF;">=</span> pick <span style="color: #2e8b57;">2</span><span style="color: #B62D65;">)</span> b<span style="color: #D98E48;">)</span><span style="color: #8BD49C;">)</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #E27E8D;">(</span><span style="color: #33CED8;">our-car</span> x<span style="color: #E27E8D;">)</span> <span style="color: #E27E8D;">(</span>x <span style="color: #2e8b57;">1</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #E27E8D;">(</span><span style="color: #33CED8;">our-cdr</span> x<span style="color: #E27E8D;">)</span> <span style="color: #E27E8D;">(</span>x <span style="color: #2e8b57;">2</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-racket">
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #718CA1;">pair</span> <span style="color: #E27E8D;">(</span>our-cons <span style="color: #2e8b57;">3</span> <span style="color: #2e8b57;">4</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+<span style="color: #5EC4FF;">(</span>our-car pair<span style="color: #5EC4FF;">)</span>
+<span style="color: #5EC4FF;">(</span>our-cdr pair<span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+3
+4
+</pre>
+
+
+<p>
+Before thinking about how it works: consider the fact that Lisp&rsquo;s
+pairs could be implemented this way, and not only would we not know
+about this while implementing <code>make-rat</code> &#x2014; we wouldn&rsquo;t care,
+since it&rsquo;s below the level of abstraction we&rsquo;re working at. As long
+as it behaves the way we expect it to &#x2014; that is, it follows the
+&ldquo;spec&rdquo;, we don&rsquo;t know or care about its implementation<sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup>. Such is the
+power of abstraction.
+</p>
+
+<p>
+Now, how is this implementation even working? Well:
+</p>
+<ul class="org-ul">
+<li><p>
+<code>cons</code> is a procedure that returns a lambda (anonymous procedure)
+which, by the substitution model, looks like:
+</p>
+<div class="org-src-container">
+<pre class="src src-racket"><span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">lambda</span> <span style="color: #E27E8D;">(</span>pick<span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">cond</span> <span style="color: #8BD49C;">(</span><span style="color: #D98E48;">(</span><span style="color: #5EC4FF;">=</span> pick <span style="color: #2e8b57;">1</span><span style="color: #D98E48;">)</span> <span style="color: #2e8b57;">3</span><span style="color: #8BD49C;">)</span>
+        <span style="color: #8BD49C;">(</span><span style="color: #D98E48;">(</span><span style="color: #5EC4FF;">=</span> pick <span style="color: #2e8b57;">2</span><span style="color: #D98E48;">)</span> <span style="color: #2e8b57;">4</span><span style="color: #8BD49C;">)</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div></li>
+<li><code>car</code> expects this procedure as an input, and returns the result of
+supplying this procedure with the value 1. This is naturally the
+first of the two numbers given to <code>cons</code> (<code>a</code>).</li>
+<li><code>cdr</code> is identical to <code>car</code>, except that <i>it</i> supplies the input
+procedure with argument 2 to get <code>b</code>.</li>
+</ul>
+
+<p>
+We can thus implement a pair &ldquo;data structure&rdquo; using only lambdas.
+In fact, these pairs are closed:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket">
+<span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">define</span> <span style="color: #718CA1;">three-d-vec</span> <span style="color: #E27E8D;">(</span>our-cons <span style="color: #2e8b57;">3</span> <span style="color: #8BD49C;">(</span>our-cons <span style="color: #2e8b57;">4</span> <span style="color: #2e8b57;">5</span><span style="color: #8BD49C;">)</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+<span style="color: #5EC4FF;">(</span>our-car three-d-vec<span style="color: #5EC4FF;">)</span>
+<span style="color: #5EC4FF;">(</span>our-car <span style="color: #E27E8D;">(</span>our-cdr three-d-vec<span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+<span style="color: #5EC4FF;">(</span>our-cdr <span style="color: #E27E8D;">(</span>our-cdr three-d-vec<span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+<span style="color: #5EC4FF;">(</span>our-cdr three-d-vec<span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+3
+4
+5
+#&lt;procedure:...6f_i/ob-2136OZJ.rkt:4:2&gt;
+</pre>
+
+
+<p>
+It is worth thinking about the structure of <code>three-d-vec</code>:
+</p>
+<div class="org-src-container">
+<pre class="src src-racket"><span style="color: #5EC4FF;">(</span><span style="color: #5EC4FF;">lambda</span> <span style="color: #E27E8D;">(</span>pick<span style="color: #E27E8D;">)</span>
+  <span style="color: #E27E8D;">(</span><span style="color: #5EC4FF;">cond</span> <span style="color: #8BD49C;">(</span><span style="color: #D98E48;">(</span><span style="color: #5EC4FF;">=</span> pick <span style="color: #2e8b57;">1</span><span style="color: #D98E48;">)</span> <span style="color: #2e8b57;">3</span><span style="color: #8BD49C;">)</span>
+        <span style="color: #8BD49C;">(</span><span style="color: #D98E48;">(</span><span style="color: #5EC4FF;">=</span> pick <span style="color: #2e8b57;">2</span><span style="color: #D98E48;">)</span> <span style="color: #D98E48;">(</span><span style="color: #5EC4FF;">lambda</span> <span style="color: #B62D65;">(</span>pick<span style="color: #B62D65;">)</span>
+                      <span style="color: #B62D65;">(</span><span style="color: #5EC4FF;">cond</span> <span style="color: #EBBF83;">(</span><span style="color: #33CED8;">(</span><span style="color: #5EC4FF;">=</span> pick <span style="color: #2e8b57;">1</span><span style="color: #33CED8;">)</span> <span style="color: #2e8b57;">4</span><span style="color: #EBBF83;">)</span>
+                            <span style="color: #EBBF83;">(</span><span style="color: #33CED8;">(</span><span style="color: #5EC4FF;">=</span> pick <span style="color: #2e8b57;">2</span><span style="color: #33CED8;">)</span> <span style="color: #2e8b57;">5</span><span style="color: #EBBF83;">)</span><span style="color: #B62D65;">)</span><span style="color: #D98E48;">)</span><span style="color: #8BD49C;">)</span><span style="color: #E27E8D;">)</span><span style="color: #5EC4FF;">)</span>
+</pre>
+</div>
+
+<p>
+Picking <code>2</code> in the top-level lambda gives us another lambda, in
+which we can pick either the first number (4) or the second (5).
+Note that this is precisely the nested pair structure we were going
+for.
+</p>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+<code>let</code> is a Lisp primitive which takes as its first argument a
+list of definitions, and second input a list of applications that may
+use these definitions. The trick is that these definitions are only
+valid in the body (second argument) of <code>let</code>, effectively creating a
+local namespace.
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
+For an operation defined on members of a set, the result of
+that operation is a member of the set. For instance, addition on
+natural numbers.
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3">3</a></sup> <div class="footpara"><p class="footpara">
+Note that Lisp actually implements pairs using &ldquo;real&rdquo; data
+structures, since using procedures this way is less efficient.
+</p></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<hr><p style="font-size: 75%">Created in GNU <a href="https://www.gnu.org/software/emacs/">Emacs</a> 25.2.2 (<a href="https://orgmode.org">Org</a> mode 9.3.6).</p>
+</div>
+</body>
+</html>

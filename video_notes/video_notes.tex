@@ -1,0 +1,2574 @@
+% Created 2021-06-07 Mon 18:17
+% Intended LaTeX compiler: xelatex
+\documentclass[9pt]{report}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage[hidelinks]{hyperref}
+\usepackage[a4paper, total={6in,9in}]{geometry}
+         \usepackage{booktabs}
+\usepackage{minted}
+         \usepackage{tikz-cd}
+\usepackage{parskip}
+\usepackage[type={CC}, modifier={by-nc}, version={3.0},]{doclicense}
+\usepackage{forest}
+\usepackage{sectsty}
+\sectionfont{\fontsize{12}{15}\selectfont}
+\subsectionfont{\fontsize{11}{11}\selectfont}
+\setlength\parindent{0pt}
+\usepackage{parskip}
+\usepackage{pifont}
+\makeatletter
+\def\@makechapterhead#1{%
+{\parindent \z@ \raggedright \normalfont
+\ifnum \c@secnumdepth >\m@ne
+\LARGE\bfseries \thechapter~
+\fi
+\interlinepenalty\@M
+\LARGE \bfseries #1\par\nobreak
+\vskip 10\p@
+}}
+\def\@makeschapterhead#1{%
+{\parindent \z@ \raggedright
+\normalfont
+\interlinepenalty\@M
+\Huge \bfseries  #1\par\nobreak
+\vskip 10\p@
+}}
+\makeatother
+\author{Nebhrajani A.V.}
+\date{\today}
+\title{MIT 6.001 1986 Video Notes}
+\hypersetup{
+ pdfauthor={Nebhrajani A.V.},
+ pdftitle={MIT 6.001 1986 Video Notes},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 25.2.2 (Org mode 9.3.6)},
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+
+\chapter{Introduction}
+\label{sec:orgb70755d}
+
+\section{About}
+\label{sec:org35c841f}
+These are my notes of the twenty SICP lectures of June 1986,
+produced by Hewlett-Packard Television. These videos are available
+under a Creative Commons license. These videos should be included in
+a directory called \texttt{./videos}.
+
+These notes aim to be concise and as example-heavy as possible. The
+language used and referred to as ``Lisp'' is MIT-Scheme. These notes,
+however, use the SICP language provided by Racket, a modern Scheme
+dialect. This is because Racket's integration with Emacs and
+\texttt{org-mode} is orders of magnitude better than MIT-Scheme's. In
+general, all ``Lisp'' code looks exactly the same as in SICP, with the
+exception of having to prefix some numbers with \texttt{\#i} to ensure
+Racket treats them as imprecise.
+
+\section{License}
+\label{sec:orgfab2bee}
+\doclicenseThis
+
+\chapter{Lecture 1A: Overview and Introduction to Lisp}
+\label{sec:org17aa150}
+
+Computer science isn't really a science, and it isn't really about
+computers. Computer science is the study of how-to or imperative
+knowledge (as opposed to declarative knowledge). To illustrate the
+difference, consider:
+
+$$y = \sqrt{x} \mathrm{~such~that~} y^2=x, y \geq 0$$
+
+This is declarative, in that we could recognize if \(y\) is the square
+root of \(x\) given \(x\) and \(y\), but we're no closer to knowing how to
+\emph{find} \(y\) if we are given \(x\). Imperative knowledge would look
+like:
+
+To find the square root \(y\) of \(x\):
+\begin{itemize}
+\item Make a guess \(g\).
+\item If \(g^2\) is close enough to \(x\), \(y=g\).
+\item Otherwise, make a new guess equal to the average of \(g\) and \(x/g\).
+\end{itemize}
+
+This method will eventually come up with a \(g\) close enough to the
+actual square root \(y\) of \(x\).
+
+Computer science focuses on this kind of imperative knowledge, and,
+specifically, how to communicate that knowledge to a computer.
+
+\section{Managing Complexity: Key Ideas of 6.001}
+\label{sec:orga6b7c0b}
+Computer science is also about managing complexity, in that large
+programs that you can't hold in your head should still be manageable
+and easy to work with. We explore this theme in 6.001 by learning
+three key ideas:
+
+\begin{itemize}
+\item Black-box abstractions
+\item Conventional interfaces
+\item Metalinguistic abstraction.
+\end{itemize}
+
+
+\section{Let's Learn Lisp}
+\label{sec:org861e677}
+When learning a new language, always ask about its:
+\begin{itemize}
+\item Primitive elements,
+\item Means of combination, and
+\item Means of abstraction.
+\end{itemize}
+
+\subsection{Primitive Elements}
+\label{sec:org09b8507}
+These are numbers like 3, 17.4, or 5. Other primitives are
+discussed later in the course.
+
+\begin{minted}[]{racket}
+4
+17.4
+5
+\end{minted}
+
+\begin{verbatim}
+4
+17.4
+5
+\end{verbatim}
+
+\subsection{Means of Combination}
+\label{sec:org4d1dd4a}
+Lisp's numerical primitives can be combined with ``operations'' such
+as addition, written in prefix notation.
+
+\begin{minted}[]{racket}
+(+ 3 17.4 5)
+\end{minted}
+
+\begin{verbatim}
+25.4
+\end{verbatim}
+
+
+Other basic operations are provided by Lisp, such as
+multiplication and division. Of course, combinations can be
+combined recursively:
+
+\begin{minted}[]{racket}
+(+ 3 (* 5 6) 8 2)
+\end{minted}
+
+\begin{verbatim}
+43
+\end{verbatim}
+
+
+This should show you the tree structure inherent in all of Lisp:
+\begin{center}
+\begin{forest}
+[+
+[* [5] [6]] [8] [2]]
+\end{forest}
+\end{center}
+
+In Lisp, () is the application of an operation or function in
+prefix notation.
+
+\subsection{Means of Abstraction}
+\label{sec:org9d9e2e3}
+
+Abstraction can simply be done by naming things. Giving
+complicated things a name prevents us from having to understand
+how the thing the name refers to \emph{works}, and instead lets us
+``abstractly'' use the name for our purposes.
+
+\begin{minted}[]{racket}
+(define a (* 5 5))
+a
+(* a a)
+(define b (+ a (* 5 a)))
+b
+(+ a (/ b 5))
+\end{minted}
+
+\begin{verbatim}
+25
+625
+150
+55
+\end{verbatim}
+
+
+Now, it's often more useful to abstract away imperative how-to
+knowledge. Consider:
+
+\begin{minted}[]{racket}
+(define (square x)
+  (* x x))
+\end{minted}
+
+\begin{minted}[]{racket}
+
+(square 10)
+\end{minted}
+
+\begin{verbatim}
+100
+\end{verbatim}
+
+
+This defines \texttt{square} as a function taking a single argument \texttt{x},
+and returning \texttt{(* x x)}. Note that this way of writing a define is
+actually ``syntactic sugar'' for:
+
+\begin{minted}[]{racket}
+(define square
+  (lambda (x)
+    (* x x)))
+
+(square 25)
+\end{minted}
+
+\begin{verbatim}
+625
+\end{verbatim}
+
+
+\texttt{lambda (x)} means ``make a procedure that takes argument \texttt{x}''. The
+second argument to lambda is the actual procedure body. The
+\texttt{define} names this anonymous procedure \texttt{square}.
+
+Just like we can use combinations recursively, so we can
+abstractions. Consider:
+
+\begin{minted}[]{racket}
+(define (average x y)
+  (/ (+ x y) 2))
+\end{minted}
+
+\begin{minted}[]{racket}
+
+
+(define (mean-square x y)
+  (average (square x)
+           (square y)))
+
+(mean-square 2 3)
+\end{minted}
+
+\begin{verbatim}
+13/2
+\end{verbatim}
+
+
+Note the indentation: since Lisp is parenthesis heavy, we use
+indentation. Good editors like Emacs should do this automatically.
+
+\section{Case Analysis in Lisp}
+\label{sec:org6a6abb3}
+
+To represent functions like:
+$$abs(x) = \begin{cases}
+   -x & x<0\\
+   0 & x = 0\\
+   x & x > 0
+   \end{cases}$$
+Lisp needs some form of conditional execution. In Lisp, this
+function would look like:
+
+\begin{minted}[]{racket}
+(define (abs x)
+  (cond ((< x 0) (- x))
+        ((= x 0) 0)
+        ((> x 0) x)))
+(abs -3)
+(abs 0)
+(abs 5)
+\end{minted}
+
+\begin{verbatim}
+3
+0
+5
+\end{verbatim}
+
+
+\texttt{cond} takes any number of arguments. Each argument must be
+structured as \texttt{(predicate) (consequent)}. If \texttt{predicate} is true,
+we do the \texttt{consequent}. Otherwise, we don't. Lisp also provides a
+way to write conditionals that only have two branches (an if-else):
+
+\begin{minted}[]{racket}
+(define (abs x)
+  (if (< x 0)
+      (- x)
+      x))
+\end{minted}
+
+\begin{minted}[]{racket}
+
+(abs -11)
+(abs 0)
+(abs 33)
+\end{minted}
+
+\begin{verbatim}
+11
+0
+33
+\end{verbatim}
+
+
+\texttt{cond} and \texttt{if} are syntactical sugar for each other. The Lisp
+implementation picks any one and defines the other in terms of it.
+
+We now know most of Lisp. Lisp doesn't have \texttt{do...while} or \texttt{for},
+since anything a loop can do can be done via recursion.
+
+\section{Finding Square Roots}
+\label{sec:orge9ed958}
+
+Remember our square root finding algorithm?
+
+To find the square root \(y\) of \(x\):
+\begin{itemize}
+\item Make a guess \(g\).
+\item If \(g^2\) is close enough to \(x\), \(y=g\).
+\item Otherwise, make a new guess equal to the average of \(g\) and
+\(x/g\).
+\end{itemize}
+
+Or, in Lisp,
+
+\begin{minted}[]{racket}
+(define (try g x)
+  (if (good-enough-p g x)
+      g
+      (try (improve g x) x)))
+\end{minted}
+
+This is a form of programming called ``wishful thinking'': we assume
+\texttt{good-enough-p} (good enough predicate) and \texttt{improve} are already
+implemented. Now that we can try a guess and improve it till it's
+good enough, we can write a simple square root function:
+
+\begin{minted}[]{racket}
+(define (sqrt x)
+  (try 1 x))
+\end{minted}
+
+This function simply starts the guess at 1, then improves it. Let's
+now write the functions we don't have:
+
+\begin{minted}[]{racket}
+(define (improve g x)
+  (average g (/ x g)))
+\end{minted}
+
+\begin{minted}[]{racket}
+(define (good-enough-p g x)
+  (< (abs (- (square g) x))
+     0.00001))
+\end{minted}
+
+This tests if \(g^2\) is within 0.0001 of \(x\). Putting it all
+together, we can finally try to find square roots:
+
+\begin{minted}[]{racket}
+
+
+
+
+
+
+
+(sqrt #i2)
+(sqrt #i3)
+(sqrt #i4)
+\end{minted}
+
+\begin{verbatim}
+1.4142156862745097
+1.7320508100147274
+2.0000000929222947
+\end{verbatim}
+
+
+\begin{quote}
+\textbf{Note:} The \texttt{\#i4} is Racket's syntax for using imprecise
+(decimals) instead of precise (fractions). Ignore it, and treat it
+as the number \texttt{4}.
+\end{quote}
+
+See that \texttt{try} actually runs a loop, but does so recursively,
+calling itself every time the \texttt{if} condition fails to improve the
+guess. Also note that these functions can all be nested inside the
+square root function to hide them from the outer scope, thus:
+
+\begin{minted}[]{racket}
+(define (sqrt x)
+  (define (good-enough-p g)
+    (define (square g)
+      (* g g))
+    (define (abs y)
+      (if (< y 0)
+          (- y)
+          y))
+    (< (abs (- (square g) x))
+       0.0001))
+  (define (improve g)
+    (define (average y z)
+      (/ (+ y z) 2))
+    (average g (/ x g)))
+  (define (try g)
+    (if (good-enough-p g)
+        g
+        (try (improve g))))
+  (try 1))
+
+(sqrt #i2)
+\end{minted}
+
+\begin{verbatim}
+1.4142156862745097
+\end{verbatim}
+
+
+This program should also show you a tree-like dependency of the
+functions, with each function containing the definitions of the
+functions it depends on. For someone using \texttt{sqrt}, all the functions
+within it are hidden.
+
+\begin{center}
+\begin{forest}
+[\texttt{sqrt}
+[\texttt{try}
+[\texttt{good-enough-p}
+[\texttt{abs}] [\texttt{square}]]
+[\texttt{improve}
+[\texttt{average}]]
+[\texttt{try}]]]
+\end{forest}
+\end{center}
+
+This discipline of writing procedures is called lexical scoping.
+
+
+\section{Inbuilt/Primitive Procedures Aren't Special}
+\label{sec:org452cc17}
+
+\begin{minted}[]{racket}
+
+square
++
+\end{minted}
+
+\begin{verbatim}
+#<procedure:square>
+#<procedure:+>
+\end{verbatim}
+
+\chapter{Lecture 1B: Procedures and Processes, Substitution Model}
+\label{sec:org77ffef6}
+
+\section{Substitution Rule/Model}
+\label{sec:orgff43aa3}
+The substitution rule states that,
+
+\begin{quote}
+To evaluate an application:
+\begin{itemize}
+\item Evaluate the operator to get procedure.
+\item Evaluate the operands to get arguments.
+\item Apply procedure to arguments.
+\begin{itemize}
+\item Copy body of procedure.
+\item Replace formal parameters with actual arguments.
+\end{itemize}
+\item Evaluate new body.
+\end{itemize}
+\end{quote}
+
+Note that this isn't necessarily how the \emph{interpreter} evaluates a
+Lisp application, but the substitution rule is a ``good enough''
+model for our purposes.
+
+\subsection{Kinds of Expressions in Lisp}
+\label{sec:orgc344207}
+\begin{itemize}
+\item Numbers (evaluate to ``themselves'')
+\item Symbols (represent some procedure)
+\item Combinations
+\item \(\lambda\)-expressions (used to build procedures)
+\item Definitions (used to name symbols)
+\item Conditionals
+\end{itemize}
+
+We will focus our use of the substitution rule on the first three.
+The last three are called ``special forms'', and we'll worry about
+them later.
+
+\subsection{Example}
+\label{sec:org857e840}
+
+Consider:
+
+\begin{minted}[]{racket}
+
+(define (sum-of-squares x y)
+  (+ (square x) (square y)))
+
+(sum-of-squares 3 4)
+\end{minted}
+
+\begin{verbatim}
+25
+\end{verbatim}
+
+
+Let's try to apply the substitution rule to our application,
+
+\begin{minted}[]{racket}
+(sum-of-squares 3 4)
+(+ (square 3) (square 4))
+(+ (square 3) (* 4 4))
+(+ (square 3) 16)
+(+ (* 3 3) 16)
+(+ 9 16)
+25
+\end{minted}
+
+\section{Peano Arithmetic}
+\label{sec:orgc7513d1}
+
+\subsection{Simple Peano Addition}
+\label{sec:orgd9585b3}
+Peano arithmetic defines addition as:
+
+\begin{minted}[]{racket}
+(define (pa+ x y)
+  (if (= x 0)
+      y
+      (pa+ (dec x) (inc y))))
+\end{minted}
+
+\begin{minted}[]{racket}
+
+(pa+ 3 4)
+\end{minted}
+
+\begin{verbatim}
+7
+\end{verbatim}
+
+
+Assume that \texttt{inc} and \texttt{dec} are primitives available that increment
+and decrement the argument respectively. How is the procedure \texttt{pa+}
+working? Let's apply the substitution rule.
+
+\begin{minted}[]{racket}
+(pa+ 3 4)
+(if (= 3 0)
+    4
+    (pa+ (dec 3) (inc 4)))
+(pa+ 2 5)
+...
+(pa+ 1 6)
+...
+(pa+ 0 7)
+7
+\end{minted}
+
+We're skipping some steps, but the idea is that \texttt{x} keeps giving
+one ``unit'' to \texttt{y} until it reaches zero. Then the sum is \texttt{y}.
+Written with steps skipped:
+
+\begin{minted}[]{racket}
+(pa+ 3 4)
+(pa+ 2 5)
+(pa+ 1 6)
+(pa+ 0 7)
+7
+\end{minted}
+
+\subsection{Another Peano Adder}
+\label{sec:org81304aa}
+Consider:
+\begin{minted}[]{racket}
+(define (pb+ x y)
+  (if (= x 0)
+      y
+      (inc (pb+ (dec x) y))))
+\end{minted}
+
+
+This is also a Peano adder: but it's implemented \emph{slightly}
+differently syntax-wise, a few characters here and there. Let's
+use the substitution rule to see how it works.
+
+\begin{minted}[]{racket}
+(pb+ 3 4)
+(inc (pb+ 2 4))
+(inc (inc (pb+ 1 4)))
+(inc (inc (inc (pb+ 0 4))))
+(inc (inc ((inc 4))))
+(inc (inc 5))
+(inc 6)
+7
+\end{minted}
+
+See that it \emph{does} work:
+
+\begin{minted}[]{racket}
+
+(pb+ 3 4)
+\end{minted}
+
+\begin{verbatim}
+7
+\end{verbatim}
+
+
+Now, consider how these two, \texttt{pa+} and \texttt{pb+}, are different. While
+the \emph{procedures} do the same thing, the processes are wildly
+different. Let's discuss their time and space complexity.
+It should be obvious to you that the time complexity is the
+vertical axis in the substitution rule application, since the
+interpreter ``executes'' these instructions line by line. More lines
+means more time.
+
+In the case of \texttt{pa+}, the number of lines increases by 1 if you
+increase input \texttt{x} by 1. Thus, the time complexity is \(O(x)\).
+Similarly, in the case of \texttt{pb+}, the number of lines increases by
+2 (once in the expansion, once in the contraction) when you
+increase \texttt{x} by 1. Thus, it is also \(O(x)\).
+
+Now, the horizontal axis shows us how much space is being used. In
+the case of \texttt{pa+}, the space used is a constant. Thus, \(O(1)\). On
+the other hand, see that \texttt{pb+} first \emph{expands} then \emph{contracts}.
+The length of the maximum expansion increases by 1 if we increase
+\(x\) by 1, since there's one more increment to do. Thus, \(O(x)\).
+
+Now, we call a process like \texttt{pa+} \emph{linear iterative} and a process
+like \texttt{pb+} \emph{linear recursive}.
+
+\begin{center}
+\begin{tabular}{lccl}
+\toprule
+Process & Time Complexity & Space Complexity & Type\\
+\midrule
+\texttt{pa+} & \(O(x)\) & \(O(1)\) & Linear iterative\\
+\texttt{pb+} & \(O(x)\) & \(O(x)\) & Linear recursive\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Note that the \emph{process} \texttt{pa+} being iterative has nothing to do
+with the implementation/definition of the \emph{procedure}, which is
+recursive. Iteration refers to the constant space requirement.
+
+\section{Differentiating Between Iterative and Recursive Processes}
+\label{sec:org09e7a2d}
+
+One of the primary ways to differentiate between an iterative and
+recursive process is to imagine what'd happen if you turned the
+computer off, then resumed the current computation.
+
+In a recursive process, we've lost some important information: how
+deep into the recursion we are. In the \texttt{pb+} example, we wouldn't
+know how many \texttt{inc}'s deep we are (information stored in the RAM by
+the interpreter, not by the process), meaning that we can't return
+the right value.
+
+In an iterative process, we can pick up right where we left off,
+since \emph{all} state information is contained by the process.
+
+\section{Fibonacci Numbers}
+\label{sec:orga7c6a05}
+
+Fibonacci numbers are defined as:
+
+$$F(x) =
+   \begin{cases}
+   0, & x = 0\\
+   1, & x = 1\\
+   F(x-1) + F(x-2), & \mathrm{otherwise}
+   \end{cases}$$
+
+The series itself is:
+$$0,1,1,2,3,5,8,13,21,34,55\hdots$$
+
+Let's write a Lisp function to calculate the \(n\mathrm{th}\) Fibonacci
+number, assuming 0 is the 0th.
+
+\begin{minted}[]{racket}
+(define (fib n)
+  (if (< n 2)
+      n
+      (+ (fib (- n 1))
+         (fib (- n 2)))))
+(fib 10)
+\end{minted}
+
+\begin{verbatim}
+55
+\end{verbatim}
+
+
+It works, that's true. But how \emph{well} does it work. Let's see. When
+we call (say) \texttt{(fib 4)}, we also call \texttt{(fib 3)} and \texttt{(fib 2)}, both
+of which also call \(\hdots\) let's draw it:
+
+\begin{center}
+\begin{forest}
+[\texttt{(fib 4)}
+[\texttt{(fib 3)}
+[\texttt{(fib 2)} [\texttt{(fib 1)} [1]] [\texttt{(fib 0)} [0]]]
+[\texttt{(fib 1)} [1]]]
+[\texttt{(fib 2)} [\texttt{(fib 1)} [1]] [\texttt{(fib 0)} [0]]]]
+\end{forest}
+\end{center}
+
+A tree! Clearly, this is an exponential-time process, since
+computing \(n+1\) takes exponentially more effort. Also note that
+it's a pretty bad process, since we constantly recompute many
+values. The space complexity is the maximum depth of the tree
+(depth of recursion), which is at most \(n\). Therefore, the time
+complexity is \(O(\mathrm{fib}(n))\) and space complexity is \(O(n)\).
+
+It is useful to try and write an iterative Fibonacci with better
+performance as an exercise.
+
+\section{Towers of Hanoi}
+\label{sec:org2361c24}
+
+From Wikipedia:
+
+\begin{quote}
+The Tower of Hanoi is a mathematical game or puzzle. It consists of
+three rods and a number of disks of different diameters, which can
+slide onto any rod. The puzzle starts with the disks stacked on one
+rod in order of decreasing size, the smallest at the top, thus
+approximating a conical shape. The objective of the puzzle is to
+move the entire stack to the last rod, obeying the following simple
+rules:
+
+\begin{itemize}
+\item Only one disk may be moved at a time.
+\item Each move consists of taking the upper disk from one of the
+stacks and placing it on top of another stack or an empty rod.
+\item No disk may be placed on top of a disk that is smaller than it.
+\end{itemize}
+\end{quote}
+
+Let's try to solve Hanoi for 4 disks, from rod A to rod C. Again
+--- ``wishful thinking''. Let's assume that we know how to solve for
+3 disks. To solve, we'd take the top 3 disks, put it on the spare
+rod B. Then, we'd take the fourth and largest disk, and put it on
+destination rod C. Finally, we'd move the three disk pile from B
+to C. Solved!
+
+But wait --- to solve the 3 disk case, let's assume we know how to
+solve the 2 disk case.
+
+To solve the 2 disk case, we should know how
+to solve the one disk case, which is just moving a disk from a rod
+to another.
+
+Or, in Lisp,
+
+\begin{minted}[]{racket}
+(define (move n from to spare)
+  (cond ((= n 1) (display "Move disk at rod ")
+                 (display from)
+                 (display " to rod ")
+                 (display to)
+                 (display ".\n"))
+        (else
+         (move (- n 1) from spare to)
+         (move 1 from to spare)
+         (move (- n 1) spare to from))))
+
+(move 4 "A" "C" "B")
+\end{minted}
+
+\begin{verbatim}
+Move disk at rod A to rod B.
+Move disk at rod A to rod C.
+Move disk at rod B to rod C.
+Move disk at rod A to rod B.
+Move disk at rod C to rod A.
+Move disk at rod C to rod B.
+Move disk at rod A to rod B.
+Move disk at rod A to rod C.
+Move disk at rod B to rod C.
+Move disk at rod B to rod A.
+Move disk at rod C to rod A.
+Move disk at rod B to rod C.
+Move disk at rod A to rod B.
+Move disk at rod A to rod C.
+Move disk at rod B to rod C.
+\end{verbatim}
+
+Note, of course, that this procedure too, is an exponential time
+procedure. However, any procedure for Hanoi will be exponential
+time, since for \(n\) disks, Hanoi requires \(2^{n-1}\) moves. Even if
+you compute every move in \(O(1)\) (which we do, since it's just a
+print), the complexity will be \(O(2^n)\).
+
+\section{Iterative Fibonacci}
+\label{sec:org4963967}
+
+\begin{minted}[]{racket}
+(define (iter-fib n a b)
+  (if (= n 1)
+      b
+      (iter-fib (dec n) b (+ a b))))
+
+(define (fib n)
+  (iter-fib n 0 1))
+
+(fib 10)
+\end{minted}
+
+\begin{verbatim}
+55
+\end{verbatim}
+
+\chapter{Lecture 2A: Higher-Order Procedures}
+\label{sec:org004ff7b}
+
+\section{Abstracting Procedural Ideas}
+\label{sec:org3910909}
+
+Consider the functions and their respective (recursive) procedures:
+
+$$\sum_{i=a}^{b} i$$
+
+\begin{minted}[]{racket}
+(define (sum-int a b)
+  (if (> a b)
+      0
+      (+ a
+         (sum-int (inc a) b))))
+
+(sum-int 0 10)
+\end{minted}
+
+\begin{verbatim}
+55
+\end{verbatim}
+
+
+$$\sum_{i=a}^{b} i^{2}$$
+
+\begin{minted}[]{racket}
+
+(define (sum-sq a b)
+  (if (> a b)
+      0
+      (+ (square a)
+         (sum-sq (inc a) b))))
+
+(sum-sq 0 4)
+\end{minted}
+
+\begin{verbatim}
+30
+\end{verbatim}
+
+
+$$\sum_{i=a_{\mathrm{~by~}4}}^{b} \frac{1}{i(i+2)}$$
+
+Note that this series estimates \(\pi /8\).
+
+\begin{minted}[]{racket}
+(define (sum-pi a b)
+  (if (> a b)
+      0
+      (+ (/ 1
+            (* a (+ a 2)))
+         (sum-pi (+ a 4) b))))
+
+(* 8 (sum-pi #i1 #i1000000))
+\end{minted}
+
+\begin{verbatim}
+3.141590653589793
+\end{verbatim}
+
+
+
+See that the commonality between these procedures comes from the
+fact that the notion of ``summation'' from \texttt{a} to \texttt{b} is the same,
+but the \emph{function} being summed is different in each case. Or, in
+general form:
+
+\begin{minted}[]{racket}
+(define (<name> a b)
+  (if (> a b)
+      0
+      (+ (<term> a)
+         (<name> (<next> a) b))))
+\end{minted}
+
+The way to solve this is by writing a procedure \texttt{sum}, which has
+available to it two procedures \texttt{term} and \texttt{next}. We supply these
+are arguments. Consider:
+
+\begin{minted}[]{racket}
+(define (sum term a next b)
+  (if (> a b)
+      0
+      (+ (term a)
+         (sum term (next a) next b))))
+\end{minted}
+
+When we call \texttt{sum} recursively, see that we pass to it the \emph{same
+procedures} \texttt{term} and \texttt{next}, along with \texttt{b} and the next value of
+\texttt{a}. Now, it is easy to define \texttt{sum-int}, \texttt{sum-sq}, and \texttt{sum-pi}
+using \texttt{sum}, thus:
+
+\begin{minted}[]{racket}
+
+(define (sum-int a b)
+  (define (identity x) x)
+  (sum identity
+       a
+       inc
+       b))
+
+(sum-int 0 10)
+\end{minted}
+
+\begin{verbatim}
+55
+\end{verbatim}
+
+
+\texttt{identity} is the function \(p(x) = x\).
+
+\begin{minted}[]{racket}
+
+
+(define (sum-sq a b)
+  (sum square
+       a
+       inc
+       b))
+
+(sum-sq 0 4)
+\end{minted}
+
+\begin{verbatim}
+30
+\end{verbatim}
+
+
+\begin{minted}[]{racket}
+
+(define (sum-pi a b)
+  (sum (lambda (x)
+         (/ 1
+            (* x (+ x 2))))
+       a
+       (lambda (x) (+ x 4))
+       b))
+
+(* 8 (sum-pi #i1 #i1000000))
+\end{minted}
+
+\begin{verbatim}
+3.141590653589793
+\end{verbatim}
+
+
+Recall that \texttt{lambda} means ``make a procedure'' that is nameless. In
+\texttt{sum-pi}, we choose to give it anonymous functions as arguments
+instead of defining our own, because there's no reason to name a
+procedure we won't later use.
+
+The big advantage of abstracting away \texttt{sum} this way is that in
+case we want to implement it in a different way, we merely have to
+change the implementation of one function (\texttt{sum}) and not that of
+the three functions that use it. In fact, those functions can
+remain exactly the same.
+
+Here's another implementation of \texttt{sum}. See that \texttt{sum-pi} still
+works without changes, because it doesn't care about how \texttt{sum} is
+implemented as long as the argument number and order remains
+constant.
+
+\begin{minted}[]{racket}
+(define (sum term a next b)
+  (define (iter j ans)
+    (if (> j b)
+        ans
+        (iter (next j)
+              (+ (term j)
+                 ans))))
+  (iter a 0))
+
+(define (sum-pi a b)
+  (sum (lambda (x)
+         (/ 1
+            (* x (+ x 2))))
+       a
+       (lambda (x) (+ x 4))
+       b))
+
+(* 8 (sum-pi #i1 #i1000000))
+\end{minted}
+
+\begin{verbatim}
+3.1415906535898936
+\end{verbatim}
+
+\section{More on Square Roots}
+\label{sec:org2b61b97}
+
+Recall our square root procedure. When seen in Lisp code, it's not
+very clear what it's doing, or how it's working.
+
+\begin{minted}[]{racket}
+(define (sqrt x)
+  (define (good-enough-p g)
+    (define (square g)
+      (* g g))
+    (define (abs y)
+      (if (< y 0)
+          (- y)
+          y))
+    (< (abs (- (square g) x))
+       0.0001))
+  (define (improve g)
+    (define (average y z)
+      (/ (+ y z) 2))
+    (average g (/ x g)))
+  (define (try g)
+    (if (good-enough-p g)
+        g
+        (try (improve g))))
+  (try 1))
+\end{minted}
+
+\begin{minted}[]{racket}
+
+(sqrt #i2)
+\end{minted}
+
+\begin{verbatim}
+1.4142156862745097
+\end{verbatim}
+
+
+Let's use higher-order procedure abstraction to make it clearer.
+
+\subsection{Fixed Points}
+\label{sec:org5aebd7a}
+
+Recall that the algorithm itself relies on writing a function
+
+$$f\colon y\mapsto \frac{y+\frac{x}{y}}{2}$$
+
+Note that this works because \(f(\sqrt{x}) = \sqrt{x}\):
+
+$$f(\sqrt{x})=\frac{\sqrt{x}+\frac{x}{\sqrt{x}}}{2} = \frac{2\sqrt{x}}{2} = \sqrt{x}$$
+
+See that this is \emph{actually} an algorithm for finding a fixed point
+of a function \(f\), which is defined as finding the point where
+\(f(z)=z\). This algorithm is merely an instance of a function \(f\)
+whose fixed point happens to be the square root.
+
+\begin{quote}
+For some functions, the fixed point can be found by iterating it.
+\end{quote}
+
+This is the top-level abstraction we'll write a function for.
+First, let's see how we'd write a square-root function by wishful
+thinking:
+
+\begin{minted}[]{racket}
+
+(define (sqrt x)
+  (fixed-point
+   (lambda (y) (average (/ x y)
+                        y))
+   1))
+\end{minted}
+
+Now writing \texttt{fixed-point}:
+
+\begin{minted}[]{racket}
+
+(define (fixed-point f start)
+  (define (close-enough-p x y)
+    (< (abs (- x y))
+       0.00001))
+  (define (iter old new)
+    (if (close-enough-p old new)
+        new
+        (iter new (f new))))
+  (iter start (f start)))
+\end{minted}
+
+Let's try it out!
+
+\begin{minted}[]{racket}
+
+
+(sqrt #i2)
+\end{minted}
+
+\begin{verbatim}
+1.4142135623746899
+\end{verbatim}
+
+\subsection{Damping Oscillations}
+\label{sec:org3e4786b}
+
+A fair question when seeing the function
+$$f_1\colon y\mapsto \frac{y+\frac{x}{y}}{2}$$
+is why another function
+$$f\colon y\mapsto \frac{x}{y}$$
+wouldn't work in its place. It's a fair question, and is best
+answered by trying to find its fixed point by iteration. Let's try
+to find it for \(x=2\), starting at \(y=1\). Then,
+
+$$f(1) = \frac{2}{1} = 2$$
+$$f(2) = \frac{2}{2} = 1$$
+$$f(1) = \frac{2}{1} = 2$$
+$$f(2) = \frac{2}{2} = 1$$
+$$~\hdots$$
+
+It seems that instead of converging, this function is
+\emph{oscillating} between two values. We know that it's easy to fix
+this: we have to damp these oscillations. The most natural way to
+do this is to take the average of successive values \(y\) and
+\(f(y)\). A \texttt{sqrt} function that uses average damping would be:
+
+\begin{minted}[]{racket}
+
+(define (sqrt x)
+  (fixed-point
+   (avg-damp (lambda (y) (/ x y)))
+   1))
+\end{minted}
+
+The \texttt{avg-damp} function takes in a procedure, creates an average damping
+procedure, and returns it. Or, in Lisp:
+
+\begin{minted}[]{racket}
+
+(define avg-damp
+  (lambda (f)
+    (lambda (x) (average (f x) x))))
+\end{minted}
+
+It is worth discussing how \texttt{avg-damp} works. It is defined as a
+procedure which takes the argument of a function \texttt{f}. It then
+returns an anonymous procedure which takes an argument \texttt{x}, and
+computes the average of \(f(x)\) and \(x\). This is finally the
+highest level of abstraction we can reach for the \texttt{sqrt}
+algorithm --- finding the fixed point of a damped oscillating
+function.
+
+Using the \texttt{sqrt} function,
+
+\begin{minted}[]{racket}
+
+
+(sqrt #i2)
+\end{minted}
+
+\begin{verbatim}
+1.4142135623746899
+\end{verbatim}
+
+\section{Newton's Method}
+\label{sec:org8494139}
+
+Newton's method is used to find the zeros of a function (\(y \ni
+   f(y)=0\)). To use it, start with some guess \(y_0\). Then,
+
+$$y_{n+1} = y_n - \frac{f(y_n)}{f'(y_n)}$$
+
+where $$f'(y) = \frac{\mathrm{d}f(y)}{\mathrm{d}y}$$
+
+We can, of course, find the zero of the square root finding function
+\(f(y) =  x-y^2\) using Newton's method. Note that Newton's method
+\emph{itself} is based on fixed points, since it aims to find a fixed
+point where \(y_{n+1}\approx y_n\).
+
+Defining \texttt{sqrt}:
+
+\begin{minted}[]{racket}
+
+(define (sqrt x)
+  (newton (lambda (y) (- x (square y)))
+          1))
+\end{minted}
+
+We pass to \texttt{newton} a function \(f(y)=x-y^2\), since its zero is \(x=y^2\).
+
+\begin{minted}[]{racket}
+
+(define (newton f guess)
+  (define df (deriv f))
+  (fixed-point
+   (lambda (x) (- x
+                  (/ (f x)
+                     (df x))))
+   guess))
+\end{minted}
+
+
+It is important to note that defining \texttt{df} to be \texttt{(deriv f)} once
+prevents wasteful recomputation of \texttt{df} every time \texttt{fixed-point}
+calls itself.
+
+Of course, we now have to define a derivative function. We can
+simply use the standard limit definition to find it numerically:
+
+$$f'(x) = \lim_{\Delta x\to 0} \frac{f(x+\Delta x) - f(x)}{\Delta
+   x}$$
+
+Or, in Lisp,
+
+\begin{minted}[]{racket}
+(define dx 0.0000001)
+
+(define deriv
+  (lambda (f)
+    (lambda (x)
+      (/ (- (f (+ x dx))
+            (f x))
+         dx))))
+
+
+\end{minted}
+
+This function returns a function which is the derivative of \texttt{f},
+and can be used as such. Consider:
+
+\begin{minted}[]{racket}
+
+((deriv (lambda (x) (* x x x))) 2)
+\end{minted}
+
+\begin{verbatim}
+12.000000584322379
+\end{verbatim}
+
+
+Which is the expected value of differentiating \(x^{3}\) w.r.t \(x\)
+(\(3x^2\)) and evaluating at 2.
+
+Testing out our \texttt{sqrt} function:
+
+\begin{minted}[]{racket}
+
+
+
+(sqrt #i2)
+\end{minted}
+
+\begin{verbatim}
+1.4142135623747674
+\end{verbatim}
+
+\section{Procedures are First-Class Citizens}
+\label{sec:orgd90e7da}
+
+This means that procedures can be:
+\begin{itemize}
+\item Named using variables.
+\item Passed as arguments to procedures.
+\item Returned as values from procedures.
+\item Included in data structures.
+\end{itemize}
+
+\chapter{Lecture 2B: Compound Data}
+\label{sec:org8c6e60e}
+
+Consider our \texttt{sqrt} function that uses \texttt{good-enough-p}. What we did
+while writing \texttt{sqrt} is assume the existence of \texttt{good-enough-p}.
+That is, we divorced the task of building \texttt{sqrt} from the task of
+implementing its parts.
+
+Let's do this for data.
+
+\section{Rational Number Arithmetic}
+\label{sec:org1fec059}
+
+Let's design a system which can add fractions:
+$$\frac{1}{2}+\frac{1}{4}=\frac{3}{4}$$
+and multiply them:
+$$\frac{3}{4}\times \frac{2}{3} = \frac{1}{2}$$
+
+The \emph{procedures} for these two tasks are well known to most people:
+
+$$\frac{n_1}{d_1} + \frac{n_2}{d_2} = \frac{n_1d_2+n_2d_2}{d_1d_2}$$
+and
+$$\frac{n_1}{d_1} \times \frac{n_2}{d_2} = \frac{n_1n_2}{d_1d_2}$$
+
+\subsection{Abstraction}
+\label{sec:org7b11891}
+We don't know, however, how to represent this data in a Lisp
+procedure. Let's use our powerful ``wishful thinking'' strategy.
+Assume that we have the following procedures available to us:
+
+\begin{itemize}
+\item A constructor \texttt{(make-rat n d)} which makes a fraction with
+numerator \texttt{n} and denominator \texttt{d}.
+\item Two selectors:
+\begin{itemize}
+\item \texttt{(numer x)} which takes in a fraction \texttt{x} and returns its
+numerator.
+\item \texttt{(denom x)} which takes in a fraction \texttt{x} and returns its
+denominator.
+\end{itemize}
+\end{itemize}
+
+Then, our procedures are easy to write:
+
+\begin{minted}[]{racket}
+(define (+rat x y)
+  (make-rat
+   (+ (* (numer x) (denom y))
+      (* (numer y) (denom x)))
+   (* (denom x) (denom y))))
+
+(define (*rat x y)
+  (make-rat
+   (* (numer x) (numer y))
+   (* (denom x) (denom y))))
+\end{minted}
+
+Why do we need this data object abstraction anyway? We could very
+well define \texttt{+rat} to take in four numbers, two numerators and two
+denominators. But to return, we can't return \emph{both} numerator and
+denominator. We now have to define two summation functions, one for
+the numerator and one for the denominator, and somehow keep track
+of the fact that one of these number is the numerator and the other
+the denominator. Furthermore, when applying more complex operations
+like:
+
+\begin{minted}[]{racket}
+(*rat (+rat x y)
+      (+rat s t))
+\end{minted}
+
+The data abstraction helps. If it weren't there, we'd have to
+maintain some temporary registers to store the numerator and
+denominator values of the \texttt{+rat} operations into, then pass them to
+\texttt{*rat}.
+
+Worse than confusing the program, such a design philosophy would
+confuse us, the programmers.
+
+\subsection{Data Object Creation}
+\label{sec:orgaa2562a}
+
+The glue we use to stick two numbers together is provided by three
+Lisp primitives:
+\begin{itemize}
+\item A constructor \texttt{cons}, which generates an ordered pair.
+\item Two selectors:
+\begin{itemize}
+\item \texttt{car}, which selects the first element of the pair, and
+\item \texttt{cdr}, which selects the second element of the pair.
+\end{itemize}
+\end{itemize}
+
+In use,
+\begin{minted}[]{racket}
+(define x (cons 1 2))
+(car x)
+(cdr x)
+\end{minted}
+
+\begin{verbatim}
+1
+2
+\end{verbatim}
+
+
+We can now write the procedures that we'd deferred writing
+earlier:
+
+\begin{minted}[]{racket}
+(define (make-rat x y)
+  (cons x y))
+
+(define (numer x)
+  (car x))
+
+(define (denom x)
+  (cdr x))
+\end{minted}
+
+\begin{minted}[]{racket}
+
+
+
+(define x (make-rat 1 2))
+(define y (make-rat 1 4))
+(define z (+rat x y))
+(numer z)
+(denom z)
+\end{minted}
+
+\begin{verbatim}
+6
+8
+\end{verbatim}
+
+
+Agh. We forgot to reduce results to the simplest form. We can
+easily include this in the \texttt{make-rat} procedure:\footnote{\texttt{let} is a Lisp primitive which takes as its first argument a
+list of definitions, and second input a list of applications that may
+use these definitions. The trick is that these definitions are only
+valid in the body (second argument) of \texttt{let}, effectively creating a
+local namespace.}
+
+\begin{minted}[]{racket}
+(define (make-rat x y)
+  (let ((g (gcd x y)))
+    (cons (/ x g)
+          (/ y g))))
+
+(define (numer x)
+  (car x))
+
+(define (denom x)
+  (cdr x))
+\end{minted}
+
+Note that we could shift the \texttt{gcd} bit to functions \texttt{numer} and
+\texttt{denom}, which would display the simplest form at access time
+rather than creation time. Deciding between the two is a matter of
+system efficiency: a system which displays often should use
+creation time simplification, while a system which creates many
+fractions should use access time simplification.
+We now need a GCD function:
+
+\begin{minted}[]{racket}
+(define (gcd a b)
+  (if (= b 0)
+      a
+      (gcd b (remainder a b))))
+\end{minted}
+
+We can now use \texttt{+rat} in \emph{exactly} the same way, since the
+interface is the same. This is the advantage of abstraction.
+
+\begin{minted}[]{racket}
+
+
+
+(define x (make-rat 1 2))
+(define y (make-rat 1 4))
+(define z (+rat x y))
+(numer z)
+(denom z)
+\end{minted}
+
+\begin{verbatim}
+3
+4
+\end{verbatim}
+
+
+Excellent: we now have a working system. The data abstraction
+model can be visualised as follows:
+
+\begin{center}
+\rule{6cm}{2pt}\\
+\texttt{+rat}, \texttt{*rat} \ldots{}\\
+\rule{6cm}{2pt}\\
+\texttt{make-rat}, \texttt{numer}, \texttt{denom}\\
+\rule{6cm}{2pt}\\
+\texttt{gcd}\\
+\rule{6cm}{2pt}\\
+Pairs\\
+\rule{6cm}{2pt}
+\end{center}
+
+At each layer of abstraction, we merely care about the usage of
+the lower layers and not their implementation or underlying
+representation.
+
+\section{Representing Points on a Plane}
+\label{sec:orgf40c0ed}
+
+This is now an easy problem --- the code should be
+self-explanatory.
+
+\begin{minted}[]{racket}
+(define (make-vec x y)
+  (cons x y))
+
+(define (xcor v)
+  (car v))
+
+(define (ycor v)
+  (cdr v))
+\end{minted}
+
+We could now define a segment as a pair of vectors:
+
+\begin{minted}[]{racket}
+(define (make-seg v w)
+  (cons v w))
+
+(define (seg-start s)
+  (car s))
+
+(define (seg-end s)
+  (cdr s))
+\end{minted}
+
+Some sample operations:
+
+\begin{minted}[]{racket}
+
+
+
+
+
+
+(define (midpoint s)
+  (let ((a (seg-start s))
+        (b (seg-end s)))
+    (make-vec
+     (average (xcor a) (xcor b))
+     (average (ycor a) (ycor b)))))
+
+(define (length s)
+  (let ((dx (- (xcor (seg-end s))
+               (xcor (seg-start s))))
+        (dy (- (ycor (seg-end s))
+               (ycor (seg-start s)))))
+    (sqrt (+ (square dx)
+             (square dy)))))
+
+(define side-a (make-vec #i3 #i0))
+(define side-b (make-vec #i0 #i4))
+(define segment (make-seg side-a side-b))
+
+(length segment)
+
+(define mp (midpoint segment))
+
+(xcor mp)
+(ycor mp)
+\end{minted}
+
+\begin{verbatim}
+5.000000000053722
+1.5
+2.0
+\end{verbatim}
+
+
+The abstraction layer diagram of this code is:
+\begin{center}
+\rule{6cm}{2pt}\\
+Segments\\
+\rule{6cm}{2pt}\\
+Vectors\\
+\rule{6cm}{2pt}\\
+Pairs\\
+\rule{6cm}{2pt}
+\end{center}
+
+It is interesting to note that segments are pairs of vectors,
+which are pairs of numbers, so segments are actually pairs of
+pairs. Represented as a tree:
+
+\begin{center}
+\begin{forest}
+[$s$ [$\vec{v_{1}}$ [$x_{1}$] [$y_{1}$]] [$\vec{v_{2}}$ [$x_2$] [$y_2$]]]
+\end{forest}
+\end{center}
+
+This property is called \emph{closure} (from abstract algebra\footnote{For an operation defined on members of a set, the result of
+that operation is a member of the set. For instance, addition on
+natural numbers.}): that means
+of combination can be nested recursively. It's an important and
+powerful technique.
+
+For instance, a three-dimensional vector can be represented by a
+pair whose one element is a number and whose other element is a
+pair of numbers. Or, in Lisp:
+
+\begin{minted}[]{racket}
+(define three-d-vec (cons 3 (cons 4 5)))
+(car three-d-vec)
+(car (cdr three-d-vec))
+(cdr (cdr three-d-vec))
+\end{minted}
+
+\begin{verbatim}
+3
+4
+5
+\end{verbatim}
+
+\section{Pairs}
+\label{sec:orgb70932f}
+
+Let's go back to when we assumed that \texttt{make-rat}, \texttt{numer}, and
+\texttt{denom}, were already implemented. The procedures we then wrote
+were written using \emph{abstract data}, with the only ``assured''
+property being that:
+
+\begin{verse}
+\texttt{if x = (make-rat n d):}\\
+\vspace*{1em}
+\hspace*{2em}\(\displaystyle \frac{\mathtt{numer~x}}{\mathtt{denom~x}} = \frac{\mathtt{n}}{\mathtt{d}}\)\\
+\end{verse}
+
+Beyond this basic ``spec'', or the interface contract, we know
+nothing about its implementation.
+
+Now, it's easy not to appreciate how knowing \emph{merely} the
+specification of the layer below is sufficient to use it, so let's
+discuss how pairs work. When we wanted to implement \texttt{make-rat}, we
+kind of ``cheated'' in that we said, ``Okay, Lisp has a primitive to
+do this so we don't have to implement a pair.'' Let's now take a
+look at a possible implementation of a pair that doesn't use data
+objects at all, and instead mimics them from thin air. Consider:
+
+\begin{minted}[]{racket}
+(define (our-cons a b)
+  (lambda (pick)
+    (cond ((= pick 1) a)
+          ((= pick 2) b))))
+
+(define (our-car x) (x 1))
+(define (our-cdr x) (x 2))
+\end{minted}
+
+\begin{minted}[]{racket}
+
+(define pair (our-cons 3 4))
+(our-car pair)
+(our-cdr pair)
+\end{minted}
+
+\begin{verbatim}
+3
+4
+\end{verbatim}
+
+
+Before thinking about how it works: consider the fact that Lisp's
+pairs could be implemented this way, and not only would we not know
+about this while implementing \texttt{make-rat} --- we wouldn't care,
+since it's below the level of abstraction we're working at. As long
+as it behaves the way we expect it to --- that is, it follows the
+``spec'', we don't know or care about its implementation\footnote{Note that Lisp actually implements pairs using ``real'' data
+structures, since using procedures this way is less efficient.}. Such is the
+power of abstraction.
+
+Now, how is this implementation even working? Well:
+\begin{itemize}
+\item \texttt{cons} is a procedure that returns a lambda (anonymous procedure)
+which, by the substitution model, looks like:
+\begin{minted}[]{racket}
+(lambda (pick)
+  (cond ((= pick 1) 3)
+        ((= pick 2) 4)))
+\end{minted}
+\item \texttt{car} expects this procedure as an input, and returns the result of
+supplying this procedure with the value 1. This is naturally the
+first of the two numbers given to \texttt{cons} (\texttt{a}).
+\item \texttt{cdr} is identical to \texttt{car}, except that \emph{it} supplies the input
+procedure with argument 2 to get \texttt{b}.
+\end{itemize}
+
+We can thus implement a pair ``data structure'' using only lambdas.
+In fact, these pairs are closed:
+
+\begin{minted}[]{racket}
+
+(define three-d-vec (our-cons 3 (our-cons 4 5)))
+(our-car three-d-vec)
+(our-car (our-cdr three-d-vec))
+(our-cdr (our-cdr three-d-vec))
+(our-cdr three-d-vec)
+\end{minted}
+
+\begin{verbatim}
+3
+4
+5
+#<procedure:...6f_i/ob-2136OZJ.rkt:4:2>
+\end{verbatim}
+
+
+It is worth thinking about the structure of \texttt{three-d-vec}:
+\begin{minted}[]{racket}
+(lambda (pick)
+  (cond ((= pick 1) 3)
+        ((= pick 2) (lambda (pick)
+                      (cond ((= pick 1) 4)
+                            ((= pick 2) 5))))))
+\end{minted}
+
+Picking \texttt{2} in the top-level lambda gives us another lambda, in
+which we can pick either the first number (4) or the second (5).
+Note that this is precisely the nested pair structure we were going
+for.
+
+\begin{center}
+\begin{forest}
+[$\lambda$(p) [3] [$\lambda$(p) [4] [5]]]
+\end{forest}
+\end{center}
+
+\chapter{Lecture 3A: Henderson Escher Example}
+\label{sec:orga0c612c}
+
+Recall our vector procedures:
+
+\begin{minted}[]{racket}
+(define (make-vec x y)
+  (cons x y))
+
+(define (xcor v)
+  (car v))
+
+(define (ycor v)
+  (cdr v))
+\end{minted}
+
+We could define more procedures using these:
+
+\begin{minted}[]{racket}
+(define (+vect v1 v2)
+  (make-vec
+   (+ (xcor v1) (xcor v2))
+   (+ (ycor v1) (ycor v2))))
+
+(define (scale v s)
+  (make-vec
+   (* s (xcor v))
+   (* s (ycor v))))
+\end{minted}
+
+Recall that our representation of a line segment was as a pair of
+vectors, or pair of pairs. That is, we can use the property of
+closure that pairs have to store any amount of data.
+
+\section{Lists}
+\label{sec:orge6a7f35}
+Often, we want to store a sequence of data. Using pairs, there are
+many ways to do this, for instance:
+
+\begin{minted}[]{racket}
+(cons (cons 1 2) (cons 3 4))
+(cons (cons 1 (cons 2 3)) 4)
+\end{minted}
+
+\begin{verbatim}
+((1 . 2) 3 . 4)
+((1 2 . 3) . 4)
+\end{verbatim}
+
+
+However, we want to establish a conventional way of dealing with
+sequences, to prevent having to make ad-hoc choices. Lisp uses a
+representation called a list:
+
+\begin{minted}[]{racket}
+(cons 1 (cons 2 (cons 3 (cons 4 nil))))
+\end{minted}
+
+\begin{verbatim}
+(1 2 3 4)
+\end{verbatim}
+
+
+Note that the \texttt{nil} represents the null or empty list. Since
+writing so many \texttt{cons} is painful, Lisp provides the primitive
+\texttt{list} which lets us build such a structure.
+
+\begin{minted}[]{racket}
+(list 1 2 3 4)
+\end{minted}
+
+\begin{verbatim}
+(1 2 3 4)
+\end{verbatim}
+
+
+Note that \texttt{list} is merely syntactic sugar for building up using
+pairs:
+
+\begin{minted}[]{racket}
+(define one-to-four (list 1 2 3 4))
+\end{minted}
+
+\begin{minted}[]{racket}
+
+(car one-to-four)
+(cdr one-to-four)
+(car (cdr one-to-four))
+(cdr (cdr one-to-four))
+(car (cdr (cdr (cdr one-to-four))))
+(cdr (cdr (cdr (cdr one-to-four))))
+\end{minted}
+
+\begin{verbatim}
+1
+(2 3 4)
+2
+(3 4)
+4
+()
+\end{verbatim}
+
+
+Note that the empty list, \texttt{nil}, is also represented by \texttt{()}. This
+way of walking down the list for elements is called \texttt{cdr}-ing down
+a list, but it's a bit painful. Thus, when we want to process
+lists, we write procedures.
+
+\subsection{Procedures on Lists}
+\label{sec:org58a0bcc}
+
+Say we wanted to write a procedure \texttt{scale-list} which multiplies
+every element in the list by a certain value. That is, when scale
+list is called on \texttt{one-to-four} with value 10, it returns \texttt{(10 20
+    30 40)}. Here's one possible (recursive) implementation:
+
+\begin{minted}[]{racket}
+
+(define (scale-list l scale)
+  (if (null? l)
+      nil
+      (cons (* scale (car l))
+            (scale-list (cdr l) scale))))
+
+(scale-list one-to-four 10)
+\end{minted}
+
+\begin{verbatim}
+(10 20 30 40)
+\end{verbatim}
+
+
+\texttt{null?} is a predicate which tells us whether the given input is
+the empty list. This will be the case at the end of the list.
+Of course, this is \emph{actually} a general method for processing all
+values of a list and returning another list, so we write a
+higher-order procedure which applies a procedure to all elements
+of a list and returns the result as a list, called \texttt{map}.
+
+\begin{minted}[]{racket}
+(define (map p l)
+  (if (null? l)
+      nil
+      (cons (p (car l))
+            (map p (cdr l)))))
+\end{minted}
+
+Now defining \texttt{scale-list} in terms of \texttt{map}:
+
+\begin{minted}[]{racket}
+
+
+(define (scale-list l s)
+  (map (lambda (x) (* x s))
+       l))
+
+(scale-list one-to-four 20)
+\end{minted}
+
+\begin{verbatim}
+(20 40 60 80)
+\end{verbatim}
+
+
+We can now square lists:
+\begin{minted}[]{racket}
+
+
+
+(map square one-to-four)
+\end{minted}
+
+\begin{verbatim}
+(1 4 9 16)
+\end{verbatim}
+
+
+Similar to \texttt{map}, we define a higher-order procedure \texttt{for-each},
+which, instead of \texttt{cons}-ing a list and returning it, simply
+applies to procedure to each element of the list.
+
+\begin{minted}[]{racket}
+(define (for-each proc l)
+  (cond ((null? l) done)
+        (else
+         (proc (car l))
+         (for-each proc (cdr l)))))
+\end{minted}
+
+\section{Henderson's Picture Language}
+\label{sec:orgcea14a0}
+
+Let's define a language. As usual, we'll concern ourselves with its
+primitives, means of combination, and means of abstraction,
+implementing some of this language in Lisp along the way.
+
+
+\subsection{Primitives}
+\label{sec:org6811f31}
+This language has only one primitive: ``picture'', which is a figure
+scaled to fit a rectangle.
+
+
+\subsection{Means of Combination and Operations}
+\label{sec:org573b49b}
+
+\begin{itemize}
+\item Rotate, which rotates a picture and returns it.
+\item Flip, which flips the picture across an axis and returns it.
+\item Beside, which takes two pictures and a scale, then puts the two
+next to each other, returning a picture.
+\item Above, like beside, but above.
+\end{itemize}
+
+See that the closure property (that an operation on pictures
+returns a picture)\footnote{\(p \otimes p = p\)} allows us to combine these operations/means of
+combination to build complex pictures with ease.
+
+Let's now implement this part of the language.
+
+\subsection{An Implementation}
+\label{sec:org01e0630}
+
+\begin{enumerate}
+\item Rectangles
+\label{sec:org6ab7f7f}
+
+Three vectors are needed to uniquely identify a rectangle on the
+plane. By convention, we take these to be the bottom left corner
+(``origin''), the bottom right corner (``horizontal'') and the top
+left corner (``vertical''). Their positions can be described
+relative to the \((0,0)\) of the display screen. Therefore,
+rectangle is implemented by:
+\begin{itemize}
+\item Constructor \texttt{make-rect}.
+\item Selectors \texttt{origin}, \texttt{horiz}, and \texttt{vert}, for the three vectors.
+\end{itemize}
+
+Note that technically, a rectangle describes a transformation of
+the unit square, where each point in the unit square:
+$$(x,y)\mapsto \mathtt{origin} + x\cdot \mathtt{horiz} + y\cdot
+     \mathtt{vert}$$
+
+We can define a procedure which returns a procedure which maps
+a pair of points \((x,y)\) on the unit square to a given rectangle:
+
+\begin{minted}[]{racket}
+(define (coord-map rect)
+  (lambda (point)
+    (+vect
+     (+vect (scale (xcor point)
+                   (horiz rect))
+            (scale (ycor point)
+                   (vert rect)))
+     (origin rect))))
+\end{minted}
+
+\texttt{coord-map} returns a procedure which given a point will map it
+correctly to \texttt{rect}.
+
+\item Pictures
+\label{sec:org8f545c1}
+
+We can now easily define a procedure which makes a picture:
+\begin{minted}[]{racket}
+(define (make-picture seglist)
+  (lambda (rect)
+    (for-each
+     (lambda (s)
+       (drawline
+        ((coord-map rect) (seg-start s))
+        ((coord-map rect) (seg-end s))))
+     seglist)))
+\end{minted}
+
+Well, relatively easily. Let's explain what \texttt{make-picture}
+actually does:
+
+\begin{itemize}
+\item Takes argument \texttt{seglist}, which is a list of line segments
+(pairs of vectors) that the picture is.
+\item Returns a procedure which:
+\begin{itemize}
+\item Takes the argument of a rectangle.
+\item For every element in \texttt{seglist}:
+\begin{itemize}
+\item Draws the segment within rectangle, by scaling it correctly
+using \texttt{coord-map}.
+\item This is done by giving \texttt{coord-map} the rectangle to scale
+to.
+\item The procedure returned by \texttt{coord-map} then scales the
+vectors \texttt{(seg-start s)} and \texttt{(seg-end s)} to the rectangle.
+\item This can now be drawn by \texttt{drawline}, since it has as
+arguments two points.
+\end{itemize}
+\end{itemize}
+\end{itemize}
+
+Note that a picture is \emph{actually} a procedure which draws itself
+inside a given rectangle, and \texttt{make-picture} generates this
+procedure from a \texttt{seglist}. Or, in use:
+
+\begin{minted}[]{racket}
+(define R (make-rect ;some vectors
+           ))
+(define draw-george-in-rectangle (make-picture ;some seglist
+                ))
+(draw-george-in-rectangle R)
+\end{minted}
+
+\item Beside
+\label{sec:org064ece5}
+
+\texttt{beside} needs to draw two pictures on the screen, after scaling
+them correctly (by \texttt{a}) and placing them side by side. Thus,
+\texttt{beside} returns a picture which takes in an argument \texttt{rect}.
+\texttt{beside} starts drawing the left picture at \texttt{(origin rect),
+     (scale a (horiz rect)) (vert rect)} and the right picture at
+\texttt{(+vect (origin rect) (scale a (horiz rect))), (scale (- 1 a)
+     (horiz rect)), (vert rect)}. This places the two pictures side by
+side and scales them correctly within \texttt{rect}. Or, in Lisp,
+
+\begin{minted}[]{racket}
+(define (beside p1 p2 a)
+  (lambda (rect)
+    (p1 (make-rect
+         (origin rect)
+         (scale a (horiz rect))
+         (vert rect)))
+    (p2 (make-rect
+         (+vect (origin rect)
+                (scale a (horiz rect)))
+         (scale (-1 a) (horiz rect))
+         (vert rect)))))
+\end{minted}
+
+\item Rotate-90
+\label{sec:orgc61bb21}
+
+To rotate a picture by 90 degrees counter-clockwise, all we have
+to do is make the \texttt{origin} shift to where \texttt{horiz} is, then draw
+the new \texttt{horiz} and \texttt{vert} correctly. With some vector algebra,
+the procedure in Lisp is:
+
+\begin{minted}[]{racket}
+(define (rot90 pict)
+  (lambda (rect)
+    (pict (make-rect
+           (+vect (origin rect)
+                  (horiz rect))
+           (vert rect)
+           (scale -1 (horiz rect))))))
+\end{minted}
+\end{enumerate}
+
+
+\subsection{Means of Abstraction}
+\label{sec:org599dad3}
+See that the picture language is now embedded in Lisp. We can
+write recursive procedures to modify a picture:
+
+\begin{minted}[]{racket}
+(define (right-push pict n a)
+  (if (= n 0)
+      pict
+      (beside pict
+              (right-push pict (dec n) a)
+              a)))
+\end{minted}
+
+We can even write a higher order procedure for ``pushing'':
+\begin{minted}[]{racket}
+(define (push comb)
+  (lambda (pict n a)
+    ((repeated
+      (lambda (p)
+        (comb pict p a))
+      n)
+     pict)))
+
+(define right-push (push beside))
+\end{minted}
+
+There's a lot to learn from this example:
+\begin{itemize}
+\item We're embedding a language inside Lisp. All of Lisp's power is
+available to this small language now: including recursion.
+\item There's no difference between a procedure and data: we're
+passing pictures around exactly like data, even though it's
+actually a procedure.
+\item We've created a layered system of abstractions on top of Lisp,
+which allows \emph{each layer} to have all of Lisp's expressive
+power. This is contrasted to a designing such a system bottom-up
+as a tree, which would mean that:
+\begin{itemize}
+\item Each node does a very specific purpose and is limited in
+complexity because a new feature has to be built ground-up at
+the node.
+\item Making a change is near impossible, since there's no higher
+order procedural abstraction. Making a change that affects
+more than one node is a nightmare.
+\end{itemize}
+\end{itemize}
+
+\chapter{Lecture 3B: Symbolic Differentiation; Quotation}
+\label{sec:org3eb51d8}
+
+We saw that robust system design involves insensitivity to small
+changes, and that embedding a language within Lisp allows this. Let
+us turn to a somewhat similar thread, solving the problem of
+symbolic differentiation in Lisp.
+
+This problem is somewhat different from \emph{numerical} differentiation
+of a function like we did for Newton's method, since we actually
+want the expressions we work with to be in an algebraic language.
+Before figuring out how to implement such a thing, let's talk about
+the operation of differentiation itself.
+
+\section{Differentiation v/s Integration}
+\label{sec:org992da05}
+
+Why is it so much easier to differentiate than to integrate?
+Let us look at the basic rules of differentiation:
+
+$$\frac{\mathrm{d}k}{\mathrm{d}x} = 0$$
+$$\frac{\mathrm{d}x}{\mathrm{d}x} = 1$$
+$$\frac{\mathrm{d}k\cdot a}{\mathrm{d}x} = k\cdot \frac{\mathrm{d}a}{\mathrm{d}x}$$
+$$\frac{\mathrm{d}(a+b)}{\mathrm{d}x} =
+   \frac{\mathrm{d}a}{\mathrm{d}x} + \frac{\mathrm{d}b}{\mathrm{d}x}$$
+$$\frac{\mathrm{d}(ab)}{\mathrm{d}x} =  a\cdot
+   \frac{\mathrm{d}b}{\mathrm{d}x} +
+   \frac{\mathrm{d}a}{\mathrm{d}x}\cdot b$$
+$$\frac{\mathrm{d}x^{n}}{\mathrm{d}x} = nx^{n-1}$$
+
+See that these rules are reduction rules, in that the derivative of
+some complex thing is the derivative of simpler things joined
+together by basic operations. Such reduction rules are naturally
+recursive in nature. This makes the problem of differentiation very
+easy to solve using simple algorithms.
+
+On the other hand, implementing an integration system is a much
+harder problem, since such a system would require us to go the
+other way, combining up simpler expressions to make more
+complicated ones, which often involves an intrinsically difficult
+choice to make.
+
+With these simple recursive rules in mind, let's implement a
+symbolic differentiation system.
+
+\section{Some Wishful Thinking}
+\label{sec:org395eef6}
+
+\begin{minted}[]{racket}
+(define (deriv expr var)
+  (cond ((constant? expr var) 0)
+        ((same-var? expr var) 1)
+        ((sum? expr)
+         (make-sum (deriv (a1 expr) var)
+                   (deriv (a2 expr) var)))
+        ((product? expr)
+         (make-sum
+          (make-product (m1 expr)
+                        (deriv (m2 expr) var))
+          (make-product (deriv (m1 expr) var)
+                        (m2 expr))))))
+\end{minted}
+
+
+That's enough rules for now, we can add more later.
+
+Note that \texttt{a1} is a procedure returning the first term of the
+addition \(x+y\) (in this case, \(x\)), and \texttt{a2} is a procedure
+returning the second (in this case, \(y\)). Similar for
+multiplication, \texttt{m1} and \texttt{m2}.
+
+All the -\texttt{?} procedures are predicates, and should be
+self-explanatory. \texttt{make-}, as expected, makes the object with given
+arguments as values and returns it. These are a level of
+abstraction below \texttt{deriv}, and involve the actual representation of
+algebraic expressions. Let's figure out how to do this.
+
+\section{Representing Algebraic Expressions}
+\label{sec:org04e42e2}
+
+\subsection{Using Lisp Syntax}
+\label{sec:org2646e54}
+
+One very simple way to represent expressions is to use Lisp's way:
+expressions that form trees. Consider:
+
+$$ax^{2} \mapsto \mathtt{(*~a~(*~x~x))}$$ $$bx+c \mapsto \mathtt{(
+    \mathtt{+} ~(*~b~x)~c)}$$
+
+This has the advantage that representing such expression is just a
+list. Moreover, finding out the operation is merely the \texttt{car} of
+the list, and the operands are the \texttt{cdr}. This effectively
+eliminates our need for parsing algebraic expressions.
+
+\subsection{Representation Implementation}
+\label{sec:orgb44b087}
+
+Let's start defining our procedures.
+
+\begin{minted}[]{racket}
+(define (constant? expr var)
+  (and (atom? expr)
+       (not (eq? expr var))))
+
+(define (same-var? expr var)
+  (and (atom? expr)
+       (eq? expr var)))
+
+(define (sum? expr)
+  (and (not (atom? expr))
+       (eq? (car expr) '+)))
+
+(define (product? expr)
+  (and (not (atom? expr))
+       (eq? (car expr) '*)))
+\end{minted}
+
+We see a new form here: \texttt{'+} and \texttt{'*}. This is called ``quoting''.
+Why do we need to do this? Consider:
+
+\begin{verse}
+``Say your name!''\\
+``Susanne.''\\
+``Say `your name'!''\\
+``Your name.''\\
+\end{verse}
+
+To differentiate the cases where we mean \emph{literally} say ``your
+name'' and the case where we actually ask what ``your name'' \emph{is}, we
+use quotation marks in English. Similarly, quoting a symbol in
+Lisp tells the interpreter to check \emph{literally} for \texttt{(car expr)}
+to be the symbol \texttt{+} and not the procedure \texttt{+}.
+
+Quotation is actually quite a complicated thing. Following the
+principle of substituting equals for equals, consider:
+
+\begin{verse}
+``Chicago'' has seven letters.\\
+Chicago is the biggest city in Illinois.\\
+``The biggest city in Illinois'' has seven letters.\\
+\end{verse}
+
+The first two statements are true, and quotation marks are used
+correctly in the first to show that we're talking about Chicago
+the word and not Chicago the city. However, the third statement is
+wrong entirely (although it is the result of changing equals for
+equals), because the phrase ``The biggest city in Illinois'' does
+not have seven letters.
+That is, we cannot substitute equals for equals in referentially
+opaque contexts.
+
+Note that the \texttt{'} symbol breaks the neat pattern of Lisp where all
+expressions are delimited by \texttt{()}. To resolve this, we introduce
+the special form \texttt{(quote +)}, which does the exactly same thing as
+\texttt{'+}.
+
+Now defining the constructors:
+
+\begin{minted}[]{racket}
+(define (make-sum a1 a2)
+  (list '+ a1 a2))
+
+(define (make-product m1 m2)
+  (list '* m1 m2))
+\end{minted}
+
+
+Finally, we must define the selectors:
+
+\begin{minted}[]{racket}
+(define a1 cadr)
+(define a2 caddr)
+
+(define m1 cadr)
+(define m2 caddr)
+\end{minted}
+
+
+\texttt{cadr} is the \texttt{car} of the \texttt{cdr} and \texttt{caddr} is the \texttt{car} of the
+\texttt{cdr} of the \texttt{cdr}. These are forms provided for convenience while
+programming, since list processing a big part of Lisp.\footnote{LISP actually stands for LISt Processing.}
+
+Let's try it out:
+
+\begin{minted}[]{racket}
+
+
+
+
+
+
+(deriv '(+ (* a (* x x)) (+ (* b x) c)) 'x)
+(deriv '(+ (* a (* x x)) (+ (* b x) c)) 'a)
+(deriv '(+ (* a (* x x)) (+ (* b x) c)) 'b)
+(deriv '(+ (* a (* x x)) (+ (* b x) c)) 'c)
+\end{minted}
+
+\begin{verbatim}
+(+ (+ (* a (+ (* x 1) (* 1 x))) (* 0 (* x x))) (+ (+ (* b 1) (* 0 x)) 0))
+(+ (+ (* a (+ (* x 0) (* 0 x))) (* 1 (* x x))) (+ (+ (* b 0) (* 0 x)) 0))
+(+ (+ (* a (+ (* x 0) (* 0 x))) (* 0 (* x x))) (+ (+ (* b 0) (* 1 x)) 0))
+(+ (+ (* a (+ (* x 0) (* 0 x))) (* 0 (* x x))) (+ (+ (* b 0) (* 0 x)) 1))
+\end{verbatim}
+
+
+Note the recursive nature of \texttt{deriv}: the process creates results
+with the same shape even when we differentiate with respect to
+some other variable. This is because the recursion only ends when
+an expression is decomposed to either \texttt{same-var?} or \texttt{constant?}.
+
+\subsection{Simplification}
+\label{sec:orgafdbe75}
+
+However, these results are ugly, and we know why --- there's no
+simplification. Technically, it's correct:
+
+\begin{align*}
+&a(1x+1x) + 0x^{2} + b + 0x + 0\\
+=& 2ax + b
+\end{align*}
+
+Note that we've faced this same problem before with fractions, and
+recall that the solution was to change the constructors so that
+they'd simplify while creating the lists. Consider:
+
+\begin{minted}[]{racket}
+(define (make-sum a1 a2)
+  (cond ((and (number? a1)
+              (number? a2))
+         (+ a1 a2))
+        ((and (number? a1)
+              (= a1 0))
+         a2)
+         ((and (number? a2)
+              (= a2 0))
+          a1)
+         (else
+          (list '+ a1 a2))))
+
+(define (make-product m1 m2)
+  (cond ((and (number? m1)
+              (number? m2))
+         (* m1 m2))
+        ((and (number? m1)
+              (= m1 0))
+         0)
+         ((and (number? m2)
+              (= m2 0))
+          0)
+         ((and (number? m1)
+               (= m1 1))
+          m2)
+         ((and (number? m2)
+               (= m2 1))
+          m1)
+         (else
+          (list '+ m1 m2))))
+\end{minted}
+
+Now trying \texttt{deriv}:
+
+
+\begin{minted}[]{racket}
+
+
+
+
+
+
+(deriv '(+ (* a (* x x)) (+ (* b x) c)) 'x)
+(deriv '(+ (* a (* x x)) (+ (* b x) c)) 'a)
+(deriv '(+ (* a (* x x)) (+ (* b x) c)) 'b)
+(deriv '(+ (* a (* x x)) (+ (* b x) c)) 'c)
+\end{minted}
+
+\begin{verbatim}
+(+ (+ a (+ x x)) b)
+(* x x)
+x
+1
+\end{verbatim}
+
+
+Excellent, these are much better. Note, of course, that we could
+simplify the first one further, but, in general, algebraic
+simplification is a painful problem, since the definition of
+simplest form varies with application. However, this is good
+enough.
+
+\section{On Abstract Syntax}
+\label{sec:orgec31c42}
+
+Note that the syntax we used was abstract in the sense that it had
+its own rules and grammar. However, since it followed Lisp's syntax
+closely, we needed quotation to allow full expression.
+
+This is a powerful paradigm: not only can we use meta-linguistic
+abstraction to create languages embedded within Lisp, but we can
+also use Lisp to interpret any syntax. We'll see more of this in
+the future.
+
+\chapter{Lecture 4A: Pattern Matching and Rule-Based Substitution}
+\label{sec:org61b49df}
+
+It's a funny technique we used last time, converting the rules of
+differentiation to Lisp. In fact, if we wanted to explain (say) the
+rules of algebra to the computer, we'd have to again create a
+similar program which converts the rules of algebra to Lisp.
+
+See that there's a higher-order idea here, of explaining rules to
+Lisp and having the rules applied to an input expression to
+``simplify'' it. Our style of writing a rule-based substitution
+program is:
+
+Rules \(\rightarrow\) conditional \(\rightarrow\) dispatch
+
+That is, we try the rules on the given expression. If there's a
+match, we ``dispatch'' the result to substitute. Now, in general, the
+application of a rule is:
+
+\begin{itemize}
+\item Compare LHS of rule to input expression.
+\item If match, RHS with substituted values is replacement.
+\end{itemize}
+
+Or, diagrammatically:
+
+\[\begin{tikzcd} \mathrm{Pattern} \arrow{r}{\mathrm{Rule}}
+  \arrow[swap]{d}{\mathrm{Matched}} & \mathrm{Skeleton}
+  \arrow{d}{\mathrm{Instantiation}} \\ \mathrm{Expression_{Src}}
+  \arrow[mapsto]{r} & \mathrm{Expression_{Target}} \end{tikzcd} \]
+
+Let us now build a simple language to express these rules, which can
+then be pattern matched, skeletons created, then instantiated.
+
+\section{Rule Language}
+\label{sec:org49f1236}
+
+Here's a sample bit of what we want the rule language to look like:
+
+\begin{minted}[]{racket}
+(define deriv-rules
+  '(
+    ((dd (?c c) (? v)) 0)
+    ((dd (?v v) (? v)) 1)
+    ((dd (?v u) (? v)) 0)
+
+    ((dd (+ (? x1) (? x2)) (? v))
+     (+ (dd (: x1) (: v))
+        (dd (: x2) (: v))))
+
+    ((dd (* (? x1) (? x2)) (? v))
+     (+ (* (: x1) (dd (: x2) (: v)))
+        (* (: x2) (dd (: x1) (: v)))))
+    ; ...
+    ))
+\end{minted}
+
+It is worth explaining what this syntax means exactly, because
+eventually, we want to parse it.
+
+The rules are a list of pairs. The \texttt{car} of each pair is the
+pattern to match (rule LHS), and the \texttt{cdr} is the skeleton
+substitution expression (rule RHS).
+
+\subsection{Pattern Matching}
+\label{sec:orga9b6a64}
+
+The idea of the LHS language is to provide a framework where
+certain constructs can be matched and possibly named. These names
+will then be passed to the skeleton instantiator.\footnote{We use ``initiate'' and ``substitute'' interchangeably to mean
+swapping out expressions in the skeleton provided by the RHS of the
+rules.}
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+Syntax & Meaning\\
+\midrule
+\texttt{foo} & Matches itself literally.\\
+\texttt{(f a b)} & Matches every 3-list whose \texttt{car} is \texttt{f}, \texttt{cadr} is \texttt{a}, and \texttt{caddr} is \texttt{b}.\\
+\texttt{(? x)} & Matches any expression, and calls it \texttt{x}.\\
+\texttt{(?c x)} & Matches an expression which is a constant, and calls it \texttt{x}.\\
+\texttt{(?v x)} & Matches an expression which is a variable, and calls it \texttt{x}.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+
+\subsection{Skeleton and Instantiation}
+\label{sec:orgad64d61}
+The RHS language provides a skeleton wherein values provided by
+the LHS language can be substituted.
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+Syntax & Meaning\\
+\midrule
+\texttt{foo} & Instantiates \texttt{foo}.\\
+\texttt{(f a b)} & Instantiates each element of the list and returns a list.\\
+\texttt{(: x)} & Instantiate the value of \texttt{x} provided by the pattern matcher.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Sample Usage}
+\label{sec:org339709d}
+
+We expect to use this program by calling a procedure called
+\texttt{simplifier}, to which we provide the list of rules. The procedure
+should return another procedure, which is able to apply the rules
+to a given input expression. Or, in Lisp:
+
+\begin{minted}[]{racket}
+(define dsimp
+  (simplifier deriv-rules))
+
+(dsimp '(dd (+ x y) x))
+\end{minted}
+
+\begin{verbatim}
+(+ 1 0)
+\end{verbatim}
+\end{document}
