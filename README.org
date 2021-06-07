@@ -20,8 +20,18 @@
   #+begin_quote
  "Programs must be written for people to read, and only incidentally for machines to execute."
   #+end_quote
-  – Abelson & Sussman, SICP, preface to the first edition
+  – Abelson & Sussman, SICP, preface to the first edition.
 
+  Don't take my word for it --- study the book yourself! This
+  repository provides notes based on the video lectures that you will
+  find useful if:
+
+  - You want SICP 'distilled' in a small file.
+  - You want to see how old MIT Scheme code is implemented in Racket's
+    =#lang sicp=.
+  - You're following the video lectures, and of course, if:
+  - You came across this repository late at night and you have nothing
+    better to do.
 
 ** Notes
    My notes are based on the [[https://groups.csail.mit.edu/mac/classes/6.001/abelson-sussman-lectures/][1986 presentation of 6.001 (SICP),
