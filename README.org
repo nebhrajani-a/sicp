@@ -1,5 +1,10 @@
 * Structure and Interpretation of Computer Programs
 
+  /Structure and Interpretation of Computer Programs/, also called the
+  Wizard Book, was an introductory computer science course taught at
+  MIT from 1981 to 2007.
+
+
 ** Notes
    My notes are based on the 1986 presentation of 6.001 (SICP),
    produced by Hewlett-Packard. The notes are generated using Emacs'
@@ -13,16 +18,23 @@
    organised as HTML with each lecture being a node, open an issue and
    I'll find somewhere to host an HTML version.
 
-** Videos
-   The videos the notes are based on are located in directory
-   =videos=, and are licensed by MIT under [[http://creativecommons.org/licenses/by-sa/3.0][CC-BY-SA 3.0]].
+** MIT's SICP Content
 
-   The citation of the course on MIT OCW is:
-   #+begin_quote
-   Eric Grimson, Peter Szolovits, and Trevor Darrell. /6.001 Structure
-   and Interpretation of Computer Programs/. Spring 2005. Massachusetts
-   Institute of Technology: MIT OpenCourseWare, https://ocw.mit.edu.
-   License: Creative Commons BY-NC-SA.
-   #+end_quote
+*** Videos
+    The videos the notes are based on are licensed by MIT under [[http://creativecommons.org/licenses/by-sa/3.0][CC-BY-SA 3.0]].
+    The citation of the course on MIT OCW is:
+    #+begin_quote
+    Eric Grimson, Peter Szolovits, and Trevor Darrell. /6.001 Structure
+    and Interpretation of Computer Programs/. Spring 2005. Massachusetts
+    Institute of Technology: MIT OpenCourseWare, https://ocw.mit.edu.
+    License: Creative Commons BY-NC-SA.
+    #+end_quote
+
+*** Book
+    =book= includes the =pdf= and =texi= unofficial SICP ebooks. These
+    are *not* officially licensed by MIT, so it is wise to peruse this
+    carefully, given the +silly DMCA+ ethical concerns.
 
 ** License
+   All material in this repository that is my creative property is
+   licensed under [[https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en][CC-BY-NC-SA 4.0]].
