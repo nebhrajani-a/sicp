@@ -7,7 +7,7 @@
   of any sort, if only because it teaches Lisp.
 
 
- #+HTML: <p align="right"><img src="./sicp.jpg" width="70" height="28" \></p>
+ #+HTML: <img src="./sicp.jpg" align="right" width="70" height="70">
 
 
   #+begin_quote
