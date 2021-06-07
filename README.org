@@ -1,5 +1,9 @@
 * Structure and Interpretation of Computer Programs Notes
 
+
+ #+HTML: <img src="./sicp.jpg" align="right" width="300">
+
+
   /Structure and Interpretation of Computer Programs/, also called the
   Wizard Book, is a book based on an introductory computer science
   course taught at MIT from 1981 to 2007. It teaches the Scheme
@@ -7,7 +11,6 @@
   of any sort, if only because it teaches Lisp.
 
 
- #+HTML: <img src="./sicp.jpg" align="right" width="70" height="70">
 
 
   #+begin_quote
