@@ -1,4 +1,4 @@
-% Created 2021-06-08 Tue 04:21
+% Created 2021-06-08 Tue 04:22
 % Intended LaTeX compiler: xelatex
 \documentclass[9pt]{report}
 \usepackage{graphicx}
@@ -60,10 +60,10 @@
 
 
 \chapter{Introduction}
-\label{sec:orge9d49ba}
+\label{sec:orgf3cee9d}
 
 \section{About}
-\label{sec:org7be1580}
+\label{sec:orgd39386f}
 These are my notes of the twenty SICP lectures of June 1986,
 produced by Hewlett-Packard Television. These videos are available
 under a Creative Commons license.
@@ -78,11 +78,11 @@ exception of having to prefix some numbers with \texttt{\#i} to ensure
 Racket treats them as imprecise.
 
 \section{License}
-\label{sec:org2f592e8}
+\label{sec:org57ce4f8}
 \doclicenseThis
 
 \chapter{Lecture 1A: Overview and Introduction to Lisp}
-\label{sec:orgfa85044}
+\label{sec:orgd5db2d2}
 
 Computer science isn't really a science, and it isn't really about
 computers. Computer science is the study of how-to or imperative
@@ -110,7 +110,7 @@ Computer science focuses on this kind of imperative knowledge, and,
 specifically, how to communicate that knowledge to a computer.
 
 \section{Managing Complexity: Key Ideas of 6.001}
-\label{sec:org005412e}
+\label{sec:orga561cec}
 Computer science is also about managing complexity, in that large
 programs that you can't hold in your head should still be manageable
 and easy to work with. We explore this theme in 6.001 by learning
@@ -124,7 +124,7 @@ three key ideas:
 
 
 \section{Let's Learn Lisp}
-\label{sec:org22a1354}
+\label{sec:org7c51da0}
 When learning a new language, always ask about its:
 \begin{itemize}
 \item Primitive elements,
@@ -133,7 +133,7 @@ When learning a new language, always ask about its:
 \end{itemize}
 
 \subsection{Primitive Elements}
-\label{sec:org9d65e9d}
+\label{sec:orgc874470}
 These are numbers like 3, 17.4, or 5. Other primitives are
 discussed later in the course.
 
@@ -150,7 +150,7 @@ discussed later in the course.
 \end{verbatim}
 
 \subsection{Means of Combination}
-\label{sec:org88733d2}
+\label{sec:org6ac8b7f}
 Lisp's numerical primitives can be combined with ``operations'' such
 as addition, written in prefix notation.
 
@@ -188,7 +188,7 @@ In Lisp, () is the application of an operation or function in
 prefix notation.
 
 \subsection{Means of Abstraction}
-\label{sec:org26e7f8a}
+\label{sec:org07403a0}
 
 Abstraction can simply be done by naming things. Giving
 complicated things a name prevents us from having to understand
@@ -278,7 +278,7 @@ Note the indentation: since Lisp is parenthesis heavy, we use
 indentation. Good editors like Emacs should do this automatically.
 
 \section{Case Analysis in Lisp}
-\label{sec:orga9873d7}
+\label{sec:orgc7a0875}
 
 To represent functions like:
 $$abs(x) = \begin{cases}
@@ -339,7 +339,7 @@ We now know most of Lisp. Lisp doesn't have \texttt{do...while} or \texttt{for},
 since anything a loop can do can be done via recursion.
 
 \section{Finding Square Roots}
-\label{sec:org95be6cd}
+\label{sec:orga7f2348}
 
 Remember our square root finding algorithm?
 
@@ -468,7 +468,7 @@ This discipline of writing procedures is called lexical scoping.
 
 
 \section{Inbuilt/Primitive Procedures Aren't Special}
-\label{sec:org4f292dc}
+\label{sec:org60bd1eb}
 
 \begin{minted}[]{racket}
 
@@ -482,10 +482,10 @@ square
 \end{verbatim}
 
 \chapter{Lecture 1B: Procedures and Processes, Substitution Model}
-\label{sec:orgb40cb67}
+\label{sec:orgdec6d9b}
 
 \section{Substitution Rule/Model}
-\label{sec:org141de53}
+\label{sec:org181ee3b}
 The substitution rule states that,
 
 \begin{quote}
@@ -507,7 +507,7 @@ Lisp application, but the substitution rule is a ``good enough''
 model for our purposes.
 
 \subsection{Kinds of Expressions in Lisp}
-\label{sec:org005ff8c}
+\label{sec:org1334f5a}
 \begin{itemize}
 \item Numbers (evaluate to ``themselves'')
 \item Symbols (represent some procedure)
@@ -522,7 +522,7 @@ The last three are called ``special forms'', and we'll worry about
 them later.
 
 \subsection{Example}
-\label{sec:orga8de83b}
+\label{sec:org556ba38}
 
 Consider:
 
@@ -552,10 +552,10 @@ Let's try to apply the substitution rule to our application,
 \end{minted}
 
 \section{Peano Arithmetic}
-\label{sec:org97ae75c}
+\label{sec:orgb880736}
 
 \subsection{Simple Peano Addition}
-\label{sec:org75d8f8c}
+\label{sec:org36bf8e4}
 Peano arithmetic defines addition as:
 
 \begin{minted}[]{racket}
@@ -605,7 +605,7 @@ Written with steps skipped:
 \end{minted}
 
 \subsection{Another Peano Adder}
-\label{sec:org1ae36ab}
+\label{sec:org5176af6}
 Consider:
 \begin{minted}[]{racket}
 (define (pb+ x y)
@@ -681,7 +681,7 @@ with the implementation/definition of the \emph{procedure}, which is
 recursive. Iteration refers to the constant space requirement.
 
 \section{Differentiating Between Iterative and Recursive Processes}
-\label{sec:orgdcaf68a}
+\label{sec:orgb8ff479}
 
 One of the primary ways to differentiate between an iterative and
 recursive process is to imagine what'd happen if you turned the
@@ -697,7 +697,7 @@ In an iterative process, we can pick up right where we left off,
 since \emph{all} state information is contained by the process.
 
 \section{Fibonacci Numbers}
-\label{sec:org016deaf}
+\label{sec:orgbffdabe}
 
 Fibonacci numbers are defined as:
 
@@ -753,7 +753,7 @@ It is useful to try and write an iterative Fibonacci with better
 performance as an exercise.
 
 \section{Towers of Hanoi}
-\label{sec:org83dd040}
+\label{sec:org4d3ac57}
 
 From Wikipedia:
 
@@ -830,7 +830,7 @@ you compute every move in \(O(1)\) (which we do, since it's just a
 print), the complexity will be \(O(2^n)\).
 
 \section{Iterative Fibonacci}
-\label{sec:orgc79040d}
+\label{sec:org703baa3}
 
 \begin{minted}[]{racket}
 (define (iter-fib n a b)
@@ -849,10 +849,10 @@ print), the complexity will be \(O(2^n)\).
 \end{verbatim}
 
 \chapter{Lecture 2A: Higher-Order Procedures}
-\label{sec:org06f2fc7}
+\label{sec:org7e9522b}
 
 \section{Abstracting Procedural Ideas}
-\label{sec:org4da7b2d}
+\label{sec:org28eff89}
 
 Consider the functions and their respective (recursive) procedures:
 
@@ -1038,7 +1038,7 @@ constant.
 \end{verbatim}
 
 \section{More on Square Roots}
-\label{sec:org9f536f3}
+\label{sec:orgd002fb3}
 
 Recall our square root procedure. When seen in Lisp code, it's not
 very clear what it's doing, or how it's working.
@@ -1078,7 +1078,7 @@ very clear what it's doing, or how it's working.
 Let's use higher-order procedure abstraction to make it clearer.
 
 \subsection{Fixed Points}
-\label{sec:orgfe02b14}
+\label{sec:org430518b}
 
 Recall that the algorithm itself relies on writing a function
 
@@ -1138,7 +1138,7 @@ Let's try it out!
 \end{verbatim}
 
 \subsection{Damping Oscillations}
-\label{sec:org3477752}
+\label{sec:org7a2bd3c}
 
 A fair question when seeing the function
 $$f_1\colon y\mapsto \frac{y+\frac{x}{y}}{2}$$
@@ -1199,7 +1199,7 @@ Using the \texttt{sqrt} function,
 \end{verbatim}
 
 \section{Newton's Method}
-\label{sec:org1055f4d}
+\label{sec:orga7a7998}
 
 Newton's method is used to find the zeros of a function (\(y \ni
    f(y)=0\)). To use it, start with some guess \(y_0\). Then,
@@ -1291,7 +1291,7 @@ Testing out our \texttt{sqrt} function:
 \end{verbatim}
 
 \section{Procedures are First-Class Citizens}
-\label{sec:org0c8f60c}
+\label{sec:org9a9c9ad}
 
 This means that procedures can be:
 \begin{itemize}
@@ -1302,7 +1302,7 @@ This means that procedures can be:
 \end{itemize}
 
 \chapter{Lecture 2B: Compound Data}
-\label{sec:orga603eb5}
+\label{sec:org7123e83}
 
 Consider our \texttt{sqrt} function that uses \texttt{good-enough?}. What we did
 while writing \texttt{sqrt} is assume the existence of \texttt{good-enough?}.
@@ -1312,7 +1312,7 @@ implementing its parts.
 Let's do this for data.
 
 \section{Rational Number Arithmetic}
-\label{sec:org1f083c7}
+\label{sec:org98b22a6}
 
 Let's design a system which can add fractions:
 $$\frac{1}{2}+\frac{1}{4}=\frac{3}{4}$$
@@ -1326,7 +1326,7 @@ and
 $$\frac{n_1}{d_1} \times \frac{n_2}{d_2} = \frac{n_1n_2}{d_1d_2}$$
 
 \subsection{Abstraction}
-\label{sec:org1de35b3}
+\label{sec:org50affc6}
 We don't know, however, how to represent this data in a Lisp
 procedure. Let's use our powerful ``wishful thinking'' strategy.
 Assume that we have the following procedures available to us:
@@ -1381,7 +1381,7 @@ Worse than confusing the program, such a design philosophy would
 confuse us, the programmers.
 
 \subsection{Data Object Creation}
-\label{sec:org88c76f4}
+\label{sec:org3e39b2a}
 
 The glue we use to stick two numbers together is provided by three
 Lisp primitives:
@@ -1513,7 +1513,7 @@ the lower layers and not their implementation or underlying
 representation.
 
 \section{Representing Points on a Plane}
-\label{sec:orga043b39}
+\label{sec:orgb40559c}
 
 This is now an easy problem --- the code should be
 self-explanatory.
@@ -1630,7 +1630,7 @@ pair of numbers. Or, in Lisp:
 \end{verbatim}
 
 \section{Pairs}
-\label{sec:org0b7a7bd}
+\label{sec:org2592802}
 
 Let's go back to when we assumed that \texttt{make-rat}, \texttt{numer}, and
 \texttt{denom}, were already implemented. The procedures we then wrote
@@ -1743,7 +1743,7 @@ for.
 \end{center}
 
 \chapter{Lecture 3A: Henderson Escher Example}
-\label{sec:orgabc8101}
+\label{sec:org3ffdaa4}
 
 Recall our vector procedures:
 
@@ -1777,7 +1777,7 @@ vectors, or pair of pairs. That is, we can use the property of
 closure that pairs have to store any amount of data.
 
 \section{Lists}
-\label{sec:orga7b25fa}
+\label{sec:org3bff486}
 Often, we want to store a sequence of data. Using pairs, there are
 many ways to do this, for instance:
 
@@ -1851,7 +1851,7 @@ a list, but it's a bit painful. Thus, when we want to process
 lists, we write procedures.
 
 \subsection{Procedures on Lists}
-\label{sec:orgf2610db}
+\label{sec:org606cdd9}
 
 Say we wanted to write a procedure \texttt{scale-list} which multiplies
 every element in the list by a certain value. That is, when scale
@@ -1932,7 +1932,7 @@ applies to procedure to each element of the list.
 \end{minted}
 
 \section{Henderson's Picture Language}
-\label{sec:org4fcf425}
+\label{sec:org5268acc}
 
 Let's define a language. As usual, we'll concern ourselves with its
 primitives, means of combination, and means of abstraction,
@@ -1940,13 +1940,13 @@ implementing some of this language in Lisp along the way.
 
 
 \subsection{Primitives}
-\label{sec:orgd41bb73}
+\label{sec:org66e54a2}
 This language has only one primitive: ``picture'', which is a figure
 scaled to fit a rectangle.
 
 
 \subsection{Means of Combination and Operations}
-\label{sec:orgcd0532e}
+\label{sec:orgb817fb9}
 
 \begin{itemize}
 \item Rotate, which rotates a picture and returns it.
@@ -1963,11 +1963,11 @@ combination to build complex pictures with ease.
 Let's now implement this part of the language.
 
 \subsection{An Implementation}
-\label{sec:orgc8787f1}
+\label{sec:org2b350f1}
 
 \begin{enumerate}
 \item Rectangles
-\label{sec:org43f0052}
+\label{sec:org1a329f4}
 
 Three vectors are needed to uniquely identify a rectangle on the
 plane. By convention, we take these to be the bottom left corner
@@ -2003,7 +2003,7 @@ a pair of points \((x,y)\) on the unit square to a given rectangle:
 correctly to \texttt{rect}.
 
 \item Pictures
-\label{sec:orgcda27f1}
+\label{sec:orgbd9189c}
 
 We can now easily define a procedure which makes a picture:
 \begin{minted}[]{racket}
@@ -2053,7 +2053,7 @@ procedure from a \texttt{seglist}. Or, in use:
 \end{minted}
 
 \item Beside
-\label{sec:org9fa7cfe}
+\label{sec:org6759cc9}
 
 \texttt{beside} needs to draw two pictures on the screen, after scaling
 them correctly (by \texttt{a}) and placing them side by side. Thus,
@@ -2079,7 +2079,7 @@ side and scales them correctly within \texttt{rect}. Or, in Lisp,
 \end{minted}
 
 \item Rotate-90
-\label{sec:org1329db4}
+\label{sec:orgf9f7ee4}
 
 To rotate a picture by 90 degrees counter-clockwise, all we have
 to do is make the \texttt{origin} shift to where \texttt{horiz} is, then draw
@@ -2099,7 +2099,7 @@ the procedure in Lisp is:
 
 
 \subsection{Means of Abstraction}
-\label{sec:orgd12205d}
+\label{sec:org74c9dcc}
 See that the picture language is now embedded in Lisp. We can
 write recursive procedures to modify a picture:
 
@@ -2147,7 +2147,7 @@ more than one node is a nightmare.
 \end{itemize}
 
 \chapter{Lecture 3B: Symbolic Differentiation; Quotation}
-\label{sec:org2837d0b}
+\label{sec:org4f153ae}
 
 We saw that robust system design involves insensitivity to small
 changes, and that embedding a language within Lisp allows this. Let
@@ -2161,7 +2161,7 @@ Before figuring out how to implement such a thing, let's talk about
 the operation of differentiation itself.
 
 \section{Differentiation v/s Integration}
-\label{sec:org29741e1}
+\label{sec:org878af4b}
 
 Why is it so much easier to differentiate than to integrate?
 Let us look at the basic rules of differentiation:
@@ -2192,7 +2192,7 @@ With these simple recursive rules in mind, let's implement a
 symbolic differentiation system.
 
 \section{Some Wishful Thinking}
-\label{sec:orgf0810fb}
+\label{sec:org7ab6aba}
 
 \begin{minted}[]{racket}
 (define (deriv expr var)
@@ -2224,10 +2224,10 @@ abstraction below \texttt{deriv}, and involve the actual representation of
 algebraic expressions. Let's figure out how to do this.
 
 \section{Representing Algebraic Expressions}
-\label{sec:org93a819d}
+\label{sec:orgadd2b45}
 
 \subsection{Using Lisp Syntax}
-\label{sec:org1d769d0}
+\label{sec:orgef695e6}
 
 One very simple way to represent expressions is to use Lisp's way:
 expressions that form trees. Consider:
@@ -2241,7 +2241,7 @@ the list, and the operands are the \texttt{cdr}. This effectively
 eliminates our need for parsing algebraic expressions.
 
 \subsection{Representation Implementation}
-\label{sec:orgb65c511}
+\label{sec:org1fa47af}
 
 Let's start defining our procedures.
 
@@ -2357,7 +2357,7 @@ some other variable. This is because the recursion only ends when
 an expression is decomposed to either \texttt{same-var?} or \texttt{constant?}.
 
 \subsection{Simplification}
-\label{sec:org4049bc0}
+\label{sec:org3f22b46}
 
 However, these results are ugly, and we know why --- there's no
 simplification. Technically, it's correct:
@@ -2436,7 +2436,7 @@ simplest form varies with application. However, this is good
 enough.
 
 \section{On Abstract Syntax}
-\label{sec:orgcbb194e}
+\label{sec:org19de983}
 
 Note that the syntax we used was abstract in the sense that it had
 its own rules and grammar. However, since it followed Lisp's syntax
@@ -2448,7 +2448,7 @@ also use Lisp to interpret any syntax. We'll see more of this in
 the future.
 
 \chapter{Lecture 4A: Pattern Matching and Rule-Based Substitution}
-\label{sec:orga65fefa}
+\label{sec:orgdee0731}
 
 It's a funny technique we used last time, converting the rules of
 differentiation to Lisp. In fact, if we wanted to explain (say) the
@@ -2482,7 +2482,7 @@ Let us now build a simple language to express these rules, which can
 then be pattern matched, skeletons created, then instantiated.
 
 \section{Rule Language}
-\label{sec:orgf3d81a1}
+\label{sec:org42077ff}
 
 Here's a sample bit of what we want the rule language to look like:
 
@@ -2514,7 +2514,7 @@ pattern to match (rule LHS), and the \texttt{cdr} is the skeleton
 substitution expression (rule RHS).
 
 \subsection{Pattern Matching}
-\label{sec:orgc27621e}
+\label{sec:org11e8fa6}
 
 The idea of the LHS language is to provide a framework where
 certain constructs can be matched and possibly named. These names
@@ -2538,7 +2538,7 @@ Syntax & Meaning\\
 
 
 \subsection{Skeleton and Instantiation}
-\label{sec:orgf3f42f4}
+\label{sec:org942154c}
 The RHS language provides a skeleton wherein values provided by
 the LHS language can be substituted.
 
@@ -2555,7 +2555,7 @@ Syntax & Meaning\\
 \end{center}
 
 \section{Desired Behaviour}
-\label{sec:org2a6f6dc}
+\label{sec:org0e1b3f9}
 
 We expect to use this program by calling a procedure called
 \texttt{simplifier}, to which we provide the list of rules. The procedure
@@ -2574,7 +2574,7 @@ to a given input expression. Or, in Lisp:
 \end{verbatim}
 
 \section{Implementation}
-\label{sec:org9b6f1ad}
+\label{sec:org0cf93bc}
 
 We implement a procedure \texttt{match}, which takes a pattern, an
 expression, and a dictionary as arguments. If that pattern matches
@@ -2589,7 +2589,7 @@ expression cannot be further simplified (no more change after a
 round of match-instantiate).
 
 \subsection{Matcher}
-\label{sec:orgc27d272}
+\label{sec:org51073a8}
 
 Abstractly, the job of the matcher is to do a tree traversal and
 comparison. Consider the rule LHS: \texttt{(+ (* (? x) (? y)) (? y))},
@@ -2673,7 +2673,7 @@ However, when it tries to insert \texttt{y: q}, the dictionary will
 rule does not match.
 
 Finally, we implement as more cases in the \texttt{cond} other things we
-may need to match, according to the rule language (\ref{sec:orgf3d81a1}).
+may need to match, according to the rule language (\ref{sec:org42077ff}).
 
 \begin{minted}[]{racket}
 (define (match pattern expression dict)
@@ -2710,13 +2710,13 @@ may need to match, according to the rule language (\ref{sec:orgf3d81a1}).
 \end{minted}
 
 We add one case wherein both the pattern to be matched and the
-expression are atomic and the same, (the case \texttt{foo} in \ref{sec:orgf3d81a1}), in which we simply return the dictionary, since the
+expression are atomic and the same, (the case \texttt{foo} in \ref{sec:org42077ff}), in which we simply return the dictionary, since the
 pattern matches. The other new cases are self-explanatory: they are
 merely matching \texttt{(?c)}, \texttt{(?v)}, and \texttt{(?)}.
 
 
 \subsection{Instantiator}
-\label{sec:org6ee9656}
+\label{sec:orgecb11af}
 
 Recall that instantiate must take accept the input of a skeleton
 and a dictionary, traverse the skeleton tree, and replace rule
@@ -2777,7 +2777,7 @@ instantiation the way we want it to:
 \end{minted}
 
 \subsection{GIGO Simplifier}
-\label{sec:org531c43d}
+\label{sec:orgb3cad53}
 
 The GIGO (garbage in, garbage out)\footnote{``Garbage in, garbage out'' means that the simplifier will
 produce garbage output if the rules supplied to it are garbage. That
@@ -2835,11 +2835,11 @@ On the other hand, if the \texttt{match} failed, we simply try the rest
 of the rules (\texttt{cdr}).
 \item Finally, \texttt{simplifier} returns the \texttt{simplify-expression}
 procedure, which can apply \texttt{the-rules} to any input expression.
-Note that this is what the desired behaviour is (\ref{sec:org2a6f6dc}).
+Note that this is what the desired behaviour is (\ref{sec:org0e1b3f9}).
 \end{itemize}
 
 \subsection{Dictionary Implementation}
-\label{sec:org6991484}
+\label{sec:org45bb10f}
 The actual dictionary implementation isn't of much interest to us,
 since it has much more to do with Lisp primitives we'll study
 later than our program.
@@ -2863,7 +2863,7 @@ later than our program.
 \end{minted}
 
 \subsection{Predicates}
-\label{sec:org0ffba81}
+\label{sec:orgdbb2251}
 Finally, we must implement the predicates we've used throughout.
 These are simple to implement and self-explanatory:
 
@@ -2890,7 +2890,7 @@ These are simple to implement and self-explanatory:
 \end{minted}
 
 \section{Usage}
-\label{sec:org95357d1}
+\label{sec:orge552e91}
 
 \begin{minted}[]{racket}
 
@@ -2919,7 +2919,7 @@ simplification, and pass the result of \texttt{dsimp} to \texttt{algsimp} to get
 a clean expression.
 
 \subsection{Algebraic Simplification}
-\label{sec:orge691f5e}
+\label{sec:org105e24e}
 Consider the rule set:
 
 \begin{minted}[]{racket}
@@ -2972,7 +2972,7 @@ Consider the rule set:
 \end{verbatim}
 
 
-Excellent. We now have a complete pattern matching and replacement
-language at our disposal, and we've tested it out on the rules of
+We now have a complete pattern matching and replacement language at
+our disposal, and we've tested it out on the rules of
 differentiation and algebraic simplification.
 \end{document}

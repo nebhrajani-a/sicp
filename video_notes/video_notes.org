@@ -2763,8 +2763,8 @@
    : (+ x x)
    : (+ 6 (+ x x))
 
-   Excellent. We now have a complete pattern matching and replacement
-   language at our disposal, and we've tested it out on the rules of
+   We now have a complete pattern matching and replacement language at
+   our disposal, and we've tested it out on the rules of
    differentiation and algebraic simplification.
 
    # add pre-sec on tree recursion
