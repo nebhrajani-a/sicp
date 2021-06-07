@@ -50,13 +50,13 @@
    Once I'm done working through the videos, I'll start working on the
    exercises (second edition). Eventually, this repository may include
    solutions to assignments and exams on the OCW page as well. No
-   promises though --- it takes a fair amount of energy and time to
+   promises though --- it takes a non-trivial amount of energy and time to
    write fairly high-quality notes and solutions.
 
 ** Reporting Errors
    Open an issue, or, if you think you can fix the error yourself,
    submit a pull request. Don't worry about being wrong --- I don't
-   mind having discussions in the issue tracker. This, after all, is a
+   mind having discussions in the issue tracker. This is, after all, a
    learning-centric repository.
 
    -----
