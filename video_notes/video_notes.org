@@ -2374,15 +2374,38 @@
 
 ** Implementation
 
+   We implement a procedure =match=, which takes a pattern, an
+   expression, and a dictionary as arguments. If that pattern matches
+   the expression, it writes the =?= values to the dictionary and
+   returns it. Next, we implement =instantiate=, which takes as
+   arguments a skeleton and a dictionary, and substitutes variables in
+   the skeleton with their dictionary values. Finally, this new
+   expression is returned to the =match=-er to match more patterns.
+   Finally, we implement =simplify=, which takes in a list of the
+   rules and applies these in a match-instantiate cycle until the
+   expression cannot be further simplified (no more change after a
+   round of match-instantiate).
 
+*** Matcher
 
+    Abstractly, the job of the matcher is to do a tree traversal and
+    comparison. Consider the rule LHS: =(+ (* (? x) (? y)) (? y))=,
+    and an expression to match: =(+ (* 3 x) x)= (say). Then, the trees
+    are:
 
+    #+LATEX: \begin{center}
+    #+LATEX: \begin{forest}
+    #+LATEX: [+ [* [\texttt{(? x)}] [\texttt{(? y)}]] [\texttt{(? y)}]]
+    #+LATEX: \end{forest}
+    #+LATEX: \begin{forest}
+    #+LATEX: [+ [* [\texttt{3}] [\texttt{x}]] [\texttt{x}]]
+    #+LATEX: \end{forest}
+    #+LATEX: \end{center}
 
-
-
-
-
-
+    Clearly, these expressions should be matched in the tree
+    traversal. Don't confuse the =(? x)= in the rule LHS with the
+    symbol =x= in the expression: for the rule, it's just a matching
+    variable, but the =x= in the expression goes into the dictionary.
 
 
 

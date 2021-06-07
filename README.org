@@ -6,6 +6,8 @@
   dialect of Lisp, and is worth reading if you're a serious programmer
   of any sort, if only because it teaches Lisp.
 
+  [[sicp.jpg]]
+
   #+begin_quote
   Lisp is worth learning for the profound enlightenment experience you
   will have when you finally get it; that experience will make you a
