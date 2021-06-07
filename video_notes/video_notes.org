@@ -36,7 +36,7 @@
    These are my notes of the twenty SICP lectures of June 1986,
    produced by Hewlett-Packard Television. These videos are available
    under a Creative Commons license. These videos should be included in
-   a directory called =./videos=.
+   the directory =../videos=.
 
    These notes aim to be concise and as example-heavy as possible. The
    language used and referred to as "Lisp" is MIT-Scheme. These notes,
@@ -826,7 +826,7 @@
 
    The way to solve this is by writing a procedure =sum=, which has
    available to it two procedures =term= and =next=. We supply these
-   are arguments. Consider:
+   as arguments. Consider:
 
    #+NAME: sum
    #+BEGIN_SRC racket :lang sicp :eval no-export :exports both
@@ -1034,7 +1034,7 @@
     $$f_1\colon y\mapsto \frac{y+\frac{x}{y}}{2}$$
     is why another function
     $$f\colon y\mapsto \frac{x}{y}$$
-    wouldn't work in its place. It's a fair question, and is best
+    wouldn't work in its place. This question is best
     answered by trying to find its fixed point by iteration. Let's try
     to find it for $x=2$, starting at $y=1$. Then,
 
