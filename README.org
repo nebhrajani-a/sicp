@@ -1,11 +1,10 @@
 * Structure and Interpretation of Computer Programs Notes
 
   /Structure and Interpretation of Computer Programs/, also called the
-  Wizard Book, is a book based on introductory computer science course
-  taught at MIT from 1981 to 2007. It teaches the Scheme dialect of
-  Lisp, and is worth reading if you're a serious programmer of any
-  sort, if only because it teaches Lisp.
-  Eric Raymond on Lisp:
+  Wizard Book, is a book based on an introductory computer science
+  course taught at MIT from 1981 to 2007. It teaches the Scheme
+  dialect of Lisp, and is worth reading if you're a serious programmer
+  of any sort, if only because it teaches Lisp.
 
   #+begin_quote
   Lisp is worth learning for the profound enlightenment experience you
@@ -13,6 +12,7 @@
   better programmer for the rest of your days, even if you never
   actually use Lisp itself a lot.
   #+end_quote
+  – Eric Raymond
 
   Moreover, SICP has gems of computer programming wisdom sprinkled
   throughout its pages:
