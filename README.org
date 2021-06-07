@@ -6,8 +6,11 @@
   dialect of Lisp, and is worth reading if you're a serious programmer
   of any sort, if only because it teaches Lisp.
 
-  #+ATTR_HTML: :align right
-  [[sicp.jpg]]
+
+ <img
+ src="./sicp.jpg"
+ alt="sicp" align="right" width="70" height="28">
+
 
   #+begin_quote
   Lisp is worth learning for the profound enlightenment experience you
