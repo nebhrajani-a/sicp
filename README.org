@@ -10,8 +10,8 @@
 
    The notes are compiled together into a single PDF file, which is
    good enough for me. However, if you're interested in having it
-   organised as HTML with each lecture being a node, open a pull
-   request and I'll find somewhere to host it.
+   organised as HTML with each lecture being a node, open an issue and
+   I'll find somewhere to host an HTML version.
 
 ** Videos
    The videos the notes are based on are located in directory
