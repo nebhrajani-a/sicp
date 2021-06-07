@@ -6,7 +6,7 @@
   dialect of Lisp, and is worth reading if you're a serious programmer
   of any sort, if only because it teaches Lisp.
 
-  #+ATTR: :align r
+  #+ATTR_HTML: :align right
   [[sicp.jpg]]
 
   #+begin_quote
