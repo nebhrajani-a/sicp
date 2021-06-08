@@ -81,9 +81,9 @@
     #+end_quote
 
 *** Book
-    =book= includes the =pdf= and =texi= unofficial SICP ebooks. These
-    are *not* officially licensed by MIT, so it is wise to peruse this
-    carefully, given the +silly DMCA+ ethical concerns.
+    Directory =book= includes the =pdf= and =texi= unofficial SICP ebooks. These
+    are *not* officially licensed by MIT, so it is wise to peruse
+    these carefully, given the +silly DMCA+ ethical concerns.
 
 ** License
    All material in this repository that is my creative property is
