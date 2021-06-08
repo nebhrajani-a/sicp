@@ -1,17 +1,12 @@
 * Structure and Interpretation of Computer Programs Notes
 
-
  #+HTML: <img src="./sicp.jpg" align="right" width="300">
-
 
   /Structure and Interpretation of Computer Programs/, also called the
   Wizard Book, is a book based on an introductory computer science
   course taught at MIT from 1981 to 2007. It teaches the Scheme
   dialect of Lisp, and is worth reading if you're a serious programmer
   of any sort, if only because it teaches Lisp.
-
-
-
 
   #+begin_quote
   Lisp is worth learning for the profound enlightenment experience you
@@ -51,7 +46,7 @@
    The notes are compiled together into a single PDF file, which is
    good enough for me. However, if you're interested in having it
    organised as HTML with each lecture being a node, open an issue and
-   I'll find somewhere to host an HTML version.
+   I'll find somewhere to host the HTML version.
 
 ** Future Plans
    Once I'm done working through the videos, I'll start working on the
@@ -67,23 +62,39 @@
    learning-centric repository.
 
    -----
+*** On Literate Programming
 
-** MIT's SICP Content
+    SICP and its video lectures are [[https://www.eecs.umich.edu/techreports/cse/2021/CSE-TR-001-21.pdf#%5B%7B%22num%22%3A55%2C%22gen%22%3A0%7D%2C%7B%22name%22%3A%22XYZ%22%7D%2C72%2C717.509%2Cnull%5D][particularly well-suited]] to
+    literate programming, given the fact that SICP's exercises and
+    example programs are *highly* inter-dependent. Often, later
+    lectures require small procedures defined in past lectures.
+    All-in-all, this makes writing code for SICP a tough job, since
+    yank-pasting dependencies every time you need them is tiring, and
+    a bug fix will not propagate to all the pastes.
 
-*** Videos
-    The videos the notes are based on are licensed by MIT under [[http://creativecommons.org/licenses/by-sa/3.0][CC-BY-SA 3.0]].
-    The citation of the course on MIT OCW is:
-    #+begin_quote
-    Eric Grimson, Peter Szolovits, and Trevor Darrell. /6.001 Structure
-    and Interpretation of Computer Programs/. Spring 2005. Massachusetts
-    Institute of Technology: MIT OpenCourseWare, https://ocw.mit.edu.
-    License: Creative Commons BY-NC-SA.
-    #+end_quote
+    This is where literate programming becomes useful, since it
+    maintains only one copy of each code block, and changes can be
+    forward-propagated by re-evaluation. Org mode is one of the
+    most complete implementations of literate programming, although
+    today a majority of literate programming users come from Jupyter
+    notebooks.
 
-*** Book
-    Directory =book= includes the =pdf= and =texi= unofficial SICP ebooks. These
-    are *not* officially licensed by MIT, so it is wise to peruse
-    these carefully, given the +silly DMCA+ ethical concerns.
+*** MIT's SICP Content
+
+**** Videos
+     The videos the notes are based on are licensed by MIT under [[http://creativecommons.org/licenses/by-sa/3.0][CC-BY-SA 3.0]].
+     The citation of the course on MIT OCW is:
+     #+begin_quote
+     Eric Grimson, Peter Szolovits, and Trevor Darrell. /6.001 Structure
+     and Interpretation of Computer Programs/. Spring 2005. Massachusetts
+     Institute of Technology: MIT OpenCourseWare, https://ocw.mit.edu.
+     License: Creative Commons BY-NC-SA.
+     #+end_quote
+
+**** Book
+     Directory =book= includes the =pdf= and =texi= unofficial SICP ebooks. These
+     are *not* officially licensed by MIT, so it is wise to peruse
+     these carefully, given the +silly DMCA+ ethical concerns.
 
 ** License
    All material in this repository that is my creative property is
