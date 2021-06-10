@@ -3231,7 +3231,6 @@
 
 
 *** Putting Martha's Procedures
-
     Similarly:
     #+NAME: complex-martha-puts
     #+BEGIN_SRC racket :lang sicp :eval no-export :exports both
