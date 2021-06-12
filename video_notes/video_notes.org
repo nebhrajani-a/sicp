@@ -1371,17 +1371,14 @@
     Excellent: we now have a working system. The data abstraction
     model can be visualised as follows:
 
-    #+begin_center
-    \rule{6cm}{2pt}\\
-    =+rat=, =*rat= ...\\
-    \rule{6cm}{2pt}\\
-    =make-rat=, =numer=, =denom=\\
-    \rule{6cm}{2pt}\\
-    =gcd=\\
-    \rule{6cm}{2pt}\\
-    Pairs\\
-    \rule{6cm}{2pt}
-    #+end_center
+    #+ATTR_LATEX: :booktabs t :align c
+    | =+rat=, =*rat= ...           |
+    |------------------------------|
+    | =make-rat=, =numer=, =denom= |
+    |------------------------------|
+    | =gcd=                        |
+    |------------------------------|
+    | Pairs                        |
 
     At each layer of abstraction, we merely care about the usage of
     the lower layers and not their implementation or underlying
@@ -1460,15 +1457,14 @@
    : 2.0
 
    The abstraction layer diagram of this code is:
-   #+begin_center
-   \rule{6cm}{2pt}\\
-   Segments\\
-   \rule{6cm}{2pt}\\
-   Vectors\\
-   \rule{6cm}{2pt}\\
-   Pairs\\
-   \rule{6cm}{2pt}
-   #+end_center
+
+
+   #+ATTR_LATEX: :booktabs t :align c
+   | Segments |
+   |----------|
+   | Vectors  |
+   |----------|
+   | Pairs    |
 
    It is interesting to note that segments are pairs of vectors,
    which are pairs of numbers, so segments are actually pairs of
@@ -4146,7 +4142,7 @@
     #+ATTR_LATEX: :width 200pt
     [[./images/frameobj.pdf]]
 
-
+*** Rules for Environment Model
 
 
 
