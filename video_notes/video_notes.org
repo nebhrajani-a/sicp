@@ -1,7 +1,10 @@
+# add biblio
 #+title: MIT 6.001 1986 Video Notes
 #+latex_class: org-report
 #+latex_header: \usepackage{tikz-cd}
+#+latex_header: \usepackage{makecell}
 #+latex_header: \usepackage{tikz}
+#+latex_header: \usepackage{tabulary}
 #+latex_header: \usetikzlibrary{quotes,angles,positioning}
 #+latex_header: \usepackage{array}
 #+latex_header: \usepackage{parskip}
@@ -3324,7 +3327,571 @@
     "message passing".
     #+end_quote
 
+    We can see by the substitution rule how this system is working:
+
+    #+BEGIN_SRC racket :lang sicp :eval no-export :exports both
+      (real z)
+      (operate 'real z)
+      ((get 'polar 'real) (contents z))
+      (real-polar (contents z))
+    #+END_SRC
+
 ** Advanced Example: Semi-Complete Arithmetic System
+
+*** Architecture
+   Let us now embed our complex number system "package" in a more
+   complex arithmetic system which, diagrammatically, looks like the
+   following:
+
+   #+LATEX: \begin{center}
+   #+LATEX: \begin{tabulary}{1.0\textwidth}{|C|C|C|C|}
+   #+LATEX: \hline
+   #+LATEX: \multicolumn{4}{|c|}{\texttt{add sub mult div}}\\
+   #+LATEX: \hline
+   #+LATEX: \multicolumn{2}{|c|}{\texttt{+complex -complex *complex /complex}}&&\\
+   #+LATEX: \cline{1-2}
+   #+LATEX: \multicolumn{2}{|c|}{}&&\\
+   #+LATEX: \multicolumn{2}{|c|}{Complex}& Rational & Lisp Numbers\\
+   #+LATEX: \multicolumn{2}{|c|}{\texttt{+c -c *c /c}}& \texttt{+rat *rat}& \texttt{+ - * /}\\
+   #+LATEX: \multicolumn{2}{|c|}{}&&\\
+   #+LATEX: \cline{1-2}
+   #+LATEX: &&&\\
+   #+LATEX: \makecell{~~~~~~Rectangular~~~~~~} & \makecell{~~~~~~~~Polar} & & \\
+   #+LATEX: &&&\\
+   #+LATEX: \hline
+   #+LATEX: \end{tabulary}
+   #+LATEX: \end{center}
+
+   Our goal is to embed our complex number, rational number, and
+   standard Lisp number code into a single system. This will also be
+   done with tags and a lookup table, with data being tagged as
+   =complex=, =rational=, or =number=. The top-level operations
+   =add=, =sub=, =mul=, and =div= are defined in terms of an =operate=
+   which is binary rather than unary. Later, we expand this system by
+   adding a way to add polynomials.
+
+*** Implementation
+
+    The rational number procedures in this system are implemented thus:
+
+    #+NAME: asn-rat-sel
+    #+BEGIN_SRC racket :lang sicp :eval no-export :exports none
+      (define (numer x) (car x))
+      (define (denom x) (cdr x))
+    #+END_SRC
+    # frac-proc
+    #+NAME: asn-rat
+    #+BEGIN_SRC racket :lang sicp :eval no-export :exports both
+      (define (make-rat n d)
+        (attach-type 'rational (cons n d)))
+
+      (put 'rational 'add +rat)
+      (put 'rational 'mul *rat)
+    #+END_SRC
+
+    The definitions of =+rat= and =*rat= are the same as last time:
+    #+BEGIN_SRC racket :lang sicp :eval no-export :exports both
+      (define (+rat x y)
+        (make-rat
+         (+ (* (numer x) (denom y))
+            (* (numer y) (denom x)))
+         (* (denom x) (denom y))))
+
+      (define (*rat x y)
+        (make-rat
+         (* (numer x) (numer y))
+         (* (denom x) (denom y))))
+    #+END_SRC
+
+    Similarly, we can implement constructors and =put= procedures for
+    complex numbers and standard Lisp numbers in this system:
+
+    #+NAME: asn-complex
+    #+BEGIN_SRC racket :lang sicp :eval no-export :exports both
+      (define (make-complex z)
+        (attach-type 'complex z))
+
+      (define (+complex z1 z2)
+        (make-complex (+c z1 z2)))
+
+      (define (-complex z1 z2)
+        (make-complex (-c z1 z2)))
+
+      (define (*complex z1 z2)
+        (make-complex (*c z1 z2)))
+
+      (define (/complex z1 z2)
+        (make-complex (/c z1 z2)))
+
+      (put 'complex 'add +complex)
+      (put 'complex 'sub -complex)
+      (put 'complex 'mul *complex)
+      (put 'complex 'div /complex)
+    #+END_SRC
+
+    Note that we define additional procedures =+complex=, =-complex=,
+    and so on to add the =complex= tag to results of operating on
+    complex numbers. Moving to standard numbers:
+
+    #+NAME: asn-num
+    #+BEGIN_SRC racket :lang sicp :eval no-export :exports both
+      (define (make-number n)
+        (attach-type 'number n))
+
+      (define (+number x y)
+        (make-number (+ x y)))
+
+      (define (-number x y)
+        (make-number (- x y)))
+
+      (define (*number x y)
+        (make-number (* x y)))
+
+      (define (/number x y)
+        (make-number (/ x y)))
+
+      (put 'number 'add +number)
+      (put 'number 'sub -number)
+      (put 'number 'mul *number)
+      (put 'number 'div /number)
+    #+END_SRC
+
+    Finally, we must implement =add=, =sub=, =mul=, and =div=
+    themselves:
+
+    #+NAME: asn-toplevel
+    #+BEGIN_SRC racket :lang sicp :eval no-export :exports both
+      (define (add x y)
+        (operate-2 'add x y))
+
+      (define (sub x y)
+        (operate-2 'sub x y))
+
+      (define (mul x y)
+        (operate-2 'mul x y))
+
+      (define (div x y)
+        (operate-2 'div x y))
+    #+END_SRC
+
+    Finally, we implement the binary =operate=, =operate-2=:
+
+    #+NAME: asn-operate-2
+    #+BEGIN_SRC racket :lang sicp :eval no-export :exports both
+      (define (operate-2 op arg1 arg2)
+        (if (eq? (type arg1) (type arg2))
+            (let ((proc (get (type arg1) op)))
+              (if (not (null? proc))
+                  (proc (contents arg1)
+                        (contents arg2))
+                  (error "Operation undefined.")))
+            (error "Argument type mismatch.")))
+    #+END_SRC
+
+*** Usage
+
+    We're now ready to test this system:
+
+    #+BEGIN_SRC racket :lang sicp :eval no-export :exports both :noweb strip-export
+      <<square>>
+      <<type-arch>>
+      <<george-complex-procs>>
+      <<martha-complex-procs>>
+      <<complex-ddp-tbl>>
+      <<complex-george-puts>>
+      <<complex-martha-puts>>
+      <<complex-operate>>
+      <<complex-tbl-gen-ops>>
+      <<complex-arith>>
+      <<asn-rat-sel>>
+      <<frac-proc>>
+      <<asn-rat>>
+      <<asn-complex>>
+      <<asn-num>>
+      <<asn-operate-2>>
+      <<asn-toplevel>>
+
+      (define p (make-complex (make-pol 1 2)))
+      (define q (make-complex (make-pol 3 4)))
+      (mul q p)
+
+      (define r (make-rat 2 4))
+      (define s (make-rat 1 4))
+      (add r s)
+
+      (sub (make-number 65) (make-number 3))
+    #+END_SRC
+
+    #+RESULTS:
+    : (complex polar 3 . 6)
+    : (rational 12 . 16)
+    : (number . 62)
+
+    See from the output the structure: labels followed by actual value
+    of the datum.
+
+*** Adding Polynomials
+
+    To do arithmetic on polynomials, we must first figure out how to
+    represent them. Consider the polynomial:
+
+    $$x^{15} + 2x^7 + 5$$
+
+    One simple way to represent a polynomial is a list of
+    coefficients, with the rightmost coefficient being the constant
+    term, the second last being the linear term, followed by
+    quadratic, and so on. However, for "sparse" polynomials like the
+    one in the example, this will result in a list with a lot of
+    zeros. We therefore choose a slightly different representation: a
+    list of pairs. The =car= of the pair is the order, and the =cdr=
+    is the coefficient. Thus, the polynomial in the example is
+    represented as =((15 1) (7 2) (0 5))=. We call this the "term
+    list" of the polynomial. In our final representation, we'll =cons=
+    this with the last bit of missing information: the variable the
+    polynomial is in.
+
+    Thus, to construct a polynomial:
+
+    #+NAME: asn-poly-cons
+    #+BEGIN_SRC racket :lang sicp :eval no-export :exports both
+      (define (make-poly var term-list)
+        (attach-type 'polynomial (cons var term-list)))
+
+      (define (var poly) (car poly))
+      (define (term-list poly) (cdr poly))
+    #+END_SRC
+
+    Now, implementing =+poly=:
+
+    #+NAME: asn-+poly
+    #+BEGIN_SRC racket :lang sicp :eval no-export :exports both
+      (define (+poly p1 p2)
+        (if (eq? (var p1) (var p2))
+            (make-poly
+             (var p1)
+             (+term (term-list p1)
+                    (term-list p2)))
+            (error "Polynomials not in same variable.")))
+
+      (put 'polynomial 'add +poly)
+    #+END_SRC
+
+    Of course, this just pushed the real work onto =+term=, which is
+    defined as:
+
+    #+NAME: asn-+term
+    #+BEGIN_SRC racket :lang sicp :eval no-export :exports both
+      (define (+term L1 L2)
+        (cond ((empty-termlist? L1) L2)
+              ((empty-termlist? L2) L1)
+              (else
+               (let ((t1 (first-term L1))
+                     (t2 (first-term L2)))
+                 (cond ((> (order t1) (order t2))
+                        (adjoin-term
+                         t1
+                         (+term (rest-terms L1) L2)))
+                       ((< (order t1) (order t2))
+                        (adjoin-term
+                         t2
+                         (+term L1 (rest-terms L2))))
+                       (else
+                        (adjoin-term
+                         (make-term (order t1)
+                                    (add (coeff t1)
+                                         (coeff t2)))
+                         (+term (rest-terms L1) (rest-terms L2)))))))))
+    #+END_SRC
+
+
+
+    Clearly, we need to implement some predicates, constructors, and
+    selectors for =term='s and =term-list='s:
+
+    #+NAME: asn-tl-cons
+    #+BEGIN_SRC racket :lang sicp :eval no-export :exports both
+      (define (empty-termlist? tl)
+        (null? tl))
+
+      (define (first-term tl)
+        (car tl))
+
+      (define (rest-terms tl)
+        (cdr tl))
+
+      (define (adjoin-term term tl)
+        (cons term tl))
+
+      (define (make-term o c)
+        (cons o c))
+
+      (define (order t)
+        (car t))
+
+      (define (coeff t)
+        (cdr t))
+    #+END_SRC
+
+    Usage is obvious:
+
+
+    #+BEGIN_SRC racket :lang sicp :eval no-export :exports both :noweb strip-export
+      <<square>>
+      <<type-arch>>
+      <<george-complex-procs>>
+      <<martha-complex-procs>>
+      <<complex-ddp-tbl>>
+      <<complex-george-puts>>
+      <<complex-martha-puts>>
+      <<complex-operate>>
+      <<complex-tbl-gen-ops>>
+      <<complex-arith>>
+      <<asn-rat-sel>>
+      <<frac-proc>>
+      <<asn-rat>>
+      <<asn-complex>>
+      <<asn-num>>
+      <<asn-operate-2>>
+      <<asn-toplevel>>
+      <<asn-poly-cons>>
+      <<asn-tl-cons>>
+      <<asn-+term>>
+      <<asn-+poly>>
+
+      (define p1-tl
+        (list
+         (cons 15 (make-number 1))
+         (cons 7 (make-number 2))
+         (cons 0 (make-number 5))))
+      (define poly1 (make-poly 'x p1-tl))
+
+      (define p2-tl
+        (list
+         (cons 25 (make-number 1))
+         (cons 15 (make-number 8))
+         (cons 9 (make-number 4))
+         (cons 7 (make-number 4))
+         (cons 0 (make-number 15))))
+      (define poly2 (make-poly 'x p2-tl))
+
+      (add poly1 poly2)
+    #+END_SRC
+
+    #+RESULTS:
+    : (polynomial x (25 number . 1) (15 number . 9)
+    :               (9 number . 4) (7 number . 6) (0 number . 20))
+
+    Although somewhat hard to read, this is just the polynomial:
+
+    $$x^{25} + 9x^{15} + 4x^9 + 6x^7 + 20$$
+
+    which is the correct result of summing the polynomials:
+
+    $$(x^{15}+2x^7+5) + (x^{25} + 8x^{15} + 4x^9 + 4x^7 + 15)$$
+
+*** Recursive Data Directed Programming
+
+    It's easy to miss one /very/ crucial point in the implementation
+    of procedure =+term=: that when we actually add the coefficients
+    of two same-order terms, we use the generic operator =add=. Or,
+    instead of doing this:
+
+    #+BEGIN_SRC racket :lang sicp :eval no-export :exports both
+      (+ (coeff t1)
+         (coeff t2))
+    #+END_SRC
+
+    we do:
+    #+BEGIN_SRC racket :lang sicp :eval no-export :exports both
+      (add (coeff t1)
+         (coeff t2))
+    #+END_SRC
+
+    What this does is that it lets our polynomial have any
+    coefficients supported by the overall system. We therefore, "for
+    free", have rational and complex coefficients. Therefore,
+    expressions like the following are fully supported:
+
+    $$\frac{3}{2}x^{2} + \frac{17}{7}$$ $$(3+2i)x^5+(4+7i)$$
+
+    This works by calling =add= on the coefficients, which knows how
+    to add fractions and complex numbers.
+
+
+    #+BEGIN_SRC racket :lang sicp :eval no-export :exports both :noweb strip-export
+      <<square>>
+      <<type-arch>>
+      <<george-complex-procs>>
+      <<martha-complex-procs>>
+      <<complex-ddp-tbl>>
+      <<complex-george-puts>>
+      <<complex-martha-puts>>
+      <<complex-operate>>
+      <<complex-tbl-gen-ops>>
+      <<complex-arith>>
+      <<asn-rat-sel>>
+      <<frac-proc>>
+      <<asn-rat>>
+      <<asn-complex>>
+      <<asn-num>>
+      <<asn-operate-2>>
+      <<asn-toplevel>>
+      <<asn-poly-cons>>
+      <<asn-tl-cons>>
+      <<asn-+term>>
+      <<asn-+poly>>
+
+      (define p1-tl
+        (list
+         (cons 15 (make-rat 1 2))
+         (cons 7 (make-rat 2 17))
+         (cons 0 (make-rat 5 4))))
+      (define poly1 (make-poly 'x p1-tl))
+
+      (define p2-tl
+        (list
+         (cons 25 (make-rat 1 3))
+         (cons 15 (make-rat 8 7))
+         (cons 9 (make-rat 4 13))
+         (cons 7 (make-rat 14 7))
+         (cons 0 (make-rat 15 1))))
+      (define poly2 (make-poly 'x p2-tl))
+
+      (add poly1 poly2)
+    #+END_SRC
+
+    #+RESULTS:
+    : (polynomial x (25 rational 1 . 3) (15 rational 23 . 14)
+    :               (9 rational 4 . 13) (7 rational 252 . 119) (0 rational 65 . 4))
+
+
+
+
+    Even cooler is the fact that we have support for polynomials with
+    polynomial coefficients, such as:
+
+    $$(x^2+1)y^2 + (x^3-2x)y + (x^4-7)$$
+
+    This is because =add= also knows, recursively, how to add
+    polynomials. We can, theoretically, nest this as far as we want
+    to, having polynomials whose coefficients are polynomials whose
+    coefficients are polynomials whose\dots
+
+    Note that we could rewrite =+rat= to use =add= instead of =+=, and
+    we'd be able to support expressions such as
+
+    $$\frac{3x+7}{x^2+1}$$
+
+    This exposes a powerful technique: once we have the basic
+    implementation of any operation, say matrix addition, in the form:
+
+    $$\begin{bmatrix}
+    a & b\\
+    c & d
+    \end{bmatrix} +
+    \begin{bmatrix}
+    p & q\\
+    r & s
+    \end{bmatrix} =
+    \begin{bmatrix}
+    a+p & b+q\\
+    c+r & d+s
+    \end{bmatrix} $$
+
+    If we use generic operators, it doesn't matter what $a$, $b$, and
+    the other operands are: they can be any type the generic operators
+    support, including matrices.
+
+** Review
+
+   We started our implementation of generic operators by writing a
+   manager to dispatch the correct procedure according to type using
+   conditional statements. We saw that this created a bottleneck at
+   the manager. We then eliminated the manager by using a lookup
+   table, which the generic operators accessed and got the correct
+   \lambda, effectively decentralising the manager's role, since
+   any new representation can be added to the table without any
+   interaction with the others. Finally, we saw how to use generic
+   operators to allow the recursive use of operations on types within
+   the system.
+
+   One feature, however, missing from the system, is the idea of "type
+   coercion". Our system fails when it tries to add, say,
+
+   $$3 + \frac{2}{5}$$
+
+   by reporting a type mismatch (it cannot add a =number= and a
+   =rational=). However, it won't complain if we ask it to add
+
+   $$\frac{3}{1} + \frac{2}{5}$$
+
+   Despite the meanings being mathematically the same. We then need to
+   implement a way to "coerce" types into other types when it is
+   mathematically meaningful to do so, for instance, interpreting a
+   pure real number $r$ as complex number $r+0i$. The implementation
+   of "type coercion" is shown in the SICP book.
+
+   # and in appendix A
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3354,7 +3921,7 @@
 * Footnotes
 
 [fn:1] =let= is a Lisp primitive which takes as its first argument a
-list of definitions, and second input a list of applications that may
+series of definitions, and second input a series of applications that may
 use these definitions. The trick is that these definitions are only
 valid in the body (second argument) of =let=, effectively creating a
 local namespace.
