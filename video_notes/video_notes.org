@@ -37,7 +37,7 @@
 #+latex_header:\makeatother
 #+latex_header: \usepackage{colortbl}
 
-* Introduction
+\newpage
 
 ** About
    These are my notes of the twenty SICP lectures of June 1986,
@@ -1985,7 +1985,7 @@
   Before figuring out how to implement such a thing, let's talk about
   the operation of differentiation itself.
 
-** Differentiation v/s Integration
+** Differentiation v. Integration
 
    Why is it so much easier to differentiate than to integrate?
    Let us look at the basic rules of differentiation:
@@ -3834,63 +3834,317 @@
    # and in appendix A
 
 
+* Lecture 5A: Assignment, State, and Side-Effects
+
+  Up until now, we've used no assignment statements in our use of
+  Lisp. If we add one, there must be a good reason to do so, and the
+  creation of significant advantage.
+  We will first consider how we'd go about dealing with assignment in
+  Lisp, then the benefits it brings to our programming practice.
+
+** Functional v. Imperative Style
+
+*** Functional Programming
+    Functional programs encode mathematical truth in a procedure. For
+    instance,
+
+    #+BEGIN_SRC racket :lang sicp :eval no-export :exports both
+      (define (fact n)
+        (cond ((= n 1) 1)
+              (else (* n (fact (dec n))))))
+
+      (fact 4)
+    #+END_SRC
+
+    #+RESULTS:
+    : 24
+
+    This is almost precisely the mathematical definition of a factorial
+    in Lisp:
+    $$f(n) = \begin{cases} 1& n=1\\ n\times f(n-1) & n>1\end{cases}$$
+
+    Moreover, such a function can be fully understood by substituting
+    recursively:
+
+    #+BEGIN_SRC racket :lang sicp :eval no-export :exports both
+      (fact 4)
+      (* 4 (fact 3))
+      (* 4 (* 3 (fact 2)))
+      (* 4 (* 3 (* 2 (fact 1))))
+      (* 4 (* 3 (* 2 1)))
+      (* 4 (* 3 2))
+      (* 4 6)
+      24
+    #+END_SRC
+
+    Furthermore, we can differentiate between procedures with different
+    processes. Consider our Peano adders:
+
+     #+BEGIN_SRC racket :lang sicp :eval no-export :exports both :noweb strip-export
+       (define (pa+ x y)
+         (if (= x 0)
+             y
+             (pa+ (dec x) (inc y))))
+     #+END_SRC
+
+     and
+
+     #+BEGIN_SRC racket :lang sicp :eval no-export :exports both :noweb strip-export
+       (define (pb+ x y)
+         (if (= x 0)
+             y
+             (inc (pb+ (dec x) y))))
+     #+END_SRC
 
 
 
+*** Imperative Programming
+
+    Imperative programming involves writing statements which change
+    the overall /state/ of the program. Lisp does this using
+    assignment statements called =set!=.
+    =set!= is called by giving it two arguments. The second is a
+    value, and the first is the variable to assign it to. Or:
+
+    #+BEGIN_SRC racket :lang sicp :eval no-export :exports both
+      (set! <var> <value?)
+    #+END_SRC
+
+    Consider what this assignment does. It creates an instant in time.
+    Before this instant, =<var>= had no value, or some other value.
+    /After/ this =set!=, =<var>= has value =<value>=, which means that
+    the =set!= changed something in the program state. Before the
+    =set!= the state was (say) A, and after, it was a different state,
+    (say) B. This is entirely different from any of our previous
+    programs, all of which used functional programming style.
+
+    It should be obvious that procedures which use assignment are not
+    bijective, that is, for the same input, they may have different
+    outputs. Consider:
+
+    #+BEGIN_SRC racket :lang sicp :eval no-export :exports both
+      (define count 1)
+
+      (define (demo x)
+        (set! count (inc count))
+        (+ x count))
+
+      (demo 3)
+      (demo 3)
+      (demo 3)
+    #+END_SRC
+
+    #+RESULTS:
+    : 5
+    : 6
+    : 7
+
+    =demo= does not compute any mathematical function.
+    Instead, the successive values of =count= are =set!= and
+    remembered somewhere in the environment each time =demo= is
+    called.
+
+    Clearly, assignment introduces difficulties. Even our previous
+    substitution model is now insufficient, since it is a static
+    phenomenon which cannot account for changing values in the
+    environment. Symbols now can refer to some place where the values
+    of variables are stored. While this certainly makes our job
+    harder, assignment is worth the trouble, as we'll see later.
+
+*** Direct Comparison
+
+    Here's an iterative implementation of a functional factorial
+    procedure:
+
+    #+BEGIN_SRC racket :lang sicp :eval no-export :exports both
+      (define (fact n)
+        (define (iter m i)
+          (cond ((> i n) m)
+                (else
+                 (iter (* i m) (inc i)))))
+        (iter 1 1))
+
+      (fact 4)
+    #+END_SRC
+
+    #+RESULTS:
+    : 24
+
+    And an iterative implementation of an imperative-style factorial
+    procedure:
+
+    #+BEGIN_SRC racket :lang sicp :eval no-export :exports both
+      (define (fact n)
+        (let ((i 1) (m 1))
+          (define (loop)
+            (cond ((> i n) m)
+                  (else
+                   (set! m (* i m))
+                   (set! i (inc i))
+                   (loop))))
+          (loop)))
+
+      (fact 4)
+    #+END_SRC
+
+    #+RESULTS:
+    : 24
+
+    Note the difference between the two. The first passes successive
+    values of =i= and =m= as parameters into the next call of =iter=.
+    However, in the imperative style, the very values of =i= and =m=
+    are changed to their new values, and the procedure simply called
+    again without any arguments.
+
+    Note also that swapping the =set!= statements:
+
+    #+BEGIN_SRC racket :lang sicp :eval no-export :exports both
+      (set! i (inc i))
+      (set! m (* i m))
+    #+END_SRC
+
+    Will mess up the execution of the program, since =m= depends on
+    =i= having the correct value /at the time/ it's reassigned to =(*
+    i m)=. The time instance creation inherent in assignment creates
+    these time-based dependencies, which are worth being aware of.
+
+** Environment Model
+
+   As we observed, assignment invalidates our substitution model of
+   evaluating Lisp programs. We therefore work on the creation of a
+   new model which supports assignment.
+
+*** Bound and Free Variables
+
+    #+begin_quote
+    We say that a variable =v= is "bound in an expression" =E= if the
+    meaning of =E= is unchanged by the uniform replacement of =v= with
+    a variable =w= (not occurring in =E=) for every occurrence of =v=
+    in =E=.
+    #+end_quote
+
+    Bound variables exist naturally in mathematics. Consider the
+    expressions:
+    $$\forall x\exists y P(x,y)$$
+    $$\int_0^1 \frac{\mathrm{d}x}{1+x^2}$$
+
+    have no difference in meaning when $x$ is substituted:
+    $$\forall w\exists y P(w,y)$$
+    $$\int_0^1 \frac{\mathrm{d}w}{1+w^2}$$
+
+    This is because, in both cases, $x$ is a bound variable. Now,
+
+    #+begin_quote
+    A quantifier is a symbol which binds a variable.
+    #+end_quote
+
+    Thus, in these cases, $\forall$, $\exists$, and $\int$ were the
+    quantifiers of bound variable $x$. Similarly, consider a Lisp
+    expression:
+
+    #+BEGIN_SRC racket :lang sicp :eval no-export :exports both
+      (lambda (y) ((lambda (x) (* x y)) 3))
+    #+END_SRC
+
+    Here, =x= and =y= are bound variables, and the \lambda are
+    quantifiers for them. This can be illustrated by swapping out the
+    variables and having no change in meaning:
+
+    #+BEGIN_SRC racket :lang sicp :eval no-export :exports both
+      (lambda (v) ((lambda (w) (* w v)) 3))
+    #+END_SRC
+
+    However, it is not necessary that all variables be bound. Consider
+    the Lisp expression:
+
+    #+BEGIN_SRC racket :lang sicp :eval no-export :exports both
+      (lambda (x) (* x y))
+    #+END_SRC
+
+    =x= is bound, with quantifier \lambda. However, =y= is not bound
+    (it is a free variable). This is because the definition of =y=
+    does not come from the formal parameter list of a
+    \lambda-expression or any other known location within the
+    expression. Instead, it comes from somewhere outside. We cannot
+    replace =y= with another variable =v=, since we don't know what
+    value =y= may have.
+    Formally,
+    #+begin_quote
+    We say that a variable =v= is "free in an expression" =E= if the
+    meaning of =E= is changed by the uniform replacement of =v= with
+    a variable =w= (not occurring in =E=) for every occurrence of =v=
+    in =E=.
+    #+end_quote
+
+    In fact, in the expression:
+
+    #+BEGIN_SRC racket :lang sicp :eval no-export :exports both
+      (lambda (y) ((lambda (x) (* x y)) 3))
+    #+END_SRC
+
+    The symbol =*= is a free variable, since the expression's meaning
+    will change if we replace it with the symbol =+=.
+
+*** Scope
+
+    Formally,
+
+    #+begin_quote
+    If =x= is a bound variable in =E=, then there is a
+    \lambda-expression where it is bound. We call the list of formal
+    parameters of this \lambda-expression the "bound variable list"
+    and we say that the \lambda-expression "binds" the variable
+    defined in the bound variable list. Moreover, those parts of the
+    expression where a variable has a value defined by the
+    \lambda-expression which binds it is called the "scope" of the
+    variable.
+    #+end_quote
 
 
+    Or, for example:
+    $$\mathtt{(\lambda~(y)~\underbrace{\mathtt{((\lambda~(x)~\overbrace{\mathtt{(*~x~y)}}^{\mathrm{Scope~of~}\mathtt{x}})~3)}}_{\mathrm{Scope~of~}\mathtt{y}})}$$
+
+*** Frames and Environments
+
+    #+ATTR_LATEX: :width 250pt
+    [[./images/frames.pdf]]
 
 
+    An environment is made up of a linked chain of frames. Shown in
+    the figure are three frames, I, II, and III. Now, each of A, B, C,
+    and D are different environments, which view the frames in
+    different ways.
 
+    #+ATTR_LATEX: :booktabs t
+    | Environment | x | y | z | m |
+    |-------------+---+---+---+---|
+    | A           | 7 | 5 | 6 | - |
+    | B           | 3 | 2 | - | 1 |
+    | C           | 3 | 5 | - | - |
+    | D           | 3 | 5 | - | - |
 
+    Environments can be considered as different "vantage points" of
+    the frame chain. From A, we see the values of the frame II and the
+    frames behind II, in this case I. Therefore, we get the values of
+    x, y, and z. However, there are two possible values of x. In this
+    case, we say that the value of x in frame II "shadows" the value
+    of x in all previous frames, and we consider that value to be the
+    correct one. Note that this is actually making the choice to use
+    the innermost scope's variables over ones in outer scopes. Other
+    environments are similarly analyzed. Note that C and D are the
+    same environment.
 
+*** Procedure Objects
 
+    A procedure objects consists of:
+    A. A pointer to the procedure object.
+    B. A pointer to the environment the procedure will execute in.
+    C. The actual body (code) of the procedure.
 
+    Diagrammatically:
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    #+ATTR_LATEX: :width 200pt
+    [[./images/frameobj.pdf]]
 
 
 
