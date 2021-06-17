@@ -49,11 +49,6 @@
    code in these notes to differ from the equivalent code in
    MIT-Scheme. These instances are pointed out in the notes.
 
-   The notes are compiled together into a single PDF file, which is
-   good enough for me. However, if you're interested in having it
-   organised as HTML with each lecture being a node, open an issue and
-   I'll find somewhere to host the HTML version.
-
 ** Future Plans
    Once I'm done working through the videos, I'll start working on the
    exercises (second edition). Eventually, this repository may include
