@@ -48,7 +48,7 @@
    language used and referred to as "Lisp" is MIT-Scheme. These notes,
    however, use the SICP language provided by Racket, a modern Scheme
    dialect. This is because Racket's integration with Emacs and
-   =org-mode= is orders of magnitude better than MIT-Scheme's. In
+   Org mode is orders of magnitude better than MIT-Scheme's. In
    general, all "Lisp" code looks exactly the same as in SICP, with the
    exception of having to prefix some numbers with =#i= to ensure
    Racket treats them as imprecise.
@@ -4143,6 +4143,294 @@
     [[./images/frameobj.pdf]]
 
 *** Rules for Environment Model
+
+    1. A procedure object is applied to a set of arguments by
+       constructing a frame binding the formal parameters of the
+       procedure to the actual arguments of the call, then evaluating
+       the body of the procedure /in the context/ of the new
+       environment thus constructed. The new frame has as its
+       enclosing environment the environment part of the procedure
+       being applied.
+
+       For example, for a procedure =P=, evaluated at =(P 3 4)=, the
+       actual arguments to =P= are "appended" to the environment =P=
+       is called in. The procedure object itself has three pointers:
+
+       - The first is to the procedure itself, =P=.
+       - The second points to the extended environment.
+       - The third point points to the actual \lambda.
+
+       Diagrammatically:
+
+       #+ATTR_LATEX: :width 300pt
+       [[./images/rule1.pdf]]
+
+    2. A \lambda-expression is evaluated relative to a given
+       environment as follows: a new procedure object is formed, the
+       combining the code of the \lambda-expression with a pointer to
+       the environment of evaluation.
+
+       This rule is self-explanatory.
+
+    Our most important take-away is that an environment is a linked
+    chain of frames, going all the way back to the first (global)
+    frame. We now have a new working model, which works with
+    assignment, as we'll soon see.
+
+
+*** Assignment
+
+    Let's play around with assignment in the environment model.
+    Consider the following procedure:
+
+    #+NAME: env-mod-make-counter
+    #+BEGIN_SRC racket :lang sicp :eval no-export :exports both
+      (define make-counter
+        (lambda (n)
+          (lambda ()
+            (set! n (inc n))
+            n)))
+    #+END_SRC
+
+    What does the environment look like once we define =make-counter=?
+    Something like this:
+
+    #+ATTR_LATEX: :width 0.8\textwidth
+    [[./images/make-counter.pdf]]
+
+    Let us now use =make-counter= to define two counters, each of
+    which start at different values of =n=:
+
+    #+NAME: env-mod-make-counter-inc
+    #+BEGIN_SRC racket :lang sicp :eval no-export :exports both :noweb strip-export
+      <<env-mod-make-counter>>
+      (define C1 (make-counter 0))
+      (define C2 (make-counter 10))
+    #+END_SRC
+
+    The environment now looks like:
+
+    #+ATTR_LATEX: :width 0.95\textwidth
+    [[./images/c1c2.pdf]]
+
+    See that there is no /possible/ confusion between which =n= =C1=
+    uses and which =n= =C2= uses. Moreover, neither =C1= nor =C2=
+    would care about a globally defined =n=, or any =n= in a higher
+    level frame, since it'd get shadowed by their own =n='s.
+
+    We can now see how the following would work:
+
+    #+BEGIN_SRC racket :lang sicp :eval no-export :exports both :noweb strip-export
+      <<env-mod-make-counter-inc>>
+      (C1)
+      (C2)
+      (C1)
+      (C2)
+    #+END_SRC
+
+    #+RESULTS:
+    : 1
+    : 11
+    : 2
+    : 12
+
+    The first call to =(C1)= sees that =n= is zero in its environment,
+    and sets =n= to =0+1=1=, and returns =1=. The first call to =(C2)=
+    sees that /its/ =n= is =10=, sets it to =11=, and returns =11=. The
+    second call to =(C1)= sees that its =n= is =1=, then sets and
+    returns =2=. The final call to =(C2)= sees that its =n= is =11=,
+    which is then sets to =12= and returned.
+
+
+*** Some Philosophy
+
+    We have some questions to answer about sameness and change of
+    objects. Consider that in the previous example, =C1='s =n= and
+    =C2='s =n= are both called =n=, and yet refer to different
+    objects. However, =C1= refers to only one object, =C1=. How then,
+    can we tell if an identifier refers to an object? This issue is
+    almost philosophical: if the only way know of an object is its
+    identifier, what is an object anyway?
+
+    We avoid these issues in Lisp's environment model by defining
+    action, change, and identity as follows:
+
+    #+begin_quote
+    Action $A$ has an effect on object $X$ ($A$ changes $X$) if
+    property $P$ true of $X$ before $A$ is false of $X$ after $A$.
+    #+end_quote
+
+    and
+
+    #+begin_quote
+    $X$ and $Y$ are the same object if any action which changes $X$
+    changes $Y$.
+    #+end_quote
+
+    The (Lisp) world is thus made up of many individual objects, all
+    with some local state.
+
+** Advantages of Assignment
+
+   We've seen that introducing assignment makes our pure functional
+   programming somewhat "murky". One of the reasons to do this is that
+   assignment often greatly enhances modularity, as we will show in an
+   example. A word of caution, however: do not use assignment unless
+   it is necessary.
+
+*** Cesàro's Pi Finder
+    Cesàro's theorem tells us that:
+
+    $$P(\mathrm{gcd}(a,b)=1) = \frac{6}{\pi^{2}}$$
+
+    Of course, we can estimate probabilities using the Monte Carlo
+    method (do lots of tests, and divide the number of successful tests
+    by the total number of tests conducted). Using assignment, the
+    program looks like:
+
+    #+NAME: c-mcarlo-1
+    #+BEGIN_SRC racket :lang sicp :eval no-export :exports both
+      (define (estimate-pi n)
+        (sqrt (/ 6 (monte-carlo n cesaro))))
+
+      (define (cesaro)
+        (= (gcd (random 4294967087) (random 4294967087)) 1))
+
+      (define (monte-carlo trials experiment)
+        (define (iter remaining passed)
+          (cond ((= remaining 0)
+                 (/ passed trials))
+                ((experiment)
+                 (iter (dec remaining)
+                       (inc passed)))
+                (else
+                 (iter (dec remaining)
+                       passed))))
+        (iter trials 0))
+
+      (estimate-pi 10000000)
+    #+END_SRC
+
+    #+RESULTS: c-mcarlo-1
+    : 3.141330429791511
+
+    Note that we use Racket's built in =random= to generate a random
+    number. However, if we had to implement a PRNG on our own, it'd
+    look something like:
+
+    #+BEGIN_SRC racket :lang sicp :eval no-export :exports both
+      (define rand
+        (let ((x random-init))
+          (lambda ()
+            (set! x (rand-update x))
+            x)))
+    #+END_SRC
+
+    Assignment is used most naturally here because we want to give =x=
+    the value of computing some function with input =x= to use the
+    next time =rand= is called. This function is evaluated within a
+    local scope where =x= at first has some constant seed value
+    =random-init=.
+
+
+*** Functional Cesàro's Pi Finder
+
+    Since we can't use assignment to keep track of the "state" of the
+    PRNG, we must write our program like:
+
+    #+BEGIN_SRC racket :lang sicp :eval no-export :exports both
+      (define (estimate-pi n)
+        (sqrt (/ 6 (random-gcd-test n))))
+
+      (define (random-gcd-test trials)
+        (define (iter remaining passed x)
+          (let ((x1 (rand-update x))
+                (x2 (rand-update x1)))
+            (cond ((= remaining 0)
+                   (/ passed trials))
+                  ((= (gcd x1 x2) 1)
+                   (iter (dec remaining)
+                         (inc passed)
+                         x))
+                  (else
+                   (iter (dec remaining)
+                         passed
+                         x2)))))
+        (iter trials 0 random-seed))
+    #+END_SRC
+
+    The state of the PRNG has "leaked" out into our program, that is,
+    =iter= has to keep track of successive values of the seed. Worse
+    still, this makes =monte-carlo= and =cesaro= non-general, reducing
+    modularity. It is applications like these where assignment is
+    incredibly useful, and helps keep our programs neat and modular.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
