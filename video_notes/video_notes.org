@@ -37,8 +37,11 @@
 #+latex_header:\makeatother
 #+latex_header: \usepackage{colortbl}
 
-\newpage
+# #+SETUPFILE: /home/aditya/.emacs.d/org-html-themes/org/theme-readtheorg-local.setup
+#+SETUPFILE: https://fniessen.github.io/org-html-themes/org/theme-readtheorg.setup
+#+LATEX: \newpage
 
+* Prologue
 ** About
    These are my notes of the twenty SICP lectures of June 1986,
    produced by Hewlett-Packard Television. These videos are available
@@ -54,7 +57,7 @@
    Racket treats them as imprecise.
 
 ** License
-   \doclicenseThis
+   #+LATEX: \doclicenseThis
 
 * Lecture 1A: Overview and Introduction to Lisp
 
@@ -3903,7 +3906,7 @@
     value, and the first is the variable to assign it to. Or:
 
     #+BEGIN_SRC racket :lang sicp :eval no-export :exports both
-      (set! <var> <value?)
+      (set! <var> <value>)
     #+END_SRC
 
     Consider what this assignment does. It creates an instant in time.
