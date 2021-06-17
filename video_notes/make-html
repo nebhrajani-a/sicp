@@ -1,0 +1,2 @@
+rm index.html
+mv video_notes.html index.html

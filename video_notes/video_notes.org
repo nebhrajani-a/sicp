@@ -900,7 +900,7 @@
    : 3.141590653589793
 
    Recall that =lambda= means "make a procedure" that is nameless. In
-   =sum-pi=, we choose to give it anonymous functions as arguments
+   =sum-pi=, we choose to give =sum= anonymous functions as arguments
    instead of defining our own, because there's no reason to name a
    procedure we won't later use.
 
@@ -2296,10 +2296,10 @@
 
   Or, diagrammatically:
 
-  \[\begin{tikzcd} \mathrm{Pattern} \arrow{r}{\mathrm{Rule}}
-  \arrow[swap]{d}{\mathrm{Matched}} & \mathrm{Skeleton}
-  \arrow{d}{\mathrm{Instantiation}} \\ \mathrm{Expression_{Src}}
-  \arrow[mapsto]{r} & \mathrm{Expression_{Target}} \end{tikzcd} \]
+  #+LATEX: \[\begin{tikzcd} \mathrm{Pattern} \arrow{r}{\mathrm{Rule}}
+  #+LATEX: \arrow[swap]{d}{\mathrm{Matched}} & \mathrm{Skeleton}
+  #+LATEX: \arrow{d}{\mathrm{Instantiation}} \\ \mathrm{Expression_{Src}}
+  #+LATEX: \arrow[mapsto]{r} & \mathrm{Expression_{Target}} \end{tikzcd} \]
 
   Let us now build a simple language to express these rules, which can
   then be pattern matched, skeletons created, then instantiated.
