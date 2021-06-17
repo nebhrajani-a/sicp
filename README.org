@@ -1,8 +1,9 @@
 * Structure and Interpretation of Computer Programs Notes
 
   Quick links:
-  - [[https://github.com/nebhrajani-a/sicp/blob/master/video_notes/video_notes.org][Org]] (markup)
   - [[https://github.com/nebhrajani-a/sicp/blob/master/video_notes/video_notes.pdf][PDF]] (recommended)
+  - [[https://nebhrajani-a.github.io/sicp/video_notes/][HTML]] (WIP)
+  - [[https://github.com/nebhrajani-a/sicp/blob/master/video_notes/video_notes.org][Org]] (markup)
   -----
 
  #+HTML: <img src="./sicp.jpg" align="right" width="300">
