@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-06-17 Thu 22:58 -->
+<!-- 2021-06-22 Tue 16:34 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>MIT 6.001 1986 Video Notes</title>
@@ -275,185 +275,196 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgd88d791">1. Prologue</a>
+<li><a href="#orge5bacd1">1. Prologue</a>
 <ul>
-<li><a href="#orgae5d882">1.1. About</a></li>
-<li><a href="#orgb75bff5">1.2. License</a></li>
+<li><a href="#orgc2c9963">1.1. About</a></li>
+<li><a href="#org26ad866">1.2. License</a></li>
 </ul>
 </li>
-<li><a href="#orgab2b604">2. Lecture 1A: Overview and Introduction to Lisp</a>
+<li><a href="#org007e4bf">2. Lecture 1A: Overview and Introduction to Lisp</a>
 <ul>
-<li><a href="#org9b4389b">2.1. Managing Complexity: Key Ideas of 6.001</a></li>
-<li><a href="#orgaf3c2b2">2.2. Let&rsquo;s Learn Lisp</a>
+<li><a href="#org1c862c4">2.1. Managing Complexity: Key Ideas of 6.001</a></li>
+<li><a href="#org4b0117b">2.2. Let&rsquo;s Learn Lisp</a>
 <ul>
-<li><a href="#org115bcc5">2.2.1. Primitive Elements</a></li>
-<li><a href="#org822992a">2.2.2. Means of Combination</a></li>
-<li><a href="#org4f4f7ff">2.2.3. Means of Abstraction</a></li>
+<li><a href="#org65b870f">2.2.1. Primitive Elements</a></li>
+<li><a href="#org3bba277">2.2.2. Means of Combination</a></li>
+<li><a href="#org529b943">2.2.3. Means of Abstraction</a></li>
 </ul>
 </li>
-<li><a href="#org177258d">2.3. Case Analysis in Lisp</a></li>
-<li><a href="#org1c6d239">2.4. Finding Square Roots</a></li>
-<li><a href="#orgbd9cb69">2.5. Inbuilt/Primitive Procedures Aren&rsquo;t Special</a></li>
+<li><a href="#org5b5b312">2.3. Case Analysis in Lisp</a></li>
+<li><a href="#org8f37ca6">2.4. Finding Square Roots</a></li>
+<li><a href="#org748273b">2.5. Inbuilt/Primitive Procedures Aren&rsquo;t Special</a></li>
 </ul>
 </li>
-<li><a href="#orgf0dffad">3. Lecture 1B: Procedures and Processes, Substitution Model</a>
+<li><a href="#org4986735">3. Lecture 1B: Procedures and Processes, Substitution Model</a>
 <ul>
-<li><a href="#orgd19d0bf">3.1. Substitution Rule/Model</a>
+<li><a href="#org51e861e">3.1. Substitution Rule/Model</a>
 <ul>
-<li><a href="#orgcc2fdcc">3.1.1. Kinds of Expressions in Lisp</a></li>
-<li><a href="#orgcd80e24">3.1.2. Example</a></li>
+<li><a href="#org1b7356c">3.1.1. Kinds of Expressions in Lisp</a></li>
+<li><a href="#org5209e5e">3.1.2. Example</a></li>
 </ul>
 </li>
-<li><a href="#org864c59c">3.2. Peano Arithmetic</a>
+<li><a href="#org121ede9">3.2. Peano Arithmetic</a>
 <ul>
-<li><a href="#org4980c07">3.2.1. Simple Peano Addition</a></li>
-<li><a href="#org1726c81">3.2.2. Another Peano Adder</a></li>
+<li><a href="#org7e1bf92">3.2.1. Simple Peano Addition</a></li>
+<li><a href="#org4170359">3.2.2. Another Peano Adder</a></li>
 </ul>
 </li>
-<li><a href="#orgb424a0c">3.3. Differentiating Between Iterative and Recursive Processes</a></li>
-<li><a href="#org586a9c7">3.4. Fibonacci Numbers</a></li>
-<li><a href="#org2f75381">3.5. Towers of Hanoi</a></li>
-<li><a href="#orged40f06">3.6. Iterative Fibonacci</a></li>
+<li><a href="#orgd86fe36">3.3. Differentiating Between Iterative and Recursive Processes</a></li>
+<li><a href="#org9933c71">3.4. Fibonacci Numbers</a></li>
+<li><a href="#org2b01ed9">3.5. Towers of Hanoi</a></li>
+<li><a href="#orga7c5389">3.6. Iterative Fibonacci</a></li>
 </ul>
 </li>
-<li><a href="#org2373aa3">4. Lecture 2A: Higher-Order Procedures</a>
+<li><a href="#org49eda4d">4. Lecture 2A: Higher-Order Procedures</a>
 <ul>
-<li><a href="#org9d0e24a">4.1. Abstracting Procedural Ideas</a></li>
-<li><a href="#org35f35b0">4.2. More on Square Roots</a>
+<li><a href="#orgfebac93">4.1. Abstracting Procedural Ideas</a></li>
+<li><a href="#orgd5b2640">4.2. More on Square Roots</a>
 <ul>
-<li><a href="#org260aed9">4.2.1. Fixed Points</a></li>
-<li><a href="#org1a35ccd">4.2.2. Damping Oscillations</a></li>
+<li><a href="#org438a2da">4.2.1. Fixed Points</a></li>
+<li><a href="#orgc8aba93">4.2.2. Damping Oscillations</a></li>
 </ul>
 </li>
-<li><a href="#orgf4d68a0">4.3. Newton&rsquo;s Method</a></li>
-<li><a href="#org5849bba">4.4. Procedures are First-Class Citizens</a></li>
+<li><a href="#orgfbb29c2">4.3. Newton&rsquo;s Method</a></li>
+<li><a href="#org98d5061">4.4. Procedures are First-Class Citizens</a></li>
 </ul>
 </li>
-<li><a href="#orge130eef">5. Lecture 2B: Compound Data</a>
+<li><a href="#org5dcf077">5. Lecture 2B: Compound Data</a>
 <ul>
-<li><a href="#org687865c">5.1. Rational Number Arithmetic</a>
+<li><a href="#orgee518a9">5.1. Rational Number Arithmetic</a>
 <ul>
-<li><a href="#org4569215">5.1.1. Abstraction</a></li>
-<li><a href="#orgdaa7ffb">5.1.2. Data Object Creation</a></li>
+<li><a href="#org3049ac2">5.1.1. Abstraction</a></li>
+<li><a href="#orgf9d5808">5.1.2. Data Object Creation</a></li>
 </ul>
 </li>
-<li><a href="#org6e1af5f">5.2. Representing Points on a Plane</a></li>
-<li><a href="#org7914e53">5.3. Pairs</a></li>
+<li><a href="#org6f98a61">5.2. Representing Points on a Plane</a></li>
+<li><a href="#orgc035658">5.3. Pairs</a></li>
 </ul>
 </li>
-<li><a href="#org02db6cd">6. Lecture 3A: Henderson Escher Example</a>
+<li><a href="#org2c6b4f4">6. Lecture 3A: Henderson Escher Example</a>
 <ul>
-<li><a href="#org0b30152">6.1. Lists</a>
+<li><a href="#orgca9451b">6.1. Lists</a>
 <ul>
-<li><a href="#org987b324">6.1.1. Procedures on Lists</a></li>
+<li><a href="#orgf07c220">6.1.1. Procedures on Lists</a></li>
 </ul>
 </li>
-<li><a href="#org094bcd7">6.2. Henderson&rsquo;s Picture Language</a>
+<li><a href="#orgc112f64">6.2. Henderson&rsquo;s Picture Language</a>
 <ul>
-<li><a href="#orga15f9df">6.2.1. Primitives</a></li>
-<li><a href="#orgc2f83fc">6.2.2. Means of Combination and Operations</a></li>
-<li><a href="#org00dd696">6.2.3. An Implementation</a></li>
-<li><a href="#orga4885f5">6.2.4. Means of Abstraction</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#org29127fd">7. Lecture 3B: Symbolic Differentiation; Quotation</a>
-<ul>
-<li><a href="#org5f27bef">7.1. Differentiation v. Integration</a></li>
-<li><a href="#org9f6f879">7.2. Some Wishful Thinking</a></li>
-<li><a href="#orgae9dcf1">7.3. Representing Algebraic Expressions</a>
-<ul>
-<li><a href="#orgef0b6c3">7.3.1. Using Lisp Syntax</a></li>
-<li><a href="#org5eb9df7">7.3.2. Representation Implementation</a></li>
-<li><a href="#org4bac4f9">7.3.3. Simplification</a></li>
-</ul>
-</li>
-<li><a href="#org50c6f66">7.4. On Abstract Syntax</a></li>
-</ul>
-</li>
-<li><a href="#orgdc5c673">8. Lecture 4A: Pattern Matching and Rule-Based Substitution</a>
-<ul>
-<li><a href="#orga3dd5b4">8.1. Rule Language</a>
-<ul>
-<li><a href="#org3b4b26e">8.1.1. Pattern Matching</a></li>
-<li><a href="#org6ef267a">8.1.2. Skeleton and Instantiation</a></li>
-</ul>
-</li>
-<li><a href="#orge7381df">8.2. Desired Behaviour</a></li>
-<li><a href="#org6b1e4f5">8.3. Implementation</a>
-<ul>
-<li><a href="#org30b967a">8.3.1. Matcher</a></li>
-<li><a href="#orgd0c41f8">8.3.2. Instantiator</a></li>
-<li><a href="#org718f9fb">8.3.3. GIGO Simplifier</a></li>
-<li><a href="#orge2589df">8.3.4. Dictionary Implementation</a></li>
-<li><a href="#orgb5de8fc">8.3.5. Predicates</a></li>
-</ul>
-</li>
-<li><a href="#orgd9cc50f">8.4. Usage</a>
-<ul>
-<li><a href="#org9332c0d">8.4.1. Algebraic Simplification</a></li>
+<li><a href="#org67f0dc0">6.2.1. Primitives</a></li>
+<li><a href="#org013d058">6.2.2. Means of Combination and Operations</a></li>
+<li><a href="#org5c531ea">6.2.3. An Implementation</a></li>
+<li><a href="#org1c5d34a">6.2.4. Means of Abstraction</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org347593e">9. Lecture 4B: Generic Operators</a>
+<li><a href="#org5898363">7. Lecture 3B: Symbolic Differentiation; Quotation</a>
 <ul>
-<li><a href="#orgf99fe15">9.1. Dispatch on Type</a>
+<li><a href="#org3f16e9e">7.1. Differentiation v. Integration</a></li>
+<li><a href="#org2d2d2c2">7.2. Some Wishful Thinking</a></li>
+<li><a href="#orgce0e25b">7.3. Representing Algebraic Expressions</a>
 <ul>
-<li><a href="#orga40476e">9.1.1. On Complex Numbers</a></li>
-<li><a href="#org6c2da3c">9.1.2. Arithmetic Implementation</a></li>
-<li><a href="#orgd7fdfed">9.1.3. George&rsquo;s Representation</a></li>
-<li><a href="#org1e9f668">9.1.4. Martha&rsquo;s Representation</a></li>
-<li><a href="#org93df0a7">9.1.5. Type Dispatch Manager</a></li>
-<li><a href="#orga5cc5bb">9.1.6. Usage</a></li>
-<li><a href="#orgbf73897">9.1.7. Review</a></li>
+<li><a href="#orgba9869b">7.3.1. Using Lisp Syntax</a></li>
+<li><a href="#org3ae7ca3">7.3.2. Representation Implementation</a></li>
+<li><a href="#orgb2a35b2">7.3.3. Simplification</a></li>
 </ul>
 </li>
-<li><a href="#org409eae3">9.2. Data-Directed Programming</a>
-<ul>
-<li><a href="#org4190d8f">9.2.1. Putting George&rsquo;s Procedures</a></li>
-<li><a href="#org8e9dced">9.2.2. Putting Martha&rsquo;s Procedures</a></li>
-<li><a href="#org123d4a4">9.2.3. Manager Automation</a></li>
-<li><a href="#org7a8f45c">9.2.4. Usage</a></li>
+<li><a href="#orgfeffe34">7.4. On Abstract Syntax</a></li>
 </ul>
 </li>
-<li><a href="#org2c21f98">9.3. Advanced Example: Semi-Complete Arithmetic System</a>
+<li><a href="#org52a03e9">8. Lecture 4A: Pattern Matching and Rule-Based Substitution</a>
 <ul>
-<li><a href="#orga9dffd8">9.3.1. Architecture</a></li>
-<li><a href="#org543cabf">9.3.2. Implementation</a></li>
-<li><a href="#org4896871">9.3.3. Usage</a></li>
-<li><a href="#org162edd2">9.3.4. Adding Polynomials</a></li>
-<li><a href="#org82f46f7">9.3.5. Recursive Data Directed Programming</a></li>
+<li><a href="#org5801145">8.1. Rule Language</a>
+<ul>
+<li><a href="#orge0350a5">8.1.1. Pattern Matching</a></li>
+<li><a href="#orga887326">8.1.2. Skeleton and Instantiation</a></li>
 </ul>
 </li>
-<li><a href="#org4a0efd8">9.4. Review</a></li>
+<li><a href="#org7b89f8d">8.2. Desired Behaviour</a></li>
+<li><a href="#orgadcc32b">8.3. Implementation</a>
+<ul>
+<li><a href="#orgf6dd2fd">8.3.1. Matcher</a></li>
+<li><a href="#orgdc13343">8.3.2. Instantiator</a></li>
+<li><a href="#org0e33746">8.3.3. GIGO Simplifier</a></li>
+<li><a href="#org1a7bbdb">8.3.4. Dictionary Implementation</a></li>
+<li><a href="#orga014df8">8.3.5. Predicates</a></li>
 </ul>
 </li>
-<li><a href="#org2e05097">10. Lecture 5A: Assignment, State, and Side-Effects</a>
+<li><a href="#orgf3aae15">8.4. Usage</a>
 <ul>
-<li><a href="#org27f865f">10.1. Functional v. Imperative Style</a>
-<ul>
-<li><a href="#orgfa0b6f7">10.1.1. Functional Programming</a></li>
-<li><a href="#org8a874c5">10.1.2. Imperative Programming</a></li>
-<li><a href="#org2cf0b87">10.1.3. Direct Comparison</a></li>
+<li><a href="#org1941b1b">8.4.1. Algebraic Simplification</a></li>
 </ul>
 </li>
-<li><a href="#org9d393be">10.2. Environment Model</a>
-<ul>
-<li><a href="#org1f522aa">10.2.1. Bound and Free Variables</a></li>
-<li><a href="#org17d200c">10.2.2. Scope</a></li>
-<li><a href="#org7a62b11">10.2.3. Frames and Environments</a></li>
-<li><a href="#org5e6cda4">10.2.4. Procedure Objects</a></li>
-<li><a href="#orge53ca4e">10.2.5. Rules for Environment Model</a></li>
-<li><a href="#org02448ae">10.2.6. Assignment</a></li>
-<li><a href="#orgfa39873">10.2.7. Some Philosophy</a></li>
 </ul>
 </li>
-<li><a href="#orgfe24657">10.3. Advantages of Assignment</a>
+<li><a href="#orgf23330c">9. Lecture 4B: Generic Operators</a>
 <ul>
-<li><a href="#org0df3d23">10.3.1. Cesàro&rsquo;s Pi Finder</a></li>
-<li><a href="#org01e2557">10.3.2. Functional Cesàro&rsquo;s Pi Finder</a></li>
+<li><a href="#org846a293">9.1. Dispatch on Type</a>
+<ul>
+<li><a href="#orge06b46a">9.1.1. On Complex Numbers</a></li>
+<li><a href="#org43b5d0e">9.1.2. Arithmetic Implementation</a></li>
+<li><a href="#org1ff9581">9.1.3. George&rsquo;s Representation</a></li>
+<li><a href="#org9ea9724">9.1.4. Martha&rsquo;s Representation</a></li>
+<li><a href="#orgeac1766">9.1.5. Type Dispatch Manager</a></li>
+<li><a href="#org48d5392">9.1.6. Usage</a></li>
+<li><a href="#org89e7268">9.1.7. Review</a></li>
+</ul>
+</li>
+<li><a href="#org0a1f009">9.2. Data-Directed Programming</a>
+<ul>
+<li><a href="#org197aa3c">9.2.1. Putting George&rsquo;s Procedures</a></li>
+<li><a href="#org4287336">9.2.2. Putting Martha&rsquo;s Procedures</a></li>
+<li><a href="#org4ec830e">9.2.3. Manager Automation</a></li>
+<li><a href="#org2772046">9.2.4. Usage</a></li>
+</ul>
+</li>
+<li><a href="#org0de65c7">9.3. Advanced Example: Semi-Complete Arithmetic System</a>
+<ul>
+<li><a href="#org390d851">9.3.1. Architecture</a></li>
+<li><a href="#org48e6d08">9.3.2. Implementation</a></li>
+<li><a href="#orgb98d9fa">9.3.3. Usage</a></li>
+<li><a href="#org658c7c5">9.3.4. Adding Polynomials</a></li>
+<li><a href="#org067e084">9.3.5. Recursive Data Directed Programming</a></li>
+</ul>
+</li>
+<li><a href="#org9b407a6">9.4. Review</a></li>
+</ul>
+</li>
+<li><a href="#org2fdc79e">10. Lecture 5A: Assignment, State, and Side-Effects</a>
+<ul>
+<li><a href="#orgbeeb37d">10.1. Functional v. Imperative Style</a>
+<ul>
+<li><a href="#org0e50c44">10.1.1. Functional Programming</a></li>
+<li><a href="#orgb4f0451">10.1.2. Imperative Programming</a></li>
+<li><a href="#orga7b5928">10.1.3. Direct Comparison</a></li>
+</ul>
+</li>
+<li><a href="#orgf9b414e">10.2. Environment Model</a>
+<ul>
+<li><a href="#org7398e22">10.2.1. Bound and Free Variables</a></li>
+<li><a href="#org82e36ad">10.2.2. Scope</a></li>
+<li><a href="#org0113350">10.2.3. Frames and Environments</a></li>
+<li><a href="#orgd38c515">10.2.4. Procedure Objects</a></li>
+<li><a href="#org05b23a5">10.2.5. Rules for Environment Model</a></li>
+<li><a href="#org8fe723b">10.2.6. Assignment</a></li>
+<li><a href="#org740a1f0">10.2.7. Some Philosophy</a></li>
+</ul>
+</li>
+<li><a href="#org5545598">10.3. Advantages of Assignment</a>
+<ul>
+<li><a href="#orgd7f5ff2">10.3.1. Cesàro&rsquo;s Pi Finder</a></li>
+<li><a href="#org83bd777">10.3.2. Functional Cesàro&rsquo;s Pi Finder</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org398dcf1">11. Lecture 5B: Computational Objects</a>
+<ul>
+<li><a href="#org3500dff">11.1. Digital Circuit Language</a>
+<ul>
+<li><a href="#org99c87aa">11.1.1. Gates</a></li>
+<li><a href="#org71a6a6a">11.1.2. Wires</a></li>
+<li><a href="#org4b03f95">11.1.3. Delays</a></li>
 </ul>
 </li>
 </ul>
@@ -462,12 +473,12 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-orgd88d791" class="outline-2">
-<h2 id="orgd88d791"><span class="section-number-2">1</span> Prologue</h2>
+<div id="outline-container-orge5bacd1" class="outline-2">
+<h2 id="orge5bacd1"><span class="section-number-2">1</span> Prologue</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-orgae5d882" class="outline-3">
-<h3 id="orgae5d882"><span class="section-number-3">1.1</span> About</h3>
+<div id="outline-container-orgc2c9963" class="outline-3">
+<h3 id="orgc2c9963"><span class="section-number-3">1.1</span> About</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 These are my notes of the twenty SICP lectures of June 1986,
@@ -488,15 +499,15 @@ Racket treats them as imprecise.
 </div>
 </div>
 
-<div id="outline-container-orgb75bff5" class="outline-3">
-<h3 id="orgb75bff5"><span class="section-number-3">1.2</span> License</h3>
+<div id="outline-container-org26ad866" class="outline-3">
+<h3 id="org26ad866"><span class="section-number-3">1.2</span> License</h3>
 <div class="outline-text-3" id="text-1-2">
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgab2b604" class="outline-2">
-<h2 id="orgab2b604"><span class="section-number-2">2</span> Lecture 1A: Overview and Introduction to Lisp</h2>
+<div id="outline-container-org007e4bf" class="outline-2">
+<h2 id="org007e4bf"><span class="section-number-2">2</span> Lecture 1A: Overview and Introduction to Lisp</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Computer science isn&rsquo;t really a science, and it isn&rsquo;t really about
@@ -536,8 +547,8 @@ specifically, how to communicate that knowledge to a computer.
 </p>
 </div>
 
-<div id="outline-container-org9b4389b" class="outline-3">
-<h3 id="org9b4389b"><span class="section-number-3">2.1</span> Managing Complexity: Key Ideas of 6.001</h3>
+<div id="outline-container-org1c862c4" class="outline-3">
+<h3 id="org1c862c4"><span class="section-number-3">2.1</span> Managing Complexity: Key Ideas of 6.001</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 Computer science is also about managing complexity, in that large
@@ -555,8 +566,8 @@ three key ideas:
 </div>
 
 
-<div id="outline-container-orgaf3c2b2" class="outline-3">
-<h3 id="orgaf3c2b2"><span class="section-number-3">2.2</span> Let&rsquo;s Learn Lisp</h3>
+<div id="outline-container-org4b0117b" class="outline-3">
+<h3 id="org4b0117b"><span class="section-number-3">2.2</span> Let&rsquo;s Learn Lisp</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 When learning a new language, always ask about its:
@@ -568,8 +579,8 @@ When learning a new language, always ask about its:
 </ul>
 </div>
 
-<div id="outline-container-org115bcc5" class="outline-4">
-<h4 id="org115bcc5"><span class="section-number-4">2.2.1</span> Primitive Elements</h4>
+<div id="outline-container-org65b870f" class="outline-4">
+<h4 id="org65b870f"><span class="section-number-4">2.2.1</span> Primitive Elements</h4>
 <div class="outline-text-4" id="text-2-2-1">
 <p>
 These are numbers like 3, 17.4, or 5. Other primitives are
@@ -591,8 +602,8 @@ discussed later in the course.
 </div>
 </div>
 
-<div id="outline-container-org822992a" class="outline-4">
-<h4 id="org822992a"><span class="section-number-4">2.2.2</span> Means of Combination</h4>
+<div id="outline-container-org3bba277" class="outline-4">
+<h4 id="org3bba277"><span class="section-number-4">2.2.2</span> Means of Combination</h4>
 <div class="outline-text-4" id="text-2-2-2">
 <p>
 Lisp&rsquo;s numerical primitives can be combined with &ldquo;operations&rdquo; such
@@ -635,8 +646,8 @@ prefix notation.
 </div>
 </div>
 
-<div id="outline-container-org4f4f7ff" class="outline-4">
-<h4 id="org4f4f7ff"><span class="section-number-4">2.2.3</span> Means of Abstraction</h4>
+<div id="outline-container-org529b943" class="outline-4">
+<h4 id="org529b943"><span class="section-number-4">2.2.3</span> Means of Abstraction</h4>
 <div class="outline-text-4" id="text-2-2-3">
 <p>
 Abstraction can simply be done by naming things. Giving
@@ -669,7 +680,7 @@ knowledge. Consider:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="orgcac276c"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">square</span> x<span style="color: #a626a4;">)</span>
+<pre class="src src-racket" id="org05a847e"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">square</span> x<span style="color: #a626a4;">)</span>
   <span style="color: #a626a4;">(</span><span style="color: #a626a4;">*</span> x x<span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
 </pre>
 </div>
@@ -717,7 +728,7 @@ abstractions. Consider:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="org2427d57"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">average</span> x y<span style="color: #a626a4;">)</span>
+<pre class="src src-racket" id="org4451282"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">average</span> x y<span style="color: #a626a4;">)</span>
   <span style="color: #a626a4;">(</span><span style="color: #a626a4;">/</span> <span style="color: #50a14f;">(</span><span style="color: #a626a4;">+</span> x y<span style="color: #50a14f;">)</span> <span style="color: #2e8b57;">2</span><span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
 </pre>
 </div>
@@ -746,8 +757,8 @@ indentation. Good editors like Emacs should do this automatically.
 </div>
 </div>
 
-<div id="outline-container-org177258d" class="outline-3">
-<h3 id="org177258d"><span class="section-number-3">2.3</span> Case Analysis in Lisp</h3>
+<div id="outline-container-org5b5b312" class="outline-3">
+<h3 id="org5b5b312"><span class="section-number-3">2.3</span> Case Analysis in Lisp</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 To represent functions like:
@@ -786,7 +797,7 @@ way to write conditionals that only have two branches (an if-else):
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="org40719ef"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">abs</span> x<span style="color: #a626a4;">)</span>
+<pre class="src src-racket" id="orgcc4c328"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">abs</span> x<span style="color: #a626a4;">)</span>
   <span style="color: #a626a4;">(</span><span style="color: #e45649;">if</span> <span style="color: #50a14f;">(</span><span style="color: #a626a4;">&lt;</span> x <span style="color: #2e8b57;">0</span><span style="color: #50a14f;">)</span>
       <span style="color: #50a14f;">(</span><span style="color: #a626a4;">-</span> x<span style="color: #50a14f;">)</span>
       x<span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
@@ -820,8 +831,8 @@ since anything a loop can do can be done via recursion.
 </div>
 </div>
 
-<div id="outline-container-org1c6d239" class="outline-3">
-<h3 id="org1c6d239"><span class="section-number-3">2.4</span> Finding Square Roots</h3>
+<div id="outline-container-org8f37ca6" class="outline-3">
+<h3 id="org8f37ca6"><span class="section-number-3">2.4</span> Finding Square Roots</h3>
 <div class="outline-text-3" id="text-2-4">
 <p>
 Remember our square root finding algorithm?
@@ -842,7 +853,7 @@ Or, in Lisp,
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="orgda2091d"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">try</span> g x<span style="color: #a626a4;">)</span>
+<pre class="src src-racket" id="org349af5d"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">try</span> g x<span style="color: #a626a4;">)</span>
   <span style="color: #a626a4;">(</span><span style="color: #e45649;">if</span> <span style="color: #50a14f;">(</span>good-enough? g x<span style="color: #50a14f;">)</span>
       g
       <span style="color: #50a14f;">(</span>try <span style="color: #da8548;">(</span>improve g x<span style="color: #da8548;">)</span> x<span style="color: #50a14f;">)</span><span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
@@ -857,7 +868,7 @@ good enough, we can write a simple square root function:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="org1020b0e"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">sqrt</span> x<span style="color: #a626a4;">)</span>
+<pre class="src src-racket" id="org797f13f"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">sqrt</span> x<span style="color: #a626a4;">)</span>
   <span style="color: #a626a4;">(</span>try <span style="color: #2e8b57;">1</span> x<span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
 </pre>
 </div>
@@ -868,13 +879,13 @@ now write the functions we don&rsquo;t have:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="orgae8b62c"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">improve</span> g x<span style="color: #a626a4;">)</span>
+<pre class="src src-racket" id="orgd86eb10"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">improve</span> g x<span style="color: #a626a4;">)</span>
   <span style="color: #a626a4;">(</span>average g <span style="color: #50a14f;">(</span><span style="color: #a626a4;">/</span> x g<span style="color: #50a14f;">)</span><span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
 </pre>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="org56cf9ce"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">good-enough?</span> g x<span style="color: #a626a4;">)</span>
+<pre class="src src-racket" id="org728a4f6"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">good-enough?</span> g x<span style="color: #a626a4;">)</span>
   <span style="color: #a626a4;">(</span><span style="color: #a626a4;">&lt;</span> <span style="color: #50a14f;">(</span><span style="color: #a626a4;">abs</span> <span style="color: #da8548;">(</span><span style="color: #a626a4;">-</span> <span style="color: #b751b6;">(</span>square g<span style="color: #b751b6;">)</span> x<span style="color: #da8548;">)</span><span style="color: #50a14f;">)</span>
      <span style="color: #2e8b57;">0.00001</span><span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
 </pre>
@@ -965,8 +976,8 @@ This discipline of writing procedures is called lexical scoping.
 </div>
 
 
-<div id="outline-container-orgbd9cb69" class="outline-3">
-<h3 id="orgbd9cb69"><span class="section-number-3">2.5</span> Inbuilt/Primitive Procedures Aren&rsquo;t Special</h3>
+<div id="outline-container-org748273b" class="outline-3">
+<h3 id="org748273b"><span class="section-number-3">2.5</span> Inbuilt/Primitive Procedures Aren&rsquo;t Special</h3>
 <div class="outline-text-3" id="text-2-5">
 <div class="org-src-container">
 <pre class="src src-racket">
@@ -983,12 +994,12 @@ square
 </div>
 </div>
 
-<div id="outline-container-orgf0dffad" class="outline-2">
-<h2 id="orgf0dffad"><span class="section-number-2">3</span> Lecture 1B: Procedures and Processes, Substitution Model</h2>
+<div id="outline-container-org4986735" class="outline-2">
+<h2 id="org4986735"><span class="section-number-2">3</span> Lecture 1B: Procedures and Processes, Substitution Model</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-orgd19d0bf" class="outline-3">
-<h3 id="orgd19d0bf"><span class="section-number-3">3.1</span> Substitution Rule/Model</h3>
+<div id="outline-container-org51e861e" class="outline-3">
+<h3 id="org51e861e"><span class="section-number-3">3.1</span> Substitution Rule/Model</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 The substitution rule states that,
@@ -1017,8 +1028,8 @@ model for our purposes.
 </p>
 </div>
 
-<div id="outline-container-orgcc2fdcc" class="outline-4">
-<h4 id="orgcc2fdcc"><span class="section-number-4">3.1.1</span> Kinds of Expressions in Lisp</h4>
+<div id="outline-container-org1b7356c" class="outline-4">
+<h4 id="org1b7356c"><span class="section-number-4">3.1.1</span> Kinds of Expressions in Lisp</h4>
 <div class="outline-text-4" id="text-3-1-1">
 <ul class="org-ul">
 <li>Numbers (evaluate to &ldquo;themselves&rdquo;)</li>
@@ -1037,8 +1048,8 @@ them later.
 </div>
 </div>
 
-<div id="outline-container-orgcd80e24" class="outline-4">
-<h4 id="orgcd80e24"><span class="section-number-4">3.1.2</span> Example</h4>
+<div id="outline-container-org5209e5e" class="outline-4">
+<h4 id="org5209e5e"><span class="section-number-4">3.1.2</span> Example</h4>
 <div class="outline-text-4" id="text-3-1-2">
 <p>
 Consider:
@@ -1076,19 +1087,19 @@ Let&rsquo;s try to apply the substitution rule to our application,
 </div>
 </div>
 
-<div id="outline-container-org864c59c" class="outline-3">
-<h3 id="org864c59c"><span class="section-number-3">3.2</span> Peano Arithmetic</h3>
+<div id="outline-container-org121ede9" class="outline-3">
+<h3 id="org121ede9"><span class="section-number-3">3.2</span> Peano Arithmetic</h3>
 <div class="outline-text-3" id="text-3-2">
 </div>
-<div id="outline-container-org4980c07" class="outline-4">
-<h4 id="org4980c07"><span class="section-number-4">3.2.1</span> Simple Peano Addition</h4>
+<div id="outline-container-org7e1bf92" class="outline-4">
+<h4 id="org7e1bf92"><span class="section-number-4">3.2.1</span> Simple Peano Addition</h4>
 <div class="outline-text-4" id="text-3-2-1">
 <p>
 Peano arithmetic defines addition as:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="org2dc4eea"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">pa+</span> x y<span style="color: #a626a4;">)</span>
+<pre class="src src-racket" id="orgc2739a6"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">pa+</span> x y<span style="color: #a626a4;">)</span>
   <span style="color: #a626a4;">(</span><span style="color: #e45649;">if</span> <span style="color: #50a14f;">(</span><span style="color: #a626a4;">=</span> x <span style="color: #2e8b57;">0</span><span style="color: #50a14f;">)</span>
       y
       <span style="color: #50a14f;">(</span>pa+ <span style="color: #da8548;">(</span>dec x<span style="color: #da8548;">)</span> <span style="color: #da8548;">(</span>inc y<span style="color: #da8548;">)</span><span style="color: #50a14f;">)</span><span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
@@ -1143,14 +1154,14 @@ Written with steps skipped:
 </div>
 </div>
 
-<div id="outline-container-org1726c81" class="outline-4">
-<h4 id="org1726c81"><span class="section-number-4">3.2.2</span> Another Peano Adder</h4>
+<div id="outline-container-org4170359" class="outline-4">
+<h4 id="org4170359"><span class="section-number-4">3.2.2</span> Another Peano Adder</h4>
 <div class="outline-text-4" id="text-3-2-2">
 <p>
 Consider:
 </p>
 <div class="org-src-container">
-<pre class="src src-racket" id="org9c445cb"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">pb+</span> x y<span style="color: #a626a4;">)</span>
+<pre class="src src-racket" id="org6c59598"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">pb+</span> x y<span style="color: #a626a4;">)</span>
   <span style="color: #a626a4;">(</span><span style="color: #e45649;">if</span> <span style="color: #50a14f;">(</span><span style="color: #a626a4;">=</span> x <span style="color: #2e8b57;">0</span><span style="color: #50a14f;">)</span>
       y
       <span style="color: #50a14f;">(</span>inc <span style="color: #da8548;">(</span>pb+ <span style="color: #b751b6;">(</span>dec x<span style="color: #b751b6;">)</span> y<span style="color: #da8548;">)</span><span style="color: #50a14f;">)</span><span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
@@ -1268,8 +1279,8 @@ recursive. Iteration refers to the constant space requirement.
 </div>
 </div>
 
-<div id="outline-container-orgb424a0c" class="outline-3">
-<h3 id="orgb424a0c"><span class="section-number-3">3.3</span> Differentiating Between Iterative and Recursive Processes</h3>
+<div id="outline-container-orgd86fe36" class="outline-3">
+<h3 id="orgd86fe36"><span class="section-number-3">3.3</span> Differentiating Between Iterative and Recursive Processes</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 One of the primary ways to differentiate between an iterative and
@@ -1292,8 +1303,8 @@ since <i>all</i> state information is contained by the process.
 </div>
 </div>
 
-<div id="outline-container-org586a9c7" class="outline-3">
-<h3 id="org586a9c7"><span class="section-number-3">3.4</span> Fibonacci Numbers</h3>
+<div id="outline-container-org9933c71" class="outline-3">
+<h3 id="org9933c71"><span class="section-number-3">3.4</span> Fibonacci Numbers</h3>
 <div class="outline-text-3" id="text-3-4">
 <p>
 Fibonacci numbers are defined as:
@@ -1355,8 +1366,8 @@ performance as an exercise.
 </div>
 </div>
 
-<div id="outline-container-org2f75381" class="outline-3">
-<h3 id="org2f75381"><span class="section-number-3">3.5</span> Towers of Hanoi</h3>
+<div id="outline-container-org2b01ed9" class="outline-3">
+<h3 id="org2b01ed9"><span class="section-number-3">3.5</span> Towers of Hanoi</h3>
 <div class="outline-text-3" id="text-3-5">
 <p>
 From Wikipedia:
@@ -1449,8 +1460,8 @@ print), the complexity will be \(O(2^n)\).
 </div>
 </div>
 
-<div id="outline-container-orged40f06" class="outline-3">
-<h3 id="orged40f06"><span class="section-number-3">3.6</span> Iterative Fibonacci</h3>
+<div id="outline-container-orga7c5389" class="outline-3">
+<h3 id="orga7c5389"><span class="section-number-3">3.6</span> Iterative Fibonacci</h3>
 <div class="outline-text-3" id="text-3-6">
 <div class="org-src-container">
 <pre class="src src-racket"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">iter-fib</span> n a b<span style="color: #a626a4;">)</span>
@@ -1472,12 +1483,12 @@ print), the complexity will be \(O(2^n)\).
 </div>
 </div>
 
-<div id="outline-container-org2373aa3" class="outline-2">
-<h2 id="org2373aa3"><span class="section-number-2">4</span> Lecture 2A: Higher-Order Procedures</h2>
+<div id="outline-container-org49eda4d" class="outline-2">
+<h2 id="org49eda4d"><span class="section-number-2">4</span> Lecture 2A: Higher-Order Procedures</h2>
 <div class="outline-text-2" id="text-4">
 </div>
-<div id="outline-container-org9d0e24a" class="outline-3">
-<h3 id="org9d0e24a"><span class="section-number-3">4.1</span> Abstracting Procedural Ideas</h3>
+<div id="outline-container-orgfebac93" class="outline-3">
+<h3 id="orgfebac93"><span class="section-number-3">4.1</span> Abstracting Procedural Ideas</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 Consider the functions and their respective (recursive) procedures:
@@ -1573,7 +1584,7 @@ as arguments. Consider:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="org2765fc0"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">sum</span> term a next b<span style="color: #a626a4;">)</span>
+<pre class="src src-racket" id="org3590d87"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">sum</span> term a next b<span style="color: #a626a4;">)</span>
   <span style="color: #a626a4;">(</span><span style="color: #e45649;">if</span> <span style="color: #50a14f;">(</span><span style="color: #a626a4;">&gt;</span> a b<span style="color: #50a14f;">)</span>
       <span style="color: #2e8b57;">0</span>
       <span style="color: #50a14f;">(</span><span style="color: #a626a4;">+</span> <span style="color: #da8548;">(</span>term a<span style="color: #da8548;">)</span>
@@ -1697,8 +1708,8 @@ constant.
 </div>
 </div>
 
-<div id="outline-container-org35f35b0" class="outline-3">
-<h3 id="org35f35b0"><span class="section-number-3">4.2</span> More on Square Roots</h3>
+<div id="outline-container-orgd5b2640" class="outline-3">
+<h3 id="orgd5b2640"><span class="section-number-3">4.2</span> More on Square Roots</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 Recall our square root procedure. When seen in Lisp code, it&rsquo;s not
@@ -1706,7 +1717,7 @@ very clear what it&rsquo;s doing, or how it&rsquo;s working.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="org76d81ce"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">sqrt</span> x<span style="color: #a626a4;">)</span>
+<pre class="src src-racket" id="orgbc04905"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">sqrt</span> x<span style="color: #a626a4;">)</span>
   <span style="color: #a626a4;">(</span><span style="color: #e45649;">define</span> <span style="color: #50a14f;">(</span><span style="color: #a626a4;">good-enough?</span> g<span style="color: #50a14f;">)</span>
     <span style="color: #50a14f;">(</span><span style="color: #e45649;">define</span> <span style="color: #da8548;">(</span><span style="color: #a626a4;">square</span> g<span style="color: #da8548;">)</span>
       <span style="color: #da8548;">(</span><span style="color: #a626a4;">*</span> g g<span style="color: #da8548;">)</span><span style="color: #50a14f;">)</span>
@@ -1744,8 +1755,8 @@ Let&rsquo;s use higher-order procedure abstraction to make it clearer.
 </p>
 </div>
 
-<div id="outline-container-org260aed9" class="outline-4">
-<h4 id="org260aed9"><span class="section-number-4">4.2.1</span> Fixed Points</h4>
+<div id="outline-container-org438a2da" class="outline-4">
+<h4 id="org438a2da"><span class="section-number-4">4.2.1</span> Fixed Points</h4>
 <div class="outline-text-4" id="text-4-2-1">
 <p>
 Recall that the algorithm itself relies on writing a function
@@ -1783,7 +1794,7 @@ thinking:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="org0c4e68d">
+<pre class="src src-racket" id="org50d5647">
 <span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">sqrt</span> x<span style="color: #a626a4;">)</span>
   <span style="color: #a626a4;">(</span>fixed-point
    <span style="color: #50a14f;">(</span><span style="color: #e45649;">lambda</span> <span style="color: #da8548;">(</span>y<span style="color: #da8548;">)</span> <span style="color: #da8548;">(</span>average <span style="color: #b751b6;">(</span><span style="color: #a626a4;">/</span> x y<span style="color: #b751b6;">)</span>
@@ -1797,7 +1808,7 @@ Now writing <code>fixed-point</code>:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="org811a758">
+<pre class="src src-racket" id="orgede69bb">
 <span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">fixed-point</span> f start<span style="color: #a626a4;">)</span>
   <span style="color: #a626a4;">(</span><span style="color: #e45649;">define</span> <span style="color: #50a14f;">(</span><span style="color: #a626a4;">close-enough-p</span> x y<span style="color: #50a14f;">)</span>
     <span style="color: #50a14f;">(</span><span style="color: #a626a4;">&lt;</span> <span style="color: #da8548;">(</span><span style="color: #a626a4;">abs</span> <span style="color: #b751b6;">(</span><span style="color: #a626a4;">-</span> x y<span style="color: #b751b6;">)</span><span style="color: #da8548;">)</span>
@@ -1827,8 +1838,8 @@ Let&rsquo;s try it out!
 </div>
 </div>
 
-<div id="outline-container-org1a35ccd" class="outline-4">
-<h4 id="org1a35ccd"><span class="section-number-4">4.2.2</span> Damping Oscillations</h4>
+<div id="outline-container-orgc8aba93" class="outline-4">
+<h4 id="orgc8aba93"><span class="section-number-4">4.2.2</span> Damping Oscillations</h4>
 <div class="outline-text-4" id="text-4-2-2">
 <p>
 A fair question when seeing the function
@@ -1857,7 +1868,7 @@ do this is to take the average of successive values \(y\) and
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="org8b0f7c8">
+<pre class="src src-racket" id="org514c4c8">
 <span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">sqrt</span> x<span style="color: #a626a4;">)</span>
   <span style="color: #a626a4;">(</span>fixed-point
    <span style="color: #50a14f;">(</span>avg-damp <span style="color: #da8548;">(</span><span style="color: #e45649;">lambda</span> <span style="color: #b751b6;">(</span>y<span style="color: #b751b6;">)</span> <span style="color: #b751b6;">(</span><span style="color: #a626a4;">/</span> x y<span style="color: #b751b6;">)</span><span style="color: #da8548;">)</span><span style="color: #50a14f;">)</span>
@@ -1871,7 +1882,7 @@ procedure, and returns it. Or, in Lisp:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="org225e185">
+<pre class="src src-racket" id="org3a022f1">
 <span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #6a1868;">avg-damp</span>
   <span style="color: #a626a4;">(</span><span style="color: #e45649;">lambda</span> <span style="color: #50a14f;">(</span>f<span style="color: #50a14f;">)</span>
     <span style="color: #50a14f;">(</span><span style="color: #e45649;">lambda</span> <span style="color: #da8548;">(</span>x<span style="color: #da8548;">)</span> <span style="color: #da8548;">(</span>average <span style="color: #b751b6;">(</span>f x<span style="color: #b751b6;">)</span> x<span style="color: #da8548;">)</span><span style="color: #50a14f;">)</span><span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
@@ -1906,8 +1917,8 @@ Using the <code>sqrt</code> function,
 </div>
 </div>
 
-<div id="outline-container-orgf4d68a0" class="outline-3">
-<h3 id="orgf4d68a0"><span class="section-number-3">4.3</span> Newton&rsquo;s Method</h3>
+<div id="outline-container-orgfbb29c2" class="outline-3">
+<h3 id="orgfbb29c2"><span class="section-number-3">4.3</span> Newton&rsquo;s Method</h3>
 <div class="outline-text-3" id="text-4-3">
 <p>
 Newton&rsquo;s method is used to find the zeros of a function (\(y \ni
@@ -1934,7 +1945,7 @@ Defining <code>sqrt</code>:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="org4a87811">
+<pre class="src src-racket" id="org85b683c">
 <span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">sqrt</span> x<span style="color: #a626a4;">)</span>
   <span style="color: #a626a4;">(</span>newton <span style="color: #50a14f;">(</span><span style="color: #e45649;">lambda</span> <span style="color: #da8548;">(</span>y<span style="color: #da8548;">)</span> <span style="color: #da8548;">(</span><span style="color: #a626a4;">-</span> x <span style="color: #b751b6;">(</span>square y<span style="color: #b751b6;">)</span><span style="color: #da8548;">)</span><span style="color: #50a14f;">)</span>
           <span style="color: #2e8b57;">1</span><span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
@@ -1946,7 +1957,7 @@ We pass to <code>newton</code> a function \(f(y)=x-y^2\), since its zero is \(x=
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="org505a2f7">
+<pre class="src src-racket" id="orga8f5863">
 <span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">newton</span> f guess<span style="color: #a626a4;">)</span>
   <span style="color: #a626a4;">(</span><span style="color: #e45649;">define</span> <span style="color: #6a1868;">df</span> <span style="color: #50a14f;">(</span>deriv f<span style="color: #50a14f;">)</span><span style="color: #a626a4;">)</span>
   <span style="color: #a626a4;">(</span>fixed-point
@@ -1979,7 +1990,7 @@ Or, in Lisp,
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="org4d6bedd"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #6a1868;">dx</span> <span style="color: #2e8b57;">0.0000001</span><span style="color: #4078f2;">)</span>
+<pre class="src src-racket" id="orgf5a1eb8"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #6a1868;">dx</span> <span style="color: #2e8b57;">0.0000001</span><span style="color: #4078f2;">)</span>
 
 <span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #6a1868;">deriv</span>
   <span style="color: #a626a4;">(</span><span style="color: #e45649;">lambda</span> <span style="color: #50a14f;">(</span>f<span style="color: #50a14f;">)</span>
@@ -2031,8 +2042,8 @@ Testing out our <code>sqrt</code> function:
 </div>
 </div>
 
-<div id="outline-container-org5849bba" class="outline-3">
-<h3 id="org5849bba"><span class="section-number-3">4.4</span> Procedures are First-Class Citizens</h3>
+<div id="outline-container-org98d5061" class="outline-3">
+<h3 id="org98d5061"><span class="section-number-3">4.4</span> Procedures are First-Class Citizens</h3>
 <div class="outline-text-3" id="text-4-4">
 <p>
 This means that procedures can be:
@@ -2047,8 +2058,8 @@ This means that procedures can be:
 </div>
 </div>
 
-<div id="outline-container-orge130eef" class="outline-2">
-<h2 id="orge130eef"><span class="section-number-2">5</span> Lecture 2B: Compound Data</h2>
+<div id="outline-container-org5dcf077" class="outline-2">
+<h2 id="org5dcf077"><span class="section-number-2">5</span> Lecture 2B: Compound Data</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 Consider our <code>sqrt</code> function that uses <code>good-enough?</code>. What we did
@@ -2062,8 +2073,8 @@ Let&rsquo;s do this for data.
 </p>
 </div>
 
-<div id="outline-container-org687865c" class="outline-3">
-<h3 id="org687865c"><span class="section-number-3">5.1</span> Rational Number Arithmetic</h3>
+<div id="outline-container-orgee518a9" class="outline-3">
+<h3 id="orgee518a9"><span class="section-number-3">5.1</span> Rational Number Arithmetic</h3>
 <div class="outline-text-3" id="text-5-1">
 <p>
 Let&rsquo;s design a system which can add fractions:
@@ -2083,8 +2094,8 @@ and
 </p>
 </div>
 
-<div id="outline-container-org4569215" class="outline-4">
-<h4 id="org4569215"><span class="section-number-4">5.1.1</span> Abstraction</h4>
+<div id="outline-container-org3049ac2" class="outline-4">
+<h4 id="org3049ac2"><span class="section-number-4">5.1.1</span> Abstraction</h4>
 <div class="outline-text-4" id="text-5-1-1">
 <p>
 We don&rsquo;t know, however, how to represent this data in a Lisp
@@ -2109,7 +2120,7 @@ Then, our procedures are easy to write:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="org5687931"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">+rat</span> x y<span style="color: #a626a4;">)</span>
+<pre class="src src-racket" id="orgd335c3d"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">+rat</span> x y<span style="color: #a626a4;">)</span>
   <span style="color: #a626a4;">(</span>make-rat
    <span style="color: #50a14f;">(</span><span style="color: #a626a4;">+</span> <span style="color: #da8548;">(</span><span style="color: #a626a4;">*</span> <span style="color: #b751b6;">(</span>numer x<span style="color: #b751b6;">)</span> <span style="color: #b751b6;">(</span>denom y<span style="color: #b751b6;">)</span><span style="color: #da8548;">)</span>
       <span style="color: #da8548;">(</span><span style="color: #a626a4;">*</span> <span style="color: #b751b6;">(</span>numer y<span style="color: #b751b6;">)</span> <span style="color: #b751b6;">(</span>denom x<span style="color: #b751b6;">)</span><span style="color: #da8548;">)</span><span style="color: #50a14f;">)</span>
@@ -2153,8 +2164,8 @@ confuse us, the programmers.
 </div>
 </div>
 
-<div id="outline-container-orgdaa7ffb" class="outline-4">
-<h4 id="orgdaa7ffb"><span class="section-number-4">5.1.2</span> Data Object Creation</h4>
+<div id="outline-container-orgf9d5808" class="outline-4">
+<h4 id="orgf9d5808"><span class="section-number-4">5.1.2</span> Data Object Creation</h4>
 <div class="outline-text-4" id="text-5-1-2">
 <p>
 The glue we use to stick two numbers together is provided by three
@@ -2191,7 +2202,7 @@ earlier:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="org4149221"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">make-rat</span> x y<span style="color: #a626a4;">)</span>
+<pre class="src src-racket" id="orgeed30c1"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">make-rat</span> x y<span style="color: #a626a4;">)</span>
   <span style="color: #a626a4;">(</span><span style="color: #a626a4;">cons</span> x y<span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
 
 <span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">numer</span> x<span style="color: #a626a4;">)</span>
@@ -2226,7 +2237,7 @@ easily include this in the <code>make-rat</code> procedure:<sup><a id="fnr.1" cl
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="orgad94883"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">make-rat</span> x y<span style="color: #a626a4;">)</span>
+<pre class="src src-racket" id="orgf9649e9"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">make-rat</span> x y<span style="color: #a626a4;">)</span>
   <span style="color: #a626a4;">(</span><span style="color: #e45649;">let</span> <span style="color: #50a14f;">(</span><span style="color: #da8548;">(</span><span style="color: #6a1868;">g</span> <span style="color: #b751b6;">(</span><span style="color: #a626a4;">gcd</span> x y<span style="color: #b751b6;">)</span><span style="color: #da8548;">)</span><span style="color: #50a14f;">)</span>
     <span style="color: #50a14f;">(</span><span style="color: #a626a4;">cons</span> <span style="color: #da8548;">(</span><span style="color: #a626a4;">/</span> x g<span style="color: #da8548;">)</span>
           <span style="color: #da8548;">(</span><span style="color: #a626a4;">/</span> y g<span style="color: #da8548;">)</span><span style="color: #50a14f;">)</span><span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
@@ -2250,7 +2261,7 @@ We now need a GCD function:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="orga52fab8"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">gcd</span> a b<span style="color: #a626a4;">)</span>
+<pre class="src src-racket" id="org43c8c45"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">gcd</span> a b<span style="color: #a626a4;">)</span>
   <span style="color: #a626a4;">(</span><span style="color: #e45649;">if</span> <span style="color: #50a14f;">(</span><span style="color: #a626a4;">=</span> b <span style="color: #2e8b57;">0</span><span style="color: #50a14f;">)</span>
       a
       <span style="color: #50a14f;">(</span><span style="color: #a626a4;">gcd</span> b <span style="color: #da8548;">(</span><span style="color: #a626a4;">remainder</span> a b<span style="color: #da8548;">)</span><span style="color: #50a14f;">)</span><span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
@@ -2322,8 +2333,8 @@ representation.
 </div>
 </div>
 
-<div id="outline-container-org6e1af5f" class="outline-3">
-<h3 id="org6e1af5f"><span class="section-number-3">5.2</span> Representing Points on a Plane</h3>
+<div id="outline-container-org6f98a61" class="outline-3">
+<h3 id="org6f98a61"><span class="section-number-3">5.2</span> Representing Points on a Plane</h3>
 <div class="outline-text-3" id="text-5-2">
 <p>
 This is now an easy problem &#x2014; the code should be
@@ -2331,7 +2342,7 @@ self-explanatory.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="orgc1c8355"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">make-vec</span> x y<span style="color: #a626a4;">)</span>
+<pre class="src src-racket" id="orgcd7b16c"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">make-vec</span> x y<span style="color: #a626a4;">)</span>
   <span style="color: #a626a4;">(</span><span style="color: #a626a4;">cons</span> x y<span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
 
 <span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">xcor</span> v<span style="color: #a626a4;">)</span>
@@ -2347,7 +2358,7 @@ We could now define a segment as a pair of vectors:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="org0c24b10"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">make-seg</span> v w<span style="color: #a626a4;">)</span>
+<pre class="src src-racket" id="orga46be75"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">make-seg</span> v w<span style="color: #a626a4;">)</span>
   <span style="color: #a626a4;">(</span><span style="color: #a626a4;">cons</span> v w<span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
 
 <span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">seg-start</span> s<span style="color: #a626a4;">)</span>
@@ -2466,8 +2477,8 @@ pair of numbers. Or, in Lisp:
 </div>
 </div>
 
-<div id="outline-container-org7914e53" class="outline-3">
-<h3 id="org7914e53"><span class="section-number-3">5.3</span> Pairs</h3>
+<div id="outline-container-orgc035658" class="outline-3">
+<h3 id="orgc035658"><span class="section-number-3">5.3</span> Pairs</h3>
 <div class="outline-text-3" id="text-5-3">
 <p>
 Let&rsquo;s go back to when we assumed that <code>make-rat</code>, <code>numer</code>, and
@@ -2498,7 +2509,7 @@ objects at all, and instead mimics them from thin air. Consider:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="orgc8872f3"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">our-cons</span> a b<span style="color: #a626a4;">)</span>
+<pre class="src src-racket" id="org3470969"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">our-cons</span> a b<span style="color: #a626a4;">)</span>
   <span style="color: #a626a4;">(</span><span style="color: #e45649;">lambda</span> <span style="color: #50a14f;">(</span>pick<span style="color: #50a14f;">)</span>
     <span style="color: #50a14f;">(</span><span style="color: #e45649;">cond</span> <span style="color: #da8548;">(</span><span style="color: #b751b6;">(</span><span style="color: #a626a4;">=</span> pick <span style="color: #2e8b57;">1</span><span style="color: #b751b6;">)</span> a<span style="color: #da8548;">)</span>
           <span style="color: #da8548;">(</span><span style="color: #b751b6;">(</span><span style="color: #a626a4;">=</span> pick <span style="color: #2e8b57;">2</span><span style="color: #b751b6;">)</span> b<span style="color: #da8548;">)</span><span style="color: #50a14f;">)</span><span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
@@ -2598,8 +2609,8 @@ for.
 </div>
 </div>
 
-<div id="outline-container-org02db6cd" class="outline-2">
-<h2 id="org02db6cd"><span class="section-number-2">6</span> Lecture 3A: Henderson Escher Example</h2>
+<div id="outline-container-org2c6b4f4" class="outline-2">
+<h2 id="org2c6b4f4"><span class="section-number-2">6</span> Lecture 3A: Henderson Escher Example</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 Recall our vector procedures:
@@ -2622,7 +2633,7 @@ We could define more procedures using these:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="org1e3c5b5"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">+vect</span> v1 v2<span style="color: #a626a4;">)</span>
+<pre class="src src-racket" id="org722ef12"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">+vect</span> v1 v2<span style="color: #a626a4;">)</span>
   <span style="color: #a626a4;">(</span>make-vec
    <span style="color: #50a14f;">(</span><span style="color: #a626a4;">+</span> <span style="color: #da8548;">(</span>xcor v1<span style="color: #da8548;">)</span> <span style="color: #da8548;">(</span>xcor v2<span style="color: #da8548;">)</span><span style="color: #50a14f;">)</span>
    <span style="color: #50a14f;">(</span><span style="color: #a626a4;">+</span> <span style="color: #da8548;">(</span>ycor v1<span style="color: #da8548;">)</span> <span style="color: #da8548;">(</span>ycor v2<span style="color: #da8548;">)</span><span style="color: #50a14f;">)</span><span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
@@ -2641,8 +2652,8 @@ closure that pairs have to store any amount of data.
 </p>
 </div>
 
-<div id="outline-container-org0b30152" class="outline-3">
-<h3 id="org0b30152"><span class="section-number-3">6.1</span> Lists</h3>
+<div id="outline-container-orgca9451b" class="outline-3">
+<h3 id="orgca9451b"><span class="section-number-3">6.1</span> Lists</h3>
 <div class="outline-text-3" id="text-6-1">
 <p>
 Often, we want to store a sequence of data. Using pairs, there are
@@ -2699,7 +2710,7 @@ pairs:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="org7314097"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #6a1868;">one-to-four</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">list</span> <span style="color: #2e8b57;">1</span> <span style="color: #2e8b57;">2</span> <span style="color: #2e8b57;">3</span> <span style="color: #2e8b57;">4</span><span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
+<pre class="src src-racket" id="org6ac8539"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #6a1868;">one-to-four</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">list</span> <span style="color: #2e8b57;">1</span> <span style="color: #2e8b57;">2</span> <span style="color: #2e8b57;">3</span> <span style="color: #2e8b57;">4</span><span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
 </pre>
 </div>
 
@@ -2732,8 +2743,8 @@ lists, we write procedures.
 </p>
 </div>
 
-<div id="outline-container-org987b324" class="outline-4">
-<h4 id="org987b324"><span class="section-number-4">6.1.1</span> Procedures on Lists</h4>
+<div id="outline-container-orgf07c220" class="outline-4">
+<h4 id="orgf07c220"><span class="section-number-4">6.1.1</span> Procedures on Lists</h4>
 <div class="outline-text-4" id="text-6-1-1">
 <p>
 Say we wanted to write a procedure <code>scale-list</code> which multiplies
@@ -2769,7 +2780,7 @@ of a list and returns the result as a list, called <code>map</code>.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="org9580130"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">map</span> p l<span style="color: #a626a4;">)</span>
+<pre class="src src-racket" id="orgd9aad35"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">map</span> p l<span style="color: #a626a4;">)</span>
   <span style="color: #a626a4;">(</span><span style="color: #e45649;">if</span> <span style="color: #50a14f;">(</span><span style="color: #a626a4;">null?</span> l<span style="color: #50a14f;">)</span>
       nil
       <span style="color: #50a14f;">(</span><span style="color: #a626a4;">cons</span> <span style="color: #da8548;">(</span>p <span style="color: #b751b6;">(</span><span style="color: #a626a4;">car</span> l<span style="color: #b751b6;">)</span><span style="color: #da8548;">)</span>
@@ -2820,7 +2831,7 @@ applies to procedure to each element of the list.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="orga0d7c57"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">for-each</span> proc l<span style="color: #a626a4;">)</span>
+<pre class="src src-racket" id="org764f44c"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">for-each</span> proc l<span style="color: #a626a4;">)</span>
   <span style="color: #a626a4;">(</span><span style="color: #e45649;">cond</span> <span style="color: #50a14f;">(</span><span style="color: #da8548;">(</span><span style="color: #a626a4;">null?</span> l<span style="color: #da8548;">)</span> done<span style="color: #50a14f;">)</span>
         <span style="color: #50a14f;">(</span><span style="color: #e45649;">else</span>
          <span style="color: #da8548;">(</span>proc <span style="color: #b751b6;">(</span><span style="color: #a626a4;">car</span> l<span style="color: #b751b6;">)</span><span style="color: #da8548;">)</span>
@@ -2831,8 +2842,8 @@ applies to procedure to each element of the list.
 </div>
 </div>
 
-<div id="outline-container-org094bcd7" class="outline-3">
-<h3 id="org094bcd7"><span class="section-number-3">6.2</span> Henderson&rsquo;s Picture Language</h3>
+<div id="outline-container-orgc112f64" class="outline-3">
+<h3 id="orgc112f64"><span class="section-number-3">6.2</span> Henderson&rsquo;s Picture Language</h3>
 <div class="outline-text-3" id="text-6-2">
 <p>
 Let&rsquo;s define a language. As usual, we&rsquo;ll concern ourselves with its
@@ -2842,8 +2853,8 @@ implementing some of this language in Lisp along the way.
 </div>
 
 
-<div id="outline-container-orga15f9df" class="outline-4">
-<h4 id="orga15f9df"><span class="section-number-4">6.2.1</span> Primitives</h4>
+<div id="outline-container-org67f0dc0" class="outline-4">
+<h4 id="org67f0dc0"><span class="section-number-4">6.2.1</span> Primitives</h4>
 <div class="outline-text-4" id="text-6-2-1">
 <p>
 This language has only one primitive: &ldquo;picture&rdquo;, which is a figure
@@ -2853,8 +2864,8 @@ scaled to fit a frame.
 </div>
 
 
-<div id="outline-container-orgc2f83fc" class="outline-4">
-<h4 id="orgc2f83fc"><span class="section-number-4">6.2.2</span> Means of Combination and Operations</h4>
+<div id="outline-container-org013d058" class="outline-4">
+<h4 id="org013d058"><span class="section-number-4">6.2.2</span> Means of Combination and Operations</h4>
 <div class="outline-text-4" id="text-6-2-2">
 <ul class="org-ul">
 <li>Rotate, which rotates a picture and returns it.</li>
@@ -2876,12 +2887,12 @@ Let&rsquo;s now implement this part of the language.
 </div>
 </div>
 
-<div id="outline-container-org00dd696" class="outline-4">
-<h4 id="org00dd696"><span class="section-number-4">6.2.3</span> An Implementation</h4>
+<div id="outline-container-org5c531ea" class="outline-4">
+<h4 id="org5c531ea"><span class="section-number-4">6.2.3</span> An Implementation</h4>
 <div class="outline-text-4" id="text-6-2-3">
 </div>
 <ol class="org-ol">
-<li><a id="org4454118"></a>Frames<br />
+<li><a id="orgbed0734"></a>Frames<br />
 <div class="outline-text-5" id="text-6-2-3-1">
 <p>
 Three vectors are needed to uniquely identify a frame on the
@@ -2927,7 +2938,7 @@ correctly to <code>rect</code>.
 </div>
 </li>
 
-<li><a id="org32297ad"></a>Pictures<br />
+<li><a id="orga238447"></a>Pictures<br />
 <div class="outline-text-5" id="text-6-2-3-2">
 <p>
 We can now easily define a procedure which makes a picture:
@@ -2986,7 +2997,7 @@ procedure from a <code>seglist</code>. Or, in use:
 </div>
 </li>
 
-<li><a id="orge8b73d0"></a>Beside<br />
+<li><a id="org153a929"></a>Beside<br />
 <div class="outline-text-5" id="text-6-2-3-3">
 <p>
 <code>beside</code> needs to draw two pictures on the screen, after scaling
@@ -3016,7 +3027,7 @@ side and scales them correctly within <code>rect</code>. Or, in Lisp,
 </div>
 </li>
 
-<li><a id="org55b69f2"></a>Rotate-90<br />
+<li><a id="org6d9cbf5"></a>Rotate-90<br />
 <div class="outline-text-5" id="text-6-2-3-4">
 <p>
 To rotate a picture by 90 degrees counter-clockwise, all we have
@@ -3041,8 +3052,8 @@ the procedure in Lisp is:
 </div>
 
 
-<div id="outline-container-orga4885f5" class="outline-4">
-<h4 id="orga4885f5"><span class="section-number-4">6.2.4</span> Means of Abstraction</h4>
+<div id="outline-container-org1c5d34a" class="outline-4">
+<h4 id="org1c5d34a"><span class="section-number-4">6.2.4</span> Means of Abstraction</h4>
 <div class="outline-text-4" id="text-6-2-4">
 <p>
 See that the picture language is now embedded in Lisp. We can
@@ -3102,8 +3113,8 @@ more than one node is a nightmare.</li>
 </div>
 </div>
 
-<div id="outline-container-org29127fd" class="outline-2">
-<h2 id="org29127fd"><span class="section-number-2">7</span> Lecture 3B: Symbolic Differentiation; Quotation</h2>
+<div id="outline-container-org5898363" class="outline-2">
+<h2 id="org5898363"><span class="section-number-2">7</span> Lecture 3B: Symbolic Differentiation; Quotation</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 We saw that robust system design involves insensitivity to small
@@ -3121,8 +3132,8 @@ the operation of differentiation itself.
 </p>
 </div>
 
-<div id="outline-container-org5f27bef" class="outline-3">
-<h3 id="org5f27bef"><span class="section-number-3">7.1</span> Differentiation v. Integration</h3>
+<div id="outline-container-org3f16e9e" class="outline-3">
+<h3 id="org3f16e9e"><span class="section-number-3">7.1</span> Differentiation v. Integration</h3>
 <div class="outline-text-3" id="text-7-1">
 <p>
 Why is it so much easier to differentiate than to integrate?
@@ -3164,11 +3175,11 @@ symbolic differentiation system.
 </div>
 </div>
 
-<div id="outline-container-org9f6f879" class="outline-3">
-<h3 id="org9f6f879"><span class="section-number-3">7.2</span> Some Wishful Thinking</h3>
+<div id="outline-container-org2d2d2c2" class="outline-3">
+<h3 id="org2d2d2c2"><span class="section-number-3">7.2</span> Some Wishful Thinking</h3>
 <div class="outline-text-3" id="text-7-2">
 <div class="org-src-container">
-<pre class="src src-racket" id="org2a62ed8"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">deriv</span> expr var<span style="color: #a626a4;">)</span>
+<pre class="src src-racket" id="orga470ac3"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">deriv</span> expr var<span style="color: #a626a4;">)</span>
   <span style="color: #a626a4;">(</span><span style="color: #e45649;">cond</span> <span style="color: #50a14f;">(</span><span style="color: #da8548;">(</span>constant? expr var<span style="color: #da8548;">)</span> <span style="color: #2e8b57;">0</span><span style="color: #50a14f;">)</span>
         <span style="color: #50a14f;">(</span><span style="color: #da8548;">(</span>same-var? expr var<span style="color: #da8548;">)</span> <span style="color: #2e8b57;">1</span><span style="color: #50a14f;">)</span>
         <span style="color: #50a14f;">(</span><span style="color: #da8548;">(</span>sum? expr<span style="color: #da8548;">)</span>
@@ -3205,12 +3216,12 @@ algebraic expressions. Let&rsquo;s figure out how to do this.
 </div>
 </div>
 
-<div id="outline-container-orgae9dcf1" class="outline-3">
-<h3 id="orgae9dcf1"><span class="section-number-3">7.3</span> Representing Algebraic Expressions</h3>
+<div id="outline-container-orgce0e25b" class="outline-3">
+<h3 id="orgce0e25b"><span class="section-number-3">7.3</span> Representing Algebraic Expressions</h3>
 <div class="outline-text-3" id="text-7-3">
 </div>
-<div id="outline-container-orgef0b6c3" class="outline-4">
-<h4 id="orgef0b6c3"><span class="section-number-4">7.3.1</span> Using Lisp Syntax</h4>
+<div id="outline-container-orgba9869b" class="outline-4">
+<h4 id="orgba9869b"><span class="section-number-4">7.3.1</span> Using Lisp Syntax</h4>
 <div class="outline-text-4" id="text-7-3-1">
 <p>
 One very simple way to represent expressions is to use Lisp&rsquo;s way:
@@ -3231,15 +3242,15 @@ eliminates our need for parsing algebraic expressions.
 </div>
 </div>
 
-<div id="outline-container-org5eb9df7" class="outline-4">
-<h4 id="org5eb9df7"><span class="section-number-4">7.3.2</span> Representation Implementation</h4>
+<div id="outline-container-org3ae7ca3" class="outline-4">
+<h4 id="org3ae7ca3"><span class="section-number-4">7.3.2</span> Representation Implementation</h4>
 <div class="outline-text-4" id="text-7-3-2">
 <p>
 Let&rsquo;s start defining our procedures.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="orgf932dbb"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">constant?</span> expr var<span style="color: #a626a4;">)</span>
+<pre class="src src-racket" id="orga51422d"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">constant?</span> expr var<span style="color: #a626a4;">)</span>
   <span style="color: #a626a4;">(</span><span style="color: #e45649;">and</span> <span style="color: #50a14f;">(</span>atom? expr<span style="color: #50a14f;">)</span>
        <span style="color: #50a14f;">(</span><span style="color: #a626a4;">not</span> <span style="color: #da8548;">(</span><span style="color: #a626a4;">eq?</span> expr var<span style="color: #da8548;">)</span><span style="color: #50a14f;">)</span><span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
 
@@ -3311,7 +3322,7 @@ Now defining the constructors:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="org010e731"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">make-sum</span> a1 a2<span style="color: #a626a4;">)</span>
+<pre class="src src-racket" id="org1c99a6a"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">make-sum</span> a1 a2<span style="color: #a626a4;">)</span>
   <span style="color: #a626a4;">(</span><span style="color: #a626a4;">list</span> <span style="color: #2e8b57;">'+</span> a1 a2<span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
 
 <span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">make-product</span> m1 m2<span style="color: #a626a4;">)</span>
@@ -3325,7 +3336,7 @@ Finally, we must define the selectors:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="org12cc0a8"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #6a1868;">a1</span> <span style="color: #a626a4;">cadr</span><span style="color: #4078f2;">)</span>
+<pre class="src src-racket" id="orge1e8de9"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #6a1868;">a1</span> <span style="color: #a626a4;">cadr</span><span style="color: #4078f2;">)</span>
 <span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #6a1868;">a2</span> <span style="color: #a626a4;">caddr</span><span style="color: #4078f2;">)</span>
 
 <span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #6a1868;">m1</span> <span style="color: #a626a4;">cadr</span><span style="color: #4078f2;">)</span>
@@ -3375,8 +3386,8 @@ an expression is decomposed to either <code>same-var?</code> or <code>constant?<
 </div>
 </div>
 
-<div id="outline-container-org4bac4f9" class="outline-4">
-<h4 id="org4bac4f9"><span class="section-number-4">7.3.3</span> Simplification</h4>
+<div id="outline-container-orgb2a35b2" class="outline-4">
+<h4 id="orgb2a35b2"><span class="section-number-4">7.3.3</span> Simplification</h4>
 <div class="outline-text-4" id="text-7-3-3">
 <p>
 However, these results are ugly, and we know why &#x2014; there&rsquo;s no
@@ -3395,7 +3406,7 @@ they&rsquo;d simplify while creating the lists. Consider:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="org3a2a786"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">make-sum</span> a1 a2<span style="color: #a626a4;">)</span>
+<pre class="src src-racket" id="org90b16c3"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">make-sum</span> a1 a2<span style="color: #a626a4;">)</span>
   <span style="color: #a626a4;">(</span><span style="color: #e45649;">cond</span> <span style="color: #50a14f;">(</span><span style="color: #da8548;">(</span><span style="color: #e45649;">and</span> <span style="color: #b751b6;">(</span><span style="color: #a626a4;">number?</span> a1<span style="color: #b751b6;">)</span>
               <span style="color: #b751b6;">(</span><span style="color: #a626a4;">number?</span> a2<span style="color: #b751b6;">)</span><span style="color: #da8548;">)</span>
          <span style="color: #da8548;">(</span><span style="color: #a626a4;">+</span> a1 a2<span style="color: #da8548;">)</span><span style="color: #50a14f;">)</span>
@@ -3467,8 +3478,8 @@ enough.
 </div>
 </div>
 
-<div id="outline-container-org50c6f66" class="outline-3">
-<h3 id="org50c6f66"><span class="section-number-3">7.4</span> On Abstract Syntax</h3>
+<div id="outline-container-orgfeffe34" class="outline-3">
+<h3 id="orgfeffe34"><span class="section-number-3">7.4</span> On Abstract Syntax</h3>
 <div class="outline-text-3" id="text-7-4">
 <p>
 Note that the syntax we used was abstract in the sense that it had
@@ -3486,8 +3497,8 @@ the future.
 </div>
 </div>
 
-<div id="outline-container-orgdc5c673" class="outline-2">
-<h2 id="orgdc5c673"><span class="section-number-2">8</span> Lecture 4A: Pattern Matching and Rule-Based Substitution</h2>
+<div id="outline-container-org52a03e9" class="outline-2">
+<h2 id="org52a03e9"><span class="section-number-2">8</span> Lecture 4A: Pattern Matching and Rule-Based Substitution</h2>
 <div class="outline-text-2" id="text-8">
 <p>
 It&rsquo;s a funny technique we used last time, converting the rules of
@@ -3528,15 +3539,15 @@ then be pattern matched, skeletons created, then instantiated.
 </p>
 </div>
 
-<div id="outline-container-orga3dd5b4" class="outline-3">
-<h3 id="orga3dd5b4"><span class="section-number-3">8.1</span> Rule Language</h3>
+<div id="outline-container-org5801145" class="outline-3">
+<h3 id="org5801145"><span class="section-number-3">8.1</span> Rule Language</h3>
 <div class="outline-text-3" id="text-8-1">
 <p>
 Here&rsquo;s a sample bit of what we want the rule language to look like:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="orgcccfb95"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #6a1868;">deriv-rules</span>
+<pre class="src src-racket" id="org5b9d535"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #6a1868;">deriv-rules</span>
   '<span style="color: #a626a4;">(</span>
     <span style="color: #50a14f;">(</span><span style="color: #da8548;">(</span>dd <span style="color: #b751b6;">(</span>?c c<span style="color: #b751b6;">)</span> <span style="color: #b751b6;">(</span>? v<span style="color: #b751b6;">)</span><span style="color: #da8548;">)</span> <span style="color: #2e8b57;">0</span><span style="color: #50a14f;">)</span>
     <span style="color: #50a14f;">(</span><span style="color: #da8548;">(</span>dd <span style="color: #b751b6;">(</span>?v v<span style="color: #b751b6;">)</span> <span style="color: #b751b6;">(</span>? v<span style="color: #b751b6;">)</span><span style="color: #da8548;">)</span> <span style="color: #2e8b57;">1</span><span style="color: #50a14f;">)</span>
@@ -3568,8 +3579,8 @@ substitution expression (rule RHS).
 </p>
 </div>
 
-<div id="outline-container-org3b4b26e" class="outline-4">
-<h4 id="org3b4b26e"><span class="section-number-4">8.1.1</span> Pattern Matching</h4>
+<div id="outline-container-orge0350a5" class="outline-4">
+<h4 id="orge0350a5"><span class="section-number-4">8.1.1</span> Pattern Matching</h4>
 <div class="outline-text-4" id="text-8-1-1">
 <p>
 The idea of the LHS language is to provide a framework where
@@ -3622,8 +3633,8 @@ will then be passed to the skeleton instantiator.<sup><a id="fnr.6" class="footr
 </div>
 
 
-<div id="outline-container-org6ef267a" class="outline-4">
-<h4 id="org6ef267a"><span class="section-number-4">8.1.2</span> Skeleton and Instantiation</h4>
+<div id="outline-container-orga887326" class="outline-4">
+<h4 id="orga887326"><span class="section-number-4">8.1.2</span> Skeleton and Instantiation</h4>
 <div class="outline-text-4" id="text-8-1-2">
 <p>
 The RHS language provides a skeleton wherein values provided by
@@ -3665,8 +3676,8 @@ the LHS language can be substituted.
 </div>
 </div>
 
-<div id="outline-container-orge7381df" class="outline-3">
-<h3 id="orge7381df"><span class="section-number-3">8.2</span> Desired Behaviour</h3>
+<div id="outline-container-org7b89f8d" class="outline-3">
+<h3 id="org7b89f8d"><span class="section-number-3">8.2</span> Desired Behaviour</h3>
 <div class="outline-text-3" id="text-8-2">
 <p>
 We expect to use this program by calling a procedure called
@@ -3689,8 +3700,8 @@ to a given input expression. Or, in Lisp:
 </div>
 </div>
 
-<div id="outline-container-org6b1e4f5" class="outline-3">
-<h3 id="org6b1e4f5"><span class="section-number-3">8.3</span> Implementation</h3>
+<div id="outline-container-orgadcc32b" class="outline-3">
+<h3 id="orgadcc32b"><span class="section-number-3">8.3</span> Implementation</h3>
 <div class="outline-text-3" id="text-8-3">
 <p>
 We implement a procedure <code>match</code>, which takes a pattern, an
@@ -3707,8 +3718,8 @@ round of match-instantiate).
 </p>
 </div>
 
-<div id="outline-container-org30b967a" class="outline-4">
-<h4 id="org30b967a"><span class="section-number-4">8.3.1</span> Matcher</h4>
+<div id="outline-container-orgf6dd2fd" class="outline-4">
+<h4 id="orgf6dd2fd"><span class="section-number-4">8.3.1</span> Matcher</h4>
 <div class="outline-text-4" id="text-8-3-1">
 <p>
 Abstractly, the job of the matcher is to do a tree traversal and
@@ -3806,11 +3817,11 @@ rule does not match.
 
 <p>
 Finally, we implement as more cases in the <code>cond</code> other things we
-may need to match, according to the rule language (<a href="#orga3dd5b4">8.1</a>).
+may need to match, according to the rule language (<a href="#org5801145">8.1</a>).
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="org1a9ab68"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">match</span> pattern expression dict<span style="color: #a626a4;">)</span>
+<pre class="src src-racket" id="org17b10a2"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">match</span> pattern expression dict<span style="color: #a626a4;">)</span>
   <span style="color: #a626a4;">(</span><span style="color: #e45649;">cond</span> <span style="color: #50a14f;">(</span><span style="color: #da8548;">(</span><span style="color: #a626a4;">eq?</span> dict <span style="color: #2e8b57;">'failed</span><span style="color: #da8548;">)</span> <span style="color: #2e8b57;">'failed</span><span style="color: #50a14f;">)</span>
 
         <span style="color: #50a14f;">(</span><span style="color: #da8548;">(</span>atom? pattern<span style="color: #da8548;">)</span>
@@ -3846,7 +3857,7 @@ may need to match, according to the rule language (<a href="#orga3dd5b4">8.1</a>
 
 <p>
 We add one case wherein both the pattern to be matched and the
-expression are atomic and the same, (the case <code>foo</code> in <a href="#orga3dd5b4">8.1</a>), in which we simply return the dictionary, since the
+expression are atomic and the same, (the case <code>foo</code> in <a href="#org5801145">8.1</a>), in which we simply return the dictionary, since the
 pattern matches. The other new cases are self-explanatory: they are
 merely matching <code>(?c)</code>, <code>(?v)</code>, and <code>(?)</code>.
 </p>
@@ -3854,8 +3865,8 @@ merely matching <code>(?c)</code>, <code>(?v)</code>, and <code>(?)</code>.
 </div>
 
 
-<div id="outline-container-orgd0c41f8" class="outline-4">
-<h4 id="orgd0c41f8"><span class="section-number-4">8.3.2</span> Instantiator</h4>
+<div id="outline-container-orgdc13343" class="outline-4">
+<h4 id="orgdc13343"><span class="section-number-4">8.3.2</span> Instantiator</h4>
 <div class="outline-text-4" id="text-8-3-2">
 <p>
 Recall that instantiate must take accept the input of a skeleton
@@ -3873,7 +3884,7 @@ This is a fairly simple procedure to write:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="org9273615"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">instantiate</span> skeleton dict<span style="color: #a626a4;">)</span>
+<pre class="src src-racket" id="orgec3c7ab"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">instantiate</span> skeleton dict<span style="color: #a626a4;">)</span>
   <span style="color: #a626a4;">(</span><span style="color: #e45649;">cond</span> <span style="color: #50a14f;">(</span><span style="color: #da8548;">(</span>atom? skeleton<span style="color: #da8548;">)</span> skeleton<span style="color: #50a14f;">)</span>
         <span style="color: #50a14f;">(</span><span style="color: #da8548;">(</span>skeleton-evaluation? skeleton<span style="color: #da8548;">)</span>
          <span style="color: #da8548;">(</span>evaluate <span style="color: #b751b6;">(</span>evaluation-expression skeleton<span style="color: #b751b6;">)</span>
@@ -3905,7 +3916,7 @@ instantiation the way we want it to:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="orgc8ea9bf"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">evaluation-expression</span> evaluation<span style="color: #a626a4;">)</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">cadr</span> evaluation<span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
+<pre class="src src-racket" id="org1579bd4"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">evaluation-expression</span> evaluation<span style="color: #a626a4;">)</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">cadr</span> evaluation<span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
 
 <span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">evaluate</span> form dict<span style="color: #a626a4;">)</span>
   <span style="color: #a626a4;">(</span><span style="color: #e45649;">if</span> <span style="color: #50a14f;">(</span>atom? form<span style="color: #50a14f;">)</span>
@@ -3919,8 +3930,8 @@ instantiation the way we want it to:
 </div>
 </div>
 
-<div id="outline-container-org718f9fb" class="outline-4">
-<h4 id="org718f9fb"><span class="section-number-4">8.3.3</span> GIGO Simplifier</h4>
+<div id="outline-container-org0e33746" class="outline-4">
+<h4 id="org0e33746"><span class="section-number-4">8.3.3</span> GIGO Simplifier</h4>
 <div class="outline-text-4" id="text-8-3-3">
 <p>
 The GIGO (garbage in, garbage out)<sup><a id="fnr.7" class="footref" href="#fn.7">7</a></sup> simplifier is implemented
@@ -3930,7 +3941,7 @@ style, because the procedures within it are merely helpers.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="org4dc7a15"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">simplifier</span> the-rules<span style="color: #a626a4;">)</span>
+<pre class="src src-racket" id="org713db36"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">simplifier</span> the-rules<span style="color: #a626a4;">)</span>
   <span style="color: #a626a4;">(</span><span style="color: #e45649;">define</span> <span style="color: #50a14f;">(</span><span style="color: #a626a4;">simplify-expression</span> expression<span style="color: #50a14f;">)</span>
     <span style="color: #50a14f;">(</span>try-rules
      <span style="color: #da8548;">(</span><span style="color: #e45649;">if</span> <span style="color: #b751b6;">(</span>compound? expression<span style="color: #b751b6;">)</span>
@@ -3975,13 +3986,13 @@ On the other hand, if the <code>match</code> failed, we simply try the rest
 of the rules (<code>cdr</code>).</li>
 <li>Finally, <code>simplifier</code> returns the <code>simplify-expression</code>
 procedure, which can apply <code>the-rules</code> to any input expression.
-Note that this is what the desired behaviour is (<a href="#orge7381df">8.2</a>).</li>
+Note that this is what the desired behaviour is (<a href="#org7b89f8d">8.2</a>).</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orge2589df" class="outline-4">
-<h4 id="orge2589df"><span class="section-number-4">8.3.4</span> Dictionary Implementation</h4>
+<div id="outline-container-org1a7bbdb" class="outline-4">
+<h4 id="org1a7bbdb"><span class="section-number-4">8.3.4</span> Dictionary Implementation</h4>
 <div class="outline-text-4" id="text-8-3-4">
 <p>
 The actual dictionary implementation isn&rsquo;t of much interest to us,
@@ -3990,7 +4001,7 @@ later than our program.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="org5d53125"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">make-empty-dict</span><span style="color: #a626a4;">)</span> '<span style="color: #a626a4;">()</span><span style="color: #4078f2;">)</span>
+<pre class="src src-racket" id="org3fad7d9"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">make-empty-dict</span><span style="color: #a626a4;">)</span> '<span style="color: #a626a4;">()</span><span style="color: #4078f2;">)</span>
 
 <span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">extend-dict</span> pat dat dictionary<span style="color: #a626a4;">)</span>
   <span style="color: #a626a4;">(</span><span style="color: #e45649;">let</span> <span style="color: #50a14f;">(</span><span style="color: #da8548;">(</span><span style="color: #6a1868;">vname</span> <span style="color: #b751b6;">(</span>variable-name pat<span style="color: #b751b6;">)</span><span style="color: #da8548;">)</span><span style="color: #50a14f;">)</span>
@@ -4010,8 +4021,8 @@ later than our program.
 </div>
 </div>
 
-<div id="outline-container-orgb5de8fc" class="outline-4">
-<h4 id="orgb5de8fc"><span class="section-number-4">8.3.5</span> Predicates</h4>
+<div id="outline-container-orga014df8" class="outline-4">
+<h4 id="orga014df8"><span class="section-number-4">8.3.5</span> Predicates</h4>
 <div class="outline-text-4" id="text-8-3-5">
 <p>
 Finally, we must implement the predicates we&rsquo;ve used throughout.
@@ -4019,7 +4030,7 @@ These are simple to implement and self-explanatory:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="org9d016b9"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">compound?</span> <span style="color: #a626a4;">exp</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">pair?</span> <span style="color: #a626a4;">exp</span><span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
+<pre class="src src-racket" id="org6e76206"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">compound?</span> <span style="color: #a626a4;">exp</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">pair?</span> <span style="color: #a626a4;">exp</span><span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
 <span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">constant?</span> <span style="color: #a626a4;">exp</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">number?</span> <span style="color: #a626a4;">exp</span><span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
 <span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">variable?</span> <span style="color: #a626a4;">exp</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">(</span>atom? <span style="color: #a626a4;">exp</span><span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
 <span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">pattern</span> rule<span style="color: #a626a4;">)</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">car</span> rule<span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
@@ -4044,8 +4055,8 @@ These are simple to implement and self-explanatory:
 </div>
 </div>
 
-<div id="outline-container-orgd9cc50f" class="outline-3">
-<h3 id="orgd9cc50f"><span class="section-number-3">8.4</span> Usage</h3>
+<div id="outline-container-orgf3aae15" class="outline-3">
+<h3 id="orgf3aae15"><span class="section-number-3">8.4</span> Usage</h3>
 <div class="outline-text-3" id="text-8-4">
 <div class="org-src-container">
 <pre class="src src-racket">
@@ -4077,15 +4088,15 @@ a clean expression.
 </p>
 </div>
 
-<div id="outline-container-org9332c0d" class="outline-4">
-<h4 id="org9332c0d"><span class="section-number-4">8.4.1</span> Algebraic Simplification</h4>
+<div id="outline-container-org1941b1b" class="outline-4">
+<h4 id="org1941b1b"><span class="section-number-4">8.4.1</span> Algebraic Simplification</h4>
 <div class="outline-text-4" id="text-8-4-1">
 <p>
 Consider the rule set:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="org34ce963"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #6a1868;">algebra-rules</span>
+<pre class="src src-racket" id="orgfad51f3"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #6a1868;">algebra-rules</span>
   '<span style="color: #a626a4;">(</span>
     <span style="color: #50a14f;">(</span> <span style="color: #da8548;">(</span><span style="color: #b751b6;">(</span>? op<span style="color: #b751b6;">)</span> <span style="color: #b751b6;">(</span>?c c1<span style="color: #b751b6;">)</span> <span style="color: #b751b6;">(</span>?c c2<span style="color: #b751b6;">)</span><span style="color: #da8548;">)</span>                <span style="color: #da8548;">(</span><span style="color: #a626a4;">:</span> <span style="color: #b751b6;">(</span>op c1 c2<span style="color: #b751b6;">)</span><span style="color: #da8548;">)</span>                <span style="color: #50a14f;">)</span>
     <span style="color: #50a14f;">(</span> <span style="color: #da8548;">(</span><span style="color: #b751b6;">(</span>? op<span style="color: #b751b6;">)</span> <span style="color: #b751b6;">(</span>?  e <span style="color: #b751b6;">)</span> <span style="color: #b751b6;">(</span>?c c <span style="color: #b751b6;">)</span><span style="color: #da8548;">)</span>                <span style="color: #da8548;">(</span><span style="color: #b751b6;">(</span><span style="color: #a626a4;">:</span> op<span style="color: #b751b6;">)</span> <span style="color: #b751b6;">(</span><span style="color: #a626a4;">:</span> c<span style="color: #b751b6;">)</span> <span style="color: #b751b6;">(</span><span style="color: #a626a4;">:</span> e<span style="color: #b751b6;">)</span><span style="color: #da8548;">)</span>          <span style="color: #50a14f;">)</span>
@@ -4144,9 +4155,8 @@ differentiation and algebraic simplification.
 </div>
 </div>
 
-
-<div id="outline-container-org347593e" class="outline-2">
-<h2 id="org347593e"><span class="section-number-2">9</span> Lecture 4B: Generic Operators</h2>
+<div id="outline-container-orgf23330c" class="outline-2">
+<h2 id="orgf23330c"><span class="section-number-2">9</span> Lecture 4B: Generic Operators</h2>
 <div class="outline-text-2" id="text-9">
 <p>
 We&rsquo;ve seen that data abstraction separates the use of data objects
@@ -4183,12 +4193,12 @@ expanding this to include the entire real number system.
 </p>
 </div>
 
-<div id="outline-container-orgf99fe15" class="outline-3">
-<h3 id="orgf99fe15"><span class="section-number-3">9.1</span> Dispatch on Type</h3>
+<div id="outline-container-org846a293" class="outline-3">
+<h3 id="org846a293"><span class="section-number-3">9.1</span> Dispatch on Type</h3>
 <div class="outline-text-3" id="text-9-1">
 </div>
-<div id="outline-container-orga40476e" class="outline-4">
-<h4 id="orga40476e"><span class="section-number-4">9.1.1</span> On Complex Numbers</h4>
+<div id="outline-container-orge06b46a" class="outline-4">
+<h4 id="orge06b46a"><span class="section-number-4">9.1.1</span> On Complex Numbers</h4>
 <div class="outline-text-4" id="text-9-1-1">
 <p>
 Complex numbers are represented in the complex plane as:
@@ -4223,8 +4233,8 @@ However, the most natural way to multiply is using polar form:
 </div>
 </div>
 
-<div id="outline-container-org6c2da3c" class="outline-4">
-<h4 id="org6c2da3c"><span class="section-number-4">9.1.2</span> Arithmetic Implementation</h4>
+<div id="outline-container-org43b5d0e" class="outline-4">
+<h4 id="org43b5d0e"><span class="section-number-4">9.1.2</span> Arithmetic Implementation</h4>
 <div class="outline-text-4" id="text-9-1-2">
 <p>
 Let&rsquo;s implement the four basic arithmetic operations. As in the
@@ -4246,7 +4256,7 @@ Then,
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="orgc250ddc"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">+c</span> z1 z2<span style="color: #a626a4;">)</span>
+<pre class="src src-racket" id="orgd148326"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">+c</span> z1 z2<span style="color: #a626a4;">)</span>
   <span style="color: #a626a4;">(</span>make-rect
    <span style="color: #50a14f;">(</span><span style="color: #a626a4;">+</span> <span style="color: #da8548;">(</span>real z1<span style="color: #da8548;">)</span> <span style="color: #da8548;">(</span>real z2<span style="color: #da8548;">)</span><span style="color: #50a14f;">)</span>
    <span style="color: #50a14f;">(</span><span style="color: #a626a4;">+</span> <span style="color: #da8548;">(</span>img z1<span style="color: #da8548;">)</span> <span style="color: #da8548;">(</span>img z2<span style="color: #da8548;">)</span><span style="color: #50a14f;">)</span><span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
@@ -4270,8 +4280,8 @@ Then,
 </div>
 </div>
 
-<div id="outline-container-orgd7fdfed" class="outline-4">
-<h4 id="orgd7fdfed"><span class="section-number-4">9.1.3</span> George&rsquo;s Representation</h4>
+<div id="outline-container-org1ff9581" class="outline-4">
+<h4 id="org1ff9581"><span class="section-number-4">9.1.3</span> George&rsquo;s Representation</h4>
 <div class="outline-text-4" id="text-9-1-3">
 <p>
 George loves the rectangular form of complex numbers. He therefore
@@ -4304,8 +4314,8 @@ implements the constructors and selectors in the following way:
 </div>
 </div>
 
-<div id="outline-container-org1e9f668" class="outline-4">
-<h4 id="org1e9f668"><span class="section-number-4">9.1.4</span> Martha&rsquo;s Representation</h4>
+<div id="outline-container-org9ea9724" class="outline-4">
+<h4 id="org9ea9724"><span class="section-number-4">9.1.4</span> Martha&rsquo;s Representation</h4>
 <div class="outline-text-4" id="text-9-1-4">
 <p>
 Martha, on the other hand, much prefers the polar representation.
@@ -4348,8 +4358,8 @@ constructors. Diagrammatically:
 </div>
 
 
-<div id="outline-container-org93df0a7" class="outline-4">
-<h4 id="org93df0a7"><span class="section-number-4">9.1.5</span> Type Dispatch Manager</h4>
+<div id="outline-container-orgeac1766" class="outline-4">
+<h4 id="orgeac1766"><span class="section-number-4">9.1.5</span> Type Dispatch Manager</h4>
 <div class="outline-text-4" id="text-9-1-5">
 <p>
 One of our chief problems is that when we have a pair that&rsquo;s a
@@ -4360,7 +4370,7 @@ George&rsquo;s or Martha&rsquo;s procedures. Consider:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="orgdec9761"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">attach-type</span> type contents<span style="color: #a626a4;">)</span>
+<pre class="src src-racket" id="org688efc0"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">attach-type</span> type contents<span style="color: #a626a4;">)</span>
   <span style="color: #a626a4;">(</span><span style="color: #a626a4;">cons</span> type contents<span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
 
 <span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">type</span> datum<span style="color: #a626a4;">)</span>
@@ -4376,7 +4386,7 @@ Now, George redefines his procedures as:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="orgef7233f"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">make-rect</span> x y<span style="color: #a626a4;">)</span>
+<pre class="src src-racket" id="orgb5d280d"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">make-rect</span> x y<span style="color: #a626a4;">)</span>
   <span style="color: #a626a4;">(</span>attach-type <span style="color: #2e8b57;">'rectangular</span> <span style="color: #50a14f;">(</span><span style="color: #a626a4;">cons</span> x y<span style="color: #50a14f;">)</span><span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
 
 <span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">real-rectangular</span> z<span style="color: #a626a4;">)</span>
@@ -4404,7 +4414,7 @@ procedures as:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="orgf318c02"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">make-pol</span> r a<span style="color: #a626a4;">)</span>
+<pre class="src src-racket" id="orgb028390"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">make-pol</span> r a<span style="color: #a626a4;">)</span>
   <span style="color: #a626a4;">(</span>attach-type <span style="color: #2e8b57;">'polar</span> <span style="color: #50a14f;">(</span><span style="color: #a626a4;">cons</span> r a<span style="color: #50a14f;">)</span><span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
 
 <span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">mag-polar</span> z<span style="color: #a626a4;">)</span>
@@ -4428,7 +4438,7 @@ Now, we can implement the generic procedures as:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="orgf53c3d2"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">real</span> z<span style="color: #a626a4;">)</span>
+<pre class="src src-racket" id="orge8c9c81"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">real</span> z<span style="color: #a626a4;">)</span>
   <span style="color: #a626a4;">(</span><span style="color: #e45649;">cond</span> <span style="color: #50a14f;">(</span><span style="color: #da8548;">(</span>rectangular? z<span style="color: #da8548;">)</span>
          <span style="color: #da8548;">(</span>real-rectangular <span style="color: #b751b6;">(</span>contents z<span style="color: #b751b6;">)</span><span style="color: #da8548;">)</span><span style="color: #50a14f;">)</span>
         <span style="color: #50a14f;">(</span><span style="color: #da8548;">(</span>polar? z<span style="color: #da8548;">)</span>
@@ -4461,7 +4471,7 @@ are simple label-checkers:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="org87d177f"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">rectangular?</span> z<span style="color: #a626a4;">)</span>
+<pre class="src src-racket" id="orgd9c78b9"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">rectangular?</span> z<span style="color: #a626a4;">)</span>
   <span style="color: #a626a4;">(</span><span style="color: #a626a4;">eq?</span> <span style="color: #2e8b57;">'rectangular</span> <span style="color: #50a14f;">(</span>type z<span style="color: #50a14f;">)</span><span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
 
 <span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">polar?</span> z<span style="color: #a626a4;">)</span>
@@ -4471,8 +4481,8 @@ are simple label-checkers:
 </div>
 </div>
 
-<div id="outline-container-orga5cc5bb" class="outline-4">
-<h4 id="orga5cc5bb"><span class="section-number-4">9.1.6</span> Usage</h4>
+<div id="outline-container-org48d5392" class="outline-4">
+<h4 id="org48d5392"><span class="section-number-4">9.1.6</span> Usage</h4>
 <div class="outline-text-4" id="text-9-1-6">
 <div class="org-src-container">
 <pre class="src src-racket">
@@ -4514,8 +4524,8 @@ Note that complex numbers are now a pair of a label and a pair.
 </div>
 </div>
 
-<div id="outline-container-orgbf73897" class="outline-4">
-<h4 id="orgbf73897"><span class="section-number-4">9.1.7</span> Review</h4>
+<div id="outline-container-org89e7268" class="outline-4">
+<h4 id="org89e7268"><span class="section-number-4">9.1.7</span> Review</h4>
 <div class="outline-text-4" id="text-9-1-7">
 <p>
 There are two major issues with this way of engineering the
@@ -4542,8 +4552,8 @@ procedures.
 </div>
 </div>
 
-<div id="outline-container-org409eae3" class="outline-3">
-<h3 id="org409eae3"><span class="section-number-3">9.2</span> Data-Directed Programming</h3>
+<div id="outline-container-org0a1f009" class="outline-3">
+<h3 id="org0a1f009"><span class="section-number-3">9.2</span> Data-Directed Programming</h3>
 <div class="outline-text-3" id="text-9-2">
 <p>
 Abstractly, what does the manager do? It acts as a lookup table, of
@@ -4615,11 +4625,11 @@ its implementation to a later lecture.
 </p>
 </div>
 
-<div id="outline-container-org4190d8f" class="outline-4">
-<h4 id="org4190d8f"><span class="section-number-4">9.2.1</span> Putting George&rsquo;s Procedures</h4>
+<div id="outline-container-org197aa3c" class="outline-4">
+<h4 id="org197aa3c"><span class="section-number-4">9.2.1</span> Putting George&rsquo;s Procedures</h4>
 <div class="outline-text-4" id="text-9-2-1">
 <div class="org-src-container">
-<pre class="src src-racket" id="orge1d3406"><span style="color: #4078f2;">(</span>put <span style="color: #2e8b57;">'rectangular</span> <span style="color: #2e8b57;">'real</span> real-rectangular<span style="color: #4078f2;">)</span>
+<pre class="src src-racket" id="orge24fd08"><span style="color: #4078f2;">(</span>put <span style="color: #2e8b57;">'rectangular</span> <span style="color: #2e8b57;">'real</span> real-rectangular<span style="color: #4078f2;">)</span>
 <span style="color: #4078f2;">(</span>put <span style="color: #2e8b57;">'rectangular</span> <span style="color: #2e8b57;">'img</span> img-rectangular<span style="color: #4078f2;">)</span>
 <span style="color: #4078f2;">(</span>put <span style="color: #2e8b57;">'rectangular</span> <span style="color: #2e8b57;">'mag</span> mag-rectangular<span style="color: #4078f2;">)</span>
 <span style="color: #4078f2;">(</span>put <span style="color: #2e8b57;">'rectangular</span> <span style="color: #2e8b57;">'ang</span> ang-rectangular<span style="color: #4078f2;">)</span>
@@ -4641,14 +4651,14 @@ must only grab the correct cell of the table.
 </div>
 
 
-<div id="outline-container-org8e9dced" class="outline-4">
-<h4 id="org8e9dced"><span class="section-number-4">9.2.2</span> Putting Martha&rsquo;s Procedures</h4>
+<div id="outline-container-org4287336" class="outline-4">
+<h4 id="org4287336"><span class="section-number-4">9.2.2</span> Putting Martha&rsquo;s Procedures</h4>
 <div class="outline-text-4" id="text-9-2-2">
 <p>
 Similarly:
 </p>
 <div class="org-src-container">
-<pre class="src src-racket" id="org4e4556c"><span style="color: #4078f2;">(</span>put <span style="color: #2e8b57;">'polar</span> <span style="color: #2e8b57;">'real</span> real-polar<span style="color: #4078f2;">)</span>
+<pre class="src src-racket" id="orgd3217bc"><span style="color: #4078f2;">(</span>put <span style="color: #2e8b57;">'polar</span> <span style="color: #2e8b57;">'real</span> real-polar<span style="color: #4078f2;">)</span>
 <span style="color: #4078f2;">(</span>put <span style="color: #2e8b57;">'polar</span> <span style="color: #2e8b57;">'img</span> img-polar<span style="color: #4078f2;">)</span>
 <span style="color: #4078f2;">(</span>put <span style="color: #2e8b57;">'polar</span> <span style="color: #2e8b57;">'mag</span> mag-polar<span style="color: #4078f2;">)</span>
 <span style="color: #4078f2;">(</span>put <span style="color: #2e8b57;">'polar</span> <span style="color: #2e8b57;">'ang</span> ang-polar<span style="color: #4078f2;">)</span>
@@ -4662,8 +4672,8 @@ anything except <code>put</code> them in the table.
 </div>
 </div>
 
-<div id="outline-container-org123d4a4" class="outline-4">
-<h4 id="org123d4a4"><span class="section-number-4">9.2.3</span> Manager Automation</h4>
+<div id="outline-container-org4ec830e" class="outline-4">
+<h4 id="org4ec830e"><span class="section-number-4">9.2.3</span> Manager Automation</h4>
 <div class="outline-text-4" id="text-9-2-3">
 <p>
 The procedures hanging around in the table isn&rsquo;t enough: when <code>+c</code>
@@ -4672,7 +4682,7 @@ This is done by:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="org0c5df6b"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">operate</span> op object<span style="color: #a626a4;">)</span>
+<pre class="src src-racket" id="org469e145"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">operate</span> op object<span style="color: #a626a4;">)</span>
   <span style="color: #a626a4;">(</span><span style="color: #e45649;">let</span> <span style="color: #50a14f;">(</span><span style="color: #da8548;">(</span><span style="color: #6a1868;">proc</span> <span style="color: #b751b6;">(</span>get <span style="color: #986801;">(</span>type object<span style="color: #986801;">)</span> op<span style="color: #b751b6;">)</span><span style="color: #da8548;">)</span><span style="color: #50a14f;">)</span>
     <span style="color: #50a14f;">(</span><span style="color: #e45649;">if</span> <span style="color: #da8548;">(</span><span style="color: #a626a4;">not</span> <span style="color: #b751b6;">(</span><span style="color: #a626a4;">null?</span> proc<span style="color: #b751b6;">)</span><span style="color: #da8548;">)</span>
         <span style="color: #da8548;">(</span>proc <span style="color: #b751b6;">(</span>contents object<span style="color: #b751b6;">)</span><span style="color: #da8548;">)</span>
@@ -4685,7 +4695,7 @@ It is now simple to define the generic operators:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="org4a52207"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">real</span> obj<span style="color: #a626a4;">)</span>
+<pre class="src src-racket" id="orge389820"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">real</span> obj<span style="color: #a626a4;">)</span>
   <span style="color: #a626a4;">(</span>operate <span style="color: #2e8b57;">'real</span> obj<span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
 
 <span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">img</span> obj<span style="color: #a626a4;">)</span>
@@ -4702,8 +4712,8 @@ It is now simple to define the generic operators:
 </div>
 
 
-<div id="outline-container-org7a8f45c" class="outline-4">
-<h4 id="org7a8f45c"><span class="section-number-4">9.2.4</span> Usage</h4>
+<div id="outline-container-org2772046" class="outline-4">
+<h4 id="org2772046"><span class="section-number-4">9.2.4</span> Usage</h4>
 <div class="outline-text-4" id="text-9-2-4">
 <p>
 The usage is the same as last time, since the difference is in the
@@ -4773,12 +4783,12 @@ We can see by the substitution rule how this system is working:
 </div>
 </div>
 
-<div id="outline-container-org2c21f98" class="outline-3">
-<h3 id="org2c21f98"><span class="section-number-3">9.3</span> Advanced Example: Semi-Complete Arithmetic System</h3>
+<div id="outline-container-org0de65c7" class="outline-3">
+<h3 id="org0de65c7"><span class="section-number-3">9.3</span> Advanced Example: Semi-Complete Arithmetic System</h3>
 <div class="outline-text-3" id="text-9-3">
 </div>
-<div id="outline-container-orga9dffd8" class="outline-4">
-<h4 id="orga9dffd8"><span class="section-number-4">9.3.1</span> Architecture</h4>
+<div id="outline-container-org390d851" class="outline-4">
+<h4 id="org390d851"><span class="section-number-4">9.3.1</span> Architecture</h4>
 <div class="outline-text-4" id="text-9-3-1">
 <p>
 Let us now embed our complex number system &ldquo;package&rdquo; in a more
@@ -4798,15 +4808,15 @@ adding a way to add polynomials.
 </div>
 </div>
 
-<div id="outline-container-org543cabf" class="outline-4">
-<h4 id="org543cabf"><span class="section-number-4">9.3.2</span> Implementation</h4>
+<div id="outline-container-org48e6d08" class="outline-4">
+<h4 id="org48e6d08"><span class="section-number-4">9.3.2</span> Implementation</h4>
 <div class="outline-text-4" id="text-9-3-2">
 <p>
 The rational number procedures in this system are implemented thus:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="org69abfcb"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">make-rat</span> n d<span style="color: #a626a4;">)</span>
+<pre class="src src-racket" id="orge7b857e"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">make-rat</span> n d<span style="color: #a626a4;">)</span>
   <span style="color: #a626a4;">(</span>attach-type <span style="color: #2e8b57;">'rational</span> <span style="color: #50a14f;">(</span><span style="color: #a626a4;">cons</span> n d<span style="color: #50a14f;">)</span><span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
 
 <span style="color: #4078f2;">(</span>put <span style="color: #2e8b57;">'rational</span> <span style="color: #2e8b57;">'add</span> +rat<span style="color: #4078f2;">)</span>
@@ -4837,7 +4847,7 @@ complex numbers and standard Lisp numbers in this system:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="org5ec0269"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">make-complex</span> z<span style="color: #a626a4;">)</span>
+<pre class="src src-racket" id="orgce9fcfe"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">make-complex</span> z<span style="color: #a626a4;">)</span>
   <span style="color: #a626a4;">(</span>attach-type <span style="color: #2e8b57;">'complex</span> z<span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
 
 <span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">+complex</span> z1 z2<span style="color: #a626a4;">)</span>
@@ -4866,7 +4876,7 @@ complex numbers. Moving to standard numbers:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="orgf9e2b9e"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">make-number</span> n<span style="color: #a626a4;">)</span>
+<pre class="src src-racket" id="org1b426a7"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">make-number</span> n<span style="color: #a626a4;">)</span>
   <span style="color: #a626a4;">(</span>attach-type <span style="color: #2e8b57;">'number</span> n<span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
 
 <span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">+number</span> x y<span style="color: #a626a4;">)</span>
@@ -4894,7 +4904,7 @@ themselves:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="org67bb2e7"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">add</span> x y<span style="color: #a626a4;">)</span>
+<pre class="src src-racket" id="orgc19ae45"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">add</span> x y<span style="color: #a626a4;">)</span>
   <span style="color: #a626a4;">(</span>operate-2 <span style="color: #2e8b57;">'add</span> x y<span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
 
 <span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">sub</span> x y<span style="color: #a626a4;">)</span>
@@ -4913,7 +4923,7 @@ Finally, we implement the binary <code>operate</code>, <code>operate-2</code>:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="org6f5fbfa"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">operate-2</span> op arg1 arg2<span style="color: #a626a4;">)</span>
+<pre class="src src-racket" id="org46de24b"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">operate-2</span> op arg1 arg2<span style="color: #a626a4;">)</span>
   <span style="color: #a626a4;">(</span><span style="color: #e45649;">if</span> <span style="color: #50a14f;">(</span><span style="color: #a626a4;">eq?</span> <span style="color: #da8548;">(</span>type arg1<span style="color: #da8548;">)</span> <span style="color: #da8548;">(</span>type arg2<span style="color: #da8548;">)</span><span style="color: #50a14f;">)</span>
       <span style="color: #50a14f;">(</span><span style="color: #e45649;">let</span> <span style="color: #da8548;">(</span><span style="color: #b751b6;">(</span><span style="color: #6a1868;">proc</span> <span style="color: #986801;">(</span>get <span style="color: #4db5bd;">(</span>type arg1<span style="color: #4db5bd;">)</span> op<span style="color: #986801;">)</span><span style="color: #b751b6;">)</span><span style="color: #da8548;">)</span>
         <span style="color: #da8548;">(</span><span style="color: #e45649;">if</span> <span style="color: #b751b6;">(</span><span style="color: #a626a4;">not</span> <span style="color: #986801;">(</span><span style="color: #a626a4;">null?</span> proc<span style="color: #986801;">)</span><span style="color: #b751b6;">)</span>
@@ -4926,8 +4936,8 @@ Finally, we implement the binary <code>operate</code>, <code>operate-2</code>:
 </div>
 </div>
 
-<div id="outline-container-org4896871" class="outline-4">
-<h4 id="org4896871"><span class="section-number-4">9.3.3</span> Usage</h4>
+<div id="outline-container-orgb98d9fa" class="outline-4">
+<h4 id="orgb98d9fa"><span class="section-number-4">9.3.3</span> Usage</h4>
 <div class="outline-text-4" id="text-9-3-3">
 <p>
 We&rsquo;re now ready to test this system:
@@ -4978,8 +4988,8 @@ of the datum.
 </div>
 </div>
 
-<div id="outline-container-org162edd2" class="outline-4">
-<h4 id="org162edd2"><span class="section-number-4">9.3.4</span> Adding Polynomials</h4>
+<div id="outline-container-org658c7c5" class="outline-4">
+<h4 id="org658c7c5"><span class="section-number-4">9.3.4</span> Adding Polynomials</h4>
 <div class="outline-text-4" id="text-9-3-4">
 <p>
 To do arithmetic on polynomials, we must first figure out how to
@@ -5010,7 +5020,7 @@ Thus, to construct a polynomial:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="orgbf9f3a8"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">make-poly</span> var term-list<span style="color: #a626a4;">)</span>
+<pre class="src src-racket" id="org6294c90"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">make-poly</span> var term-list<span style="color: #a626a4;">)</span>
   <span style="color: #a626a4;">(</span>attach-type <span style="color: #2e8b57;">'polynomial</span> <span style="color: #50a14f;">(</span><span style="color: #a626a4;">cons</span> var term-list<span style="color: #50a14f;">)</span><span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
 
 <span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">var</span> poly<span style="color: #a626a4;">)</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">car</span> poly<span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
@@ -5023,7 +5033,7 @@ Now, implementing <code>+poly</code>:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="org1522a39"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">+poly</span> p1 p2<span style="color: #a626a4;">)</span>
+<pre class="src src-racket" id="orgc7408eb"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">+poly</span> p1 p2<span style="color: #a626a4;">)</span>
   <span style="color: #a626a4;">(</span><span style="color: #e45649;">if</span> <span style="color: #50a14f;">(</span><span style="color: #a626a4;">eq?</span> <span style="color: #da8548;">(</span>var p1<span style="color: #da8548;">)</span> <span style="color: #da8548;">(</span>var p2<span style="color: #da8548;">)</span><span style="color: #50a14f;">)</span>
       <span style="color: #50a14f;">(</span>make-poly
        <span style="color: #da8548;">(</span>var p1<span style="color: #da8548;">)</span>
@@ -5041,7 +5051,7 @@ defined as:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="orge112c4f"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">+term</span> L1 L2<span style="color: #a626a4;">)</span>
+<pre class="src src-racket" id="orgfca538c"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">+term</span> L1 L2<span style="color: #a626a4;">)</span>
   <span style="color: #a626a4;">(</span><span style="color: #e45649;">cond</span> <span style="color: #50a14f;">(</span><span style="color: #da8548;">(</span>empty-termlist? L1<span style="color: #da8548;">)</span> L2<span style="color: #50a14f;">)</span>
         <span style="color: #50a14f;">(</span><span style="color: #da8548;">(</span>empty-termlist? L2<span style="color: #da8548;">)</span> L1<span style="color: #50a14f;">)</span>
         <span style="color: #50a14f;">(</span><span style="color: #e45649;">else</span>
@@ -5072,7 +5082,7 @@ selectors for <code>term</code>&rsquo;s and <code>term-list</code>&rsquo;s:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="org3ada9db"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">empty-termlist?</span> tl<span style="color: #a626a4;">)</span>
+<pre class="src src-racket" id="org787ca56"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">empty-termlist?</span> tl<span style="color: #a626a4;">)</span>
   <span style="color: #a626a4;">(</span><span style="color: #a626a4;">null?</span> tl<span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
 
 <span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">first-term</span> tl<span style="color: #a626a4;">)</span>
@@ -5167,8 +5177,8 @@ which is the correct result of summing the polynomials:
 </div>
 </div>
 
-<div id="outline-container-org82f46f7" class="outline-4">
-<h4 id="org82f46f7"><span class="section-number-4">9.3.5</span> Recursive Data Directed Programming</h4>
+<div id="outline-container-org067e084" class="outline-4">
+<h4 id="org067e084"><span class="section-number-4">9.3.5</span> Recursive Data Directed Programming</h4>
 <div class="outline-text-4" id="text-9-3-5">
 <p>
 It&rsquo;s easy to miss one <i>very</i> crucial point in the implementation
@@ -5315,8 +5325,8 @@ support, including matrices.
 </div>
 </div>
 
-<div id="outline-container-org4a0efd8" class="outline-3">
-<h3 id="org4a0efd8"><span class="section-number-3">9.4</span> Review</h3>
+<div id="outline-container-org9b407a6" class="outline-3">
+<h3 id="org9b407a6"><span class="section-number-3">9.4</span> Review</h3>
 <div class="outline-text-3" id="text-9-4">
 <p>
 We started our implementation of generic operators by writing a
@@ -5360,9 +5370,8 @@ of &ldquo;type coercion&rdquo; is shown in the SICP book.
 </div>
 </div>
 
-
-<div id="outline-container-org2e05097" class="outline-2">
-<h2 id="org2e05097"><span class="section-number-2">10</span> Lecture 5A: Assignment, State, and Side-Effects</h2>
+<div id="outline-container-org2fdc79e" class="outline-2">
+<h2 id="org2fdc79e"><span class="section-number-2">10</span> Lecture 5A: Assignment, State, and Side-Effects</h2>
 <div class="outline-text-2" id="text-10">
 <p>
 Up until now, we&rsquo;ve used no assignment statements in our use of
@@ -5373,12 +5382,12 @@ Lisp, then the benefits it brings to our programming practice.
 </p>
 </div>
 
-<div id="outline-container-org27f865f" class="outline-3">
-<h3 id="org27f865f"><span class="section-number-3">10.1</span> Functional v. Imperative Style</h3>
+<div id="outline-container-orgbeeb37d" class="outline-3">
+<h3 id="orgbeeb37d"><span class="section-number-3">10.1</span> Functional v. Imperative Style</h3>
 <div class="outline-text-3" id="text-10-1">
 </div>
-<div id="outline-container-orgfa0b6f7" class="outline-4">
-<h4 id="orgfa0b6f7"><span class="section-number-4">10.1.1</span> Functional Programming</h4>
+<div id="outline-container-org0e50c44" class="outline-4">
+<h4 id="org0e50c44"><span class="section-number-4">10.1.1</span> Functional Programming</h4>
 <div class="outline-text-4" id="text-10-1-1">
 <p>
 Functional programs encode mathematical truth in a procedure. For
@@ -5451,8 +5460,8 @@ and
 
 
 
-<div id="outline-container-org8a874c5" class="outline-4">
-<h4 id="org8a874c5"><span class="section-number-4">10.1.2</span> Imperative Programming</h4>
+<div id="outline-container-orgb4f0451" class="outline-4">
+<h4 id="orgb4f0451"><span class="section-number-4">10.1.2</span> Imperative Programming</h4>
 <div class="outline-text-4" id="text-10-1-2">
 <p>
 Imperative programming involves writing statements which change
@@ -5521,8 +5530,8 @@ harder, assignment is worth the trouble, as we&rsquo;ll see later.
 </div>
 </div>
 
-<div id="outline-container-org2cf0b87" class="outline-4">
-<h4 id="org2cf0b87"><span class="section-number-4">10.1.3</span> Direct Comparison</h4>
+<div id="outline-container-orga7b5928" class="outline-4">
+<h4 id="orga7b5928"><span class="section-number-4">10.1.3</span> Direct Comparison</h4>
 <div class="outline-text-4" id="text-10-1-3">
 <p>
 Here&rsquo;s an iterative implementation of a functional factorial
@@ -5599,8 +5608,8 @@ these time-based dependencies, which are worth being aware of.
 </div>
 </div>
 
-<div id="outline-container-org9d393be" class="outline-3">
-<h3 id="org9d393be"><span class="section-number-3">10.2</span> Environment Model</h3>
+<div id="outline-container-orgf9b414e" class="outline-3">
+<h3 id="orgf9b414e"><span class="section-number-3">10.2</span> Environment Model</h3>
 <div class="outline-text-3" id="text-10-2">
 <p>
 As we observed, assignment invalidates our substitution model of
@@ -5609,8 +5618,8 @@ new model which supports assignment.
 </p>
 </div>
 
-<div id="outline-container-org1f522aa" class="outline-4">
-<h4 id="org1f522aa"><span class="section-number-4">10.2.1</span> Bound and Free Variables</h4>
+<div id="outline-container-org7398e22" class="outline-4">
+<h4 id="org7398e22"><span class="section-number-4">10.2.1</span> Bound and Free Variables</h4>
 <div class="outline-text-4" id="text-10-2-1">
 <blockquote>
 <p>
@@ -5711,8 +5720,8 @@ will change if we replace it with the symbol <code>+</code>.
 </div>
 </div>
 
-<div id="outline-container-org17d200c" class="outline-4">
-<h4 id="org17d200c"><span class="section-number-4">10.2.2</span> Scope</h4>
+<div id="outline-container-org82e36ad" class="outline-4">
+<h4 id="org82e36ad"><span class="section-number-4">10.2.2</span> Scope</h4>
 <div class="outline-text-4" id="text-10-2-2">
 <p>
 Formally,
@@ -5739,8 +5748,8 @@ Or, for example:
 </div>
 </div>
 
-<div id="outline-container-org7a62b11" class="outline-4">
-<h4 id="org7a62b11"><span class="section-number-4">10.2.3</span> Frames and Environments</h4>
+<div id="outline-container-org0113350" class="outline-4">
+<h4 id="org0113350"><span class="section-number-4">10.2.3</span> Frames and Environments</h4>
 <div class="outline-text-4" id="text-10-2-3">
 <p>
 <a href="./images/frames.pdf">./images/frames.pdf</a>
@@ -5827,8 +5836,8 @@ same environment.
 </div>
 </div>
 
-<div id="outline-container-org5e6cda4" class="outline-4">
-<h4 id="org5e6cda4"><span class="section-number-4">10.2.4</span> Procedure Objects</h4>
+<div id="outline-container-orgd38c515" class="outline-4">
+<h4 id="orgd38c515"><span class="section-number-4">10.2.4</span> Procedure Objects</h4>
 <div class="outline-text-4" id="text-10-2-4">
 <p>
 A procedure objects consists of:
@@ -5849,8 +5858,8 @@ Diagrammatically:
 </div>
 </div>
 
-<div id="outline-container-orge53ca4e" class="outline-4">
-<h4 id="orge53ca4e"><span class="section-number-4">10.2.5</span> Rules for Environment Model</h4>
+<div id="outline-container-org05b23a5" class="outline-4">
+<h4 id="org05b23a5"><span class="section-number-4">10.2.5</span> Rules for Environment Model</h4>
 <div class="outline-text-4" id="text-10-2-5">
 <ol class="org-ol">
 <li><p>
@@ -5905,8 +5914,8 @@ assignment, as we&rsquo;ll soon see.
 </div>
 
 
-<div id="outline-container-org02448ae" class="outline-4">
-<h4 id="org02448ae"><span class="section-number-4">10.2.6</span> Assignment</h4>
+<div id="outline-container-org8fe723b" class="outline-4">
+<h4 id="org8fe723b"><span class="section-number-4">10.2.6</span> Assignment</h4>
 <div class="outline-text-4" id="text-10-2-6">
 <p>
 Let&rsquo;s play around with assignment in the environment model.
@@ -5914,7 +5923,7 @@ Consider the following procedure:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="org578e779"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #6a1868;">make-counter</span>
+<pre class="src src-racket" id="orgd260fc4"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #6a1868;">make-counter</span>
   <span style="color: #a626a4;">(</span><span style="color: #e45649;">lambda</span> <span style="color: #50a14f;">(</span>n<span style="color: #50a14f;">)</span>
     <span style="color: #50a14f;">(</span><span style="color: #e45649;">lambda</span> <span style="color: #da8548;">()</span>
       <span style="color: #da8548;">(</span><span style="color: #e45649;">set!</span> n <span style="color: #b751b6;">(</span>inc n<span style="color: #b751b6;">)</span><span style="color: #da8548;">)</span>
@@ -5937,7 +5946,7 @@ which start at different values of <code>n</code>:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="org42f3d3e">
+<pre class="src src-racket" id="orgfdc304d">
 <span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #6a1868;">C1</span> <span style="color: #a626a4;">(</span>make-counter <span style="color: #2e8b57;">0</span><span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
 <span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #6a1868;">C2</span> <span style="color: #a626a4;">(</span>make-counter <span style="color: #2e8b57;">10</span><span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
 </pre>
@@ -5991,8 +6000,8 @@ which is then sets to <code>12</code> and returned.
 </div>
 
 
-<div id="outline-container-orgfa39873" class="outline-4">
-<h4 id="orgfa39873"><span class="section-number-4">10.2.7</span> Some Philosophy</h4>
+<div id="outline-container-org740a1f0" class="outline-4">
+<h4 id="org740a1f0"><span class="section-number-4">10.2.7</span> Some Philosophy</h4>
 <div class="outline-text-4" id="text-10-2-7">
 <p>
 We have some questions to answer about sameness and change of
@@ -6035,8 +6044,8 @@ with some local state.
 </div>
 </div>
 
-<div id="outline-container-orgfe24657" class="outline-3">
-<h3 id="orgfe24657"><span class="section-number-3">10.3</span> Advantages of Assignment</h3>
+<div id="outline-container-org5545598" class="outline-3">
+<h3 id="org5545598"><span class="section-number-3">10.3</span> Advantages of Assignment</h3>
 <div class="outline-text-3" id="text-10-3">
 <p>
 We&rsquo;ve seen that introducing assignment makes our pure functional
@@ -6047,8 +6056,8 @@ it is necessary.
 </p>
 </div>
 
-<div id="outline-container-org0df3d23" class="outline-4">
-<h4 id="org0df3d23"><span class="section-number-4">10.3.1</span> Cesàro&rsquo;s Pi Finder</h4>
+<div id="outline-container-orgd7f5ff2" class="outline-4">
+<h4 id="orgd7f5ff2"><span class="section-number-4">10.3.1</span> Cesàro&rsquo;s Pi Finder</h4>
 <div class="outline-text-4" id="text-10-3-1">
 <p>
 Cesàro&rsquo;s theorem tells us that:
@@ -6066,7 +6075,7 @@ program looks like:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-racket" id="orgf3d8966"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">estimate-pi</span> n<span style="color: #a626a4;">)</span>
+<pre class="src src-racket" id="orgd5207fc"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">estimate-pi</span> n<span style="color: #a626a4;">)</span>
   <span style="color: #a626a4;">(</span><span style="color: #a626a4;">sqrt</span> <span style="color: #50a14f;">(</span><span style="color: #a626a4;">/</span> <span style="color: #2e8b57;">6</span> <span style="color: #da8548;">(</span>monte-carlo n cesaro<span style="color: #da8548;">)</span><span style="color: #50a14f;">)</span><span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
 
 <span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">cesaro</span><span style="color: #a626a4;">)</span>
@@ -6119,8 +6128,8 @@ local scope where <code>x</code> at first has some constant seed value
 </div>
 
 
-<div id="outline-container-org01e2557" class="outline-4">
-<h4 id="org01e2557"><span class="section-number-4">10.3.2</span> Functional Cesàro&rsquo;s Pi Finder</h4>
+<div id="outline-container-org83bd777" class="outline-4">
+<h4 id="org83bd777"><span class="section-number-4">10.3.2</span> Functional Cesàro&rsquo;s Pi Finder</h4>
 <div class="outline-text-4" id="text-10-3-2">
 <p>
 Since we can&rsquo;t use assignment to keep track of the &ldquo;state&rdquo; of the
@@ -6155,6 +6164,389 @@ The state of the PRNG has &ldquo;leaked&rdquo; out into our program, that is,
 still, this makes <code>monte-carlo</code> and <code>cesaro</code> non-general, reducing
 modularity. It is applications like these where assignment is
 incredibly useful, and helps keep our programs neat and modular.
+</p>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="outline-container-org398dcf1" class="outline-2">
+<h2 id="org398dcf1"><span class="section-number-2">11</span> Lecture 5B: Computational Objects</h2>
+<div class="outline-text-2" id="text-11">
+<p>
+Now that we have local state, let&rsquo;s see what we can do with it. As
+we saw earlier, real world objects also have local state. As such,
+we can now make a model of the real world in our computer, taking
+advantage of its inherent modularity to built a model with modular
+objects.
+</p>
+
+<p>
+We explore this possibility in this lecture by writing a simulator
+for digital circuits in Lisp. Along the way, we&rsquo;ll have to implement
+certain data structures which support local state.
+</p>
+</div>
+
+<div id="outline-container-org3500dff" class="outline-3">
+<h3 id="org3500dff"><span class="section-number-3">11.1</span> Digital Circuit Language</h3>
+<div class="outline-text-3" id="text-11-1">
+<p>
+We build a language embedded in Lisp (in the same style as the
+picture language) to simulate digital circuits. Here&rsquo;s the expected
+usage:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #6a1868;">a</span> <span style="color: #a626a4;">(</span>make-wire<span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
+<span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #6a1868;">b</span> <span style="color: #a626a4;">(</span>make-wire<span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
+<span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #6a1868;">c</span> <span style="color: #a626a4;">(</span>make-wire<span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
+<span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #6a1868;">d</span> <span style="color: #a626a4;">(</span>make-wire<span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
+<span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #6a1868;">e</span> <span style="color: #a626a4;">(</span>make-wire<span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
+<span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #6a1868;">s</span> <span style="color: #a626a4;">(</span>make-wire<span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
+
+<span style="color: #4078f2;">(</span>or-gate a b d<span style="color: #4078f2;">)</span>
+<span style="color: #4078f2;">(</span>and-gate a b c<span style="color: #4078f2;">)</span>
+<span style="color: #4078f2;">(</span>inverter c e<span style="color: #4078f2;">)</span>
+<span style="color: #4078f2;">(</span>and-gate d e s<span style="color: #4078f2;">)</span>
+</pre>
+</div>
+
+<p>
+The <code>or-gate</code> takes two input wires <code>a</code> and <code>b</code>, and returns the
+<code>OR</code> of the signals on wire <code>d</code>, very much like a real OR gate:
+</p>
+
+<p>
+We could use these primitives to
+write a half adder:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">half-adder</span> a b s c<span style="color: #a626a4;">)</span>
+  <span style="color: #a626a4;">(</span><span style="color: #e45649;">let</span> <span style="color: #50a14f;">(</span><span style="color: #da8548;">(</span><span style="color: #6a1868;">d</span> <span style="color: #b751b6;">(</span>make-wire<span style="color: #b751b6;">)</span><span style="color: #da8548;">)</span>
+        <span style="color: #da8548;">(</span><span style="color: #6a1868;">e</span> <span style="color: #b751b6;">(</span>make-wire<span style="color: #b751b6;">)</span><span style="color: #da8548;">)</span><span style="color: #50a14f;">)</span>
+    <span style="color: #50a14f;">(</span>or-gate a b d<span style="color: #50a14f;">)</span>
+    <span style="color: #50a14f;">(</span>and-gate a b c<span style="color: #50a14f;">)</span>
+    <span style="color: #50a14f;">(</span>inverter c e<span style="color: #50a14f;">)</span>
+    <span style="color: #50a14f;">(</span>and-gate d e s<span style="color: #50a14f;">)</span><span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
+</pre>
+</div>
+
+<p>
+Note carefully that the procedure <code>half-adder</code> doesn&rsquo;t actually
+return anything: it merely makes calls to the gate procedures.
+We&rsquo;ll see why later. Since the language is hierarchical, we could
+now write a full adder:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">full-adder</span> a b c-in sum c-out<span style="color: #a626a4;">)</span>
+  <span style="color: #a626a4;">(</span><span style="color: #e45649;">let</span> <span style="color: #50a14f;">(</span><span style="color: #da8548;">(</span><span style="color: #6a1868;">s</span> <span style="color: #b751b6;">(</span>make-wire<span style="color: #b751b6;">)</span><span style="color: #da8548;">)</span>
+        <span style="color: #da8548;">(</span><span style="color: #6a1868;">c1</span> <span style="color: #b751b6;">(</span>make-wire<span style="color: #b751b6;">)</span><span style="color: #da8548;">)</span>
+        <span style="color: #da8548;">(</span><span style="color: #6a1868;">c2</span> <span style="color: #b751b6;">(</span>make-wire<span style="color: #b751b6;">)</span><span style="color: #da8548;">)</span><span style="color: #50a14f;">)</span>
+    <span style="color: #50a14f;">(</span>half-adder b c-in s c1<span style="color: #50a14f;">)</span>
+    <span style="color: #50a14f;">(</span>half-adder a s sum c2<span style="color: #50a14f;">)</span>
+    <span style="color: #50a14f;">(</span>or-gate c1 c2 c-out<span style="color: #50a14f;">)</span><span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org99c87aa" class="outline-4">
+<h4 id="org99c87aa"><span class="section-number-4">11.1.1</span> Gates</h4>
+<div class="outline-text-4" id="text-11-1-1">
+<p>
+Let us now implement the primitive gates of this language. Here&rsquo;s
+an <code>inverter</code>:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">inverter</span> in out<span style="color: #a626a4;">)</span>
+  <span style="color: #a626a4;">(</span><span style="color: #e45649;">define</span> <span style="color: #50a14f;">(</span><span style="color: #a626a4;">invert-in</span><span style="color: #50a14f;">)</span>
+    <span style="color: #50a14f;">(</span><span style="color: #e45649;">let</span> <span style="color: #da8548;">(</span><span style="color: #b751b6;">(</span><span style="color: #6a1868;">new</span>
+           <span style="color: #986801;">(</span>logical-not <span style="color: #4db5bd;">(</span>get-signal in<span style="color: #4db5bd;">)</span><span style="color: #986801;">)</span><span style="color: #b751b6;">)</span><span style="color: #da8548;">)</span>
+      <span style="color: #da8548;">(</span>after-delay inverter-delay
+                   <span style="color: #b751b6;">(</span><span style="color: #e45649;">lambda</span> <span style="color: #986801;">()</span>
+                     <span style="color: #986801;">(</span>set-signal! out <span style="color: #a626a4;">new</span><span style="color: #986801;">)</span><span style="color: #b751b6;">)</span><span style="color: #da8548;">)</span><span style="color: #50a14f;">)</span><span style="color: #a626a4;">)</span>
+  <span style="color: #a626a4;">(</span>add-action! in invert-in<span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
+</pre>
+</div>
+
+<p>
+<code>inverter</code> defines a procedure called <code>invert-in</code>, and adds that
+action to the wire <code>in</code>. <code>invert-in</code> itself takes the logical not
+of <code>in</code> and sets the signal on <code>out</code> to this value, after some
+delay. See that this is precisely how a digital inverter in the
+real world is expected to work: wires have certain signals
+(<code>get-signal</code> and <code>set-signal</code>), these signals change according to
+how the wires are routed <code>add-action!</code>, and there are certain
+delays before the signal changes.
+</p>
+
+<p>
+Of course, the primitive <code>logical-not</code> is easy to define:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">logical-not</span> s<span style="color: #a626a4;">)</span>
+  <span style="color: #a626a4;">(</span><span style="color: #e45649;">cond</span> <span style="color: #50a14f;">(</span><span style="color: #da8548;">(</span><span style="color: #a626a4;">=</span> s <span style="color: #2e8b57;">0</span><span style="color: #da8548;">)</span> <span style="color: #2e8b57;">1</span><span style="color: #50a14f;">)</span>
+        <span style="color: #50a14f;">(</span><span style="color: #da8548;">(</span><span style="color: #a626a4;">=</span> s <span style="color: #2e8b57;">1</span><span style="color: #da8548;">)</span> <span style="color: #2e8b57;">0</span><span style="color: #50a14f;">)</span>
+        <span style="color: #50a14f;">(</span><span style="color: #e45649;">else</span>
+         <span style="color: #da8548;">(</span><span style="color: #a626a4;">error</span> <span style="color: #50a14f;">"Invalid signal"</span> s<span style="color: #da8548;">)</span><span style="color: #50a14f;">)</span><span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
+</pre>
+</div>
+
+<p>
+Similarly, <code>and-gate</code> can be defined as:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">and-gate</span> a1 a2 out<span style="color: #a626a4;">)</span>
+  <span style="color: #a626a4;">(</span><span style="color: #e45649;">define</span> <span style="color: #50a14f;">(</span><span style="color: #a626a4;">and-action-proc</span><span style="color: #50a14f;">)</span>
+    <span style="color: #50a14f;">(</span><span style="color: #e45649;">let</span> <span style="color: #da8548;">(</span><span style="color: #b751b6;">(</span><span style="color: #6a1868;">new-value</span>
+           <span style="color: #986801;">(</span>logical-and <span style="color: #4db5bd;">(</span>get-signal a1<span style="color: #4db5bd;">)</span>
+                        <span style="color: #4db5bd;">(</span>get-signal a2<span style="color: #4db5bd;">)</span><span style="color: #986801;">)</span><span style="color: #b751b6;">)</span><span style="color: #da8548;">)</span>
+      <span style="color: #da8548;">(</span>after-delay and-gate-delay
+                   <span style="color: #b751b6;">(</span><span style="color: #e45649;">lambda</span> <span style="color: #986801;">()</span>
+                     <span style="color: #986801;">(</span>set-signal! out new-value<span style="color: #986801;">)</span><span style="color: #b751b6;">)</span><span style="color: #da8548;">)</span><span style="color: #50a14f;">)</span><span style="color: #a626a4;">)</span>
+  <span style="color: #a626a4;">(</span>add-action! a1 and-action-proc<span style="color: #a626a4;">)</span>
+  <span style="color: #a626a4;">(</span>add-action! a2 and-action-proc<span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
+</pre>
+</div>
+
+<p>
+The only difference is in that we need to <code>get-signal</code> two signals
+and <code>add-action!</code>&rsquo;s to two signals. <code>logical-and</code> can be
+implemented as:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">logical-and</span> a b<span style="color: #a626a4;">)</span>
+  <span style="color: #a626a4;">(</span><span style="color: #e45649;">cond</span> <span style="color: #50a14f;">(</span><span style="color: #da8548;">(</span><span style="color: #a626a4;">=</span> a <span style="color: #2e8b57;">0</span><span style="color: #da8548;">)</span>
+         <span style="color: #da8548;">(</span><span style="color: #e45649;">cond</span> <span style="color: #b751b6;">(</span><span style="color: #986801;">(</span><span style="color: #a626a4;">=</span> b <span style="color: #2e8b57;">0</span><span style="color: #986801;">)</span> <span style="color: #2e8b57;">0</span><span style="color: #b751b6;">)</span>
+               <span style="color: #b751b6;">(</span><span style="color: #986801;">(</span><span style="color: #a626a4;">=</span> b <span style="color: #2e8b57;">1</span><span style="color: #986801;">)</span> <span style="color: #2e8b57;">0</span><span style="color: #b751b6;">)</span><span style="color: #da8548;">)</span><span style="color: #50a14f;">)</span>
+        <span style="color: #50a14f;">(</span><span style="color: #da8548;">(</span><span style="color: #a626a4;">=</span> a <span style="color: #2e8b57;">1</span><span style="color: #da8548;">)</span>
+         <span style="color: #da8548;">(</span><span style="color: #e45649;">cond</span> <span style="color: #b751b6;">(</span><span style="color: #986801;">(</span><span style="color: #a626a4;">=</span> b <span style="color: #2e8b57;">0</span><span style="color: #986801;">)</span> <span style="color: #2e8b57;">0</span><span style="color: #b751b6;">)</span>
+               <span style="color: #b751b6;">(</span><span style="color: #986801;">(</span><span style="color: #a626a4;">=</span> b <span style="color: #2e8b57;">1</span><span style="color: #986801;">)</span> <span style="color: #2e8b57;">1</span><span style="color: #b751b6;">)</span><span style="color: #da8548;">)</span><span style="color: #50a14f;">)</span><span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
+</pre>
+</div>
+
+<p>
+Finally, an <code>or-gate</code> is implemented as:
+</p>
+<div class="org-src-container">
+<pre class="src src-racket"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">or-gate</span> r1 r2 out<span style="color: #a626a4;">)</span>
+  <span style="color: #a626a4;">(</span><span style="color: #e45649;">define</span> <span style="color: #50a14f;">(</span><span style="color: #a626a4;">or-action-proc</span><span style="color: #50a14f;">)</span>
+    <span style="color: #50a14f;">(</span><span style="color: #e45649;">let</span> <span style="color: #da8548;">(</span><span style="color: #b751b6;">(</span><span style="color: #6a1868;">new-value</span>
+           <span style="color: #986801;">(</span>logical-or <span style="color: #4db5bd;">(</span>get-signal r1<span style="color: #4db5bd;">)</span>
+                        <span style="color: #4db5bd;">(</span>get-signal r2<span style="color: #4db5bd;">)</span><span style="color: #986801;">)</span><span style="color: #b751b6;">)</span><span style="color: #da8548;">)</span>
+      <span style="color: #da8548;">(</span>after-delay or-gate-delay
+                   <span style="color: #b751b6;">(</span><span style="color: #e45649;">lambda</span> <span style="color: #986801;">()</span>
+                     <span style="color: #986801;">(</span>set-signal! out new-value<span style="color: #986801;">)</span><span style="color: #b751b6;">)</span><span style="color: #da8548;">)</span><span style="color: #50a14f;">)</span><span style="color: #a626a4;">)</span>
+  <span style="color: #a626a4;">(</span>add-action! r1 or-action-proc<span style="color: #a626a4;">)</span>
+  <span style="color: #a626a4;">(</span>add-action! r2 or-action-proc<span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
+</pre>
+</div>
+
+<p>
+<code>logical-or</code> is defined similar to <code>logical-and</code>:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">logical-or</span> a b<span style="color: #a626a4;">)</span>
+  <span style="color: #a626a4;">(</span><span style="color: #e45649;">cond</span> <span style="color: #50a14f;">(</span><span style="color: #da8548;">(</span><span style="color: #a626a4;">=</span> a <span style="color: #2e8b57;">0</span><span style="color: #da8548;">)</span>
+         <span style="color: #da8548;">(</span><span style="color: #e45649;">cond</span> <span style="color: #b751b6;">(</span><span style="color: #986801;">(</span><span style="color: #a626a4;">=</span> b <span style="color: #2e8b57;">0</span><span style="color: #986801;">)</span> <span style="color: #2e8b57;">0</span><span style="color: #b751b6;">)</span>
+               <span style="color: #b751b6;">(</span><span style="color: #986801;">(</span><span style="color: #a626a4;">=</span> b <span style="color: #2e8b57;">1</span><span style="color: #986801;">)</span> <span style="color: #2e8b57;">1</span><span style="color: #b751b6;">)</span><span style="color: #da8548;">)</span><span style="color: #50a14f;">)</span>
+        <span style="color: #50a14f;">(</span><span style="color: #da8548;">(</span><span style="color: #a626a4;">=</span> a <span style="color: #2e8b57;">1</span><span style="color: #da8548;">)</span>
+         <span style="color: #da8548;">(</span><span style="color: #e45649;">cond</span> <span style="color: #b751b6;">(</span><span style="color: #986801;">(</span><span style="color: #a626a4;">=</span> b <span style="color: #2e8b57;">0</span><span style="color: #986801;">)</span> <span style="color: #2e8b57;">1</span><span style="color: #b751b6;">)</span>
+               <span style="color: #b751b6;">(</span><span style="color: #986801;">(</span><span style="color: #a626a4;">=</span> b <span style="color: #2e8b57;">1</span><span style="color: #986801;">)</span> <span style="color: #2e8b57;">1</span><span style="color: #b751b6;">)</span><span style="color: #da8548;">)</span><span style="color: #50a14f;">)</span><span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org71a6a6a" class="outline-4">
+<h4 id="org71a6a6a"><span class="section-number-4">11.1.2</span> Wires</h4>
+<div class="outline-text-4" id="text-11-1-2">
+<p>
+We define wires as:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">make-wire</span><span style="color: #a626a4;">)</span>
+  <span style="color: #a626a4;">(</span><span style="color: #e45649;">let</span> <span style="color: #50a14f;">(</span><span style="color: #da8548;">(</span><span style="color: #6a1868;">signal</span> <span style="color: #2e8b57;">0</span><span style="color: #da8548;">)</span>
+        <span style="color: #da8548;">(</span><span style="color: #6a1868;">action-procs</span> '<span style="color: #b751b6;">()</span><span style="color: #da8548;">)</span><span style="color: #50a14f;">)</span>
+    <span style="color: #50a14f;">(</span><span style="color: #e45649;">define</span> <span style="color: #da8548;">(</span><span style="color: #a626a4;">set-my-signal!</span> <span style="color: #a626a4;">new</span><span style="color: #da8548;">)</span>
+      <span style="color: #da8548;">(</span><span style="color: #e45649;">cond</span> <span style="color: #b751b6;">(</span><span style="color: #986801;">(</span><span style="color: #a626a4;">=</span> signal <span style="color: #a626a4;">new</span><span style="color: #986801;">)</span> <span style="color: #2e8b57;">'done</span><span style="color: #b751b6;">)</span>
+            <span style="color: #b751b6;">(</span><span style="color: #e45649;">else</span>
+             <span style="color: #986801;">(</span><span style="color: #e45649;">set!</span> signal <span style="color: #a626a4;">new</span><span style="color: #986801;">)</span>
+             <span style="color: #986801;">(</span>call-each action-procs<span style="color: #986801;">)</span><span style="color: #b751b6;">)</span><span style="color: #da8548;">)</span><span style="color: #50a14f;">)</span>
+    <span style="color: #50a14f;">(</span><span style="color: #e45649;">define</span> <span style="color: #da8548;">(</span><span style="color: #a626a4;">accept-action-proc</span> proc<span style="color: #da8548;">)</span>
+      <span style="color: #da8548;">(</span><span style="color: #e45649;">set!</span> action-procs
+            <span style="color: #b751b6;">(</span><span style="color: #a626a4;">cons</span> proc action procs<span style="color: #b751b6;">)</span><span style="color: #da8548;">)</span>
+      <span style="color: #da8548;">(</span>proc<span style="color: #da8548;">)</span><span style="color: #50a14f;">)</span>
+  <span style="color: #50a14f;">(</span><span style="color: #e45649;">define</span> <span style="color: #da8548;">(</span><span style="color: #a626a4;">dispatch</span> m<span style="color: #da8548;">)</span>
+    <span style="color: #da8548;">(</span><span style="color: #e45649;">cond</span> <span style="color: #b751b6;">(</span><span style="color: #986801;">(</span><span style="color: #a626a4;">eq?</span> m <span style="color: #2e8b57;">'get-signal</span><span style="color: #986801;">)</span> signal<span style="color: #b751b6;">)</span>
+          <span style="color: #b751b6;">(</span><span style="color: #986801;">(</span><span style="color: #a626a4;">eq?</span> m <span style="color: #2e8b57;">'set-signal!</span><span style="color: #986801;">)</span> set-my-signal!<span style="color: #b751b6;">)</span>
+          <span style="color: #b751b6;">(</span><span style="color: #986801;">(</span><span style="color: #a626a4;">eq?</span> m <span style="color: #2e8b57;">'add-action!</span><span style="color: #986801;">)</span> accept-action-proc<span style="color: #b751b6;">)</span>
+          <span style="color: #b751b6;">(</span><span style="color: #e45649;">else</span>
+           <span style="color: #986801;">(</span><span style="color: #a626a4;">error</span> <span style="color: #50a14f;">"Bad message"</span> m<span style="color: #986801;">)</span><span style="color: #b751b6;">)</span><span style="color: #da8548;">)</span><span style="color: #50a14f;">)</span>
+  dispatch<span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
+</pre>
+</div>
+
+<p>
+Clearly, a wire is defined by two local-scope variables, <code>signal</code>
+and <code>action-procs</code>, which are initially set to <code>0</code> and <code>'()</code> (the
+empty list, <code>nil</code>) respectively. Internally defined procedure
+<code>set-my-signal!</code> does the obvious thing and sets the signal to the
+new signal. It then calls all the action procedures of this wire.
+<code>accept-action-proc</code> adds a new procedure to the front of the
+existing action procedure list (<code>action-procs</code>) a new procedure.
+It then calls this procedure for reasons we&rsquo;ll see later. Finally,
+<code>dispatch</code> does the right thing according to its argument.
+</p>
+
+<p>
+<code>call-each</code> is a simple <code>cdr</code> down a list and execution &#x2014; note the
+extra parenthesis around <code>((car procs))</code>:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">call-each</span> procs<span style="color: #a626a4;">)</span>
+  <span style="color: #a626a4;">(</span><span style="color: #e45649;">cond</span> <span style="color: #50a14f;">(</span><span style="color: #da8548;">(</span><span style="color: #a626a4;">null?</span> procs<span style="color: #da8548;">)</span> <span style="color: #2e8b57;">'done</span><span style="color: #50a14f;">)</span>
+        <span style="color: #50a14f;">(</span><span style="color: #e45649;">else</span>
+         <span style="color: #da8548;">(</span><span style="color: #b751b6;">(</span><span style="color: #a626a4;">car</span> procs<span style="color: #b751b6;">)</span><span style="color: #da8548;">)</span>
+         <span style="color: #da8548;">(</span>call-each <span style="color: #b751b6;">(</span><span style="color: #a626a4;">cdr</span> procs<span style="color: #b751b6;">)</span><span style="color: #da8548;">)</span><span style="color: #50a14f;">)</span><span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
+</pre>
+</div>
+
+<p>
+Naturally, we can now define <code>get-signal</code>, <code>set-signal</code>, and
+<code>add-action</code> using the wire&rsquo;s <code>dispatch</code>:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">get-signal</span> wire<span style="color: #a626a4;">)</span>
+  <span style="color: #a626a4;">(</span>wire <span style="color: #2e8b57;">'get-signal</span><span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
+
+<span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">set-signal!</span> wire<span style="color: #a626a4;">)</span>
+  <span style="color: #a626a4;">(</span>wire <span style="color: #2e8b57;">'set-signal!</span><span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
+
+<span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">add-action!</span> wire<span style="color: #a626a4;">)</span>
+  <span style="color: #a626a4;">(</span>wire <span style="color: #2e8b57;">'add-action!</span><span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org4b03f95" class="outline-4">
+<h4 id="org4b03f95"><span class="section-number-4">11.1.3</span> Delays</h4>
+<div class="outline-text-4" id="text-11-1-3">
+<p>
+We define the <code>after-delay</code> procedure as:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-racket"><span style="color: #4078f2;">(</span><span style="color: #e45649;">define</span> <span style="color: #a626a4;">(</span><span style="color: #a626a4;">after-delay</span> <span style="color: #a626a4;">delay</span> action<span style="color: #a626a4;">)</span>
+  <span style="color: #a626a4;">(</span>add-to-agenda!
+   <span style="color: #50a14f;">(</span><span style="color: #a626a4;">+</span> <span style="color: #a626a4;">delay</span> <span style="color: #da8548;">(</span>current-time the-agenda<span style="color: #da8548;">)</span><span style="color: #50a14f;">)</span>
+   action
+   the-agenda<span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
+</pre>
+</div>
+
+<p>
+<code>after-delay</code> calls a function called <code>add-to-agenda!</code>.
 </p>
 </div>
 </div>
