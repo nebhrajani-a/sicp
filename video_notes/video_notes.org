@@ -4796,10 +4796,6 @@
 
 
 
-
-
-
-
 * Footnotes
 
 [fn:1] =let= is a Lisp primitive which takes as its first argument a
