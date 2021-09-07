@@ -151,7 +151,6 @@
     prefix notation.
 
 *** Means of Abstraction
-
     Abstraction can simply be done by naming things. Giving
     complicated things a name prevents us from having to understand
     how the thing the name refers to /works/, and instead lets us
