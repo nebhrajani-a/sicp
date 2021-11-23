@@ -13,6 +13,7 @@
 #+latex_header: \usepackage{parskip}
 #+latex_header: \usepackage[type={CC}, modifier={by-nc-sa}, version={4.0},]{doclicense}
 #+latex_header: \usepackage{forest}
+#+latex_header: \setminted{linenos=true, breaklines=true, breakanywhere=true, style=default}
 #+latex_class_options: [9pt]
 #+latex_header:\usepackage{sectsty}
 #+latex_header:\sectionfont{\fontsize{12}{15}\selectfont}
@@ -755,6 +756,7 @@
 
 ** Iterative Fibonacci
 
+   #+NAME: iter-fib
    #+BEGIN_SRC racket :lang sicp :eval no-export :exports both
      (define (iter-fib n a b)
        (if (= n 1)
@@ -763,7 +765,10 @@
 
      (define (fib n)
        (iter-fib n 0 1))
+   #+END_SRC
 
+   #+BEGIN_SRC racket :lang sicp :eval no-export :exports both :noweb strip-export
+     <<iter-fib>>
      (fib 10)
    #+END_SRC
 
@@ -4372,95 +4377,6 @@
     modularity. It is applications like these where assignment is
     incredibly useful, and helps keep our programs neat and modular.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 * Lecture 5B: Computational Objects
 
   Now that we have local state, let's see what we can do with it. As
@@ -5185,52 +5101,607 @@
    that this is not necessarily how =set-car!= and =set-cdr!= are
    /actually/ implemented, since this way is less efficient.
 
+* Lecture 6A: Streams, Part I
+
+  In the last lecture, we discussed assignment. We also saw that this
+  one addition required a complete change of perspective from our
+  simple substitution model to an environment based model, which was
+  required since assignment introduces the ideas of state and of time.
+  Pairs and variables are actually /objects/ with identity instead of
+  mere mathematical variables. Two pairs with the same =car= and =cdr=
+  may still be different objects. In this sense, assignment causes the
+  programming language to be philosophically harder, and can create
+  state-related bugs. Why did we choose to incur this cost? To build
+  modular systems, such as the psuedorandom number generator we built.
+  Assignment often helps modularity, since state is a part of the real
+  world, as in the case of digital circuits.
+
+  In this lecture, we will attempt to shift our perspective of the
+  world in order to remove state, by looking at it from a "signal
+  processing" style system: with signals coming in, being processed,
+  and some output being generated.
+
+** Stream Processing
+
+   Consider the following two problems:
+
+   1. Given a tree that looks like:
+      #+LATEX: \begin{center}
+      #+LATEX: \begin{forest}
+      #+LATEX: for tree={%
+      #+LATEX: calign=fixed edge angles,
+      #+LATEX: delay={where content={}{shape=coordinate}{}},
+      #+LATEX: parent anchor=south,
+      #+LATEX: s sep=1.5cm,
+      #+LATEX: }
+      #+LATEX: [  [[1] [[2] [7]]] [[13] [[12] [14]]]]
+      #+LATEX: \end{forest}
+      #+LATEX: \end{center}
+      We want to sum all the squares of all the odd nodes. A
+      conventional solution to this problem is as follows:
+
+      #+NAME: str-1-tree
+      #+BEGIN_SRC racket :lang sicp :eval no-export :exports none :noweb strip-export
+        <<atom?>>
+
+        (define (make-tree left right)
+          (list left right))
+
+        (define (left-branch tree)
+          (car tree))
+
+        (define (right-branch tree)
+          (cadr tree))
+
+        (define (leaf-node? node)
+          (atom? node))
+      #+END_SRC
+
+      #+BEGIN_SRC racket :lang sicp :eval no-export :exports both :noweb strip-export
+        <<square>>
+        <<str-1-tree>>
+
+        (define (sum-odd-squares tree)
+          (if (leaf-node? tree)
+              (if (odd? tree)
+                  (square tree)
+                  0)
+              (+ (sum-odd-squares
+                  (left-branch tree))
+                 (sum-odd-squares
+                  (right-branch tree)))))
+
+        (define my-tree (make-tree (make-tree 1 (make-tree 2 7)) (make-tree 13 (make-tree 12 14))))
+        (sum-odd-squares my-tree)
+      #+END_SRC
+
+      #+RESULTS:
+      : 219
+
+   2. Given an input $k$, we want returned a list of all the odd Fibonacci
+      numbers till the $n^{\mathrm{th}}$ Fibonacci number.
+
+      #+BEGIN_SRC racket :lang sicp :eval no-export :exports both :noweb strip-export
+        <<iter-fib>>
+        (define (odd-fibs n)
+          (define (next k)
+            (if (> k n)
+                '()
+                (let ((f (fib k)))
+                  (if (odd? f)
+                      (cons f (next (inc k)))
+                      (next (inc k))))))
+          (next 1))
+
+        (odd-fibs 10)
+      #+END_SRC
+
+      #+RESULTS:
+      : (1 1 3 5 13 21 55)
 
 
+   Now, we can see that these procedures are actually doing the
+   following:
+
+   1. Square odd nodes in a tree:
+      1. Enumerate the leaves.
+      2. Filter for =odd?=-ness.
+      3. Map =square=.
+      4. Accumulate using =+= starting at 0.
+   2. Find odd Fibonacci numbers till the $n^{\mathrm{th}}$ one:
+      1. Enumerate numbers from 1 to $n$.
+      2. Map =fib=.
+      3. Filter for =odd?=-ness.
+      4. Accumulate using =cons=, starting with the empty list ='()=.
+
+   We've rewritten the procedures in terms of enumerating, mapping,
+   filtering, and accumulating. Note that this is similar to how
+   signals are processed by passing them through filters and the like.
+   However, our Lisp procedures in their
+   current state do not explicitly have these distinct parts.
+
+   Let us therefore invent a language for writing procedures in this
+   signal processing way. The objects passed between maps, filters,
+   etc. are called "streams", which are defined by the following
+   selectors and constructors:
+   - Constructor: =(cons-stream x y)=.
+   - Selectors:
+     - =(head s)=
+     - =(tail s)=
+
+   #+NAME: str-1-macros
+   #+BEGIN_SRC racket :lang sicp :eval no-export :exports none :noweb strip-export
+     (define-syntax cons-stream
+       (syntax-rules ()
+         ((cons-stream a e) (cons a (delay e)))))
+
+     (define-syntax delay
+       (syntax-rules ()
+         ((delay expr)
+          (memo-proc (lambda () expr)))))
+   #+END_SRC
+
+   #+NAME: str-1-seqs
+   #+BEGIN_SRC racket :lang sicp :eval no-export :exports none :noweb strip-export
+     <<str-1-macros>>
+     (define (head s)
+       (car s))
+
+     (define (tail s)
+       (force (cdr s)))
+
+     (define (force p)
+       (p))
+
+     (define (empty-stream? s)
+       (null? s))
+
+     (define (memo-proc proc)
+       (let ((already-run? false) (result false))
+         (lambda ()
+           (if (not already-run?)
+               (begin
+                (set! result (proc))
+                (set! already-run? true)
+                result)
+               result))))
+   #+END_SRC
+
+   The behavior is such that for any =x= and =y=:
+
+   #+BEGIN_SRC racket :lang sicp :eval no-export :exports both :noweb strip-export
+     <<str-1-seqs>>
+
+     (define x 1)
+     (define y 2)
+     (head (cons-stream x y))
+     (tail (cons-stream x y))
+   #+END_SRC
+
+   #+RESULTS:
+   : 1
+   : 2
+
+   We also have =the-empty-stream=. Note that this description makes a
+   stream look a lot like a pair, and, for now, it's alright to
+   pretend streams /are/ pairs. We can now define our stream
+   processing procedures:
+
+   #+NAME: str-1-map-filter-accum-append-enum-enum-tree
+   #+BEGIN_SRC racket :lang sicp :eval no-export :exports both :noweb strip-export
+     <<str-1-seqs>>
+     <<str-1-tree>>
+     (define (map-stream proc s)
+       (if (empty-stream? s)
+           the-empty-stream
+           (cons-stream
+            (proc (head s))
+            (map-stream proc (tail s)))))
+
+     (define (filter-stream pred s)
+       (cond
+         ((empty-stream? s) the-empty-stream)
+         ((pred (head s))
+          (cons-stream (head s)
+                       (filter-stream pred (tail s))))
+         (else (filter-stream pred (tail s)))))
+
+     (define (accumulate-stream combiner init-val s)
+       (if (empty-stream? s)
+           init-val
+           (combiner (head s)
+                     (accumulate-stream combiner init-val (tail s)))))
+
+     (define (enumerate-tree tree)
+       (if (leaf-node? tree)
+           (cons-stream tree the-empty-stream)
+           (append-streams
+            (enumerate-tree
+             (left-branch tree))
+            (enumerate-tree
+             (right-branch tree)))))
+
+     (define (append-streams s1 s2)
+       (if (empty-stream? s1)
+           s2
+           (cons-stream (head s1)
+                        (append-streams (tail s1) s2))))
+
+     (define (enumerate-interval low high)
+       (if (> low high)
+           the-empty-stream
+           (cons-stream low
+                        (enumerate-interval (inc low) high))))
+
+     (define (singleton s)
+       (cons-stream s the-empty-stream))
+   #+END_SRC
+
+   These should be relatively intuitive. We can now write our
+   procedures using stream processing:
+
+   #+BEGIN_SRC racket :lang sicp :eval no-export :exports both :noweb strip-export
+     <<str-1-map-filter-accum-append-enum-enum-tree>>
+     <<iter-fib>>
+     <<square>>
+     (define (sum-odd-squares tree)
+       (accumulate-stream +
+                          0
+                          (map-stream square
+                               (filter-stream odd?
+                                       (enumerate-tree tree)))))
+
+     (define (odd-fibs n)
+       (accumulate-stream cons
+                         '()
+                         (filter-stream odd?
+                                        (map-stream fib
+                                                    (enumerate-interval 1 n)))))
+
+     (define my-tree (make-tree (make-tree 1 (make-tree 2 7)) (make-tree 13 (make-tree 12 14))))
+     (sum-odd-squares my-tree)
+
+     (odd-fibs 10)
+   #+END_SRC
+
+   #+RESULTS:
+   : 219
+   : (1 1 3 5 13 21 55)
+
+   This brings modularity into our programs: we're establishing
+   conventional interfaces via streams. This way of looking at
+   programs (mapping, filtering, etc.) is very general and can be used
+   to write all sorts of procedures.
 
 
+** Some More Complex Examples
+
+*** Flattening
+
+    Suppose we have a "stream of streams", or a data structure that
+    looks like the following:
+    #+BEGIN_SRC racket :lang sicp :eval no-export :exports both :noweb strip-export
+      ((1 2 3) (4 5 6) (7 8 9))
+    #+END_SRC
+
+    That we want to process into a single stream:
+    #+BEGIN_SRC racket :lang sicp :eval no-export :exports both :noweb strip-export
+      (1 2 3 4 5 6 7 8 98)
+    #+END_SRC
+
+    That is, we want to "flatten" the stream of streams. We can do so
+    like this:
+
+    #+NAME: str-1-flatten
+    #+BEGIN_SRC racket :lang sicp :eval no-export :exports both :noweb strip-export
+      <<str-1-map-filter-accum-append-enum-enum-tree>>
+      (define (flatten stream-of-streams)
+        (accumulate-stream append-streams
+                           the-empty-stream
+                           stream-of-streams))
+    #+END_SRC
+
+    Now, consider a function $f$ that returns a stream. We want to
+    call $f$ on a stream (map $f$ to it), then take its output
+    stream-of-streams and flatten it. This is also simple:
+
+    #+NAME: str-1-flatmap
+    #+BEGIN_SRC racket :lang sicp :eval no-export :exports both :noweb strip-export
+      <<str-1-flatten>>
+      (define (flatmap f s)
+        (flatten (map-stream f s)))
+    #+END_SRC
+
+*** Prime Sum Pairs
+
+    Our first problem is: given $N$, find all pairs $i$, $j$ ($0< j <
+    i \leq N$) such that $i+j$ is prime. For instance, given $N=6$,
+    our expected output is something like:
+
+    #+ATTR_LATEX: :booktabs t :align ccc
+    |      $i$ |      $j$ |    $i+j$ |
+    |----------+----------+----------|
+    |        2 |        1 |        3 |
+    |        3 |        2 |        5 |
+    |        4 |        1 |        5 |
+    | $\vdots$ | $\vdots$ | $\vdots$ |
+
+    We can therefore write:
+
+   #+BEGIN_SRC racket :lang sicp :eval no-export :exports both :noweb strip-export
+     <<str-1-flatmap>>
+
+     (#%require math/number-theory) ;; for prime?
+     (define (prime-sum-pairs n)
+       (map-stream (lambda (p)
+                     (list (car p) (cadr p) (+ (car p) (cadr p))))
+                   (filter-stream (lambda (p)
+                                    (prime? (+ (car p) (cadr p))))
+                                  (flatmap (lambda (i)
+                                             (map-stream (lambda (j) (list i j))
+                                                         (enumerate-interval 1 (dec i))))
+                                           (enumerate-interval 1 n)))))
+
+     (head (prime-sum-pairs 6))
+     (head (tail (prime-sum-pairs 6)))
+     (head (tail (tail (prime-sum-pairs 6))))
+#+END_SRC
+
+   #+RESULTS:
+   : (2 1 3)
+   : (3 2 5)
+   : (4 1 5)
+
+   How does this work? Let's read it inside out, starting with the
+   =flatmap=. The first argument to =flatmap= is a function which,
+   given an input =i=, creates a stream of lists of =i= and =j= for
+   all values of =j= between =1= and =i=. The second argument is
+   simply all =i='s from =1= to =n=. =flatmap= therefore creates a
+   stream that looks like the following:
+
+   $$\left[
+   \binom{2}{1}~\binom{3}{1}~\binom{3}{2}~\binom{4}{1}~\binom{4}{2}~\binom{4}{3}~\binom{5}{1}~\cdots
+   \right]$$
+
+   All that's left to do is filter this stream for the =prime?=-ness
+   of $i+j$ in each list, then create our output in the expected
+   format. This is done using =filter-stream= with the right
+   $\lambda$, and then mapping this stream to our output format.
+
+*** TODO Backtracking: The Eight Queens Problem
 
 
+** The Catch: On Efficiency
 
+   By treating streams the way we have, simply as lists, introduces a
+   form of inefficiency. Consider the problem of finding the second
+   prime in the interval $[10^4, 10^{15}]$. =enumerate-interval= would
+   never terminate, since it'll spend forever generating an incredibly
+   long list of numbers. Assuming this can be done, we'll spend
+   forever and a day filtering and checking primality, only to ignore
+   most of this work and pick up the second element of the list.
+   This is clearly outrageous, since most of the work has gone to
+   waste, assuming a computer could do it in the first place. It seems
+   the "traditional" approach, while less mathematically pretty, is
+   better, since it would stop as soon as it found the second prime.
 
+   Now, this would indeed be true if streams were lists. But ---
+   streams are streams, so we can indeed do:
 
+   #+BEGIN_SRC racket :lang sicp :eval no-export :exports both :noweb strip-export
+     <<str-1-map-filter-accum-append-enum-enum-tree>>
+     (#%require math/number-theory)
+     (define (get-prime low high)
+       (filter-stream prime?
+                      (enumerate-interval low high)))
+     (head (tail (get-prime 10000 1000000000000000)))
+   #+END_SRC
 
+   #+RESULTS:
+   : 10009
 
+   And get a result. It seems that we can have our cake and eat it
+   too. What is this magic? How are we able to both have the
+   expressiveness of stream-style processing /and/ the efficiency of
+   traditional programming? What is this magical black box called a
+   stream?
 
+** Implementing Streams
 
+   Streams work on the principle of "laziness". That is, when we
+   declare a stream, it figures out /only/ what the first element is, and
+   promises to do the rest of the work "later". If, and /only if/ we
+   need the second element is it computed, by us calling on the
+   promise. An alternate way to visualize this is by imagining how
+   you'd thread a string through a series of tubes: we only pull out
+   of the far end as much string as we need.[fn:8]
 
+   Streams are an on-demand data structure. These are easy to
+   implement in our language using procedures as first-class citizens.
+   Here's how =cons-stream=, =head=, and =tail= are defined:
 
+   #+BEGIN_SRC racket :lang sicp :eval no-export :exports both :noweb strip-export
+     (define-syntax cons-stream
+       (syntax-rules ()
+         ((cons-stream a e) (cons a (delay e)))))
 
+     (define (head s)
+       (car s))
 
+     (define (tail s)
+       (force (cdr s)))
+   #+END_SRC
 
+   =define-syntax= defines =cons-stream= to be a macro. All that this
+   means is that any instances of =(cons-stream a e)= are replaced by
+   =(cons a (delay e))= /before/ we pass the program to the
+   interpreter. Why we define it as a macro rather than a procedure
+   will become clear momentarily. Note that by this token, streams are
+   created as the =cons= of the first input and the second input
+   passed to something called =delay=. =head= is the same as =car=,
+   and =tail= calls =force= on the =cdr= of the stream.
 
+   Clearly, there's some magic going on in =delay= and =force= which
+   makes streams lazy: but there's really none. Here's how they're
+   defined:
 
+   #+BEGIN_SRC racket :lang sicp :eval no-export :exports both :noweb strip-export
+     (define-syntax delay
+       (syntax-rules ()
+         ((delay expr)
+          (lambda () expr))))
 
+     (define (force p)
+       (p))
+   #+END_SRC
 
+   Again =delay= is simply a macro that replaces any instance of
+   =(delay expr)= with =(lambda () expr)=. That is, it hides the
+   expression inside a \lambda. =force= calls this \lambda, recovering
+   the expression.
 
+   Simply doing this creates the behavior we need. Consider our
+   previous example, that of finding primes (=get-prime=). Here's what
+   happens:
 
+   #+BEGIN_SRC racket :lang sicp :eval no-export :exports both :noweb strip-export
+     (define (get-prime low high)
+       (filter-stream prime?
+                      (enumerate-interval low high)))
+     (head (tail (get-prime 10000 1000000000000000)))
+   #+END_SRC
 
+   We can use the substitution model since everything is purely
+   functional:
+   #+BEGIN_SRC racket :lang sicp :eval no-export :exports both :noweb strip-export
+     (enumerate-interval 10000 1000000000000000)
+   #+END_SRC
 
+   How is =enumerate-interval= defined?
 
+   #+BEGIN_SRC racket :lang sicp :eval no-export :exports both :noweb strip-export
+     (define (enumerate-interval 10000 1000000000000000)
+       (if (> 10000 1000000000000000)
+           the-empty-stream
+           (cons-stream 10000
+                        (enumerate-interval (inc 10000) 1000000000000000))))
+   #+END_SRC
 
+   It does a =cons-stream= on =10000= and a /promise/ to compute
+   =(enumerate-interval 10001 1000000000000000)=. Or, explicitly
+   written:
 
+   #+BEGIN_SRC racket :lang sicp :eval no-export :exports both :noweb strip-export
+     (cons 10000 (delay (enumerate-interval (inc 10000) 1000000000000000)))
+   #+END_SRC
 
+   Expanding out the =delay= and checking its output:
+   #+BEGIN_SRC racket :lang sicp :eval no-export :exports both :noweb strip-export
+     <<str-1-map-filter-accum-append-enum-enum-tree>>
+     (cons 10000 (lambda () (enumerate-interval (inc 10000) 1000000000000000)))
+   #+END_SRC
 
+   #+RESULTS:
+   : (10000 . #<procedure:...CDEkB/ob-p1kSJ7.rkt:91:12>)
 
+   So our "stream" really is just a pair of the first element and some
+   procedure that delay created. Calling =head= would just give us:
 
+   #+BEGIN_SRC racket :lang sicp :eval no-export :exports both :noweb strip-export
+     <<str-1-map-filter-accum-append-enum-enum-tree>>
+     (head (cons 10000 (lambda () (enumerate-interval (inc 10000) 1000000000000000))))
+   #+END_SRC
 
+   #+RESULTS:
+   : 10000
 
+   What would =tail= give us? It'll simply call the \lambda, giving us
+   another pair:
 
+   #+BEGIN_SRC racket :lang sicp :eval no-export :exports both :noweb strip-export
+     <<str-1-map-filter-accum-append-enum-enum-tree>>
+     (tail (cons 10000 (lambda () (enumerate-interval (inc 10000) 1000000000000000))))
+   #+END_SRC
 
+   #+RESULTS:
+   : (10001 . #<procedure:...CDEkB/ob-zfZJq9.rkt:25:4>)
 
+   Clearly, =enumerate-interval= was only called the second time
+   /when/ we called tail, and not before. This is where the efficiency
+   is created.
 
+   Note that we're filtering the stream for =prime?=-ness. How does
+   =filter-stream= work? Here's the definition:
 
+   #+BEGIN_SRC racket :lang sicp :eval no-export :exports both :noweb strip-export
+     (define (filter-stream pred s)
+       (cond
+         ((empty-stream? s) the-empty-stream)
+         ((pred (head s))
+          (cons-stream (head s)
+                       (filter-stream pred (tail s))))
+         (else (filter-stream pred (tail s)))))
+   #+END_SRC
 
+   Since it also uses =cons-stream=, the output it generates is also a
+   promise-style pair. =filter-stream= will keep "tugging" on the
+   stream (keep calling on promises, as in the =else= clause), until
+   it finds a prime.
 
+   #+BEGIN_SRC racket :lang sicp :eval no-export :exports both :noweb strip-export
+     <<str-1-map-filter-accum-append-enum-enum-tree>>
+     (#%require math/number-theory)
+     (filter-stream prime? (cons 10000 (lambda () (enumerate-interval (inc 10000) 1000000000000000))))
+   #+END_SRC
+
+   #+RESULTS:
+   : (10007 . #<procedure:...CDEkB/ob-Mvek4B.rkt:25:4>)
+
+   Since we want to find the second prime, when we call =tail= on the
+   stream, the =delay= is =force='d, and we get the prime =10009=.
+
+   Note that we define =delay= and =cons-stream= as macros because we
+   /don't/ want their arguments evaluated: i.e., we want them to be
+   lazy. This is only possible if we define them as macros and
+   directly substitute the source before compilation.
+
+*** A Small Optimization
+
+    Often, calling =tail= repeatedly will result in the recomputation
+    of certain procedures that may already have been computed. This
+    can get expensive, so we add memoization by slightly changing
+    =delay=:
+    #+BEGIN_SRC racket :lang sicp :eval no-export :exports both :noweb strip-export
+      (define-syntax delay
+        (syntax-rules ()
+          ((delay expr)
+           (memo-proc (lambda () expr)))))
+    #+END_SRC
+
+    =memo-proc= itself just remembers if it has already computed a
+    procedure by using a flag (=already-run?=) and storing the value
+    in =result=:
+
+    #+BEGIN_SRC racket :lang sicp :eval no-export :exports both :noweb strip-export
+      (define (memo-proc proc)
+        (let ((already-run? false) (result false))
+          (lambda ()
+            (if (not already-run?)
+                (begin
+                  (set! result (proc))
+                  (set! already-run? true)
+                  result)
+                result))))
+    #+END_SRC
+
+    Streams, clearly, make life simpler and bring more modularity into
+    our code.
 
 
 
 * Footnotes
+[fn:8] This is indeed how the video lectures explain it, see Lecture
+6A at timestamp 47:39.
 
 [fn:1] =let= is a Lisp primitive which takes as its first argument a
 series of definitions, and second input a series of applications that may
