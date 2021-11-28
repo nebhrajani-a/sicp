@@ -236,6 +236,7 @@
     #+RESULTS:
     : 13/2
 
+
     Note the indentation: since Lisp is parenthesis heavy, we use
     indentation. Good editors like Emacs should do this automatically.
 
@@ -5386,7 +5387,7 @@
 
     That we want to process into a single stream:
     #+BEGIN_SRC racket :lang sicp :eval no-export :exports both :noweb strip-export
-      (1 2 3 4 5 6 7 8 98)
+      (1 2 3 4 5 6 7 8 9)
     #+END_SRC
 
     That is, we want to "flatten" the stream of streams. We can do so
