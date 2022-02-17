@@ -42,6 +42,7 @@
 #+latex_header:\makeatother
 #+latex_header: \usepackage{colortbl}
 
+#+include: ~/nebhrajani-a.github.io/generalized_preamble.org
 # #+SETUPFILE: /home/aditya/.emacs.d/org-html-themes/org/theme-readtheorg-local.setup
 #+SETUPFILE: https://fniessen.github.io/org-html-themes/org/theme-readtheorg.setup
 #+LATEX: \newpage
