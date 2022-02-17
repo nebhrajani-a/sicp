@@ -1,5 +1,6 @@
 # add biblio
-#+title: MIT 6.001 1986 Video Notes
+#+title: Structure and Interpretation of Computer Programs 1986 Video Notes
+#+subtitle: MIT 6.001 (SICP)
 #+latex_class: org-report
 #+latex_header: \usepackage{tikz-cd}
 # for printing b&w
