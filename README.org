@@ -10,10 +10,7 @@
 
   /Structure and Interpretation of Computer Programs/, also called the
   Wizard Book, is a book based on an introductory computer science
-  course taught at MIT from 1981 to 2007. It teaches the Scheme
-  dialect of Lisp, and is worth reading if you're a programmer, if only 
-  /because/ it teaches Lisp.
-
+  course taught at MIT from 1981 to 2007.
 
   #+begin_quote
   Lisp is worth learning for the profound enlightenment experience you
@@ -23,15 +20,7 @@
   #+end_quote
   – Eric Raymond
 
-  Moreover, SICP has gems of computer programming wisdom sprinkled
-  throughout its pages:
-
-  #+begin_quote
- "Programs must be written for people to read, and only incidentally for machines to execute."
-  #+end_quote
-  – Abelson & Sussman, SICP, preface to the first edition.
-
-  Don't take my word for it --- study the book yourself! This
+  Don't take Eric's word for it --- study the book yourself! This
   repository provides notes based on the video lectures that you will
   find useful if:
 
@@ -43,25 +32,12 @@
     better to do.
 
 ** Notes
-   My notes are based on the [[https://groups.csail.mit.edu/mac/classes/6.001/abelson-sussman-lectures/][1986 presentation of 6.001 (SICP),
+   These notes are based on the [[https://groups.csail.mit.edu/mac/classes/6.001/abelson-sussman-lectures/][1986 presentation of 6.001 (SICP),
    produced by Hewlett-Packard]]. The notes are generated using Emacs'
    Org mode, are written in literate programming style, and use
    Racket's =#lang sicp=. In some (very few) cases, this causes the
    code in these notes to differ from the equivalent code in
    MIT-Scheme. These instances are pointed out in the notes.
-
-** Future Plans
-   Once I'm done working through the videos, I'll start working on the
-   exercises (second edition). Eventually, this repository may include
-   solutions to assignments and exams on the OCW page as well. No
-   promises though --- it takes a non-trivial amount of energy and time to
-   write reasonably high-quality notes and solutions.
-
-** Reporting Errors
-   Open an issue, or, if you think you can fix the error yourself,
-   submit a pull request. Don't worry about being wrong --- I don't
-   mind having discussions in the issue tracker. This is, after all, a
-   learning-centric repository.
 
    -----
 
@@ -72,16 +48,12 @@
     literate programming, given the fact that SICP's exercises and
     example programs are *highly* inter-dependent. Often, later
     lectures require small procedures defined in past lectures.
-    All-in-all, this makes writing code for SICP a tough job, since
-    yank-pasting dependencies every time you need them is tiring, and
-    a bug fix will not propagate to all the pastes.
-
-    This is where literate programming becomes useful, since it
-    maintains only one copy of each code block, and changes can be
-    forward-propagated by re-evaluation. Org mode is one of the
-    most complete implementations of literate programming, although
-    today a majority of literate programming users come from Jupyter
-    notebooks.
+    All-in-all, this makes writing code while following SICP a tough
+    job, since yank-pasting dependencies every time you need them is
+    tiring, and a bug fix will not propagate to all the pastes. This
+    is where literate programming becomes useful, since it maintains
+    only one copy of each code block, and changes can be
+    forward-propagated by re-evaluation.
 
 *** MIT's SICP Content
 
