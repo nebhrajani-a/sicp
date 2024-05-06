@@ -67,11 +67,6 @@
      License: Creative Commons BY-NC-SA.
      #+end_quote
 
-**** Book
-     Directory =book= includes the =pdf= and =texi= unofficial SICP ebooks. These
-     are *not* officially licensed by MIT, so it is wise to peruse
-     these carefully, given the +silly DMCA+ ethical concerns.
-
 ** License
    All material in this repository that is my creative property is
    licensed under [[https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en][CC-BY-NC-SA 4.0]].
